@@ -54,7 +54,7 @@ jobs:
           command: |
             /opt/unity/Editor/Unity -batchmode -nographics -quit \
             -projectPath $(pwd) -executeMethod BuildScript.PerformBuild \
-            -logFile logs/build.log || echo "Échec de la build Unity."g
+            -logFile logs/build.log || echo "Échec de la build Unity."
 
       # Vérification des logs Unity
       - run:
