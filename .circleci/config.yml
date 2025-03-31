@@ -58,6 +58,10 @@ jobs:
           name: Affichage des logs Unity
           command: cat logs/build.log || echo "Le fichier de log est introuvable."
 
+      - store_artifacts:
+          path: Builds
+          destination: build_output
+
 workflows:
   version: 2
   build-workflow:
