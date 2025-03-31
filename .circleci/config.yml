@@ -58,6 +58,10 @@ jobs:
           name: Affichage des logs Unity
           command: cat logs/build.log || echo "Le fichier de log est introuvable."
 
+      - run:
+          name: Vérifier si la build a été créée
+          command: ls -R $(pwd)/Builds || echo "Le dossier Builds est vide ou n'existe pas"
+
       - store_artifacts:
           path: Builds
           destination: build_output
