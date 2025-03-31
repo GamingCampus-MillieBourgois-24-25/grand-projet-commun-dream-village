@@ -8,22 +8,41 @@ jobs:
       GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g"'
     steps:
       - checkout  # Récupère le code depuis le repo
-      - restore_cache:
-          keys:
-            - gradle-cache-{{ checksum "build.gradle" }}
+          
       - run:
-          name: Installer les dépendances
-          command: ./gradlew dependencies
+          name: Build Unity vers Android
+          command: |
+            /opt/unity/Editor/Unity -batchmode -nographics -quit \
+            -projectPath $(pwd) -executeMethod BuildScript.PerformBuild \
+            -logFile logs/build.log
+
       - run:
-          name: Build APK Debug
-          command: ./gradlew assembleDebug
-      - save_cache:
-          key: gradle-cache-{{ checksum "build.gradle" }}
-          paths:
-            - ~/.gradle
+          name: Vérifier si `build.gradle` existe
+          command: ls -R YourExportedAndroidProject/
+
+      - run:
+          name: Donner les permissions à `gradlew`
+          command: chmod +x YourExportedAndroidProject/gradlew
+
+      - run:
+          name: Build APK
+          command: |
+            cd YourExportedAndroidProject
+            ./gradlew assembleDebug
+
       - store_artifacts:
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: YourExportedAndroidProject/app/build/outputs/apk/debug/app-debug.apk
           destination: apk
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - develop
 
 workflows:
   version: 2
