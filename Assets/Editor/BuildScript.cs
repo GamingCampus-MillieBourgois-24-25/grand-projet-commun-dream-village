@@ -2,23 +2,27 @@ using UnityEditor;
 using UnityEngine;
 using System.IO;
 
-public class BuildScript
+namespace BuildSystem
 {
-    public static void PerformBuild()
+    public class BuildScript
     {
-        string buildPath = "Builds/";
-        string targetFile = buildPath + "game.exe";
+        public static void PerformBuild()
+        {
+            Debug.Log("🚀 Build Unity commencée !");
+            string buildPath = "Builds/";
+            string targetFile = buildPath + "game.exe";
 
-        if (!Directory.Exists(buildPath))
-            Directory.CreateDirectory(buildPath);
+            if (!Directory.Exists(buildPath))
+                Directory.CreateDirectory(buildPath);
 
-        BuildPipeline.BuildPlayer(
-            new[] { "Assets/Scenes/MainScene.unity" }, // Ajoute tes scènes ici
-            targetFile,
-            BuildTarget.StandaloneWindows64,
-            BuildOptions.None
-        );
+            string[] scenes = { "Assets/Scenes/MainScene.unity" };
 
-        Debug.Log("Build terminée avec succès !");
+            BuildPipeline.BuildPlayer(scenes, targetFile, BuildTarget.StandaloneWindows64, BuildOptions.None);
+
+            if (File.Exists(targetFile))
+                Debug.Log("✅ Build réussie : " + targetFile);
+            else
+                Debug.LogError("❌ La build n'a pas été générée !");
+        }
     }
 }
