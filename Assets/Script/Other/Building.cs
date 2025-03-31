@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
 public enum BuildingType
 {
     Bench,
@@ -32,19 +31,19 @@ public class BuildingData
 }
 
 [CreateAssetMenu(fileName = "BuildingDatabase", menuName = "ScriptableObjects/BuildingDatabase", order = 1)]
-public class Utiles : ScriptableObject
+public class Building : ScriptableObject
 {
-    public BuildingData buildings;
+    public BuildingData building;
     
     public void PrintBuildingData()
     {
-        Debug.Log("Building Name: " + buildings.name);
-        Debug.Log("Cost: " + buildings.cost);
-        Debug.Log("Usage Time: " + buildings.usageTime);
-        foreach (var effect in buildings.Effects)
+        Debug.Log("Building Name: " + building.name);
+        Debug.Log("Cost: " + building.cost);
+        Debug.Log("Usage Time: " + building.usageTime);
+        foreach (var effect in building.Effects)
         {
             Debug.Log("Effect Name: " + effect.effectName + ", Effect Value: " + effect.effectValue);
         }
-        Debug.Log("Max Amount: " + buildings.maxAmount);
+        Debug.Log("Max Amount: " + building.maxAmount);
     }
 }

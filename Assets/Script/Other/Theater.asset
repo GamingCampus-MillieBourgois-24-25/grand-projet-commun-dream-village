@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
   m_Name: Theater
   m_EditorClassIdentifier: 
-  buildings:
+  building:
     name: 4
     cost: 2000
     usageTime: 45
