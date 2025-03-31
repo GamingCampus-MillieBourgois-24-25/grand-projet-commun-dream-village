@@ -1,11 +1,15 @@
 version: 2.1
 
-jobs:
-  build:
+executors:
+  unity-executor:
     docker:
       - image: unityci/editor:2022.3.32f1-android-3
+    resource_class: large
 
-       steps:
+jobs:
+  build:
+    executor: unity-executor
+    steps:
       - checkout
       
       # Vérification de l'installation de Unity
