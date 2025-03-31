@@ -50,7 +50,7 @@ jobs:
           name: Lancer la build Unity
           command: |
             /opt/unity/Editor/Unity -batchmode -nographics \
-            -projectPath $(pwd) -executeMethod BuildSystem.BuildScript.PerformBuild \
+            -projectPath $(pwd) -executeMethod BuildScript.PerformBuild \
             -logFile logs/build.log
 
       # Vérification des logs Unity
