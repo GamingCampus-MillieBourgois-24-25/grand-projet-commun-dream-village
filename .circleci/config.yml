@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/android:2023.01  # Image Docker pour Android
+      - image: cimg/android:2024.02  # Image Docker pour Android
     environment:
       GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g"'
     steps:
