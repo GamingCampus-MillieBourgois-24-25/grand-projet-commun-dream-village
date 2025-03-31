@@ -3,22 +3,16 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/android:api-26-node  # Image Docker pour Android
-    environment:
-      GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g"'
+      - image: unityci/editor:2022.3.32f1  # Unity image (verifie ta version)
     steps:
-      - checkout  # Récupère le code depuis le repo
-          
+      - checkout
+      
       - run:
           name: Build Unity vers Android
           command: |
             /opt/unity/Editor/Unity -batchmode -nographics -quit \
             -projectPath $(pwd) -executeMethod BuildScript.PerformBuild \
             -logFile logs/build.log
-
-      - run:
-          name: Vérifier si `build.gradle` existe
-          command: ls -R YourExportedAndroidProject/
 
       - run:
           name: Donner les permissions à `gradlew`
@@ -42,4 +36,3 @@ workflows:
           filters:
             branches:
               only:
-                - develop 
