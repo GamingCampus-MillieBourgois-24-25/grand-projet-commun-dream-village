@@ -5,10 +5,10 @@ jobs:
     docker:
       - image: unityci/editor:2022.3.32f1-android-3
     environment:
-      UNITY_LICENSE: $UNITY_LICENSE
+      UNITY_LICENSE: $UNITY_LICENSE 
     steps:
       - checkout
-      
+
       # Vérification de l'installation de Unity
       - run:
           name: Vérification de la présence de Unity
@@ -41,12 +41,18 @@ jobs:
               echo "Le fichier BuildScript.cs est introuvable !"
               exit 1
             fi
-      
+
+      # Configuration de la licence Unity
       - run:
           name: Configure Unity License
           command: |
             mkdir -p ~/.config/unity3d/Unity
             echo "$UNITY_LICENSE" > ~/.config/unity3d/Unity/Unity_lic.ulf
+            # Vérifier que la licence a été correctement écrite
+            if [ ! -f ~/.config/unity3d/Unity/Unity_lic.ulf ]; then
+              echo "Erreur: La licence Unity n'a pas pu être écrite correctement !"
+              exit 1
+            fi
 
       # Lancer la build Unity
       - run:
@@ -61,12 +67,20 @@ jobs:
           name: Affichage des logs Unity
           command: cat logs/build.log || echo "Le fichier de log est introuvable."
 
+      # Vérifier si la build a été créée
       - run:
           name: Vérifier si la build a été créée
-          command: ls -R $(pwd)/Builds || echo "Le dossier Builds est vide ou n'existe pas"
+          command: |
+            if [ -d "$(pwd)/Builds" ]; then
+              echo "La build a été créée avec succès."
+            else
+              echo "Le dossier Builds est vide ou n'existe pas."
+              exit 1
+            fi
 
+      # Stockage des artifacts
       - store_artifacts:
-          path: Builds
+          path: $(pwd)/Builds
           destination: build_output
 
 workflows:
