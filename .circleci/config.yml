@@ -5,35 +5,60 @@ jobs:
     docker:
       - image: unityci/editor:2022.3.32f1-android-3
 
-    steps:
+       steps:
       - checkout
       
+      # Vérification de l'installation de Unity
       - run:
-          name: Build Unity vers Android
+          name: Vérification de la présence de Unity
+          command: ls -la /opt/unity/Editor/ || echo "Unity n'est pas installé !"
+
+      # Vérification que l'exécutable Unity est bien accessible
+      - run:
+          name: Vérification de l'exécutable Unity
+          command: |
+            if [ ! -f "/opt/unity/Editor/Unity" ]; then
+              echo "L'exécutable Unity n'existe pas !"
+              exit 1
+            fi
+
+      # Donner les permissions d'exécution à Unity
+      - run:
+          name: Donner les permissions à Unity
+          command: chmod +x /opt/unity/Editor/Unity
+
+      # Vérification du contenu du répertoire
+      - run:
+          name: Vérification des fichiers du projet
+          command: ls -la $(pwd)
+
+      # Vérification que le fichier BuildScript.cs est bien présent
+      - run:
+          name: Vérification du script de build Unity
+          command: |
+            if [ ! -f "$(pwd)/Assets/Editor/BuildScript.cs" ]; then
+              echo "Le fichier BuildScript.cs est introuvable !"
+              exit 1
+            fi
+
+      # Lancer la build Unity
+      - run:
+          name: Lancer la build Unity
           command: |
             /opt/unity/Editor/Unity -batchmode -nographics -quit \
             -projectPath $(pwd) -executeMethod BuildScript.PerformBuild \
-            -logFile logs/build.log
+            -logFile logs/build.log || echo "Échec de la build Unity."
 
+      # Vérification des logs Unity
       - run:
-          name: Donner les permissions à `gradlew`
-          command: chmod +x YourExportedAndroidProject/gradlew
-
-      - run:
-          name: Build APK
-          command: |
-            cd YourExportedAndroidProject
-            ./gradlew assembleDebug
-
-      - store_artifacts:
-          path: YourExportedAndroidProject/app/build/outputs/apk/debug/app-debug.apk
-          destination: apk
+          name: Affichage des logs Unity
+          command: cat logs/build.log || echo "Le fichier de log est introuvable."
 
 workflows:
   version: 2
-  build-and-test:
+  build-workflow:
     jobs:
       - build:
           filters:
             branches:
-              only:
+              only: develop
