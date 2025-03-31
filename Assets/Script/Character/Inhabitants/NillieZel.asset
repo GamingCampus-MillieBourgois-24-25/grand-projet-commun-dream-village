@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6963ced5b706aa4e896fd214196de3b, type: 3}
-  m_Name: NewInhabitant
+  m_Name: NillieZel
   m_EditorClassIdentifier: 
   firstName: 
   lastName: 
-  pronouns: 
-  MBTI: 
+  pronouns: 0
+  MBTI: 0
   personnality: 
   likes: 
   dislikes: 
@@ -27,3 +27,4 @@ MonoBehaviour:
   unlockLevel: 0
   InitialPrice: 0
   canLeave: 0
+  heartsBeforeLeaving: 0

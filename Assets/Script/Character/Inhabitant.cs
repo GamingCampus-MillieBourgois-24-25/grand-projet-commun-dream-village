@@ -6,46 +6,62 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewInhabitant", menuName = "Character")]
 public class Inhabitant : ScriptableObject
 {
-    [Header("Basic Information")]
-    public string firstName;
-    public string lastName;
-    public string pronouns;
-    public string MBTI;
 
-    [TextArea] public string personnality;
+    #region Variables Serialized
+    [Header("Basic Information")]
+    [SerializeField] private string firstName;
+    [SerializeField] private string lastName;
+    [SerializeField] private Pronouns pronouns;
+    [SerializeField] private InhabitantEnums MBTI;
+
+    [SerializeField] private List<Personalities> personnality;
 
     [Header("Preferences")] 
-    public List<InterestCategory> likes;
-    public List<InterestCategory> dislikes;
+    [SerializeField] private List<InterestCategory> likes;
+    [SerializeField] private List<InterestCategory> dislikes;
 
     [Header("Statistics")] 
-    public int mood;
-    public int serenity;
-    public int energy;
-    public int hearts;
+    private int mood;
+    private int serenity;
+    private int energy;
+    private int hearts;
+    [SerializeField] private int limit;
 
     [Header("Progression & Economy")] 
-    public float goldMultiplier;
-    public int unlockLevel;
-    public int InitialPrice;
-    public bool canLeave;
+    [SerializeField] private float goldMultiplier;
+    [SerializeField] private int unlockLevel;
+    [SerializeField] private int InitialPrice;
+    [SerializeField] private bool canLeave;
+    [SerializeField] private int heartsBeforeLeaving;
+    #endregion
 
-    public void ModifyStatistic()
+
+
+
+    private void Awake()
+    {
+        hearts = heartsBeforeLeaving;
+    }
+
+
+
+
+    private void ModifyStatistic()
     {
         
     }
 
-    public bool isAffectedBy(InterestCategory element)
+    private int isAffectedBy(InterestCategory element)
     {
         if (likes.Contains(element))
         {
-            return true;
+            return 1;
         }
         else if (dislikes.Contains(element))
         {
-            return false;
+            return -1;
         }
 
-        return true;
+        return 0;
     }
 }

@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
-  m_Name: Theater
+  m_Name: Banc
   m_EditorClassIdentifier: 
-  building:
-    name: 4
-    cost: 2000
-    usageTime: 45
-    Effects:
-    - effectName: Humeur
-      effectValue: 20
-    - effectName: "S\xE9r\xE9nit\xE9"
-      effectValue: -20
-    maxAmount: 1
+  effect:
+    name: 
+    description: 
+    utilisationDuration: 0
+    energy: 0
+    mood: 0
+    serenity: 0
+    attributeEffects: []
+  price: 0
+  maximumInInv: 0
+  unlockLevel: 0
