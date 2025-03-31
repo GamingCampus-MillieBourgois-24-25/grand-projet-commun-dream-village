@@ -49,9 +49,9 @@ jobs:
       - run:
           name: Lancer la build Unity
           command: |
-            /opt/unity/Editor/Unity -batchmode -nographics -quit \
-            -projectPath $(pwd) -executeMethod BuildScript.PerformBuild \
-            -logFile logs/build.log || echo "Échec de la build Unity."
+            /opt/unity/Editor/Unity -batchmode -nographics \
+            -projectPath $(pwd) -executeMethod BuildSystem.BuildScript.PerformBuild \
+            -logFile logs/build.log
 
       # Vérification des logs Unity
       - run:
