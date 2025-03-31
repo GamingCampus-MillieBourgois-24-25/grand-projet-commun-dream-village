@@ -15,7 +15,7 @@ namespace BuildSystem
             if (!Directory.Exists(buildPath))
                 Directory.CreateDirectory(buildPath);
 
-            string[] scenes = { "Assets/Scenes/MainScene.unity" };
+            string[] scenes = { "Assets/Scenes/SampleScene.unity" };
 
             BuildPipeline.BuildPlayer(scenes, targetFile, BuildTarget.StandaloneWindows64, BuildOptions.None);
 
