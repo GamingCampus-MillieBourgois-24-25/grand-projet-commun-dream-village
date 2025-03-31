@@ -3,7 +3,8 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: unityci/editor:windows-2022.3.32f1-android-3.1.0
+      - image: unityci/editor:2022.3.32f1-android-3
+
     steps:
       - checkout
       
