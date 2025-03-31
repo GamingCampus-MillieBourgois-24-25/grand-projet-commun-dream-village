@@ -1,14 +1,11 @@
 version: 2.1
 
-executors:
-  unity-executor:
-    docker:
-      - image: unityci/editor:2022.3.32f1-android-3
-    resource_class: large
-
 jobs:
   build:
-    executor: unity-executor
+    docker:
+      - image: unityci/editor:2022.3.32f1-android-3
+    environment:
+      UNITY_LICENSE: $UNITY_LICENSE
     steps:
       - checkout
       
@@ -44,6 +41,12 @@ jobs:
               echo "Le fichier BuildScript.cs est introuvable !"
               exit 1
             fi
+      
+      - run:
+          name: Configure Unity License
+          command: |
+            mkdir -p ~/.config/unity3d/Unity
+            echo "$UNITY_LICENSE" > ~/.config/unity3d/Unity/Unity_lic.ulf
 
       # Lancer la build Unity
       - run:
