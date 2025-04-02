@@ -31,10 +31,10 @@ jobs:
           command: cat $HOME/.local/share/unity3d/Unity/Unity_lic.ulf || echo "❌ Licence introuvable !"
             
       - run:
-          name: Activer la licence Unity
+          name: Activer Unity
           command: |
-            /opt/unity/Editor/Unity -batchmode -nographics -quit \
-            -manualLicenseFile $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
+            /opt/unity/Editor/Unity -batchmode -quit \
+              -manualLicenseFile $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
 
       - run:
           name: Vérifier les permissions du fichier de licence
