@@ -36,7 +36,7 @@ jobs:
       # Vérification que le fichier BuildScript.cs est bien présent
       - run:
           name: Vérification du script de build Unity
-           command: |
+          command: |
               if [ ! -f "$(pwd)/Assets/Editor/BuildScript.cs" ]; then
                 echo "Le fichier BuildScript.cs est introuvable !"
                 exit 1
