@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Dialogues", menuName = "ScriptableObjects/Dialogues", order = 1)]
 public class Dialogues : ScriptableObject
 {
+    
+    // Type of dialogue: either a reaction of an event, information about a dream or the character
     public enum DialogueType
     {
         Reaction,
