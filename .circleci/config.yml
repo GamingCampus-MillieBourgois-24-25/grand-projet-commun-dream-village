@@ -6,16 +6,27 @@ jobs:
       - image: unityci/editor:2022.3.32f1-android-3
     working_directory: ~/project
     steps:
-      - checkout
+      - checkout  # Récupère le code depuis le repo
+
+      setup_remote_docker:
+        version: 20.10.7
+        docker_layer_caching: true
+
+      # Vérifier les fichiers après checkout
+      - run:
+          name: Vérifier les fichiers du projet
+          command: ls -l ~/project/
 
       - restore_cache:
           keys:
             - unity-docker-cache-v1-{{ checksum "Dockerfile" }}
             - unity-docker-cache-v1
+
+      # Vérifier la présence du Dockerfile
       - run:
           name: Vérifier la présence du Dockerfile
-          command: ls -l /root/project/docker/
-          
+          command: ls -l ~/project/docker/
+
       # Donner les permissions d'exécution à Unity
       - run:
           name: Donner les permissions à Unity
@@ -29,11 +40,11 @@ jobs:
             echo $UNITY_LICENSE | base64 --decode > $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
             cat $HOME/.local/share/unity3d/Unity/Unity_lic.ulf | head -c 50  # Vérifie si le fichier est bien écrit
             chmod 777 $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
-      
+
       - run:
           name: Vérifier le fichier de licence
           command: cat $HOME/.local/share/unity3d/Unity/Unity_lic.ulf || echo "❌ Licence introuvable !"
-            
+
       - run:
           name: Activer Unity
           command: |
