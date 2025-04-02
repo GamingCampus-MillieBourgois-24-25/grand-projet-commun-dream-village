@@ -18,4 +18,3 @@ workflows:
           project-path: .
           build-target: 'Android'
           context: unity
-
