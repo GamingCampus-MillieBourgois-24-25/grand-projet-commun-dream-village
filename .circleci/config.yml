@@ -33,8 +33,11 @@ jobs:
       - run:
           name: Activer Unity
           command: |
-            /opt/unity/Editor/Unity -batchmode -quit \
-              -manualLicenseFile $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
+            /opt/unity/Editor/Unity -batchmode -quit -manualLicenseFile $HOME/.local/share/unity3d/Unity/Unity_lic.ulf -logFile /tmp/unity_build.log
+
+      - run:
+          name: Afficher les logs de Unity
+          command: cat /tmp/unity_build.log
 
       - run:
           name: Vérifier les permissions du fichier de licence
