@@ -38,7 +38,7 @@ public class DayNight : MonoBehaviour
     private void OnValidate()
     {
         var closeCurtain = LMotion.Create(curtain.transform.position.x, shownPosition.x, animationDuration)
-            .WithEase(Ease.InOutBack).WithOnComplete(SwitchTime)
+            .WithEase(Ease.OutCubic).WithOnComplete(SwitchTime)
             .BindToPositionX(curtain.transform);
         
 
@@ -60,7 +60,7 @@ public class DayNight : MonoBehaviour
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         
         var openCurtain = LMotion.Create(curtain.transform.position.x, hiddenPosition.x, animationDuration)
-            .WithEase(Ease.InOutBack)
+            .WithEase(Ease.OutCubic)
             .BindToPositionX(curtain.transform);
     }
 }
