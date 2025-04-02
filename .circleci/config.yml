@@ -3,22 +3,9 @@ version: 2.1
 orbs:
   unity: game-ci/unity@1.7.1
 
-jobs:
-  unity-build:
-    docker:
-      - image: unityci/editor:ubuntu-2022.3.3f1-base-1
-    steps:
-      - checkout
-      - run:
-          name: "Vérifier la variable d'environnement de licence"
-          command: |
-            echo "Vérification de UNITY_ENCODED_LICENSE..."
-            if [ -z "$UNITY_ENCODED_LICENSE" ]; then
-              echo "La variable UNITY_ENCODED_LICENSE n'est pas définie ou vide"
-              exit 1
-            else
-              echo "La variable UNITY_ENCODED_LICENSE est définie"
-            fi
+workflows:
+  build-unity-project:
+    jobs:
       - unity/build:
           name: 'build-android'
           step-name: 'Build Android'
@@ -30,14 +17,17 @@ jobs:
             target_platform: 'android'
             editor_version: '2022.3.3f1'
             resource_class: 'large'
-          project-path: .
+          project-path: 'Unity2D-Demo-Game-CI-CD/src'
           build-target: 'Android'
           context: unity
-          
-
-workflows:
-  version: 2
-  build:
-    jobs:
-      - unity-build
-           
+          pre-steps:
+            - run:
+                name: "Vérifier la variable d'environnement de licence"
+                command: |
+                  echo "Vérification de UNITY_ENCODED_LICENSE..."
+                  if [ -z "$UNITY_ENCODED_LICENSE" ]; then
+                    echo "La variable UNITY_ENCODED_LICENSE n'est pas définie ou vide"
+                    exit 1
+                  else
+                    echo "La variable UNITY_ENCODED_LICENSE est définie"
+                  fi
