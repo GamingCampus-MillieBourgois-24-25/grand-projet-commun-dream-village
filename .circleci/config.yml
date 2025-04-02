@@ -42,6 +42,15 @@ jobs:
               exit 1
             fi
 
+      - run:
+          name: Vérification de la variable UNITY_LICENSE
+          command: echo "$UNITY_LICENSE"
+
+      - run:
+          name: Test de décodage de la licence
+          command: echo "$UNITY_LICENSE" | base64 --decode || echo "Erreur de décodage !"
+    
+
       # Configuration de la licence Unity
       - run:
           name: Configurer la licence Unity
