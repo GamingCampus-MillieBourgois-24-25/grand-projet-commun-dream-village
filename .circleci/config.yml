@@ -9,7 +9,6 @@ jobs:
       - checkout  # Récupère le code depuis le repo
       
       setup_remote_docker:
-          version: 20.10.7
           docker_layer_caching: true
 
       # Vérifier les fichiers après checkout
