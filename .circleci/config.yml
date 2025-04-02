@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  unity: game-ci/unity@2022.3
+  unity: game-ci/unity@2022.3.32f1
 
 workflows:
   create-unity-activation-file:
