@@ -54,6 +54,18 @@ jobs:
             fi
 
       - run:
+          name: Vérification du format de UNITY_LICENSE
+          command: |
+            echo "Longueur de UNITY_LICENSE : $(echo -n "$UNITY_LICENSE" | wc -c)"
+            echo "$UNITY_LICENSE" | base64 --decode &> /dev/null
+            if [ $? -ne 0 ]; then
+              echo "❌ UNITY_LICENSE semble mal encodé en Base64 !"
+              exit 1
+            else
+              echo "✅ UNITY_LICENSE est bien encodé en Base64."
+            fi
+
+      - run:
           name: Vérification de la variable UNITY_LICENSE
           command: echo "$UNITY_LICENSE"
 
