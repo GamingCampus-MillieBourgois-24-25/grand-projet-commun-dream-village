@@ -31,6 +31,12 @@ jobs:
             chmod 777 $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
 
       - run:
+          name : Username & Password
+          command: |
+            echo $UNITY_USERNAME
+            echo $UNITY_PASSWORD
+
+      - run:
           name: Activer Unity
           command: |
             /opt/unity/Editor/Unity -batchmode -nographics -quit -username $UNITY_USERNAME -password $UNITY_PASSWORD -logFile /tmp/unity_build.log || echo "Echcec de l'activation"
