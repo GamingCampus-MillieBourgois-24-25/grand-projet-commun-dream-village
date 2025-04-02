@@ -11,20 +11,10 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
-      # Vérifier les fichiers après checkout
-      - run:
-          name: Vérifier les fichiers du projet
-          command: ls -l ~/project/
-
       - restore_cache:
           keys:
-            - unity-docker-cache-v1-{{ checksum "docker/Dockerfile" }}
+            - unity-docker-cache-v1-{{ .Branch }}
             - unity-docker-cache-v1
-
-      # Vérifier la présence du Dockerfile
-      - run:
-          name: Vérifier la présence du répertoire docker
-          command: ls -l ~/project/docker/
 
       # Donner les permissions d'exécution à Unity
       - run:
@@ -39,10 +29,6 @@ jobs:
             echo $UNITY_LICENSE | base64 --decode > $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
             cat $HOME/.local/share/unity3d/Unity/Unity_lic.ulf | head -c 50  # Vérifie si le fichier est bien écrit
             chmod 777 $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
-
-      - run:
-          name: Vérifier le fichier de licence
-          command: cat $HOME/.local/share/unity3d/Unity/Unity_lic.ulf || echo "❌ Licence introuvable !"
 
       - run:
           name: Activer Unity
@@ -87,7 +73,7 @@ jobs:
       - save_cache:
           paths:
             - /opt/unity
-          key: unity-docker-cache-v1-{{ checksum "Dockerfile" }}
+          key: unity-docker-cache-v1-{{ .Branch }}
 
 workflows:
   version: 2
