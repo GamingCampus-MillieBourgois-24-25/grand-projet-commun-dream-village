@@ -44,15 +44,11 @@ jobs:
 
       # Configuration de la licence Unity
       - run:
-          name: Configure Unity License
-          command: |
-            mkdir -p ~/.config/unity3d/Unity
-            echo "$UNITY_LICENSE" > ~/.config/unity3d/Unity/Unity_lic.ulf
-            # Vérifier que la licence a été correctement écrite
-            if [ ! -f ~/.config/unity3d/Unity/Unity_lic.ulf ]; then
-              echo "Erreur: La licence Unity n'a pas pu être écrite correctement !"
-              exit 1
-            fi
+        name: Configurer la licence Unity
+        command: |
+          mkdir -p /root/.local/share/unity3d/Unity/
+          echo "$UNITY_LICENSE" > /root/.local/share/unity3d/Unity/Unity_lic.ulf
+          chmod 777 /root/.local/share/unity3d/Unity/Unity_lic.ulf
 
       # Lancer la build Unity
       - run:
