@@ -3,14 +3,20 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TilemapChecker : MonoBehaviour
+public class IsoManager : MonoBehaviour
 {
-    public static TilemapChecker Instance { get; private set; } // Singleton
+    public static IsoManager Instance { get; private set; } // Singleton
 
     [SerializeField] private Tilemap tilemapBase;
     [SerializeField] private Tilemap tilemapObjects;
     [SerializeField] private TileBase whiteTile;
     [SerializeField] private TileBase greenTile;
+    [SerializeField] private TileBase redTile;
+
+    public PlaceableObject selectedObject;
+    [SerializeField] private float yMovingObject;
+    [SerializeField] private bool isEditMode;
+
 
     private void Awake()
     {
@@ -23,7 +29,7 @@ public class TilemapChecker : MonoBehaviour
         Instance = this;
     }
 
-    public void CheckObjectOnTilemap(PlacableObject obj)
+    public void CheckObjectOnTilemap(PlaceableObject obj)
     {
         if (obj == null) return; // Sécurité
 
@@ -61,18 +67,19 @@ public class TilemapChecker : MonoBehaviour
                 }
             }
         }
-
-
-
     }
 
 
-
-
+    public void OnObjectSelected(PlaceableObject obj)
+    {
+        selectedObject = obj;
+        selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, yMovingObject, selectedObject.transform.position.z);
+        selectedObject.IsMoving = true;
+    }
 }
 
-public static class TC
+public static class IM
 {
-    public static TilemapChecker Instance => TilemapChecker.Instance;
+    public static IsoManager Instance => IsoManager.Instance;
 }
 

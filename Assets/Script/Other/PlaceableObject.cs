@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlacableObject : MonoBehaviour
+public class PlaceableObject : MonoBehaviour
 {
     [SerializeField] private bool isMoving = false;
 
@@ -14,7 +14,7 @@ public class PlacableObject : MonoBehaviour
     {
         if (isMoving)
         {
-            TC.Instance.CheckObjectOnTilemap(this);
+            IM.Instance.CheckObjectOnTilemap(this);
         }
     }
 
