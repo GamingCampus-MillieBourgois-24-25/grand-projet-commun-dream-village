@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       
-       #  Donner les permissions d'exécution à Unity
+      # Donner les permissions d'exécution à Unity
       - run:
           name: Donner les permissions à Unity
           command: chmod +x /opt/unity/Editor/Unity
