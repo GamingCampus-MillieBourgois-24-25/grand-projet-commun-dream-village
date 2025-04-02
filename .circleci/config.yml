@@ -3,9 +3,12 @@ version: 2.1
 orbs:
   unity: game-ci/unity@1.7.1
 
-workflows:
-  build-unity-project:
-    jobs:
+jobs:
+  unity-build:
+    docker:
+      - image: unityci/editor:ubuntu-2022.3.3f1-base-1
+    steps:
+      - checkout
       - run:
           name: "Vérifier la variable d'environnement de licence"
           command: |
@@ -16,7 +19,6 @@ workflows:
             else
               echo "La variable UNITY_ENCODED_LICENSE est définie"
             fi
-    
       - unity/build:
           name: 'build-android'
           step-name: 'Build Android'
@@ -31,3 +33,11 @@ workflows:
           project-path: .
           build-target: 'Android'
           context: unity
+          
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - unity-build
+           
