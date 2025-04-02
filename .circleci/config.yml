@@ -18,12 +18,12 @@ jobs:
 
       - restore_cache:
           keys:
-            - unity-docker-cache-v1-{{ checksum "Dockerfile" }}
+            - unity-docker-cache-v1-{{ checksum "docker/Dockerfile" }}
             - unity-docker-cache-v1
 
       # Vérifier la présence du Dockerfile
       - run:
-          name: Vérifier la présence du Dockerfile
+          name: Vérifier la présence du répertoire docker
           command: ls -l ~/project/docker/
 
       # Donner les permissions d'exécution à Unity
