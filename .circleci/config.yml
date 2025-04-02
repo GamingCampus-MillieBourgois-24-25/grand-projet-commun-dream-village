@@ -3,34 +3,91 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/android:2023.01  # Image Docker pour Android
+      - image: unityci/editor:2022.3.32f1-android-3
     environment:
-      GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g"'
+      UNITY_LICENSE: $UNITY_LICENSE 
     steps:
-      - checkout  # Récupère le code depuis le repo
-      - restore_cache:
-          keys:
-            - gradle-cache-{{ checksum "build.gradle" }}
+      - checkout
+
+      # Vérification de l'installation de Unity
       - run:
-          name: Installer les dépendances
-          command: ./gradlew dependencies
+          name: Vérification de la présence de Unity
+          command: ls -la /opt/unity/Editor/ || echo "Unity n'est pas installé !"
+
+      # Vérification que l'exécutable Unity est bien accessible
       - run:
-          name: Build APK Debug
-          command: ./gradlew assembleDebug
-      - save_cache:
-          key: gradle-cache-{{ checksum "build.gradle" }}
-          paths:
-            - ~/.gradle
+          name: Vérification de l'exécutable Unity
+          command: |
+            if [ ! -f "/opt/unity/Editor/Unity" ]; then
+              echo "L'exécutable Unity n'existe pas !"
+              exit 1
+            fi
+
+      # Donner les permissions d'exécution à Unity
+      - run:
+          name: Donner les permissions à Unity
+          command: chmod +x /opt/unity/Editor/Unity
+
+      # Vérification du contenu du répertoire
+      - run:
+          name: Vérification des fichiers du projet
+          command: ls -la $(pwd)
+
+      # Vérification que le fichier BuildScript.cs est bien présent
+      - run:
+          name: Vérification du script de build Unity
+          command: |
+            if [ ! -f "$(pwd)/Assets/Editor/BuildScript.cs" ]; then
+              echo "Le fichier BuildScript.cs est introuvable !"
+              exit 1
+            fi
+
+      # Configuration de la licence Unity
+      - run:
+          name: Configure Unity License
+          command: |
+            mkdir -p ~/.config/unity3d/Unity
+            echo "$UNITY_LICENSE" > ~/.config/unity3d/Unity/Unity_lic.ulf
+            # Vérifier que la licence a été correctement écrite
+            if [ ! -f ~/.config/unity3d/Unity/Unity_lic.ulf ]; then
+              echo "Erreur: La licence Unity n'a pas pu être écrite correctement !"
+              exit 1
+            fi
+
+      # Lancer la build Unity
+      - run:
+          name: Lancer la build Unity
+          command: |
+            /opt/unity/Editor/Unity -batchmode -nographics -quit \
+            -projectPath $(pwd) -executeMethod BuildScript.PerformBuild \
+            -logFile logs/build.log || echo "Échec de la build Unity."
+
+      # Vérification des logs Unity
+      - run:
+          name: Affichage des logs Unity
+          command: cat logs/build.log || echo "Le fichier de log est introuvable."
+
+      # Vérifier si la build a été créée
+      - run:
+          name: Vérifier si la build a été créée
+          command: |
+            if [ -d "$(pwd)/Builds" ]; then
+              echo "La build a été créée avec succès."
+            else
+              echo "Le dossier Builds est vide ou n'existe pas."
+              exit 1
+            fi
+
+      # Stockage des artifacts
       - store_artifacts:
-          path: app/build/outputs/apk/debug/app-debug.apk
-          destination: apk
+          path: $(pwd)/Builds
+          destination: build_output
 
 workflows:
   version: 2
-  build-and-test:
+  build-workflow:
     jobs:
       - build:
           filters:
             branches:
-              only:
-                - develop 
+              only: develop
