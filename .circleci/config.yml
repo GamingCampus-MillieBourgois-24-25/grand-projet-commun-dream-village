@@ -20,8 +20,8 @@ jobs:
             echo $UNITY_LICENSE | base64 --decode > $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
             cat $HOME/.local/share/unity3d/Unity/Unity_lic.ulf | head -c 50  # Vérifie si le fichier est bien écrit
             chmod 777 $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
-
-       - run:
+            
+      - run:
           name: Activer la licence Unity
           command: |
             /opt/unity/Editor/Unity -batchmode -nographics -quit \
