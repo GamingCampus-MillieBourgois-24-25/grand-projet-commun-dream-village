@@ -4,6 +4,7 @@ jobs:
   build:
     docker:
       - image: unityci/editor:2022.3.32f1-android-3
+    working_directory: ~/project
     steps:
       - checkout
 
@@ -11,7 +12,10 @@ jobs:
           keys:
             - unity-docker-cache-v1-{{ checksum "Dockerfile" }}
             - unity-docker-cache-v1
-      
+      - run:
+          name: Vérifier la présence du Dockerfile
+          command: ls -l /root/project/docker/
+          
       # Donner les permissions d'exécution à Unity
       - run:
           name: Donner les permissions à Unity
