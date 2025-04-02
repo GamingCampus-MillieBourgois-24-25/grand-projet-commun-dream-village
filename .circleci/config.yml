@@ -8,3 +8,4 @@ workflows:
     jobs:
       - unity/create-activation-file:
           editor_version: 2022.3.32f1
+
