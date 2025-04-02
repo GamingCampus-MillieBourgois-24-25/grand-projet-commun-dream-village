@@ -44,6 +44,17 @@ jobs:
 
       - run:
           name: Vérification de la variable UNITY_LICENSE
+          command: |
+            if [ -z "$UNITY_LICENSE" ]; then
+              echo "❌ UNITY_LICENSE n'est pas défini !"
+              exit 1
+            else
+              echo "✅ UNITY_LICENSE est défini."
+              echo "$UNITY_LICENSE" | head -c 50  # Affiche les 50 premiers caractères pour vérifier
+            fi
+
+      - run:
+          name: Vérification de la variable UNITY_LICENSE
           command: echo "$UNITY_LICENSE"
 
       - run:
