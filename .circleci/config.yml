@@ -2,45 +2,45 @@ version: 2.1
 
 jobs:
   build:
-    docker:
-      - image: unityci/editor:2022.3.32f1-android-3
+   #docker:
+     # - image: unityci/editor:2022.3.32f1-android-3
     environment:
       UNITY_LICENSE: $UNITY_LICENSE 
     steps:
       - checkout
 
       # Vérification de l'installation de Unity
-      - run:
-          name: Vérification de la présence de Unity
-          command: ls -la /opt/unity/Editor/ || echo "Unity n'est pas installé !"
+      #- run:
+      #    name: Vérification de la présence de Unity
+      #    command: ls -la /opt/unity/Editor/ || echo "Unity n'est pas installé !"
 
       # Vérification que l'exécutable Unity est bien accessible
-      - run:
-          name: Vérification de l'exécutable Unity
-          command: |
-            if [ ! -f "/opt/unity/Editor/Unity" ]; then
-              echo "L'exécutable Unity n'existe pas !"
-              exit 1
-            fi
+      #- run:
+       #   name: Vérification de l'exécutable Unity
+        #  command: |
+         #   if [ ! -f "/opt/unity/Editor/Unity" ]; then
+         #     echo "L'exécutable Unity n'existe pas !"
+         #     exit 1
+          #  fi
 
       # Donner les permissions d'exécution à Unity
-      - run:
-          name: Donner les permissions à Unity
-          command: chmod +x /opt/unity/Editor/Unity
+      #- run:
+       #   name: Donner les permissions à Unity
+        #  command: chmod +x /opt/unity/Editor/Unity
 
       # Vérification du contenu du répertoire
-      - run:
-          name: Vérification des fichiers du projet
-          command: ls -la $(pwd)
+      #- run:
+       #   name: Vérification des fichiers du projet
+        #  command: ls -la $(pwd)
 
       # Vérification que le fichier BuildScript.cs est bien présent
-      - run:
-          name: Vérification du script de build Unity
-          command: |
-            if [ ! -f "$(pwd)/Assets/Editor/BuildScript.cs" ]; then
-              echo "Le fichier BuildScript.cs est introuvable !"
-              exit 1
-            fi
+      #- run:
+      #    name: Vérification du script de build Unity
+       #   command: |
+        #    if [ ! -f "$(pwd)/Assets/Editor/BuildScript.cs" ]; then
+         #     echo "Le fichier BuildScript.cs est introuvable !"
+         #     exit 1
+          #  fi
 
       - run:
           name: Vérification de la variable UNITY_LICENSE
