@@ -6,11 +6,11 @@ jobs:
       - image: unityci/editor:2022.3.32f1-android-3
     working_directory: ~/project
     steps:
-      - checkout  # Récupère le code depuis le repo
+      - checkout 
 
       setup_remote_docker:
-        version: 20.10.7
-        docker_layer_caching: true
+          version: 20.10.7
+          docker_layer_caching: true
 
       # Vérifier les fichiers après checkout
       - run:
