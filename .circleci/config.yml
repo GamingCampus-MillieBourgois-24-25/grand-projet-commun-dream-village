@@ -44,11 +44,15 @@ jobs:
 
       # Configuration de la licence Unity
       - run:
-        name: Configurer la licence Unity
-        command: |
-          mkdir -p /root/.local/share/unity3d/Unity/
-          echo "$UNITY_LICENSE" > /root/.local/share/unity3d/Unity/Unity_lic.ulf
-          chmod 777 /root/.local/share/unity3d/Unity/Unity_lic.ulf
+          name: Configurer la licence Unity
+          command: |
+            mkdir -p /root/.local/share/unity3d/Unity/
+            echo "$UNITY_LICENSE" > /root/.local/share/unity3d/Unity/Unity_lic.ulf
+            chmod 777 /root/.local/share/unity3d/Unity/Unity_lic.ulf
+
+      - run:
+          name: Vérifier la licence Unity
+          command: cat /root/.local/share/unity3d/Unity/Unity_lic.ulf || echo "Licence introuvable !"
 
       # Lancer la build Unity
       - run:
