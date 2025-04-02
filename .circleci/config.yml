@@ -4,8 +4,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2023.06 #unityci/editor:2022.3.32f1-android-3
-    environment:
-      UNITY_LICENSE: $UNITY_LICENSE 
     steps:
       - checkout
 
@@ -22,7 +20,7 @@ jobs:
               exit 1
             else
               echo "✅ UNITY_LICENSE est défini."
-              echo UNITY_LICENSE | head -c 50  # Affiche les 50 premiers caractères pour vérifier
+              echo $UNITY_LICENSE | head -c 50  # Affiche les 50 premiers caractères pour vérifier
             fi
 
       - run:
