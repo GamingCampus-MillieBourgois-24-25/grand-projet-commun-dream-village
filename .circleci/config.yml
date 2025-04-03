@@ -3,13 +3,27 @@ version: 2.1
 orbs:
   unity: game-ci/unity@1.7.1
 
+jobs:
+  install_sdk:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - run:
+          name: Install Android SDK and Update
+          command: |
+            # Install Android SDK and required components
+            echo "y" | sdkmanager --licenses
+            sdkmanager "platforms;android-33" "build-tools;33.0.0" "platform-tools"
+
 workflows:
+  version: 2
   build-unity-project:
     jobs:
+      - install_sdk
       - unity/build:
           name: 'build-android'
           step-name: 'Build Android'
-          unity-serial-var-name: 'UNITY_SERIAL' 
+          unity-serial-var-name: 'UNITY_SERIAL'
           unity-username-var-name: 'UNITY_USERNAME'
           unity-password-var-name: 'UNITY_PASSWORD'
           executor:
@@ -20,3 +34,5 @@ workflows:
           project-path: .
           build-target: 'Android'
           context: DreamVillageUnityInfo
+          requires:
+            - install_sdk
