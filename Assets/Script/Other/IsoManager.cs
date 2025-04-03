@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class IsoManager : MonoBehaviour
 {
@@ -13,9 +14,13 @@ public class IsoManager : MonoBehaviour
     [SerializeField] private TileBase greenTile;
     [SerializeField] private TileBase redTile;
 
-    public PlaceableObject selectedObject;
+    [SerializeField] private Canvas editModeCanvas;
+    [SerializeField] private Button placeBtn;
+
     [SerializeField] private float yMovingObject;
-    [SerializeField] private bool isEditMode;
+
+    [SerializeField] public PlaceableObject selectedObject;
+    [SerializeField] public bool isEditMode = false;
 
 
     private void Awake()
@@ -29,6 +34,27 @@ public class IsoManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Update()
+    {
+        if (isEditMode)
+        {
+            // Si on a un objet
+            if (selectedObject)
+            {
+                CheckObjectOnTilemap(selectedObject);
+            }
+
+            if (Input.GetMouseButtonDown(0)) // PC
+            {
+                SelectObjectUnderPointer(Input.mousePosition);
+            }
+            else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) // mobile
+            {
+                SelectObjectUnderPointer(Input.GetTouch(0).position);
+            }
+        }
+    }
+
     public void CheckObjectOnTilemap(PlaceableObject obj)
     {
         if (obj == null) return; // Sécurité
@@ -40,7 +66,7 @@ public class IsoManager : MonoBehaviour
         Vector3 bottomLeftWorldPos = renderer.bounds.min;
         Vector3 topRightWorldPos = renderer.bounds.max;
 
-        Debug.Log("BottomLEft: "+ bottomLeftWorldPos + " and TOPRIght: "+ topRightWorldPos);
+        //Debug.Log("BottomLEft: "+ bottomLeftWorldPos + " and TOPRIght: "+ topRightWorldPos);
 
         // Convertit les positions du monde en coordonnées de la tilemap
         Vector3Int bottomLeftCell = tilemapBase.WorldToCell(bottomLeftWorldPos);
@@ -70,12 +96,66 @@ public class IsoManager : MonoBehaviour
     }
 
 
-    public void OnObjectSelected(PlaceableObject obj)
+
+    private void SelectObjectUnderPointer(Vector2 screenPosition)
     {
+        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            PlaceableObject obj = hit.collider.GetComponent<PlaceableObject>();
+            if (obj != null)
+            {
+                OnObjectSelected(obj);
+            }
+        }
+    }
+
+    private void OnObjectSelected(PlaceableObject obj)
+    {
+        if (obj == null) return; // Sécurité
+
+        // Si un objet est déjà sélectionné, il revient à sa position initiale
+        if (selectedObject != null)
+        {
+            selectedObject.transform.position = selectedObject.OriginalPosition;
+        }
+
         selectedObject = obj;
         selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, yMovingObject, selectedObject.transform.position.z);
-        selectedObject.IsMoving = true;
+
+        placeBtn.interactable = true;
+
+        Debug.Log("Objet sélectionné : " + obj.name);
     }
+
+    private void PlacePlaceableObject(PlaceableObject obj)
+    {
+        if (obj != null)
+        {
+            float objectHeight = obj.GetComponent<Renderer>().bounds.size.y;
+            // TODO: à changer plus tard si toutes les origines des bâtiments sont en bas !
+            float newYPosition = IM.Instance.transform.position.y + (objectHeight / 2f);
+
+            obj.transform.position = new Vector3(obj.transform.position.x, newYPosition, obj.transform.position.z);
+
+            // Réinitialiser
+            selectedObject = null;
+            placeBtn.interactable = false;
+        }
+    }
+
+#region Btns Functions
+    public void BS_PlaceSelectedObject()
+    {
+        PlacePlaceableObject(selectedObject);
+    }
+    public void BS_ToggleEditMode()
+    {
+        isEditMode = !isEditMode;
+        editModeCanvas.gameObject.SetActive(isEditMode);
+        selectedObject = null;
+    }
+#endregion
 }
 
 public static class IM

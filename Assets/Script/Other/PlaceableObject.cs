@@ -2,20 +2,16 @@ using UnityEngine;
 
 public class PlaceableObject : MonoBehaviour
 {
-    [SerializeField] private bool isMoving = false;
-
-    public bool IsMoving
+    private Vector3 originalPosition;
+    public Vector3 OriginalPosition
     {
-        get => isMoving;
-        set => isMoving = value;
+        get => originalPosition;
+        set => originalPosition = value;
     }
 
-    private void Update()
+    public void Start()
     {
-        if (isMoving)
-        {
-            IM.Instance.CheckObjectOnTilemap(this);
-        }
+        OriginalPosition = transform.position;
     }
 
     public Vector3 GetSize()
