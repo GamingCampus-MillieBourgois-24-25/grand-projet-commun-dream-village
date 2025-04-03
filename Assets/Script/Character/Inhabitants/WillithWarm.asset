@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6963ced5b706aa4e896fd214196de3b, type: 3}
+  m_Name: WillithWarm
+  m_EditorClassIdentifier: 
+  firstName: Willith
+  lastName: Warm
+  pronouns: 0
+  MBTI: 6
+  personnality: 000000000100000002000000030000000400000005000000
+  likes:
+  - {fileID: 11400000, guid: a1b9f91182c991a4f84027f5a6648485, type: 2}
+  - {fileID: 11400000, guid: 629b924ae2a253b43a4103920a8ecc89, type: 2}
+  - {fileID: 11400000, guid: 7557c9e9f1dc06c498ae86fc236b1391, type: 2}
+  - {fileID: 11400000, guid: edbd5b4cf4ecb6048a9d9bd47572a306, type: 2}
+  dislikes:
+  - {fileID: 11400000, guid: 2b574a8cd29d59942bb785cfb05c2317, type: 2}
+  - {fileID: 11400000, guid: c438e252334d1a04caea8daffd796dd4, type: 2}
+  - {fileID: 11400000, guid: df15dce0f8fb50544b99b12e25ae75de, type: 2}
+  - {fileID: 11400000, guid: a9097d07afa0b0346ba116afeded535c, type: 2}
+  limit: 100
+  goldMultiplier: 1
+  unlockLevel: 0
+  InitialPrice: 0
+  canLeave: 0
+  heartsBeforeLeaving: 0
+  Icon: {fileID: 0}
+  InhabitantPrefab: {fileID: 0}
