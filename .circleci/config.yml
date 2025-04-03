@@ -24,7 +24,7 @@ workflows:
             - run:
                 name: Setup Java
                 command: |
-                  sudo apt update && sudo apt install -y openjdk-11-jdk
+                  apt-get update && apt-get install -y openjdk-11-jdk
                   echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64' >> $BASH_ENV
                   echo 'export PATH=$JAVA_HOME/bin:$PATH' >> $BASH_ENV
             
