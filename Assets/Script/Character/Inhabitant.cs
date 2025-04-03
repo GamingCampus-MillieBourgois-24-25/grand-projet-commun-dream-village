@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "NewInhabitant", menuName = "Character")]
 public class Inhabitant : ScriptableObject
@@ -33,6 +34,11 @@ public class Inhabitant : ScriptableObject
     [SerializeField] private int InitialPrice;
     [SerializeField] private bool canLeave;
     [SerializeField] private int heartsBeforeLeaving;
+
+
+    [Header("Visuals")]
+    [SerializeField] private Image Icon;
+    [SerializeField] private GameObject InhabitantPrefab;
     #endregion
 
 

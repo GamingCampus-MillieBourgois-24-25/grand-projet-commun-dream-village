@@ -46,7 +46,7 @@ public class Building : ScriptableObject
 
 
             [SerializeField] private InterestCategory attribute;
-            [SerializeField] private int bonus;
+            [SerializeField] private float bonus;
             [SerializeField] private BonusType bonusType;
         }
     }

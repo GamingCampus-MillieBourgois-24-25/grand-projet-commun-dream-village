@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
-  m_Name: Banc
+  m_Name: "Caf\xE9"
   m_EditorClassIdentifier: 
   effect:
-    name: 
+    name: "Caf\xE9"
     description: 
-    utilisationDuration: 0
-    energy: 0
-    mood: 0
-    serenity: 0
-    attributeEffects: []
-  price: 0
-  maximumInInv: 0
-  unlockLevel: 0
+    utilisationDuration: 30
+    energy: 10
+    mood: 10
+    serenity: -5
+    attributeEffects:
+    - attribute: {fileID: 11400000, guid: 7557c9e9f1dc06c498ae86fc236b1391, type: 2}
+      bonus: 20
+      bonusType: 1
+  price: 1500
+  maximumInInv: 4
+  unlockLevel: 2
