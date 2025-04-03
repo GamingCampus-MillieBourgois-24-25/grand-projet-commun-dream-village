@@ -20,19 +20,5 @@ workflows:
           project-path: .
           build-target: 'Android'
           context: DreamVillageUnityInfo
-          pre-steps:
-            - run:
-                name: Setup Java
-                command: |
-                  apt-get update && apt-get install -y openjdk-11-jdk
-                  echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64' >> $BASH_ENV
-                  echo 'export PATH=$JAVA_HOME/bin:$PATH' >> $BASH_ENV
-            
-            - run:
-                name: "Check SDK Vesrion"
-                command: |
-                    export ANDROID_HOME=/opt/android-sdk
-                    export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
-                    /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/tools/bin/sdkmanager --list
                                   
           
