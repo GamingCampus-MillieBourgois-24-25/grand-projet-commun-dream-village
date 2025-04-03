@@ -1,0 +1,34 @@
+version: 2.1
+
+orbs:
+  unity: game-ci/unity@1.7.1
+
+workflows:
+  build-unity-project:
+    jobs:
+      - unity/build:
+          name: 'build-android'
+          step-name: 'Build Android'
+          unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+          unity-username-var-name: 'UNITY_USERNAME'
+          unity-password-var-name: 'UNITY_PASSWORD'
+          executor:
+            name: 'unity/ubuntu'
+            target_platform: 'android'
+            editor_version: '2022.3.3f1'
+            resource_class: 'large'
+          project-path: .
+          build-target: 'Android'
+          context: DreamVillageUnityInfo
+          pre-steps:
+            - run:
+                name: "Vérifier la variable d'environnement de licence"
+                command: |
+                  echo "Vérification de UNITY_ENCODED_LICENSE..."
+                  if [ -z "$UNITY_ENCODED_LICENSE" ]; then
+                    echo "La variable UNITY_ENCODED_LICENSE n'est pas définie ou vide"
+                    exit 1
+                  else
+                    echo "La variable UNITY_ENCODED_LICENSE est définie"
+                    echo $UNITY_ENCODED_LICENSE | base64 --decode | head -n 20
+                  fi
