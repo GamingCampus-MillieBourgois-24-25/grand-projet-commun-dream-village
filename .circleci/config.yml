@@ -2,8 +2,8 @@ version: 2.1
 
 executors:
   unity-executor:
-    machine:
-      image: ubuntu-2004:current
+    docker:
+      - image: game-ci/unity-builder:latest
     resource_class: large
 
 jobs:
