@@ -12,6 +12,10 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: Find Docker
+          command: docker pull game-ci/unity-builder:latest
+
       # Build Project
       - run:
           name: Build project
@@ -25,7 +29,7 @@ jobs:
               -e UNITY_PASSWORD=$UNITY_PASSWORD \
               -e UNITY_SERIAL=$UNITY_SERIAL \
               -v $(pwd):/project \
-              game-ci/unity-builder:4.3.0 \
+              game-ci/unity-builder:latest \
               --targetPlatform Android
 
       # Upload artifact
