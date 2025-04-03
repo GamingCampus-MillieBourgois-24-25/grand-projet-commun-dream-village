@@ -1,22 +1,49 @@
 version: 2.1
 
-orbs:
-  unity: game-ci/unity@1.7.1
+executors:
+  unity-executor:
+    machine:
+      image: ubuntu-2004:current
+    resource_class: large
+    context: DreamVillageUnityInfo
+
+jobs:
+  build:
+    executor: unity-executor
+    steps:
+      - checkout
+
+      # Build Project
+      - run:
+          name: Build project
+          command: |
+            export UNITY_SERIAL=${UNITY_SERIAL}
+            export UNITY_EMAIL=${UNITY_EMAIL}
+            export UNITY_PASSWORD=${UNITY_PASSWORD}
+
+            docker run --rm \
+              -e UNITY_EMAIL=$UNITY_EMAIL \
+              -e UNITY_PASSWORD=$UNITY_PASSWORD \
+              -e UNITY_SERIAL=$UNITY_SERIAL \
+              -v $(pwd):/project \
+              game-ci/unity-builder:4.3.0 \
+              --targetPlatform Android
+
+      # Upload artifact
+      - run:
+          name: Archive Build
+          command: |
+            mkdir -p /tmp/build
+            cp -r build/Android/Android.apk /tmp/build/
+      - store_artifacts:
+          path: /tmp/build
+          destination: Build
 
 workflows:
-  build-unity-project:
+  version: 2
+  build-workflow:
     jobs:
-      - unity/build:
-          name: 'build-android'
-          step-name: 'Build Android'
-          unity-serial-var-name: 'UNITY_SERIAL' 
-          unity-username-var-name: 'UNITY_USERNAME'
-          unity-password-var-name: 'UNITY_PASSWORD'
-          executor:
-            name: 'unity/ubuntu'
-            target_platform: 'android'
-            editor_version: '2022.3.3f1'
-            resource_class: 'large'
-          project-path: .
-          build-target: 'Android'
-          context: DreamVillageUnityInfo
+      - build:
+          filters:
+            branches:
+              only: main
