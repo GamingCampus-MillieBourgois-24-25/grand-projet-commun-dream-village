@@ -12,26 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6963ced5b706aa4e896fd214196de3b, type: 3}
   m_Name: FestiaHest
   m_EditorClassIdentifier: 
-  firstName: Festia
-  lastName: Hest
-  pronouns: 1
-  MBTI: 1
-  personnality: 060000000700000008000000090000000a000000
-  likes:
+  <FirstName>k__BackingField: Festia
+  <LastName>k__BackingField: Hest
+  <Pronouns>k__BackingField: 1
+  <MBTI>k__BackingField: 1
+  <Personnality>k__BackingField: 060000000700000008000000090000000a000000
+  <Likes>k__BackingField:
   - {fileID: 11400000, guid: df15dce0f8fb50544b99b12e25ae75de, type: 2}
   - {fileID: 11400000, guid: 2b574a8cd29d59942bb785cfb05c2317, type: 2}
   - {fileID: 11400000, guid: b6e0378aa9b179b41a05b74ce21abb74, type: 2}
   - {fileID: 11400000, guid: 177d50357d44e3e4ba416e6dea88f5c9, type: 2}
-  dislikes:
+  <Dislikes>k__BackingField:
   - {fileID: 11400000, guid: a9097d07afa0b0346ba116afeded535c, type: 2}
   - {fileID: 11400000, guid: ef5fbab2462aab84ea98ab3992e683de, type: 2}
   - {fileID: 11400000, guid: 5b77e91670e132440820dd87886d84eb, type: 2}
   - {fileID: 11400000, guid: 200ec0a758f847041ae4a2a6d931cf0e, type: 2}
-  limit: 100
-  goldMultiplier: 1.1
-  unlockLevel: 2
-  InitialPrice: 1000
-  canLeave: 1
-  heartsBeforeLeaving: 3
-  Icon: {fileID: 0}
-  InhabitantPrefab: {fileID: 0}
+  <Mood>k__BackingField: 0
+  <Serenity>k__BackingField: 0
+  <Energy>k__BackingField: 0
+  <Hearts>k__BackingField: 3
+  <Limit>k__BackingField: 100
+  <GoldMultiplier>k__BackingField: 1.1
+  <UnlockLevel>k__BackingField: 2
+  <InitialPrice>k__BackingField: 1000
+  <CanLeave>k__BackingField: 1
+  <HeartsBeforeLeaving>k__BackingField: 3
+  <Icon>k__BackingField: {fileID: 0}
+  <InhabitantPrefab>k__BackingField: {fileID: 0}

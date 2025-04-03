@@ -2147,10 +2147,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1608238934}
   m_HandleRect: {fileID: 1683658828}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -100
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2612,10 +2612,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1021622510}
   m_HandleRect: {fileID: 1315170356}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -100
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3123,6 +3123,104 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1791542755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1791542757}
+  - component: {fileID: 1791542756}
+  m_Layer: 0
+  m_Name: DreamMachineManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1791542756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791542755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198235de1fa2caa4489b8173bf2198c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterImage: {fileID: 1497854951}
+  characterNameText: {fileID: 900314678}
+  moodSlider: {fileID: 1486797818}
+  serenitySlider: {fileID: 1334013947}
+  energySlider: {fileID: 1926667474}
+  inhabitants:
+  - {fileID: 11400000, guid: 0a6322da7c5df2146b0c76b979834566, type: 2}
+--- !u!4 &1791542757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791542755}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1166.0366, y: 637.42096, z: -137.92082}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1872441737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1872441739}
+  - component: {fileID: 1872441738}
+  m_Layer: 0
+  m_Name: VillageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1872441738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872441737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba782f19d4e2ca345b8973fc844ea549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inhabitants:
+  - {fileID: 11400000, guid: 0a6322da7c5df2146b0c76b979834566, type: 2}
+  buildings: []
+--- !u!4 &1872441739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872441737}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1166.0366, y: 637.42096, z: -137.92082}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1926667472
 GameObject:
   m_ObjectHideFlags: 0
@@ -3206,10 +3304,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1389922370}
   m_HandleRect: {fileID: 996896258}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -100
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3221,3 +3319,5 @@ SceneRoots:
   - {fileID: 820389079}
   - {fileID: 1172034172}
   - {fileID: 1286242633}
+  - {fileID: 1872441739}
+  - {fileID: 1791542757}

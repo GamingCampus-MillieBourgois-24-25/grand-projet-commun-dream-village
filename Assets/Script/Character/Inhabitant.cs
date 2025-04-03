@@ -9,36 +9,34 @@ public class Inhabitant : ScriptableObject
 {
 
     #region Variables Serialized
-    [Header("Basic Information")]
-    [SerializeField] private string firstName;
-    [SerializeField] private string lastName;
-    [SerializeField] private Pronouns pronouns;
-    [SerializeField] private InhabitantEnums MBTI;
+    [field: Header("Basic Information")]
+    [field: SerializeField] public string FirstName { get; private set; }
+    [field: SerializeField] public string LastName { get; private set; }
+    [field: SerializeField] public Pronouns Pronouns { get; private set; }
+    [field: SerializeField] public InhabitantEnums MBTI { get; private set; }
+    [field: SerializeField] public List<Personalities> Personnality { get; private set; }
 
-    [SerializeField] private List<Personalities> personnality;
+    [field: Header("Preferences")]
+    [field: SerializeField] public List<InterestCategory> Likes { get; private set; }
+    [field: SerializeField] public List<InterestCategory> Dislikes { get; private set; }
 
-    [Header("Preferences")] 
-    [SerializeField] private List<InterestCategory> likes;
-    [SerializeField] private List<InterestCategory> dislikes;
+    [field: Header("Statistics")]
+    [field: SerializeField] public int Mood { get; private set; }
+    [field: SerializeField] public int Serenity { get; private set; }
+    [field: SerializeField] public int Energy { get; private set; }
+    [field: SerializeField] public int Hearts { get; private set; }
+    [field: SerializeField] public int Limit { get; private set; }
 
-    [Header("Statistics")] 
-    private int mood;
-    private int serenity;
-    private int energy;
-    private int hearts;
-    [SerializeField] private int limit;
+    [field: Header("Progression & Economy")]
+    [field: SerializeField] public float GoldMultiplier { get; private set; }
+    [field: SerializeField] public int UnlockLevel { get; private set; }
+    [field: SerializeField] public int InitialPrice { get; private set; }
+    [field: SerializeField] public bool CanLeave { get; private set; }
+    [field: SerializeField] public int HeartsBeforeLeaving { get; private set; }
 
-    [Header("Progression & Economy")] 
-    [SerializeField] private float goldMultiplier;
-    [SerializeField] private int unlockLevel;
-    [SerializeField] private int InitialPrice;
-    [SerializeField] private bool canLeave;
-    [SerializeField] private int heartsBeforeLeaving;
-
-
-    [Header("Visuals")]
-    [SerializeField] private Image Icon;
-    [SerializeField] private GameObject InhabitantPrefab;
+    [field: Header("Visuals")]
+    [field: SerializeField] public Image Icon { get; private set; }
+    [field: SerializeField] public GameObject InhabitantPrefab { get; private set; }
     #endregion
 
 
@@ -46,7 +44,7 @@ public class Inhabitant : ScriptableObject
 
     private void Awake()
     {
-        hearts = heartsBeforeLeaving;
+        Hearts = HeartsBeforeLeaving;
     }
 
 
@@ -59,11 +57,11 @@ public class Inhabitant : ScriptableObject
 
     private int isAffectedBy(InterestCategory element)
     {
-        if (likes.Contains(element))
+        if (Likes.Contains(element))
         {
             return 1;
         }
-        else if (dislikes.Contains(element))
+        else if (Dislikes.Contains(element))
         {
             return -1;
         }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class InterestCategory : ScriptableObject
 {
     #region "Variables"
-    [SerializeField] private string name;
+    [SerializeField] private string interestName;
     [SerializeField] private string description;
     [SerializeField] private Image icon;
     #endregion
