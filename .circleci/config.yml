@@ -26,7 +26,6 @@ workflows:
                 command: |
                     export ANDROID_HOME=/opt/android-sdk
                     export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
-                    find / -name "sdkmanager" 2>/dev/null
-                    sdkmanager --list
+                    /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/tools/bin/sdkmanager --list
                                   
           
