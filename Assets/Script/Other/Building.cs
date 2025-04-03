@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 
@@ -33,6 +34,10 @@ public class Building : ScriptableObject
 
         [Header("Stats")]
         [SerializeField] private List<AttributeEffect> attributeEffects;
+
+        [Header("Visuals")]
+        [SerializeField] private Image icon;
+        [SerializeField] private GameObject buildingPrefab;
 
 
         [System.Serializable]
