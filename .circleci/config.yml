@@ -12,8 +12,8 @@ jobs:
           name: Install Android SDK
           command: |
             # Installer le SDK Android
-            apt-get update
-            apt-get install -y wget unzip openjdk-11-jdk
+            sudo apt-get update
+            sudo apt-get install -y wget unzip openjdk-11-jdk
             wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O android_sdk.zip
             unzip android_sdk.zip -d /usr/local/android-sdk
             rm android_sdk.zip
