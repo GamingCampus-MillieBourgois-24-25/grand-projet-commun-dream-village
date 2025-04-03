@@ -4494,7 +4494,7 @@ MonoBehaviour:
   tilemapObjects: {fileID: 530926207}
   whiteTile: {fileID: 11400000, guid: 5ddc73841439e4a4f9c4d59c3e49c02e, type: 2}
   greenTile: {fileID: 11400000, guid: cdb89a559ebbd284a8bff8aac53aa97b, type: 2}
-  redTile: {fileID: 0}
+  redTile: {fileID: 11400000, guid: b439710c197aeed429959e1398c48491, type: 2}
   editModeCanvas: {fileID: 732063512}
   placeBtn: {fileID: 782546247}
   yMovingObject: 0

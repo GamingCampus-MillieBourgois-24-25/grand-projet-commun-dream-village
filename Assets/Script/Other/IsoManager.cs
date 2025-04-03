@@ -55,18 +55,17 @@ public class IsoManager : MonoBehaviour
         }
     }
 
-    public void CheckObjectOnTilemap(PlaceableObject obj)
+    // Fonction qui vérifie si l'objet peut être placé sur la tilemap
+    private bool CanPlaceObjectOnTilemap(PlaceableObject obj)
     {
-        if (obj == null) return; // Sécurité
+        if (obj == null) return false; // Sécurité
 
         Renderer renderer = obj.GetComponent<Renderer>();
-        if (renderer == null) return; // Sécurité
+        if (renderer == null) return false; // Sécurité
 
-        // Récupére les bornes de l'objet dans l'espace 3D
+        // Récupère les bornes de l'objet dans l'espace 3D
         Vector3 bottomLeftWorldPos = renderer.bounds.min;
         Vector3 topRightWorldPos = renderer.bounds.max;
-
-        //Debug.Log("BottomLEft: "+ bottomLeftWorldPos + " and TOPRIght: "+ topRightWorldPos);
 
         // Convertit les positions du monde en coordonnées de la tilemap
         Vector3Int bottomLeftCell = tilemapBase.WorldToCell(bottomLeftWorldPos);
@@ -76,29 +75,87 @@ public class IsoManager : MonoBehaviour
 
         for (int x = bottomLeftCell.x; x <= topRightCell.x; x++)
         {
-            // Oui c'est top avant bottom. Left Right, Top Bottom. Pas changer!
             for (int y = topRightCell.y; y <= bottomLeftCell.y; y++)
             {
                 Vector3Int cellPos = new Vector3Int(x, y, 0);
                 TileBase tile = tilemapBase.GetTile(cellPos);
 
-                // Si sur une case valide, on peint
-                if (tile == whiteTile)
-                {
-                    tilemapObjects.SetTile(cellPos, greenTile);
-                }
-                else
+                // Si la case est invalide
+                if (tile != whiteTile)
                 {
                     isValidPos = false;
+                    break;
                 }
             }
+
+            if (!isValidPos) break;
         }
 
-        if (!isValidPos) {
-            // Si l'objet est sur une case invalide, il peut pas être placé
-            ChangeTileUnderObject(selectedObject, redTile);
+        return isValidPos;
+    }
+
+    public void CheckObjectOnTilemap(PlaceableObject obj)
+    {
+        if (obj == null) return; // Sécurité
+
+        bool canPlace = CanPlaceObjectOnTilemap(obj); // Vérifie si l'objet peut être placé
+
+        if (canPlace)
+        {
+            placeBtn.interactable = true;
+            ChangeTileUnderObject(obj, greenTile);
+        }
+        else
+        {
+            placeBtn.interactable = false;
+            ChangeTileUnderObject(obj, redTile); 
         }
     }
+
+    //public void CheckObjectOnTilemap(PlaceableObject obj)
+    //{
+    //    if (obj == null) return; // Sécurité
+
+    //    Renderer renderer = obj.GetComponent<Renderer>();
+    //    if (renderer == null) return; // Sécurité
+
+    //    // Récupére les bornes de l'objet dans l'espace 3D
+    //    Vector3 bottomLeftWorldPos = renderer.bounds.min;
+    //    Vector3 topRightWorldPos = renderer.bounds.max;
+
+    //    //Debug.Log("BottomLEft: "+ bottomLeftWorldPos + " and TOPRIght: "+ topRightWorldPos);
+
+    //    // Convertit les positions du monde en coordonnées de la tilemap
+    //    Vector3Int bottomLeftCell = tilemapBase.WorldToCell(bottomLeftWorldPos);
+    //    Vector3Int topRightCell = tilemapBase.WorldToCell(topRightWorldPos);
+
+    //    bool isValidPos = true;
+
+    //    for (int x = bottomLeftCell.x; x <= topRightCell.x; x++)
+    //    {
+    //        for (int y = topRightCell.y; y <= bottomLeftCell.y; y++)
+    //        {
+    //            Vector3Int cellPos = new Vector3Int(x, y, 0);
+    //            TileBase tile = tilemapBase.GetTile(cellPos);
+
+    //            // Si invalide
+    //            if (tile != whiteTile)
+    //            {
+    //                isValidPos = false;
+    //                break;
+    //            }
+    //        }
+    //    }
+
+    //    if (isValidPos)
+    //    {
+    //        ChangeTileUnderObject(obj, greenTile);
+    //    }
+    //    else
+    //    {
+    //        ChangeTileUnderObject(obj, redTile);
+    //    }
+    //}
     private void ChangeTileUnderObject(PlaceableObject obj, TileBase tileType)
     {
         if (obj != null && obj.GetComponent<Renderer>())
@@ -150,10 +207,14 @@ public class IsoManager : MonoBehaviour
 
     private void MoveSelectedObject(RaycastHit hit)
     {
+        if (selectedObject == null) return; // Sécurité
+
+        ChangeTileUnderObject(selectedObject, null);
+
         Vector3 newPosition = hit.point;
         newPosition.y = selectedObject.transform.position.y + yMovingObject;
-        ChangeTileUnderObject(selectedObject, null);
         selectedObject.transform.position = newPosition;
+
         CheckObjectOnTilemap(selectedObject);
     }
 
@@ -178,7 +239,7 @@ public class IsoManager : MonoBehaviour
         if (selectedObject != null)
         {
             ChangeTileUnderObject(selectedObject, null);
-            selectedObject.transform.position = selectedObject.OriginalPosition;
+            selectedObject.ResetPosition();
         }
 
         selectedObject = obj;
@@ -191,22 +252,21 @@ public class IsoManager : MonoBehaviour
 
     private void PlacePlaceableObject(PlaceableObject obj)
     {
-        if (obj != null)
-        {
-            float objectHeight = obj.GetComponent<Renderer>().bounds.size.y;
-            // TODO: à changer plus tard si toutes les origines des batiments sont en bas !
-            float newYPosition = IM.Instance.transform.position.y + (objectHeight / 2f);
+        if (obj == null) return; // Sécurité
 
-            obj.transform.position = new Vector3(obj.transform.position.x, newYPosition, obj.transform.position.z);
+        float objectHeight = obj.GetComponent<Renderer>().bounds.size.y;
+        // TODO: à changer plus tard si toutes les origines des batiments sont en bas !
+        float newYPosition = IM.Instance.transform.position.y + (objectHeight / 2f);
 
-            // SET NEW POSITION
-            obj.OriginalPosition = obj.transform.position;
+        obj.transform.position = new Vector3(obj.transform.position.x, newYPosition, obj.transform.position.z);
 
-            // Réinitialiser
-            ChangeTileUnderObject(selectedObject, null);
-            selectedObject = null;
-            placeBtn.interactable = false;
-        }
+        // SET NEW POSITION
+        obj.OriginalPosition = obj.transform.position;
+
+        // Réinitialiser
+        ChangeTileUnderObject(selectedObject, null);
+        selectedObject = null;
+        placeBtn.interactable = false;
     }
 
 #region Btns Functions
@@ -219,6 +279,8 @@ public class IsoManager : MonoBehaviour
         isEditMode = !isEditMode;
         this.gameObject.SetActive(isEditMode);
         editModeCanvas.gameObject.SetActive(isEditMode);
+        tilemapObjects.ClearAllTiles();
+        selectedObject.ResetPosition();
         selectedObject = null;
     }
 #endregion

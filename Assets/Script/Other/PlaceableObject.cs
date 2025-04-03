@@ -16,6 +16,11 @@ public class PlaceableObject : MonoBehaviour
         //CenterObject(IM.Instance.tilemapObjects);
     }
 
+    public void ResetPosition()
+    {
+        transform.position = OriginalPosition;
+    }
+
     public Vector3 GetSize()
     {
         Renderer renderer = GetComponent<Renderer>();
