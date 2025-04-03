@@ -24,6 +24,7 @@ workflows:
             - run:
                 name: "Check SDK Vesrion"
                 command: |
+                    java -version
                     export ANDROID_HOME=/opt/android-sdk
                     export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
                     /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/tools/bin/sdkmanager --list
