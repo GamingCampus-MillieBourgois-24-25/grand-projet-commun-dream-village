@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
+  m_Name: Pool
+  m_EditorClassIdentifier: 
+  effect:
+    name: Pool
+    description: 
+    utilisationDuration: 60
+    energy: -15
+    mood: 10
+    serenity: 25
+    attributeEffects:
+    - attribute: {fileID: 11400000, guid: b729c793c8539d1419923170a21a9b75, type: 2}
+      bonus: 1.5
+      bonusType: 0
+  price: 2750
+  maximumInInv: 1
+  unlockLevel: 7

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6963ced5b706aa4e896fd214196de3b, type: 3}
+  m_Name: FestiaHest
+  m_EditorClassIdentifier: 
+  firstName: Festia
+  lastName: Hest
+  pronouns: 1
+  MBTI: 1
+  personnality: 060000000700000008000000090000000a000000
+  likes:
+  - {fileID: 11400000, guid: df15dce0f8fb50544b99b12e25ae75de, type: 2}
+  - {fileID: 11400000, guid: 2b574a8cd29d59942bb785cfb05c2317, type: 2}
+  - {fileID: 11400000, guid: b6e0378aa9b179b41a05b74ce21abb74, type: 2}
+  - {fileID: 11400000, guid: 177d50357d44e3e4ba416e6dea88f5c9, type: 2}
+  dislikes:
+  - {fileID: 11400000, guid: a9097d07afa0b0346ba116afeded535c, type: 2}
+  - {fileID: 11400000, guid: ef5fbab2462aab84ea98ab3992e683de, type: 2}
+  - {fileID: 11400000, guid: 5b77e91670e132440820dd87886d84eb, type: 2}
+  - {fileID: 11400000, guid: 200ec0a758f847041ae4a2a6d931cf0e, type: 2}
+  limit: 100
+  goldMultiplier: 1.1
+  unlockLevel: 2
+  InitialPrice: 1000
+  canLeave: 1
+  heartsBeforeLeaving: 3
+  Icon: {fileID: 0}
+  InhabitantPrefab: {fileID: 0}
