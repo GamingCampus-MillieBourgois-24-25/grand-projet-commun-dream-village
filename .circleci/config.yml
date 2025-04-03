@@ -12,10 +12,6 @@ jobs:
     steps:
       - checkout
 
-      - run:
-          name: Find Docker
-          command: docker pull game-ci/unity-builder:latest
-
       # Build Project
       - run:
           name: Build project
