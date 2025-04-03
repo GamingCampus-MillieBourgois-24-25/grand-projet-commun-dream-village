@@ -9,10 +9,19 @@ jobs:
       - image: circleci/python:3.8
     steps:
       - run:
-          name: Install Android SDK and Update
+          name: Install Android SDK
           command: |
-            # Install Android SDK and required components
-            echo "y" | sdkmanager --licenses
+            # Installer le SDK Android
+            apt-get update
+            apt-get install -y wget unzip openjdk-11-jdk
+            wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O android_sdk.zip
+            unzip android_sdk.zip -d /usr/local/android-sdk
+            rm android_sdk.zip
+            # Définir les variables d'environnement
+            export ANDROID_HOME=/usr/local/android-sdk
+            export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+            # Accepter les licences et installer les composants nécessaires
+            yes | sdkmanager --licenses
             sdkmanager "platforms;android-33" "build-tools;33.0.0" "platform-tools"
 
 workflows:
