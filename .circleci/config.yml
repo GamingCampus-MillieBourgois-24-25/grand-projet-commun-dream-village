@@ -9,7 +9,7 @@ workflows:
       - unity/build:
           name: 'build-android'
           step-name: 'Build Android'
-          unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+          unity-serial-var-name: 'UNITY_SERIAL' 
           unity-username-var-name: 'UNITY_USERNAME'
           unity-password-var-name: 'UNITY_PASSWORD'
           executor:
@@ -20,15 +20,3 @@ workflows:
           project-path: .
           build-target: 'Android'
           context: DreamVillageUnityInfo
-          pre-steps:
-            - run:
-                name: "Vérifier la variable d'environnement de licence"
-                command: |
-                  echo "Vérification de UNITY_ENCODED_LICENSE..."
-                  if [ -z "$UNITY_ENCODED_LICENSE" ]; then
-                    echo "La variable UNITY_ENCODED_LICENSE n'est pas définie ou vide"
-                    exit 1
-                  else
-                    echo "La variable UNITY_ENCODED_LICENSE est définie"
-                    echo $UNITY_ENCODED_LICENSE | base64 --decode | head -n 20
-                  fi
