@@ -1,49 +1,31 @@
 version: 2.1
 
-executors:
-  unity-executor:
-    docker:
-      - image: game-ci/unity-builder:latest
-    resource_class: large
-
-jobs:
-  build:
-    executor: unity-executor
-    steps:
-      - checkout
-
-      # Build Project
-      - run:
-          name: Build project
-          command: |
-            export UNITY_SERIAL=${UNITY_SERIAL}
-            export UNITY_EMAIL=${UNITY_EMAIL}
-            export UNITY_PASSWORD=${UNITY_PASSWORD}
-
-            docker run --rm \
-              -e UNITY_EMAIL=$UNITY_EMAIL \
-              -e UNITY_PASSWORD=$UNITY_PASSWORD \
-              -e UNITY_SERIAL=$UNITY_SERIAL \
-              -v $(pwd):/project \
-              game-ci/unity-builder:latest \
-              --targetPlatform Android
-
-      # Upload artifact
-      - run:
-          name: Archive Build
-          command: |
-            mkdir -p /tmp/build
-            cp -r build/Android/Android.apk /tmp/build/
-      - store_artifacts:
-          path: /tmp/build
-          destination: Build
+orbs:
+  unity: game-ci/unity@1.7.1
 
 workflows:
-  version: 2
-  build-workflow:
+  build-unity-project:
     jobs:
-      - build:
+      - unity/build:
+          name: 'build-android'
+          step-name: 'Build Android'
+          unity-serial-var-name: 'UNITY_SERIAL' 
+          unity-username-var-name: 'UNITY_USERNAME'
+          unity-password-var-name: 'UNITY_PASSWORD'
+          executor:
+            name: 'unity/ubuntu'
+            target_platform: 'android'
+            editor_version: '2022.3.3f1'
+            resource_class: 'large'
+          project-path: .
+          build-target: 'Android'
           context: DreamVillageUnityInfo
-          filters:
-            branches:
-              only: develop
+          pre-steps:
+            - run:
+                name: "Check SDK Vesrion"
+                command: |
+                    export ANDROID_HOME=/opt/android-sdk
+                    export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+                    sdkmanager --list
+                                  
+          
