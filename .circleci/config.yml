@@ -15,10 +15,10 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y wget unzip openjdk-11-jdk
             wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O android_sdk.zip
-            unzip android_sdk.zip -d /usr/local/android-sdk
+            unzip android_sdk.zip -d /opt/android-sdk
             rm android_sdk.zip
             # Définir les variables d'environnement
-            export ANDROID_HOME=/usr/local/android-sdk
+            export ANDROID_HOME=/opt/android-sdk
             export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
             # Accepter les licences et installer les composants nécessaires
             yes | sdkmanager --licenses
