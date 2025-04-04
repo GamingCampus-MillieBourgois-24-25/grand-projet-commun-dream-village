@@ -12,15 +12,17 @@ jobs:
     steps:
       - checkout
 
+      - setup_remote_docker:
+          version: 20.10.7
+          docker_layer_caching: true
+          image: unityci/editor:ubuntu-2022.3.32f1-android-3 
+          registry: "docker.io"  
+          force_pull: false 
+
       - restore_cache:
           keys:
             - unity-cache-{{ checksum "Packages/manifest.json" }}
             - unity-cache-v1
-
-      - restore_cache:
-          keys:
-            - gradle-cache-{{ checksum "build.gradle" }}
-            - gradle-cache-v1
 
       # Build Projet
       - run:
@@ -58,12 +60,6 @@ jobs:
             - /project/Library
           key: unity-cache-{{ checksum "Packages/manifest.json" }}
 
-      - save_cache:
-          paths:
-            - ~/.gradle/caches
-            - ~/.gradle/wrapper
-          key: gradle-cache-{{ checksum "build.gradle" }}
-
       - run:
           name: Debug - Chercher où Unity a mis l'APK
           command: find . -name "*.apk"
@@ -73,7 +69,7 @@ jobs:
           name: Archive Build
           command: |
             mkdir -p /tmp/build
-            cp -r build/Android/Android.apk /tmp/build/
+            cp -r /build/Android/Android.apk /tmp/build/
             
       - store_artifacts:
           path: /tmp/build
