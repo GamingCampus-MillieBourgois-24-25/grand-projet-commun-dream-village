@@ -17,6 +17,11 @@ jobs:
             - unity-cache-{{ checksum "Packages/manifest.json" }}
             - unity-cache-v1
 
+      - restore_cache:
+          keys:
+            - gradle-cache-{{ checksum "build.gradle" }}
+            - gradle-cache-v1
+
       # Build Projet
       - run:
           name: Build project
@@ -53,6 +58,16 @@ jobs:
             - /project/Library
           key: unity-cache-{{ checksum "Packages/manifest.json" }}
 
+      - save_cache:
+          paths:
+            - ~/.gradle/caches
+            - ~/.gradle/wrapper
+          key: gradle-cache-{{ checksum "build.gradle" }}
+
+      - run:
+          name: Debug - Chercher où Unity a mis l'APK
+          command: find . -name "*.apk"
+
       # Upload artifact
       - run:
           name: Archive Build
@@ -63,17 +78,6 @@ jobs:
       - store_artifacts:
           path: /tmp/build
           destination: Build
-
-      - restore_cache:
-          keys:
-            - gradle-cache-{{ checksum "build.gradle" }}
-            - gradle-cache-v1
-
-      - save_cache:
-          paths:
-            - ~/.gradle/caches
-            - ~/.gradle/wrapper
-          key: gradle-cache-{{ checksum "build.gradle" }}
 
 workflows:
   version: 2
