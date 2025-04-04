@@ -21,6 +21,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialogueSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Other/DayNight.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -35,6 +36,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Dialogues&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Day-and-Night&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -98,6 +100,7 @@
       <updated>1743593852593</updated>
       <workItem from="1743593855185" duration="1130000" />
       <workItem from="1743595654421" duration="1620000" />
+      <workItem from="1743595654421" duration="9558000" />
     </task>
     <servers />
   </component>
