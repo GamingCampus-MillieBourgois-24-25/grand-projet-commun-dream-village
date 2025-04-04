@@ -68,14 +68,14 @@ jobs:
 
 
       - run: 
-          name: Afficher les répertoires et fichiers
+          name: Lister les fichiers .apk
           command: |
-            echo "Liste des fichiers et dossiers dans le répertoire courant:"
-            ls -l
-            echo "Liste des fichiers et dossiers dans /project:"
-            ls -l /project
-            echo "Liste des fichiers et dossiers dans /project/build/Android:"
-            ls -l /project/build/Android
+            echo "Liste des fichiers .apk dans le répertoire courant:"
+            find . -name "*.apk"
+            echo "Liste des fichiers .apk dans /project:"
+            find /project -name "*.apk"
+            echo "Liste des fichiers .apk dans /project/build/Android:"
+            find /project/build/Android -name "*.apk"
             
       # Upload artifact
       - run:
