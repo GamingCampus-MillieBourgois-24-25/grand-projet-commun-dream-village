@@ -1,26 +1,28 @@
 using UnityEditor;
 using UnityEngine;
-using System.IO;
-
 
 public class BuildScript
 {
-    public static void PerformBuild()
+    public static void BuildAndroid()
     {
-        Debug.Log("🚀 Build Unity commencée !");
-        string buildPath = "Builds/";
-        string targetFile = buildPath + "game.exe";
+        string buildPath = "builds/Android.apk";
 
-        if (!Directory.Exists(buildPath))
-            Directory.CreateDirectory(buildPath);
+        BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
+        {
+            scenes = new[] { "Assets/Scenes/Test/DefaultBuildScene.unity" }, // Change selon ton projet
+            locationPathName = buildPath,
+            target = BuildTarget.Android,
+            options = BuildOptions.None
+        };
 
-        string[] scenes = { "Assets/Scenes/SampleScene.unity" };
-
-        BuildPipeline.BuildPlayer(scenes, targetFile, BuildTarget.StandaloneWindows64, BuildOptions.None);
-
-        if (File.Exists(targetFile))
-            Debug.Log("✅ Build réussie : " + targetFile);
+        var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
+        if (report.summary.result != UnityEditor.Build.Reporting.BuildResult.Succeeded)
+        {
+            Debug.LogError("Build failed!");
+        }
         else
-            Debug.LogError("❌ La build n'a pas été générée !");
+        {
+            Debug.Log("Build succeeded!");
+        }
     }
 }
