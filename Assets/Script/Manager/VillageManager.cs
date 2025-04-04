@@ -13,7 +13,7 @@ public class VillageManager : MonoBehaviour
     private void Awake()
     {
         //Si jamais faut assurer qu'il y a qu'un seul Village ou Game Manager
-        /*
+        
         if (instance == null)
         {
             instance = this;
@@ -23,7 +23,7 @@ public class VillageManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        */
+        
     }
 
     public void AddInhabitant(Inhabitant newInhabitant)

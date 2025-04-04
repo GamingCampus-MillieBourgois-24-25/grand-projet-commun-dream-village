@@ -35,7 +35,7 @@ public class Inhabitant : ScriptableObject
     [field: SerializeField] public int HeartsBeforeLeaving { get; private set; }
 
     [field: Header("Visuals")]
-    [field: SerializeField] public Image Icon { get; private set; }
+    [field: SerializeField] public Sprite Icon { get; private set; }
     [field: SerializeField] public GameObject InhabitantPrefab { get; private set; }
     #endregion
 

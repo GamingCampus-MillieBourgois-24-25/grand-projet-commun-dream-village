@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badd941a9a5d3b74ca4571e749d9d5cf, type: 3}
   m_Name: Draw
   m_EditorClassIdentifier: 
-  name: Draw
+  <interestName>k__BackingField: Draw
   description: 
   icon: {fileID: 0}

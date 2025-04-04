@@ -37,5 +37,6 @@ MonoBehaviour:
   <InitialPrice>k__BackingField: 1000
   <CanLeave>k__BackingField: 1
   <HeartsBeforeLeaving>k__BackingField: 3
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: c44da6d62915e0c41858f295a360b362,
+    type: 3}
   <InhabitantPrefab>k__BackingField: {fileID: 0}
