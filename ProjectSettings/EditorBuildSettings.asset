@@ -13,3 +13,7 @@ EditorBuildSettings:
       type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 62daa0666fcdeec479a14761a04b3958, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: e6655917ead7ed2458351e39ec4fa501,
+      type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 53d183bfa4790e143915c6b330bdfed9,
+      type: 2}
