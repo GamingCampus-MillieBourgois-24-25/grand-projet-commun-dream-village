@@ -12,8 +12,8 @@ public class PlaceableObject : MonoBehaviour
 
     public void Start()
     {
+        CenterObject(IM.Instance.tilemapObjects);
         OriginalPosition = transform.position;
-        //CenterObject(IM.Instance.tilemapObjects);
     }
 
     public void ResetPosition()
@@ -36,34 +36,55 @@ public class PlaceableObject : MonoBehaviour
         Renderer renderer = GetComponent<Renderer>();
         if (renderer == null || tilemap == null) return;
 
-        // Récupérer les dimensions en X et Z
-        Vector3 size = renderer.bounds.size;
+        Vector3 boundsCenter = renderer.bounds.center;
+        Vector3Int cell = tilemap.WorldToCell(boundsCenter);
+        Vector3 cellCenterWorld = tilemap.GetCellCenterWorld(cell);
+        //cellCenterWorld.y = transform.position.y;
 
         // Calculer combien de tiles l'objet occupe
+        Vector3 size = renderer.bounds.size;
         int tilesX = Mathf.CeilToInt(size.x / tilemap.cellSize.x);
-        int tilesZ = Mathf.CeilToInt(size.z / tilemap.cellSize.y); // y dans Tilemap = z en 3D
-
-        // Convertir minWorld en coordonnées de tilemap
-        Vector3 minWorld = renderer.bounds.min;
-        Vector3Int minCell = tilemap.WorldToCell(minWorld);
+        int tilesZ = Mathf.CeilToInt(size.z / tilemap.cellSize.y);
 
         // Calcul de l'offset pour centrer correctement
-        float offsetX = (tilesX % 2 == 0) ? 0.5f : 0f; // 0.5 si pair, 0 si impair
-        float offsetZ = (tilesZ % 2 == 0) ? 0.5f : 0f;
+        float offsetX = (tilesX % 2 == 0) ? 0.5f * tilemap.cellSize.x : 0f; // 0.5 si pair, 0 si impair
+        float offsetZ = (tilesZ % 2 == 0) ? 0.5f * tilemap.cellSize.y : 0f;
 
-        // Trouver la position centrale des tiles occupées
-        Vector3 centerCell = new Vector3(
-            minCell.x + (tilesX / 2f) - offsetX,
-            minCell.y + (tilesZ / 2f) - offsetZ,
-            0
-        );
+        transform.position = new Vector3(cellCenterWorld.x + offsetX, transform.position.y, cellCenterWorld.z + offsetZ);
 
-        // Convertir en position monde et ajuster
-        Vector3 centeredWorldPosition = tilemap.GetCellCenterWorld(Vector3Int.FloorToInt(centerCell));
-        transform.position = new Vector3(centeredWorldPosition.x, transform.position.y, centeredWorldPosition.z);
-
-        Debug.Log($"Objet centré à : {transform.position}, Taille : {tilesX}x{tilesZ} tiles, CenterCell {centerCell}");
+        Debug.Log($"Object centered on tile: Cell {cell}, WorldPos {cellCenterWorld}");
     }
+
+    //public void CenterObject(Tilemap tilemap)
+    //{
+    //Vector3Int minCellCoords = tilemap.WorldToCell(renderer.bounds.min);
+
+    //// Calculer combien de tiles l'objet occupe
+    //Vector3 size = renderer.bounds.size;
+    //int tilesX = Mathf.CeilToInt(size.x / tilemap.cellSize.x);
+    //int tilesZ = Mathf.CeilToInt(size.z / tilemap.cellSize.y);
+
+    //// Tile en bas à gauche
+    //Vector3Int minCell = tilemap.WorldToCell(renderer.bounds.min);
+    //Vector3 minCellWorld = tilemap.CellToWorld(minCell);
+
+    //// Calcul de l'offset pour centrer correctement
+    //float offsetX = (tilesX % 2 == 0) ? 0f : 0.5f; // 0 si pair, 0.5 si impair
+    //float offsetZ = (tilesZ % 2 == 0) ? 0f : 0.5f;
+
+    //// Trouver la position centrale des tiles occupées
+    //Vector3 centeredWorldPosition = new Vector3(
+    //    minCellWorld.x + (tilesX / 2f - offsetX) * tilemap.cellSize.x,
+    //    transform.position.y,
+    //    minCellWorld.y + (tilesZ / 2f - offsetZ) * tilemap.cellSize.y
+    //);
+
+    //// Convertir en position monde et ajuster
+    ////Vector3 centeredWorldPosition = tilemap.GetCellCenterWorld(Vector3Int.FloorToInt(centerCell));
+    //transform.position = centeredWorldPosition;
+
+    //Debug.Log($"minCellWorld : {minCellWorld.x}, TilesX/2 : {(tilesX / 2f)}, OffestX: {offsetX} Taille : {tilesX}x{tilesZ} tiles, CenterCell {centeredWorldPosition}");
+//}
 
 
 
