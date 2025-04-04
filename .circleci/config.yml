@@ -66,6 +66,17 @@ jobs:
             - /project/Library
           key: unity-cache-{{ checksum "Packages/manifest.json" }}
 
+
+      - run: 
+          name: Afficher les répertoires et fichiers
+          command: |
+            echo "Liste des fichiers et dossiers dans le répertoire courant:"
+            ls -l
+            echo "Liste des fichiers et dossiers dans /project:"
+            ls -l /project
+            echo "Liste des fichiers et dossiers dans /project/build/Android:"
+            ls -l /project/build/Android
+            
       # Upload artifact
       - run:
           name: Archive Build
