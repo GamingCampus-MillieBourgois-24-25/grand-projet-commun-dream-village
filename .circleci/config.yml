@@ -27,6 +27,8 @@ jobs:
       - run:
           name: Build project
           command: |
+            mkdir -p /project/build/Android
+          
             # Activer la licence Unity
             unity-editor \
               -batchmode \
@@ -51,6 +53,9 @@ jobs:
               -customBuildTarget Android \
               -customBuildPath /project/build/Android/Android.apk \
               -quit
+
+            echo "Unity Build Logs:"
+            cat /tmp/unity_build.log
 
       - save_cache:
           paths:
