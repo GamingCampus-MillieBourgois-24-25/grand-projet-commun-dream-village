@@ -22,7 +22,7 @@ jobs:
               -nographics \
               -silent-crashes \
               -logFile /dev/stdout \
-              -username "$UNITY_EMAIL" \
+              -username "$UNITY_USERNAME" \
               -password "$UNITY_PASSWORD" \
               -serial "$UNITY_SERIAL" \
               -projectPath $(pwd) \
