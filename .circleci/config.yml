@@ -49,6 +49,7 @@ jobs:
               -projectPath $(pwd) \
               -buildTarget Android \
               -customBuildTarget Android \
+              -customBuildPath /project/build/Android/Android.apk
               -quit
 
       - run:
@@ -61,6 +62,10 @@ jobs:
             - /root/.local/share/unity3d
             - /project/Library
           key: unity-cache-{{ checksum "Packages/manifest.json" }}
+
+      - run:
+          name: Liste du contenu du dossier de build
+          command: ls -al /project/build/Android/
             
       # Upload artifact
       - run:
