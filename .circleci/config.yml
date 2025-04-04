@@ -27,6 +27,8 @@ jobs:
       - run:
           name: Build project
           command: |
+            docker images
+            
             mkdir -p /project/build/Android
           
             # Activer la licence Unity
@@ -47,7 +49,7 @@ jobs:
               -batchmode \
               -nographics \
               -silent-crashes \
-              -logFile /dev/stdout \
+              -logFile /tmp/unity_build.log \
               -projectPath $(pwd) \
               -buildTarget Android \
               -customBuildTarget Android \
