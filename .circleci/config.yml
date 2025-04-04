@@ -69,13 +69,7 @@ jobs:
 
       - run: 
           name: Lister les fichiers .apk
-          command: |
-            echo "Liste des fichiers .apk dans le répertoire courant:"
-            find . -name "*.apk"
-            echo "Liste des fichiers .apk dans /project:"
-            find /project -name "*.apk"
-            echo "Liste des fichiers .apk dans /project/build/Android:"
-            find /project/build/Android -name "*.apk"
+          command: find / -type f -name "*.apk" -print -quit | grep -q .
             
       # Upload artifact
       - run:
