@@ -30,4 +30,5 @@ workflows:
                     exit 1
                   else
                     echo "La variable UNITY_ENCODED_LICENSE est définie"
+                    echo $UNITY_ENCODED_LICENSE | base64 --decode | head -n 20
                   fi
