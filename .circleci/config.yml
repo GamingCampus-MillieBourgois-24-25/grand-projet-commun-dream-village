@@ -7,7 +7,6 @@ executors:
 jobs:
   build:
     executor: unity-executor
-    context: DreamVillageUnityInfo
     steps:
       - checkout
 
@@ -53,7 +52,6 @@ workflows:
   build-workflow:
     jobs:
       - build:
-          context: DreamVillageUnityInfo
           filters:
             branches:
               only: develop
