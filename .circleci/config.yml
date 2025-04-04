@@ -15,8 +15,8 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
           image: unityci/editor:ubuntu-2022.3.32f1-android-3 
-          registry: "docker.io"  
-          force_pull: false 
+          registry: "docker.io"
+          force_pull: false
 
       - restore_cache:
           keys:
@@ -26,7 +26,7 @@ jobs:
       # Build Projet
       - run:
           name: Build project
-          command: |    
+          command: |
             # Activer la licence Unity
             unity-editor \
               -batchmode \
@@ -45,17 +45,13 @@ jobs:
               -batchmode \
               -nographics \
               -silent-crashes \
-              -logFile /tmp/unity_build.log \
+              -logFile /dev/stdout \
               -projectPath $(pwd) \
               -buildTarget Android \
-              -customBuildTarget Android \
-              -customBuildPath /project/build/Android/Android.apk
+              -executeMethod BuildScript.BuildAndroid \
               -quit
 
-      - run:
-          name: Unity Logs 
-          command: cat /tmp/unity_build.log || echo "Le fichier de log est introuvable."
-
+      # Save cache for Unity dependencies
       - save_cache:
           paths:
             - /root/.cache/unity3d
@@ -63,17 +59,13 @@ jobs:
             - /project/Library
           key: unity-cache-{{ checksum "Packages/manifest.json" }}
 
-      - run:
-          name: Liste du contenu du dossier de build
-          command: ls -al /project/build/Android/
-            
-      # Upload artifact
+      # Archive Build
       - run:
           name: Archive Build
           command: |
             mkdir -p /tmp/build
-            cp -r /project/build/Android/Android.apk /tmp/build/
-            
+            cp builds/Android.apk /tmp/build/
+
       - store_artifacts:
           path: /tmp/build
           destination: Build
