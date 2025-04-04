@@ -69,7 +69,7 @@ jobs:
 
       - run: 
           name: Lister les fichiers .apk
-          command: find / -type f -name "*.apk" -print -quit | grep -q .
+          command: find /project \( -path /proc -o -path /sys -o -path /dev \) -prune -o -type f -name "*.apk" -print -quit | grep -q .
             
       # Upload artifact
       - run:
