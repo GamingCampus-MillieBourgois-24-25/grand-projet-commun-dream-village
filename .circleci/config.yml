@@ -26,10 +26,7 @@ jobs:
       # Build Projet
       - run:
           name: Build project
-          command: |
-            
-            mkdir -p /project/build/Android
-          
+          command: |    
             # Activer la licence Unity
             unity-editor \
               -batchmode \
@@ -52,7 +49,6 @@ jobs:
               -projectPath $(pwd) \
               -buildTarget Android \
               -customBuildTarget Android \
-              -customBuildPath /project/build/Android/Android.apk \
               -quit
 
       - run:
@@ -65,19 +61,6 @@ jobs:
             - /root/.local/share/unity3d
             - /project/Library
           key: unity-cache-{{ checksum "Packages/manifest.json" }}
-
-
-      - run: 
-          name: Lister les fichiers .apk
-          command: |
-              echo "Liste des fichiers et dossiers dans le répertoire courant:"
-              ls -l /project/build
-              echo "Liste des fichiers et dossiers dans /project:"
-              ls -l /project/build/outputs
-              echo "Liste des fichiers et dossiers dans /project/build/Android:"
-              ls -l /project/build/outputs/apk
-              echo "Liste des fichiers et dossiers dans /project/build/Android:"
-              ls -l /project/build/outputs/apk/release
             
       # Upload artifact
       - run:
