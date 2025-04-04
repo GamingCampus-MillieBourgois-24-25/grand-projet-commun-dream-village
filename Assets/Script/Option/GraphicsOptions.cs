@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class GraphicsOptions : MonoBehaviour
@@ -20,34 +22,40 @@ public class GraphicsOptions : MonoBehaviour
     }
     
     [Header("Graphics Settings")]
-    public ShadowQualityParameter shadowQuality = ShadowQualityParameter.All;
     public VsyncParameter vsync = VsyncParameter.On;
     public int targetFrameRate = 60;
     public Vector2Int fpsLimitRange = new Vector2Int(30, 60);
+    public string[] qualitySettings;
+    public string currentQualitySettings;
+
+    [Header("Interface")] 
+    public TMP_Text fpsText;
     
     private void Start()
     {
-        QualitySettings.shadows = (ShadowQuality)shadowQuality;
         QualitySettings.vSyncCount = (int)vsync;
         Application.targetFrameRate = targetFrameRate;
+        fpsText.text = targetFrameRate.ToString();
+        qualitySettings = QualitySettings.names;
+        currentQualitySettings = qualitySettings[QualitySettings.GetQualityLevel()];
     }
 
     private void OnValidate()
     {
-        QualitySettings.shadows = (ShadowQuality)shadowQuality;
         QualitySettings.vSyncCount = (int)vsync;
         Application.targetFrameRate = targetFrameRate;
     }
     
-    public void SetShadowQuality(int _quality)
+    public void SetQualitySettings(int quality)
     {
-        shadowQuality = (ShadowQualityParameter)_quality;
-        QualitySettings.shadows = (ShadowQuality)shadowQuality;
+        currentQualitySettings = qualitySettings[quality];
+        QualitySettings.SetQualityLevel(qualitySettings.ToList().IndexOf(currentQualitySettings), false);
     }
     
-    public void SetTargetFrameRate(float _frameRate)
+    public void SetTargetFrameRate(float frameRate)
     {
-        targetFrameRate = (int) Mathf.Lerp(fpsLimitRange.x, fpsLimitRange.y, _frameRate);
+        targetFrameRate = (int) Mathf.Lerp(fpsLimitRange.x, fpsLimitRange.y, frameRate);
         Application.targetFrameRate = targetFrameRate;
+        fpsText.text = targetFrameRate.ToString();
     }
 }

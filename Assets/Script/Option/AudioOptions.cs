@@ -23,27 +23,27 @@ public class AudioOptions : MonoBehaviour
         }
     }
     
-    public void SetGameVolume(float _volume)
+    public void SetGameVolume(float volume)
     {
-        gameVolume = Mathf.Clamp(_volume, 0.0001f, 1);
+        gameVolume = Mathf.Clamp(volume, 0.0001f, 1);
         if (audioMixer != null)
         {
             audioMixer.SetFloat("GameVolume", Mathf.Log10(gameVolume) * 20);
         }
     }
     
-    public void SetMusicVolume(float _volume)
+    public void SetMusicVolume(float volume)
     {
-        musicVolume = Mathf.Clamp(_volume, 0.0001f, 1);
+        musicVolume = Mathf.Clamp(volume, 0.0001f, 1);
         if (audioMixer != null)
         {
             audioMixer.SetFloat("MusicVolume", Mathf.Log10(musicVolume) * 20);
         }
     }
     
-    public void SetUIVolume(float _volume)
+    public void SetUIVolume(float volume)
     {
-        uiVolume = Mathf.Clamp(_volume, 0.0001f, 1);
+        uiVolume = Mathf.Clamp(volume, 0.0001f, 1);
         if (audioMixer != null)
         {
             audioMixer.SetFloat("UISFX", Mathf.Log10(uiVolume) * 20);
