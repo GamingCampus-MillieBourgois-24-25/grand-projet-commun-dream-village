@@ -70,15 +70,14 @@ jobs:
       - run: 
           name: Lister les fichiers .apk
           command: |
-              found_apk=$(find /project \( -path /proc -o -path /sys -o -path /dev \) -prune -o -type f -name "*.apk")
-              echo "Fichiers APK trouvés :"
-              echo "$found_apk"
-              if [ -n "$found_apk" ]; then
-                echo "Le fichier .apk a été trouvé."
-              else
-                echo "Aucun fichier .apk trouvé."
-                exit 1
-              fi
+              echo "Liste des fichiers et dossiers dans le répertoire courant:"
+              ls -l /project/build
+              echo "Liste des fichiers et dossiers dans /project:"
+              ls -l /project/build/outputs
+              echo "Liste des fichiers et dossiers dans /project/build/Android:"
+              ls -l /project/build/outputs/apk
+              echo "Liste des fichiers et dossiers dans /project/build/Android:"
+              ls -l /project/build/outputs/apk/release
             
       # Upload artifact
       - run:
