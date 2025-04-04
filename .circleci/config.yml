@@ -55,8 +55,9 @@ jobs:
               -customBuildPath /project/build/Android/Android.apk \
               -quit
 
-            echo "Unity Build Logs:"
-            cat /tmp/unity_build.log
+      -run:
+          name: Unity Logs 
+          command: cat /tmp/unity_build.log || echo "Le fichier de log est introuvable."
 
       - save_cache:
           paths:
