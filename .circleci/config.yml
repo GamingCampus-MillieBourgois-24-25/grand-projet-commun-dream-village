@@ -60,10 +60,6 @@ jobs:
             - /project/Library
           key: unity-cache-{{ checksum "Packages/manifest.json" }}
 
-      - run:
-          name: Debug - Chercher où Unity a mis l'APK
-          command: find . -name "*.apk"
-
       # Upload artifact
       - run:
           name: Archive Build
