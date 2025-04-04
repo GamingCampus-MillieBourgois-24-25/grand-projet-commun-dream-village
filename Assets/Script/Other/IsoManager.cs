@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class IsoManager : MonoBehaviour
 {
     public static IsoManager Instance { get; private set; } // Singleton
+
+    [SerializeField] private InputActionAsset inputActions;
 
     [SerializeField] private Tilemap tilemapBase;
     [SerializeField] public Tilemap tilemapObjects;
@@ -25,7 +28,12 @@ public class IsoManager : MonoBehaviour
     private PlaceableObject selectedObject;
     private bool isEditMode = false;
 
+    private InputAction clickAction;
+    private InputAction dragAction;
 
+    private TilemapRenderer tileRenderer;
+
+    #region Unity Functions
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -39,29 +47,56 @@ public class IsoManager : MonoBehaviour
 
     private void Start()
     {
-        //this.gameObject.SetActive(isEditMode);
+        tileRenderer = transform.GetChild(0).GetComponent<TilemapRenderer>();
+        tileRenderer.enabled = isEditMode;
+    }
+    #endregion
+
+    private void OnEnable()
+    {
+        var baseSceneMap = inputActions.FindActionMap("BaseScene");
+
+        clickAction = baseSceneMap.FindAction("Click");
+        dragAction = baseSceneMap.FindAction("Drag");
+
+        clickAction.performed += OnClickPerformed;
+        dragAction.performed += OnDragPerformed;
+
+        baseSceneMap.Enable();
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        if (isEditMode)
-        {
-            if (Input.GetMouseButton(0)) { // PC Move
-                CheckUnderPointerMove(Input.mousePosition);
-            }
-            else if (Input.GetMouseButtonDown(0)) // PC Touch
-            {
-                CheckUnderPointerTouch(Input.mousePosition);
-            }
-            else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) // Mobile Move
-            {
-                CheckUnderPointerMove(Input.GetTouch(0).position);
-            }
-            else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) // Mobile Touch
-            {
-                CheckUnderPointerTouch(Input.GetTouch(0).position);
-            }
-        }
+        clickAction.performed -= OnClickPerformed;
+        dragAction.performed -= OnDragPerformed;
+
+        clickAction.actionMap.Disable();
+    }
+
+    private void OnClickPerformed(InputAction.CallbackContext context)
+    {
+        if (!isEditMode) return;
+
+        Debug.Log("OnClickPerformed");
+        Vector2 pointerPos = GetPointerPosition(context);
+        CheckUnderPointerTouch(pointerPos);
+    }
+
+    private void OnDragPerformed(InputAction.CallbackContext context)
+    {
+        if (!isEditMode) return;
+
+        Debug.Log("OnDragPerformed");
+        Vector2 pointerPos = context.ReadValue<Vector2>();
+        CheckUnderPointerMove(pointerPos);
+    }
+
+    private Vector2 GetPointerPosition(InputAction.CallbackContext context)
+    {
+        // Si besoin de récupérer la position à partir du device
+        if (Pointer.current != null)
+            return Pointer.current.position.ReadValue();
+        return Vector2.zero;
     }
 
     private void CheckUnderPointerTouch(Vector2 screenPosition)
@@ -86,10 +121,10 @@ public class IsoManager : MonoBehaviour
     private void CheckUnderPointerMove(Vector2 screenPosition)
     {
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, GridLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000f, GridLayer))
         {
             // Move selected object
-            if(selectedObject != null)
+            if (selectedObject != null)
             {
                 MoveSelectedObject(hit);
             }
@@ -245,7 +280,9 @@ public class IsoManager : MonoBehaviour
     public void BS_ToggleEditMode()
     {
         isEditMode = !isEditMode;
-        this.gameObject.SetActive(isEditMode);
+
+        tileRenderer.enabled = isEditMode;
+
         editModeCanvas.gameObject.SetActive(isEditMode);
         tilemapObjects.ClearAllTiles();
         if (selectedObject != null) selectedObject.ResetPosition();

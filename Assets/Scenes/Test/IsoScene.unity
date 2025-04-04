@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 530926205}
   - component: {fileID: 530926207}
   - component: {fileID: 530926206}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: TilemapObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1069,7 +1069,7 @@ GameObject:
   - component: {fileID: 777933302}
   - component: {fileID: 777933304}
   - component: {fileID: 777933303}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: TilemapBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4306,7 +4306,7 @@ GameObject:
   - component: {fileID: 1223721980}
   - component: {fileID: 1223721979}
   - component: {fileID: 1223721978}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Island
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4442,7 +4442,7 @@ GameObject:
   - component: {fileID: 1329695092}
   - component: {fileID: 1329695093}
   - component: {fileID: 1329695094}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4490,6 +4490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d65039b76e15445804ae87c3df3d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActions: {fileID: -944628639613478452, guid: ed9b05e541cdb5346bd3925081cb94eb,
+    type: 3}
   tilemapBase: {fileID: 777933304}
   tilemapObjects: {fileID: 530926207}
   whiteTile: {fileID: 11400000, guid: e76e82b0f597f634d9936c1ed931fbf8, type: 2}
