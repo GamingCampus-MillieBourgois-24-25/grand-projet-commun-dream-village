@@ -38,7 +38,7 @@ jobs:
               -projectPath $(pwd) \
               -buildTarget Android \
               -customBuildTarget Android \
-              -customBuildPath /project/builds/Android.apk \
+              -customBuildPath /project/build/Android/Android.apk \
               -quit
 
       # Upload artifact
@@ -46,7 +46,8 @@ jobs:
           name: Archive Build
           command: |
             mkdir -p /tmp/build
-            cp -r build/Android/Android.apk /tmp/build/
+            cp -r /project/build/Android/Android.apk /tmp/build/
+            
       - store_artifacts:
           path: /tmp/build
           destination: Build
