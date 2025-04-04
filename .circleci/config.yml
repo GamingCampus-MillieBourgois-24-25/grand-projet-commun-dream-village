@@ -27,7 +27,6 @@ jobs:
       - run:
           name: Build project
           command: |
-            docker images
             
             mkdir -p /project/build/Android
           
