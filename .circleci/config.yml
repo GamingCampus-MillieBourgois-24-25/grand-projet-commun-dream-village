@@ -37,6 +37,8 @@ jobs:
               -logFile /dev/stdout \
               -projectPath $(pwd) \
               -buildTarget Android \
+              -customBuildTarget Android \
+              -customBuildPath /project/builds/Android.apk \
               -quit
 
       # Upload artifact
