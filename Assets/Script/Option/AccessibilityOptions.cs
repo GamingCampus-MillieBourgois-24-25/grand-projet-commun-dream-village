@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class AccessibilityOptions : MonoBehaviour
@@ -10,9 +11,7 @@ public class AccessibilityOptions : MonoBehaviour
     public enum LanguageParameter
     {
         English,
-        French,
-        Spanish,
-        Deutsch
+        French
     }
     
     public LanguageParameter currentLanguage = LanguageParameter.English;
@@ -33,6 +32,8 @@ public class AccessibilityOptions : MonoBehaviour
     public RectTransform languageDropdownTemplate;
     public RectTransform languageDropdownViewport;
     public float languageDropdownHeight = 150f;
+    
+    private bool _localizationActive = false;
     #endregion
     
     #region Text Speed
@@ -51,18 +52,21 @@ public class AccessibilityOptions : MonoBehaviour
     {
         languageDropdown.ClearOptions();
         List<string> options = new List<string>();
-        foreach (var lang in Enum.GetValues(typeof(LanguageParameter)))
+        foreach (var lang in LocalizationSettings.AvailableLocales.Locales)
         {
             options.Add(lang.ToString());
         }
         languageDropdown.AddOptions(options);
         languageDropdownTemplate.sizeDelta = new Vector2(0, languageDropdownHeight * options.Count);
         languageDropdownViewport.sizeDelta = new Vector2(languageDropdownViewport.rect.width, languageDropdownHeight * options.Count);
+        languageDropdown.value = (int) currentLanguage;
     }
 
     public void SetLanguageParameter(int value)
     {
+        if (_localizationActive) return;
         currentLanguage = (LanguageParameter) value;
+        StartCoroutine(SetLocale(value));
     }
     
     public void SetTextSpeedParameter(int value)
@@ -77,5 +81,14 @@ public class AccessibilityOptions : MonoBehaviour
         {
             textSpeedButtons[i].GetComponent<Image>().color = i == value ? Color.yellow : Color.white;
         }
+    }
+    
+    IEnumerator SetLocale(int localeID)
+    {
+        _localizationActive = true;
+        yield return LocalizationSettings.InitializationOperation;
+        LocalizationSettings.SelectedLocale=LocalizationSettings.AvailableLocales.Locales[localeID];
+        PlayerPrefs.SetInt("LocaleKey", localeID);
+        _localizationActive = false;
     }
 }

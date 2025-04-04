@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: OptionsTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: OptionsTable
+  m_TableCollectionNameGuidString: 34954f719440f7b479a35b9ef1e127c4
+  m_Entries:
+  - m_Id: 114167607296
+    m_Key: Quality Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6053306265600
+    m_Key: Graphics Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8862986629120
+    m_Key: FPS Limit Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9050316828672
+    m_Key: Audio Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9164544503808
+    m_Key: Game Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9293380939776
+    m_Key: Music Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9368316375040
+    m_Key: UI Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10435015962624
+    m_Key: Accessibility Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10554230665216
+    m_Key: Slow Text Speed Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10625496084480
+    m_Key: Normal Text Speed Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10709814177792
+    m_Key: Fast Text Speed Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10939590733824
+    m_Key: Text Speed Setting
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4777452889067225112
+  references:
+    version: 2
+    RefIds:
+    - rid: 4777452889067225112
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1743759225626
