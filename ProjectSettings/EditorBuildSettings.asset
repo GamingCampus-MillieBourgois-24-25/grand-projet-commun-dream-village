@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test/DefaultBuildScene.unity
     guid: 5e59e7f2801099645b53d3bb401936e6
+  - enabled: 1
+    path: Assets/Scenes/Test/IsoSceneZoom.unity
+    guid: 7eddee54e1a023042ac6bc6e6533777a
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 104c6935dcc4cd94997789787d56b25d,
       type: 2}

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -28,8 +25,8 @@ public class IsoManager : MonoBehaviour
     private PlaceableObject selectedObject;
     private bool isEditMode = false;
 
-    private InputAction clickAction;
-    private InputAction dragAction;
+    [SerializeField] private InputActionReference clickAction;
+    [SerializeField] private InputActionReference dragAction;
 
     private TilemapRenderer tileRenderer;
 
@@ -54,23 +51,19 @@ public class IsoManager : MonoBehaviour
 
     private void OnEnable()
     {
-        var baseSceneMap = inputActions.FindActionMap("BaseScene");
+        clickAction.action.performed += OnClickPerformed;
+        dragAction.action.performed += OnDragPerformed;
 
-        clickAction = baseSceneMap.FindAction("Click");
-        dragAction = baseSceneMap.FindAction("Drag");
-
-        clickAction.performed += OnClickPerformed;
-        dragAction.performed += OnDragPerformed;
-
-        baseSceneMap.Enable();
+        dragAction.action.Enable();
+        clickAction.action.Enable();
     }
 
     private void OnDisable()
     {
-        clickAction.performed -= OnClickPerformed;
-        dragAction.performed -= OnDragPerformed;
+        clickAction.action.performed -= OnClickPerformed;
+        dragAction.action.performed -= OnDragPerformed;
 
-        clickAction.actionMap.Disable();
+        clickAction.action.actionMap.Disable();
     }
 
     private void OnClickPerformed(InputAction.CallbackContext context)
@@ -289,6 +282,14 @@ public class IsoManager : MonoBehaviour
         selectedObject = null;
     }
 #endregion
+
+
+
+
+    public bool IsEditMode()
+    {
+        return isEditMode;
+    }
 }
 
 public static class IM
