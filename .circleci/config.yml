@@ -71,14 +71,13 @@ jobs:
           destination: Build
 
       # Upload to Dropbox
-      - run:
-          name: Dropbox Large File Uploader
+      g- run:
+          name: Upload APK to GitHub Release
           command: |
-            curl -X POST https://content.dropboxapi.com/2/files/upload \
-              --header "Authorization: Bearer ${DROPBOX_REFRESH_TOKEN}" \
-              --header "Dropbox-API-Arg: {\"path\": \"/Build/Android.apk\", \"mode\": \"overwrite\", \"autorename\": true, \"mute\": false}" \
-              --header "Content-Type: application/octet-stream" \
-              --data-binary @builds/Android/Android.apk
+            echo "$GITHUB_TOKEN_CUSTOM" | gh auth login --with-token
+            gh release upload latest builds/Android.apk \
+              --repo GamingCampus-MillieBourgois-24-25/grand-projet-commun-dream-village \
+              --clobber
 
       # Envoyer le lien sur Discord
       - run:
