@@ -70,8 +70,8 @@ jobs:
           path: /tmp/build
           destination: Build
 
-      # Upload to Dropbox
-      g- run:
+      # Upload to Github Realease
+      - run:
           name: Upload APK to GitHub Release
           command: |
             echo "$GITHUB_TOKEN_CUSTOM" | gh auth login --with-token
