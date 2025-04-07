@@ -10,7 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e13e6beaa89ee5d418d873cd6e279228, type: 3}
-  m_Name: DreamSnake
+  m_Name: DreamCats
   m_EditorClassIdentifier: 
+  ID: Dream001
   dialogueType: 1
-  dialogueText: I dreamt of dogs last night. I really liked it.
+  dialogueText: I dreamt of cats last night. I really liked it.
+  attributeEffects:
+  - attribute: {fileID: 11400000, guid: c438e252334d1a04caea8daffd796dd4, type: 2}
+    bonus: 10
+    bonusType: 1
+  stats:
+    Mood: 10
+    Serenity: 0
+    Energy: 0
+    Hearts: 5

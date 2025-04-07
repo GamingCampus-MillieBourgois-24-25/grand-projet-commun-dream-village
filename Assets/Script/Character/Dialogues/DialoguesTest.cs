@@ -1,16 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class DialoguesTest : MonoBehaviour
 {
-    public Dialogues dialogues;
-    
-    public TMP_Text dialogueText;
-    
-    private void Start()
+    public bool showDialogue;
+    [Range(1, 3)] public int type;
+    public DialoguesInhabitantTest dialInhabitant;
+
+    private void Update()
     {
-        dialogueText.text = dialogues.GetDialogueText();
+        if (showDialogue)
+        {
+            dialInhabitant.ShowDialogue(type);
+            
+            showDialogue = false;
+        }
     }
 }

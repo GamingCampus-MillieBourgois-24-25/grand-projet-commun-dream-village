@@ -10,7 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e13e6beaa89ee5d418d873cd6e279228, type: 3}
-  m_Name: ReactionTheater
+  m_Name: DreamDogs
   m_EditorClassIdentifier: 
-  dialogueType: 0
-  dialogueText: Oh a new Theater, cool !
+  ID: Dream002
+  dialogueType: 1
+  dialogueText: I dreamt of dogs last night. I really liked it.
+  attributeEffects:
+  - attribute: {fileID: 11400000, guid: 629b924ae2a253b43a4103920a8ecc89, type: 2}
+    bonus: 10
+    bonusType: 1
+  stats:
+    Mood: 10
+    Serenity: 0
+    Energy: 0
+    Hearts: 5

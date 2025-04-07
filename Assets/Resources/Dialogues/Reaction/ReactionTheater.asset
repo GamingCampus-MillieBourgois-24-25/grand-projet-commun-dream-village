@@ -10,7 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e13e6beaa89ee5d418d873cd6e279228, type: 3}
-  m_Name: InformationCat
+  m_Name: ReactionTheater
   m_EditorClassIdentifier: 
-  dialogueType: 2
-  dialogueText: I had a cat when I was a kid, I miss him.
+  ID: Info002
+  dialogueType: 0
+  dialogueText: Oh a new Theater, cool !
+  attributeEffects:
+  - attribute: {fileID: 11400000, guid: ef5fbab2462aab84ea98ab3992e683de, type: 2}
+    bonus: 10
+    bonusType: 1
+  stats:
+    Mood: 5
+    Serenity: 5
+    Energy: 5
+    Hearts: 0

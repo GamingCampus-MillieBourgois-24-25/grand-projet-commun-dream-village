@@ -10,7 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e13e6beaa89ee5d418d873cd6e279228, type: 3}
-  m_Name: DreamDogs
+  m_Name: DreamBirdsB
   m_EditorClassIdentifier: 
+  ID: Dream003
   dialogueType: 1
-  dialogueText: I dreamt of dogs last night. I really liked it.
+  dialogueText: The birds were too loud, I couldn't sleep!
+  attributeEffects:
+  - attribute: {fileID: 11400000, guid: 839f4e0566a589c4aab6d8d34fbafb0e, type: 2}
+    bonus: -10
+    bonusType: 1
+  stats:
+    Mood: -10
+    Serenity: -5
+    Energy: -10
+    Hearts: 0
