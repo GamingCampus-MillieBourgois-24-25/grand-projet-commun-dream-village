@@ -116,7 +116,7 @@ public class IsoManager : MonoBehaviour
     {
         if (!isEditMode || !isClicking) return;
 
-        //Debug.Log("OnDragPerformed");
+        Debug.Log("OnDragPerformed");
         Vector2 pointerPos = context.ReadValue<Vector2>();
         CheckUnderPointerMove(pointerPos);
     }
@@ -126,7 +126,6 @@ public class IsoManager : MonoBehaviour
         if (!isEditMode) return;
         isClicking = false;
     }
-
     #endregion
 
     #region Touch/Move
@@ -137,9 +136,28 @@ public class IsoManager : MonoBehaviour
             return Pointer.current.position.ReadValue();
         return Vector2.zero;
     }
+    private bool IsPointerOverUIElement(Vector2 screenPosition)
+    {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
+        {
+            position = screenPosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, results);
+
+        return results.Count > 0; // If there's any UI element under the pointer, return true
+    }
 
     private void CheckUnderPointerTouch(Vector2 screenPosition)
     {
+        // Cancel si click sur un bouton de l'UI
+        if (IsPointerOverUIElement(screenPosition))
+        {
+            Debug.Log("Over UI!");
+            return;
+        }
+
         // Au toucher on peut changer d'objet ou move celui qu'on a
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
@@ -159,11 +177,12 @@ public class IsoManager : MonoBehaviour
     private void CheckUnderPointerMove(Vector2 screenPosition)
     {
         // Cancel si click sur un bouton de l'UI
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (IsPointerOverUIElement(screenPosition))
         {
-            return; // Ne fait rien si le clic est sur un bouton de l'UI
-
+            Debug.Log("Over UI!");
+            return;
         }
+
         // Au move on ne peut que move le selectedobject
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 1000f, IslandLayer))
@@ -268,6 +287,8 @@ public class IsoManager : MonoBehaviour
     {
         if (obj == null) return; // Sécurité
 
+        Debug.Log("OnObjectSelected");
+
         // Si un objet est déjà sélectionné, il revient à sa position initiale
         if (selectedObject != null)
         {
@@ -281,6 +302,7 @@ public class IsoManager : MonoBehaviour
         selectedObject = obj;
         selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y + yMovingObject, selectedObject.transform.position.z);
         placeBtn.interactable = true;
+        CheckObjectOnTilemap(selectedObject);
 
         Debug.Log("Objet sélectionné : " + obj.name);
     }
