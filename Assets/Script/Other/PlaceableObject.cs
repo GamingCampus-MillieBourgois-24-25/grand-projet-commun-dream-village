@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -55,6 +56,7 @@ public class PlaceableObject : MonoBehaviour
             occupiedTiles.Add(cellPos);
         }
 
+        Debug.Log("OccupiedTiles: "+String.Join(",", occupiedTiles));
         return occupiedTiles;
     }
 
@@ -75,7 +77,9 @@ public class PlaceableObject : MonoBehaviour
         if (renderer == null || tilemap == null) return Vector3.zero;
 
         Vector3 boundsCenter = renderer.bounds.center;
-        Vector3Int cell = tilemap.WorldToCell(boundsCenter);
+        Vector3 adjustedCenter = new Vector3(boundsCenter.x - 0.01f, boundsCenter.y, boundsCenter.z);
+
+        Vector3Int cell = tilemap.WorldToCell(adjustedCenter);
         Vector3 cellCenterWorld = tilemap.GetCellCenterWorld(cell);
         //cellCenterWorld.y = transform.position.y;
 

@@ -5,7 +5,9 @@ using Unity.VisualScripting;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -20,7 +22,7 @@ public class IsoManager : MonoBehaviour
     [SerializeField] private TileBase whiteTile;
     [SerializeField] private TileBase greenTile;
     [SerializeField] private TileBase redTile;
-    [SerializeField] private LayerMask GridLayer;
+    [SerializeField] private LayerMask IslandLayer;
 
 
     [SerializeField] private Canvas editModeCanvas;
@@ -87,7 +89,20 @@ public class IsoManager : MonoBehaviour
     {
         if (!isEditMode) return;
 
-        Debug.Log("OnClickPerformed");
+        // Cancel si click sur un bouton de l'UI
+        foreach (var touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches) { 
+            if (EventSystem.current.IsPointerOverGameObject(touch.touchId))
+            {
+                return; 
+            }
+        }
+        if (EventSystem.current.IsPointerOverGameObject(-1))
+        {
+            return;
+        }
+
+
+        //Debug.Log("OnClickPerformed");
         Vector2 pointerPos = GetPointerPosition(context);
         CheckUnderPointerTouch(pointerPos);
     }
@@ -131,9 +146,15 @@ public class IsoManager : MonoBehaviour
 
     private void CheckUnderPointerMove(Vector2 screenPosition)
     {
+        // Cancel si click sur un bouton de l'UI
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return; // Ne fait rien si le clic est sur un bouton de l'UI
+
+        }
         // Au move on ne peut que move le selectedobject
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000f, GridLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000f, IslandLayer))
         {
             if (selectedObject != null)
             {
@@ -289,11 +310,13 @@ public class IsoManager : MonoBehaviour
 
     private void PlacePlaceableObject(PlaceableObject obj)
     {
+        Debug.Log("Place Object");
         if (obj == null || !CanPlaceObjectOnTilemap(obj)) return; // Sécurité
 
         float objectHeight = obj.GetComponent<Renderer>().bounds.size.y;
         // TODO: à changer plus tard si toutes les origines des batiments sont en bas !
-        float newYPosition = IM.Instance.transform.position.y + (objectHeight / 2f);
+        //float newYPosition = IM.Instance.transform.position.y + (objectHeight / 2f);
+        float newYPosition = IM.Instance.transform.position.y;
 
         obj.transform.position = new Vector3(obj.transform.position.x, newYPosition, obj.transform.position.z);
 
