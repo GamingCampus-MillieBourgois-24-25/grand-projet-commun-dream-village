@@ -22,6 +22,9 @@ public class DreamMachineManager : MonoBehaviour
 
     private List<Inhabitant> inhabitants;
     private int currentIndex = 0;
+    private Dictionary<Inhabitant, List<DisplayableDream>> dreamsByInhabitant = new Dictionary<Inhabitant, List<DisplayableDream>>();
+    private Vector2 startTouchPosition;
+    private float swipeThreshold = 50f;
 
     private void Start()
     {
@@ -29,13 +32,56 @@ public class DreamMachineManager : MonoBehaviour
 
         if (inhabitants.Count > 0)
         {
-            var currentDreams = GenerateDreamOptions(inhabitants[currentIndex]);
+            var current = inhabitants[currentIndex];
+
+            if (!dreamsByInhabitant.ContainsKey(current))
+            {
+                dreamsByInhabitant[current] = GenerateDreamOptions(current);
+            }
+
             DisplayCurrentInhabitant();
-            DisplayDreams(currentDreams);
+            DisplayDreams(dreamsByInhabitant[current]);
         }
         else
         {
             Debug.Log("No inhabitants found in VillageManager!");
+        }
+    }
+
+    private void Update()
+    {
+        // Gestion du swipe pour changer de personnage
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0); // On prend le premier touch
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    // Enregistrer la position de départ du swipe
+                    startTouchPosition = touch.position;
+                    break;
+
+                case TouchPhase.Ended:
+                    // Calculer la distance du swipe
+                    float swipeDistance = touch.position.x - startTouchPosition.x;
+
+                    if (Mathf.Abs(swipeDistance) > swipeThreshold)
+                    {
+                        // Si le swipe est assez long, changer de personnage
+                        if (swipeDistance > 0)
+                        {
+                            // Swipe à droite -> personnage précédent
+                            PreviousInhabitant();
+                        }
+                        else
+                        {
+                            // Swipe à gauche -> personnage suivant
+                            NextInhabitant();
+                        }
+                    }
+                    break;
+            }
         }
     }
 
@@ -53,50 +99,80 @@ public class DreamMachineManager : MonoBehaviour
         index.text = $"{currentIndex + 1}/{inhabitants.Count}";
     }
 
-    private void DisplayDreams(List<DreamOption> dreamOptions)
+    private void DisplayDreams(List<DisplayableDream> dreams)
     {
         foreach (Transform child in dreamsContainer)
-        {
             Destroy(child.gameObject);
-        }
 
-        foreach (var option in dreamOptions)
+        foreach (var displayable in dreams)
         {
-            // Créer le bouton pour chaque rêve
             GameObject dreamButton = Instantiate(dreamButtonPrefab, dreamsContainer);
-
-            // Récupérer les images dans le bouton
             Image[] images = dreamButton.GetComponentsInChildren<Image>();
 
-            // Assigner les bonnes images (Positive, Negative, Random)
-            images[1].sprite = option.positiveElement.icon;  // Image pour l'élément positif
-            images[2].sprite = option.negativeElement.icon;  // Image pour l'élément négatif
-            images[3].sprite = option.randomElement.icon;    // Image pour l'élément aléatoire
+            var ordered = displayable.orderedElements;
 
+            images[1].sprite = ordered[0].icon;
+            images[2].sprite = ordered[1].icon;
+            images[3].sprite = ordered[2].icon;
+
+            Debug.Log($"Dream Order: {ordered[0].interestName}, {ordered[1].interestName}, {ordered[2].interestName}");
         }
     }
+
 
     public void NextInhabitant()
     {
         currentIndex = (currentIndex + 1) % inhabitants.Count;
         DisplayCurrentInhabitant();
+
+        var current = inhabitants[currentIndex];
+
+        if (!dreamsByInhabitant.ContainsKey(current))
+        {
+            dreamsByInhabitant[current] = GenerateDreamOptions(current);
+        }
+
+        DisplayDreams(dreamsByInhabitant[current]);
     }
 
     public void PreviousInhabitant()
     {
-        currentIndex = ( currentIndex - 1 + inhabitants.Count ) % inhabitants.Count;
+        currentIndex = (currentIndex - 1 + inhabitants.Count) % inhabitants.Count;
         DisplayCurrentInhabitant();
+
+        var current = inhabitants[currentIndex];
+
+        if (!dreamsByInhabitant.ContainsKey(current))
+        {
+            dreamsByInhabitant[current] = GenerateDreamOptions(current);
+        }
+
+        DisplayDreams(dreamsByInhabitant[current]);
     }
 
-    private List<DreamOption> GenerateDreamOptions(Inhabitant inhabitant)
+
+    private List<DisplayableDream> GenerateDreamOptions(Inhabitant inhabitant)
     {
-        List<DreamOption> dreamOptions = new List<DreamOption>();
+        List<DisplayableDream> displayableDreams = new();
 
-        List<InterestCategory> liked = new List<InterestCategory>(inhabitant.Likes);
-        List<InterestCategory> disliked = new List<InterestCategory>(inhabitant.Dislikes);
-
-        List<InterestCategory> neutral = new List<InterestCategory>(interestDatabase.allInterests);
+        List<InterestCategory> liked = new(inhabitant.Likes);
+        List<InterestCategory> disliked = new(inhabitant.Dislikes);
+        List<InterestCategory> neutral = new(interestDatabase.allInterests);
         neutral.RemoveAll(i => liked.Contains(i) || disliked.Contains(i));
+
+        List<System.Func<DreamOption, List<InterestCategory>>> permutations = new()
+    {
+        (option) => new List<InterestCategory> { option.positiveElement, option.negativeElement, option.randomElement },
+        (option) => new List<InterestCategory> { option.randomElement, option.positiveElement, option.negativeElement },
+        (option) => new List<InterestCategory> { option.negativeElement, option.randomElement, option.positiveElement }
+    };
+
+        // Mélange les permutations pour cette série
+        for (int i = 0; i < permutations.Count; i++)
+        {
+            int r = Random.Range(i, permutations.Count);
+            (permutations[i], permutations[r]) = (permutations[r], permutations[i]);
+        }
 
         for (int i = 0; i < 3; i++)
         {
@@ -112,16 +188,13 @@ public class DreamMachineManager : MonoBehaviour
             else
                 rand = neutral.Count > 0 ? neutral[Random.Range(0, neutral.Count)] : interestDatabase.allInterests[Random.Range(0, interestDatabase.allInterests.Count)];
 
-            DreamOption option = new DreamOption(pos, neg, rand);
-            dreamOptions.Add(option);
-
-            Debug.Log($"Dream {i + 1}:");
-            Debug.Log($"Positive: {option.positiveElement.interestName}");
-            Debug.Log($"Negative: {option.negativeElement.interestName}");
-            Debug.Log($"Random: {option.randomElement.interestName}");
+            var option = new DreamOption(pos, neg, rand);
+            var ordered = permutations[i](option);
+            displayableDreams.Add(new DisplayableDream(option, ordered));
         }
 
-        return dreamOptions;
+        return displayableDreams;
     }
+
 
 }
