@@ -22,7 +22,8 @@ public class CameraDeplacement : MonoBehaviour
     [Header("Coords")]
     [SerializeField] private Vector2 centerCamera;
     [SerializeField] private Vector2 limCam;
-    [SerializeField] private Vector2 distanceBords;
+    [SerializeField] private Vector2 outsideSpeedDeplacementMax;
+    private Vector2 distanceBords;
     Vector2 screenSize;
 
     private float prevMagnitude = 0f;
@@ -34,6 +35,7 @@ public class CameraDeplacement : MonoBehaviour
     {
         isoManager = IsoManager.Instance;
         screenSize = new Vector2(Screen.width, Screen.height);
+        distanceBords = new Vector2(screenSize.x * 0.15f, screenSize.y * 0.15f);
 
         // Mouse scroll wheel input
         InputAction scrollAction = new InputAction("Scroll", binding: "<Mouse>/scroll");
@@ -165,16 +167,37 @@ public class CameraDeplacement : MonoBehaviour
                 Vector2 posTouch = zoom1Action.action.ReadValue<Vector2>();
 
                 if (posTouch.x < distanceBords.x)
-                    movement.x = 0.03f;
+                {
+                    // Normaliser posTouch.x entre 0 et distanceBords.x
+                    float normalizedValue = Mathf.InverseLerp(0, distanceBords.x, posTouch.x);
+
+                    // Interpoler la vitesse entre 0 et outsideSpeedDeplacementMax.x
+                    movement.x = Mathf.Lerp(0, outsideSpeedDeplacementMax.x, normalizedValue);
+                }
 
                 if (posTouch.x > screenSize.x - distanceBords.x)
-                    movement.x = -0.03f;
+                {
+                    // Normaliser posTouch.x entre 0 et distanceBords.x
+                    float normalizedValue = Mathf.InverseLerp(screenSize.x - distanceBords.x, screenSize.x, posTouch.x);
+                    // Interpoler la vitesse entre 0 et outsideSpeedDeplacementMax.x
+                    movement.x = Mathf.Lerp(0, -outsideSpeedDeplacementMax.x, normalizedValue);
+                }
 
                 if (posTouch.y < distanceBords.y)
-                    movement.y = 0.03f;
+                {
+                    // Normaliser posTouch.y entre 0 et distanceBords.y
+                    float normalizedValue = Mathf.InverseLerp(0, distanceBords.y, posTouch.y);
+                    // Interpoler la vitesse entre 0 et outsideSpeedDeplacementMax.y
+                    movement.y = Mathf.Lerp(0, outsideSpeedDeplacementMax.y, normalizedValue);
+                }
 
                 if (posTouch.y > screenSize.y - distanceBords.y)
-                    movement.y = -0.03f;
+                {
+                    // Normaliser posTouch.y entre 0 et distanceBords.y
+                    float normalizedValue = Mathf.InverseLerp(screenSize.y - distanceBords.y, screenSize.y, posTouch.y);
+                    // Interpoler la vitesse entre 0 et outsideSpeedDeplacementMax.y
+                    movement.y = Mathf.Lerp(0, -outsideSpeedDeplacementMax.y, normalizedValue);
+                }
 
                 if (movement == Vector2.zero)
                     yield return null;
