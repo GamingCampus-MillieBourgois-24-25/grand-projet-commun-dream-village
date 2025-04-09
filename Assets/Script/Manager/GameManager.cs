@@ -17,40 +17,29 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
+            return;
         }
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //LoadAllResources();
-    }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        LoadAllResources();
     }
 
     // Load all resources for shop from the Resources folder
     private void LoadAllResources()
     {
         // Load all inhabitants
-        Inhabitant[] allInhabitants = Resources.LoadAll<Inhabitant>("ScriptableObject/Inhabitant");
+        Inhabitant[] allInhabitants = Resources.LoadAll<Inhabitant>("ScriptableObject/Inhabitants");
         foreach (Inhabitant inhabitant in allInhabitants)
         {
             inhabitants.Add(inhabitant);
         }
         // Load all buildings
-        Building[] allBuildings = Resources.LoadAll<Building>("ScriptableObjet/Building");
+        Building[] allBuildings = Resources.LoadAll<Building>("ScriptableObject/Buildings");
         foreach (Building building in allBuildings)
         {
             buildings.Add(building);

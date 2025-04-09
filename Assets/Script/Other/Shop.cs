@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
@@ -20,16 +17,19 @@ public class Shop : MonoBehaviour
     [SerializeField] private ShopCategory shopCategory = ShopCategory.InhabitantCategory;
     [SerializeField] private GameObject itemPrefab;
 
-    [SerializeField] private GameObject inhabitantContainer;
-    [SerializeField] private GameObject buildingContainer;
-    [SerializeField] private GameObject decorationContainer;
+
+    [Header("UI")]
+    [SerializeField] private ScrollRect scrollView;
+    [SerializeField] private List<Button> categoryButtons;
+    [SerializeField] private List<GameObject> categoryContainers;
 
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-       InitCatagory(inhabitantContainer, GameManager.instance.inhabitants);
+        InitCatagory(categoryContainers[0], GameManager.instance.inhabitants);
+        InitCatagory(categoryContainers[1], GameManager.instance.buildings);
     }
 
     // Update is called once per frame
@@ -47,10 +47,10 @@ public class Shop : MonoBehaviour
             switch (item)
             {
                 case Inhabitant inhabitant:
-                    SetItemContent(inhabitant, obj);
+                    obj.GetComponent<ShopItem>().SetItemContent(inhabitant.Icon, inhabitant.FirstName + " " + inhabitant.LastName, inhabitant.InitialPrice);
                     break;
                 case Building building:
-                    SetItemContent(building, obj);
+                    obj.GetComponent<ShopItem>().SetItemContent(building.effect.icon, building.effect.name, building.price);
                     break;
                 //case Decoration decoration:
                 //    SetItemContent(decoration, obj);
@@ -62,19 +62,7 @@ public class Shop : MonoBehaviour
         }
     }
 
-    private void SetItemContent(Inhabitant _item, GameObject _obj)
-    {
-        _obj.GetComponentInChildren<Image>().sprite = _item.Icon;
-        _obj.GetComponentInChildren<TextMeshProUGUI>().text = _item.FirstName + " " + _item.LastName;
-        _obj.GetComponentInChildren<TextMeshProUGUI>().text = 
-    }
-
-    private void SetItemContent(Building _item, GameObject _obj)
-    {
-
-    }
-
-    private void SwitchCategory(int _category)
+    public void SwitchCategory(int _category)
     {
         if(_category < 0 || _category > 3)
         {
@@ -82,8 +70,13 @@ public class Shop : MonoBehaviour
             return;
         }
 
+        categoryButtons[(int)shopCategory].interactable = true;
+        categoryContainers[(int)shopCategory].SetActive(false);
+
         shopCategory = (ShopCategory)_category;
 
-
+        categoryButtons[_category].interactable = false;
+        categoryContainers[_category].SetActive(true);
+        scrollView.content = categoryContainers[_category].GetComponent<RectTransform>();
     }
 }
