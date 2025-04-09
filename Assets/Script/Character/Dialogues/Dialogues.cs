@@ -1,15 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 
 [CreateAssetMenu(fileName = "Dialogues", menuName = "ScriptableObjects/Dialogues", order = 1)]
 public class Dialogues : ScriptableObject
 {
-    public string ID;
-    public LocalizedString dialogueText;
-    
-    // Type of dialogue: either a reaction of an event, information about a dream or the character
     public enum DialogueType
     {
         Reaction,
@@ -34,17 +28,17 @@ public class Dialogues : ScriptableObject
             Multiple,
             Add
         }
-
-
+        
         public InterestCategory attribute;
         public float bonus;
         public BonusType bonusType;
     }
     
+    public string ID;
+    [SerializeField] private LocalizedString dialogueText;
     
-    public DialogueType dialogueType;
-    public List<AttributeEffect> attributeEffects;
-    public Stats stats;
+    [SerializeField] private DialogueType dialogueType;
+    [SerializeField] private Stats stats;
     
     public DialogueType GetDialogueType()
     {
@@ -54,5 +48,10 @@ public class Dialogues : ScriptableObject
     public string GetDialogueText()
     {
         return dialogueText.GetLocalizedString();
+    }
+    
+    public Stats GetStats()
+    {
+        return stats;
     }
 }
