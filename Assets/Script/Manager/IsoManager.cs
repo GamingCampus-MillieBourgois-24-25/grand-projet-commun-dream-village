@@ -116,7 +116,7 @@ public class IsoManager : MonoBehaviour
     {
         if (!isEditMode || !isClicking) return;
 
-        Debug.Log("OnDragPerformed");
+        //Debug.Log("OnDragPerformed");
         Vector2 pointerPos = context.ReadValue<Vector2>();
         CheckUnderPointerMove(pointerPos);
     }
@@ -154,7 +154,7 @@ public class IsoManager : MonoBehaviour
         // Cancel si click sur un bouton de l'UI
         if (IsPointerOverUIElement(screenPosition))
         {
-            Debug.Log("Over UI!");
+            //Debug.Log("Over UI!");
             return;
         }
 

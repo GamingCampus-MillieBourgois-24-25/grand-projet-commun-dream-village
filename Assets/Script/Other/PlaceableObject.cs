@@ -71,7 +71,7 @@ public class PlaceableObject : MonoBehaviour
         );
     }
 
-    private Vector3 GetCenterObject(Tilemap tilemap)
+    public Vector3 GetCenterObject(Tilemap tilemap)
     {
         Renderer renderer = GetComponent<Renderer>();
         if (renderer == null || tilemap == null) return Vector3.zero;
