@@ -1,13 +1,17 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class CameraDeplacement : MonoBehaviour
 {
+    [SerializeField] float maxZoom = 7f;
+    [SerializeField] float minZoom = 1f;
     [SerializeField] float zoomSpeed = 0.1f;
     [SerializeField] float moveSpeed = 0.1f;   
 
     [Header("Input Actions")]
-    [SerializeField] private InputActionReference zoom1Action;
+    [SerializeField] private InputActionReference zoom1Action; 
     [SerializeField] private InputActionReference zoom2Action;
     [SerializeField] private InputActionReference touch1Action;
     [SerializeField] private InputActionReference touch2Action;
@@ -18,20 +22,25 @@ public class CameraDeplacement : MonoBehaviour
     [Header("Coords")]
     [SerializeField] private Vector2 centerCamera;
     [SerializeField] private Vector2 limCam;
+    [SerializeField] private Vector2 distanceBords;
+    Vector2 screenSize;
 
     private float prevMagnitude = 0f;
     private int touchCount = 0;
     IsoManager isoManager;
+    Coroutine cameraMovementCoroutine = null;
 
     void Start()
     {
         isoManager = IsoManager.Instance;
+        screenSize = new Vector2(Screen.width, Screen.height);
 
         // Mouse scroll wheel input
         InputAction scrollAction = new InputAction("Scroll", binding: "<Mouse>/scroll");
         scrollAction.Enable();
         scrollAction.performed += ctx => CameraZoom(ctx.ReadValue<Vector2>().y * zoomSpeed);
 
+        // Zoom
         touch1Action.action.Enable();
         touch2Action.action.Enable();
         touch1Action.action.performed += ctx => touchCount++;
@@ -43,9 +52,14 @@ public class CameraDeplacement : MonoBehaviour
         zoom2Action.action.Enable();
         zoom2Action.action.performed += ctx => OnPinch();
 
+        // Deplacement
         MoveAction.action.Enable();
         touch1Action.action.performed += ctx => MoveAction.action.performed += ctx => CameraMovement(ctx.ReadValue<Vector2>() * moveSpeed);
         touch1Action.action.canceled += ctx => MoveAction.action.performed -= ctx => CameraMovement(ctx.ReadValue<Vector2>() * moveSpeed);
+
+        // Deplacement in edit 
+        touch1Action.action.performed +=  ctx => CameraMovementEdit();
+        touch1Action.action.canceled += ctx => CameraMovementEdit();
 
     }
 
@@ -54,7 +68,11 @@ public class CameraDeplacement : MonoBehaviour
 
     private void OnPinch()
     {
-        float magnitude = (zoom1Action.action.ReadValue<Vector2>() - zoom2Action.action.ReadValue<Vector2>()).magnitude;
+        Vector3 initialCameraPosition = Camera.main.transform.position;
+
+        Vector3 finger1 = zoom1Action.action.ReadValue<Vector2>();
+        Vector3 finger2 = zoom2Action.action.ReadValue<Vector2>(); 
+        float magnitude = (finger1 - finger2).magnitude;
         if (prevMagnitude == 0f)
         {
             prevMagnitude = magnitude;
@@ -64,6 +82,16 @@ public class CameraDeplacement : MonoBehaviour
         prevMagnitude = magnitude;
 
         CameraZoom(-dif * zoomSpeed);
+
+/*        // Calcul de la position moyenne entre les deux doigts
+        Vector2 midpoint = (finger1 + finger2) / 2;
+
+        // Convertir la position de l'écran en position dans le monde
+        Vector3 worldMidpoint = Camera.main.ScreenToWorldPoint(new Vector3(midpoint.x, midpoint.y, Camera.main.transform.position.y));
+
+        // Interpoler la position de la caméra à 50% entre sa position initiale et le point médian
+        Camera.main.transform.position = Vector3.Lerp(initialCameraPosition, worldMidpoint, 0.5f);
+*/
     }
 
     void RemoveTouch()
@@ -81,16 +109,13 @@ public class CameraDeplacement : MonoBehaviour
 
     private void CameraZoom(float incr)
     {
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + incr, 1, 7);
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + incr, minZoom, maxZoom);
     }
 
-    private void CameraMovement(Vector2 movement)
+    private void CameraMovement(Vector2 movement, bool isEdit = false)
     {
-
-        if (isoManager.IsEditMode())
+        if (isoManager.IsEditMode() && !isEdit)
             return;
-
-        Debug.Log("CameraMovement: " + movement);
 
         Vector3 newPosition = Camera.main.transform.position;
 
@@ -114,5 +139,55 @@ public class CameraDeplacement : MonoBehaviour
 
 
         Camera.main.transform.position = newPosition;
+    }
+
+    void CameraMovementEdit()
+    {
+        if(cameraMovementCoroutine != null)
+        {
+            StopCoroutine(cameraMovementCoroutine);
+            cameraMovementCoroutine = null;
+        }
+        else
+        {
+            cameraMovementCoroutine = StartCoroutine(CameraDeplacementEditCorout());
+        }
+    }
+
+    IEnumerator CameraDeplacementEditCorout()
+    {
+        while (touch1Action.action.IsPressed())
+        {
+            Vector2 movement = Vector2.zero;
+
+            if (isoManager.IsEditMode())
+            {
+                Vector2 posTouch = zoom1Action.action.ReadValue<Vector2>();
+
+                if (posTouch.x < distanceBords.x)
+                    movement.x = 0.03f;
+
+                if (posTouch.x > screenSize.x - distanceBords.x)
+                    movement.x = -0.03f;
+
+                if (posTouch.y < distanceBords.y)
+                    movement.y = 0.03f;
+
+                if (posTouch.y > screenSize.y - distanceBords.y)
+                    movement.y = -0.03f;
+
+                if (movement == Vector2.zero)
+                    yield return null;
+
+                Debug.Log(movement);
+                CameraMovement(movement, true);
+            }
+            else
+            {
+                cameraMovementCoroutine = null;
+                yield break;
+            }
+            yield return null;
+        }
     }
 }
