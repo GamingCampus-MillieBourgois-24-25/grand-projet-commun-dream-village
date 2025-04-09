@@ -12,8 +12,8 @@ using UnityEngine.InputSystem;
 public class DialoguesInhabitant : MonoBehaviour
 {
     [SerializeField] private Inhabitant inhabitant;
-    [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject dialogueBox;
+    [SerializeField] private TMP_Text dialogueText;
     
     public List<Dialogues> dialoguesDream = new List<Dialogues>();
     public List<Dialogues> dialoguesInformation = new List<Dialogues>();
@@ -23,6 +23,9 @@ public class DialoguesInhabitant : MonoBehaviour
     
     [SerializeField] private InputActionReference touchAction;
     [SerializeField] private InputActionReference positionAction;
+    
+    
+    private AccessibilityOptions accessibilityOptions;
 
     [Header("Animation Settings")]
     private MotionHandle textAnimationHandle;
@@ -34,6 +37,7 @@ public class DialoguesInhabitant : MonoBehaviour
         touchAction.action.Enable();
         positionAction.action.Enable();
         touchAction.action.performed += OnTouch;
+        accessibilityOptions = AccessibilityOptions.Instance;
         GetUIElements();
         GetAllDialogues();
     }
@@ -105,7 +109,9 @@ public class DialoguesInhabitant : MonoBehaviour
     private void ShowDialogue(Dialogues dialogue)
     {
         dialogueBox.SetActive(true);
-
+        
+        textAnimationSpeed = accessibilityOptions.CurrentTextSpeedStruct.TextSpeed;
+        
         textAnimationSettings = textAnimationSettings with
         {
             StartValue = "",
@@ -115,11 +121,6 @@ public class DialoguesInhabitant : MonoBehaviour
         
         textAnimationHandle = LMotion.String.Create128Bytes(textAnimationSettings.StartValue, textAnimationSettings.EndValue, textAnimationSettings.Duration)
             .BindToText(dialogueText);
-    }
-    
-    public void SetTextAnimationSpeed(float speed)
-    {
-        textAnimationSpeed = speed;
     }
 
     public void StopTextAnimation()
@@ -145,8 +146,13 @@ public class DialoguesInhabitant : MonoBehaviour
 
     private void GetUIElements()
     {
-        dialogueText = GameObject.Find("Dialogue Text").GetComponent<TMP_Text>();
-        dialogueBox = GameObject.Find("Dialogue Canvas");
+        // dialogueText = GameObject.Find("Dialogue Text").GetComponent<TMP_Text>();
+        // dialogueBox = GameObject.Find("Dialogue Canvas");
+        
+        dialogueText = accessibilityOptions.dialogueText;
+        dialogueBox = accessibilityOptions.dialogueBox;
+        
+        dialogueBox.SetActive(false);
     }
     
     private void GetAllDialogues()
