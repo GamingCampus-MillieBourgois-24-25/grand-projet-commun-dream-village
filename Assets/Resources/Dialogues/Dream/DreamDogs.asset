@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: DreamDogs
   m_EditorClassIdentifier: 
   ID: Dream002
+  dialogueText:
+    m_TableReference:
+      m_TableCollectionName: GUID:7780982e9b822044886529c7a682b1dc
+    m_TableEntryReference:
+      m_KeyId: 1153641967616
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   dialogueType: 1
-  dialogueText: I dreamt of dogs last night. I really liked it.
   attributeEffects:
   - attribute: {fileID: 11400000, guid: 629b924ae2a253b43a4103920a8ecc89, type: 2}
     bonus: 10
@@ -24,3 +32,6 @@ MonoBehaviour:
     Serenity: 0
     Energy: 0
     Hearts: 5
+  references:
+    version: 2
+    RefIds: []

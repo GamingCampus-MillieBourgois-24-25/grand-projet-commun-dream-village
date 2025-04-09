@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: DreamBirdsB
   m_EditorClassIdentifier: 
   ID: Dream003
+  dialogueText:
+    m_TableReference:
+      m_TableCollectionName: GUID:7780982e9b822044886529c7a682b1dc
+    m_TableEntryReference:
+      m_KeyId: 13177155584
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   dialogueType: 1
-  dialogueText: The birds were too loud, I couldn't sleep!
   attributeEffects:
   - attribute: {fileID: 11400000, guid: 839f4e0566a589c4aab6d8d34fbafb0e, type: 2}
     bonus: -10
@@ -24,3 +32,6 @@ MonoBehaviour:
     Serenity: -5
     Energy: -10
     Hearts: 0
+  references:
+    version: 2
+    RefIds: []

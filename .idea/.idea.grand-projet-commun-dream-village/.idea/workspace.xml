@@ -7,26 +7,6 @@
     <list default="true" id="133297ab-59a1-4172-bc85-0cebe864daf4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dream.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dream/DreamCats.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dream/DreamCats.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dream/DreamDogs.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dream/DreamDogs.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dream/DreamSnake.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dream/DreamSnake.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Information.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Information/InformationCat.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Information/InformationCat.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Information/InformationRain.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Information/InformationRain.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Reaction.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Reaction/ReactionSwimmingPool.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Reaction/ReactionSwimmingPool.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Reaction/ReactionTheater.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Reaction/ReactionTheater.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Inhabitants/NillieZel.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Inhabitants/NillieZel.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +31,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "DialogueSuite",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -116,6 +96,7 @@
       <workItem from="1743593855185" duration="1130000" />
       <workItem from="1743595654421" duration="1620000" />
       <workItem from="1743595654421" duration="9558000" />
+      <workItem from="1744198535324" duration="663000" />
     </task>
     <servers />
   </component>

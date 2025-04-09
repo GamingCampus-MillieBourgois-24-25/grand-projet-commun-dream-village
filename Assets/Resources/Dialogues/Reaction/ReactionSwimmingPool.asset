@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: ReactionSwimmingPool
   m_EditorClassIdentifier: 
   ID: Info001
+  dialogueText:
+    m_TableReference:
+      m_TableCollectionName: GUID:6f36e9338e6be5e409d1d764ea6df474
+    m_TableEntryReference:
+      m_KeyId: 12246020096
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   dialogueType: 0
-  dialogueText: The swimming pool just opened, I should take a swim.
   attributeEffects:
   - attribute: {fileID: 11400000, guid: b729c793c8539d1419923170a21a9b75, type: 2}
     bonus: 10
@@ -24,3 +32,6 @@ MonoBehaviour:
     Serenity: 5
     Energy: 5
     Hearts: 0
+  references:
+    version: 2
+    RefIds: []
