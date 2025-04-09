@@ -891,7 +891,7 @@ MonoBehaviour:
     type: 3}
   centerCamera: {x: -50, y: -50}
   limCam: {x: 10, y: 10}
-  distanceBords: {x: 200, y: 200}
+  outsideSpeedDeplacementMax: {x: 0.1, y: 0.1}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
