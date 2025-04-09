@@ -35,6 +35,8 @@ public class IsoManager : MonoBehaviour
     private PlaceableObject selectedObject;
     private bool isEditMode = false;
 
+    private bool isClicking = false;
+
     private InputAction clickAction;
     private InputAction dragAction;
 
@@ -72,6 +74,7 @@ public class IsoManager : MonoBehaviour
         dragAction = baseSceneMap.FindAction("Drag");
 
         clickAction.performed += OnClickPerformed;
+        clickAction.canceled += OnClickCancelled;
         dragAction.performed += OnDragPerformed;
 
         baseSceneMap.Enable();
@@ -80,6 +83,7 @@ public class IsoManager : MonoBehaviour
     private void OnDisable()
     {
         clickAction.performed -= OnClickPerformed;
+        clickAction.canceled -= OnClickCancelled;
         dragAction.performed -= OnDragPerformed;
 
         clickAction.actionMap.Disable();
@@ -101,6 +105,7 @@ public class IsoManager : MonoBehaviour
             return;
         }
 
+        isClicking = true;
 
         //Debug.Log("OnClickPerformed");
         Vector2 pointerPos = GetPointerPosition(context);
@@ -109,12 +114,19 @@ public class IsoManager : MonoBehaviour
 
     private void OnDragPerformed(InputAction.CallbackContext context)
     {
-        if (!isEditMode) return;
+        if (!isEditMode || !isClicking) return;
 
         //Debug.Log("OnDragPerformed");
         Vector2 pointerPos = context.ReadValue<Vector2>();
         CheckUnderPointerMove(pointerPos);
     }
+
+    private void OnClickCancelled(InputAction.CallbackContext context)
+    {
+        if (!isEditMode) return;
+        isClicking = false;
+    }
+
     #endregion
 
     #region Touch/Move
