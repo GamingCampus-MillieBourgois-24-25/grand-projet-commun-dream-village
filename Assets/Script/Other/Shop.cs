@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class Shop : MonoBehaviour
 {
@@ -37,18 +39,39 @@ public class Shop : MonoBehaviour
     }
 
     
-    private void InitCatagory(GameObject _container, List<Inhabitant> _contents)
+    private void InitCatagory<T>(GameObject _container, List<T> _contents)
     {
-        foreach(Inhabitant item in _contents)
+        foreach(T item in _contents)
         {
             GameObject obj = Instantiate(itemPrefab, _container.transform);
-            SetItemContent(item, obj);
+            switch (item)
+            {
+                case Inhabitant inhabitant:
+                    SetItemContent(inhabitant, obj);
+                    break;
+                case Building building:
+                    SetItemContent(building, obj);
+                    break;
+                //case Decoration decoration:
+                //    SetItemContent(decoration, obj);
+                //    break;
+                default:
+                    Debug.LogWarning($"Type {typeof(T)} non pris en charge dans SetItemContent.");
+                    break;
+            }
         }
     }
 
     private void SetItemContent(Inhabitant _item, GameObject _obj)
     {
-        
+        _obj.GetComponentInChildren<Image>().sprite = _item.Icon;
+        _obj.GetComponentInChildren<TextMeshProUGUI>().text = _item.FirstName + " " + _item.LastName;
+        _obj.GetComponentInChildren<TextMeshProUGUI>().text = 
+    }
+
+    private void SetItemContent(Building _item, GameObject _obj)
+    {
+
     }
 
     private void SwitchCategory(int _category)
