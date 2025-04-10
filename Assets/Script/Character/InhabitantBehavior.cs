@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class InhabitantsBehavior : MonoBehaviour
+public class InhabitantBehavior : MonoBehaviour
 {
     private NavMeshAgent agent;
-    [SerializeField] NavMeshSurface surface;
+    [SerializeField] private Unity.AI.Navigation.NavMeshSurface surface;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class InhabitantsBehavior : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-
+            surface.UpdateNavMesh(surface.navMeshData);
         }
     }
 }
