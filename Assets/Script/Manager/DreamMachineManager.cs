@@ -18,12 +18,12 @@ public class DreamMachineManager : MonoBehaviour
 
     public InterestDatabase interestDatabase;
 
-    private List<Inhabitant> inhabitants;
+    private List<InhabitantInstance> inhabitants;
     private int currentIndex = 0;
-    
-    private Dictionary<Inhabitant, List<DisplayableDream>> dreamsByInhabitant = new Dictionary<Inhabitant, List<DisplayableDream>>();
-    private Dictionary<Inhabitant, DisplayableDream> selectedDreamByInhabitant = new();
-    
+
+    private Dictionary<InhabitantInstance, List<DisplayableDream>> dreamsByInhabitant = new();
+    private Dictionary<InhabitantInstance, DisplayableDream> selectedDreamByInhabitant = new();
+
     private Vector2 startTouchPosition;
     private float swipeThreshold = 50f;
 
@@ -84,7 +84,7 @@ public class DreamMachineManager : MonoBehaviour
 
     private void DisplayCurrentInhabitant()
     {
-        Inhabitant currentInhabitant = inhabitants[currentIndex];
+        InhabitantInstance currentInhabitant = inhabitants[currentIndex];
 
         characterImage.sprite = currentInhabitant.Icon;
         characterNameText.text = $"{currentInhabitant.FirstName} {currentInhabitant.LastName}";
@@ -123,7 +123,7 @@ public class DreamMachineManager : MonoBehaviour
             Destroy(child.gameObject);
 
         List<Button> buttons = new();
-        Inhabitant currentInhabitant = inhabitants[currentIndex];
+        InhabitantInstance currentInhabitant = inhabitants[currentIndex];
 
         for (int i = 0; i < dreams.Count; i++)
         {
@@ -221,7 +221,7 @@ public class DreamMachineManager : MonoBehaviour
     }
 
 
-    private List<DisplayableDream> GenerateDreamOptions(Inhabitant inhabitant)
+    private List<DisplayableDream> GenerateDreamOptions(InhabitantInstance inhabitant)
     {
         List<DisplayableDream> displayableDreams = new();
 
@@ -282,7 +282,7 @@ public class DreamMachineManager : MonoBehaviour
     }
 
     
-    private int GetStatChange(InterestCategory element, Inhabitant inhabitant)
+    private int GetStatChange(InterestCategory element, InhabitantInstance inhabitant)
     {
         if (inhabitant.Likes.Contains(element)) return 10;
         if (inhabitant.Dislikes.Contains(element)) return -10;
@@ -348,36 +348,39 @@ public class DreamMachineManager : MonoBehaviour
         validateButton.interactable = allSelected;
     }
 
-    
+
     public void ApplySelectedDreams()
     {
         foreach (var pair in selectedDreamByInhabitant)
         {
-            Inhabitant inhabitant = pair.Key;
-            DisplayableDream dream = pair.Value;
-
+            var inhabitant = pair.Key;
+            var dream = pair.Value;
             var ordered = dream.orderedElements;
 
+            // 🔍 Stats avant
+            Debug.Log($"[Before] {inhabitant.FirstName} {inhabitant.LastName} | Mood: {inhabitant.Mood}, Serenity: {inhabitant.Serenity}, Energy: {inhabitant.Energy}");
+
+            // ✨ Application des effets
             inhabitant.Mood += GetStatChange(ordered[0], inhabitant);
             inhabitant.Serenity += GetStatChange(ordered[1], inhabitant);
             inhabitant.Energy += GetStatChange(ordered[2], inhabitant);
 
-            // 🔄 Désélectionner le rêve
+            // 📊 Stats après
+            Debug.Log($"[After] {inhabitant.FirstName} {inhabitant.LastName} | Mood: {inhabitant.Mood}, Serenity: {inhabitant.Serenity}, Energy: {inhabitant.Energy}");
+
+            // 🔄 Désélection
             dream.isSelected = false;
         }
 
-        // ♻️ Vider le dictionnaire de sélection
+        // ♻️ Reset
         selectedDreamByInhabitant.Clear();
-
-        // 🧼 Désactiver le bouton Validate
         validateButton.interactable = false;
 
-        // 🔁 Rafraîchir l'affichage du personnage courant
+        // 🔁 Rafraîchissement UI
         DisplayCurrentInhabitant();
-
-        // 🔁 Recharger les rêves pour ce personnage (en réinitialisant visuellement)
         DisplayDreams(dreamsByInhabitant[inhabitants[currentIndex]]);
     }
+
 
 }
 

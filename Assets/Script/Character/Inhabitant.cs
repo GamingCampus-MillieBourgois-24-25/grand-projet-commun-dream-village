@@ -21,9 +21,9 @@ public class Inhabitant : ScriptableObject
     [field: SerializeField] public List<InterestCategory> Dislikes { get; private set; }
 
     [field: Header("Statistics")]
-    [field: SerializeField] public int Mood { get; set; }
-    [field: SerializeField] public int Serenity { get; set; }
-    [field: SerializeField] public int Energy { get; set; }
+    [field: SerializeField] public int Mood { get; private set; }
+    [field: SerializeField] public int Serenity { get; private set; }
+    [field: SerializeField] public int Energy { get; private set; }
     [field: SerializeField] public int Hearts { get; private set; }
     [field: SerializeField] public int Limit { get; private set; }
 
