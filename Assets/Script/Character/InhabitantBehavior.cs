@@ -26,10 +26,5 @@ public class InhabitantBehavior : MonoBehaviour
                 GoTo(hit.point);
             }
         }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            surface.UpdateNavMesh(surface.navMeshData);
-        }
     }
 }
