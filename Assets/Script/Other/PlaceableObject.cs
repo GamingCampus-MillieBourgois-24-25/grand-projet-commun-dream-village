@@ -56,7 +56,7 @@ public class PlaceableObject : MonoBehaviour
             occupiedTiles.Add(cellPos);
         }
 
-        Debug.Log("OccupiedTiles: "+String.Join(",", occupiedTiles));
+        Debug.Log("OccupiedTiles de: "+this.gameObject.name+""+String.Join(",", occupiedTiles));
         return occupiedTiles;
     }
 
@@ -71,14 +71,9 @@ public class PlaceableObject : MonoBehaviour
         );
     }
 
-    public Vector3 GetCenterObject(Tilemap tilemap)
+    public Vector3 GetCenterObject(Tilemap tilemap, Vector3 centerPoint)
     {
-        Renderer renderer = GetComponent<Renderer>();
-        if (renderer == null || tilemap == null) return Vector3.zero;
-
-        Vector3 boundsCenter = renderer.bounds.center;
-        Vector3 adjustedCenter = new Vector3(boundsCenter.x - 0.01f, boundsCenter.y, boundsCenter.z);
-
+        Vector3 adjustedCenter = new Vector3(centerPoint.x - 0.01f, centerPoint.y, centerPoint.z);
         Vector3Int cell = tilemap.WorldToCell(adjustedCenter);
         Vector3 cellCenterWorld = tilemap.GetCellCenterWorld(cell);
         //cellCenterWorld.y = transform.position.y;
@@ -97,7 +92,11 @@ public class PlaceableObject : MonoBehaviour
 
     public void CenterObject(Tilemap tilemap)
     {
-        transform.position = GetCenterObject(tilemap);
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer == null || tilemap == null) return;
+
+        Vector3 boundsCenter = renderer.bounds.center;
+        transform.position = GetCenterObject(tilemap, boundsCenter);
     }
 
     void OnDrawGizmos()

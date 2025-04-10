@@ -94,16 +94,16 @@ public class IsoManager : MonoBehaviour
         if (!isEditMode) return;
 
         // Cancel si click sur un bouton de l'UI
-        foreach (var touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches) { 
-            if (EventSystem.current.IsPointerOverGameObject(touch.touchId))
-            {
-                return; 
-            }
-        }
-        if (EventSystem.current.IsPointerOverGameObject(-1))
-        {
-            return;
-        }
+        //foreach (var touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches) { 
+        //    if (EventSystem.current.IsPointerOverGameObject(touch.touchId))
+        //    {
+        //        return; 
+        //    }
+        //}
+        //if (EventSystem.current.IsPointerOverGameObject(-1))
+        //{
+        //    return;
+        //}
 
         isClicking = true;
 
@@ -154,7 +154,6 @@ public class IsoManager : MonoBehaviour
         // Cancel si click sur un bouton de l'UI
         if (IsPointerOverUIElement(screenPosition))
         {
-            //Debug.Log("Over UI!");
             return;
         }
 
@@ -179,7 +178,6 @@ public class IsoManager : MonoBehaviour
         // Cancel si click sur un bouton de l'UI
         if (IsPointerOverUIElement(screenPosition))
         {
-            Debug.Log("Over UI!");
             return;
         }
 
@@ -200,9 +198,10 @@ public class IsoManager : MonoBehaviour
 
         ChangeTileUnderObject(selectedObject, null);
 
-        Vector3Int gridPosition = tilemapBase.WorldToCell(hit.point);
-        Vector3 newPosition = tilemapBase.CellToWorld(gridPosition);
-        newPosition.y = selectedObject.transform.position.y + yMovingObject;
+        //Vector3Int gridPosition = tilemapBase.WorldToCell(hit.point);
+        //Vector3 newPosition = tilemapBase.CellToWorld(gridPosition);
+        Vector3 newPosition = selectedObject.GetCenterObject(tilemapObjects, hit.point);
+        newPosition.y += yMovingObject;
         selectedObject.transform.position = newPosition;
 
         CheckObjectOnTilemap(selectedObject);
@@ -344,7 +343,6 @@ public class IsoManager : MonoBehaviour
 
     private void PlacePlaceableObject(PlaceableObject obj)
     {
-        Debug.Log("Place Object");
         if (obj == null || !CanPlaceObjectOnTilemap(obj)) return; // Sécurité
 
         float objectHeight = obj.GetComponent<Renderer>().bounds.size.y;
