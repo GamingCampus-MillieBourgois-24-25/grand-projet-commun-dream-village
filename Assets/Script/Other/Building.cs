@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
 
 
 
@@ -9,10 +8,10 @@ public class Building : ScriptableObject
 {
     #region Variable Serialized
     [Header("Building Information")]
-    [SerializeField] private BuildingEffect effect;
+    [SerializeField] public BuildingEffect effect;
 
     [Header("Stats")]
-    [SerializeField] int price;
+    [SerializeField] public int price;
     [SerializeField] int maximumInInv;
     [SerializeField] int unlockLevel;
 
@@ -21,9 +20,9 @@ public class Building : ScriptableObject
 
 
     [System.Serializable]
-    class BuildingEffect
+    public class BuildingEffect
     {
-        [SerializeField] private string name;
+        [SerializeField] public string name;
         [SerializeField] private string description;
         [SerializeField][Tooltip("in minutes")] private int utilisationDuration;
 
@@ -36,7 +35,7 @@ public class Building : ScriptableObject
         [SerializeField] private List<AttributeEffect> attributeEffects;
 
         [Header("Visuals")]
-        [SerializeField] private Image icon;
+        [SerializeField] public Sprite icon;
         [SerializeField] private GameObject buildingPrefab;
 
 
