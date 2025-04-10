@@ -23,7 +23,31 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 249035452416
-    m_Localized: A new theater! I should go see a movie.
+    m_Localized: A new movie theater! I should go see a movie.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365673057054720
+    m_Localized: EN Reac Bench
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365670624358400
+    m_Localized: EN Reac Cafe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365663905083392
+    m_Localized: EN Reac Fountain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365659127771136
+    m_Localized: EN Reac Gym
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365654300127232
+    m_Localized: EN Reac Library
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365650881769472
+    m_Localized: EN Reac Well
     m_Metadata:
       m_Items: []
   references:

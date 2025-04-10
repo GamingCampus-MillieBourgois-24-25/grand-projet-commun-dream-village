@@ -1373,6 +1373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 302496528}
+  - component: {fileID: 302496529}
   - component: {fileID: 302496527}
   m_Layer: 0
   m_Name: DialogueTest
@@ -1380,7 +1381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &302496527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1393,9 +1394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580f87e192712dd408590898d7e983e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showDialogue: 0
-  type: 1
   dialInhabitant: {fileID: 1480218082}
+  dialogueID: 
 --- !u!4 &302496528
 Transform:
   m_ObjectHideFlags: 0
@@ -1411,6 +1411,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &302496529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302496526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7ca2cff5a518249b3ac084791a9464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueBox: {fileID: 1466105456}
+  dialogueText: {fileID: 230347869}
 --- !u!1 &345184512
 GameObject:
   m_ObjectHideFlags: 0
@@ -5298,8 +5312,6 @@ MonoBehaviour:
   - {fileID: 1089183894}
   - {fileID: 374856662}
   - {fileID: 45036842}
-  dialogueBox: {fileID: 1466105456}
-  dialogueText: {fileID: 230347869}
 --- !u!114 &1158177978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6255,10 +6267,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inhabitant: {fileID: 11400000, guid: 6c011cc3151d1cc40a63b831756fe83d, type: 2}
-  dialogueBox: {fileID: 0}
-  dialogueText: {fileID: 0}
-  dialoguesDream: []
-  dialoguesInformation: []
   stats:
     Mood: 0
     Serenity: 0
@@ -6649,6 +6657,8 @@ MonoBehaviour:
     schedulerType: 0
     additionalSettings: 0
   textAnimationSpeed: 2
+  dialogueBox: {fileID: 0}
+  dialogueText: {fileID: 0}
 --- !u!1 &1480693857
 GameObject:
   m_ObjectHideFlags: 0

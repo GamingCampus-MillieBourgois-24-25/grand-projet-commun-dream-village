@@ -10,27 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e13e6beaa89ee5d418d873cd6e279228, type: 3}
-  m_Name: ReactionSwimmingPool
+  m_Name: Reaction Gym
   m_EditorClassIdentifier: 
-  ID: Info001
+  ID: Reac005
+  relatedElementID: Building005
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:6f36e9338e6be5e409d1d764ea6df474
     m_TableEntryReference:
-      m_KeyId: 12246020096
+      m_KeyId: 365659127771136
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   dialogueType: 0
-  attributeEffects:
-  - attribute: {fileID: 11400000, guid: b729c793c8539d1419923170a21a9b75, type: 2}
-    bonus: 10
-    bonusType: 1
   stats:
-    Mood: 5
-    Serenity: 5
-    Energy: 5
+    Mood: 0
+    Serenity: 0
+    Energy: 0
     Hearts: 0
   references:
     version: 2

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LitMotion;
 using LitMotion.Editor;
 using LitMotion.Extensions;
@@ -11,19 +12,17 @@ using UnityEngine.InputSystem;
 
 public class DialoguesInhabitant : MonoBehaviour
 {
+    [Header("Inhabitant Settings")]
     [SerializeField] private Inhabitant inhabitant;
-    [SerializeField] private GameObject dialogueBox;
-    [SerializeField] private TMP_Text dialogueText;
-    
-    public List<Dialogues> dialoguesDream = new List<Dialogues>();
-    public List<Dialogues> dialoguesInformation = new List<Dialogues>();
-    private List<Dialogues> dialoguesReaction = new List<Dialogues>();
-
     [SerializeField] private Dialogues.Stats stats;
     
+    private DialoguesManager dialoguesManager;
+    
+    private List<Dialogues> dialogues = new List<Dialogues>();
+    
+    [Header("Input Settings")]
     [SerializeField] private InputActionReference touchAction;
     [SerializeField] private InputActionReference positionAction;
-    
     
     private AccessibilityOptions accessibilityOptions;
 
@@ -32,14 +31,23 @@ public class DialoguesInhabitant : MonoBehaviour
     [SerializeField] private SerializableMotionSettings<FixedString128Bytes, StringOptions> textAnimationSettings;
     [SerializeField] private float textAnimationSpeed;
     
+    [Header("UI Elements")]
+    [SerializeField] private GameObject dialogueBox;
+    [SerializeField] private TMP_Text dialogueText;
+    
     private void Start()
     {
         touchAction.action.Enable();
         positionAction.action.Enable();
         touchAction.action.performed += OnTouch;
         accessibilityOptions = AccessibilityOptions.Instance;
-        GetUIElements();
-        GetAllDialogues();
+        dialoguesManager = DialoguesManager.Instance;
+
+        if (dialoguesManager)
+        {
+            GetUIElements();
+            dialogues = dialoguesManager.GetDialogues();
+        }
     }
 
     private void OnEnable()
@@ -54,6 +62,7 @@ public class DialoguesInhabitant : MonoBehaviour
         positionAction.action.Disable();
     }
 
+    // If NPC is touched, select a random dialogue
     private void OnTouch(InputAction.CallbackContext ctx)
     {
         if (ctx.action.triggered && !dialogueBox.activeSelf)
@@ -64,31 +73,37 @@ public class DialoguesInhabitant : MonoBehaviour
             {
                 if (hit.collider.CompareTag("NPC"))
                 {
-                    ShowDialogue(Random.Range(1, 3));
+                    SelectDialogue(Random.Range(1, 4));
                 }
             }
         }
     }
 
-    public void ShowDialogue(int type)
+    public void SelectDialogue(int type)
     {
         Dialogues dial = null;
         switch (type)
         {
             case 1:
-                dial = dialoguesDream[Random.Range(0, dialoguesDream.Count)];
+                dial = dialogues.Where(x => x.GetDialogueType() == Dialogues.DialogueType.Dream)
+                    .OrderBy(x => Random.value)
+                    .FirstOrDefault();
                 ShowDialogue(dial);
                 UpdateStats(dial);
                 ShowStats();
                 break;
             case 2:
-                dial = dialoguesInformation[Random.Range(0, dialoguesInformation.Count)];
+                dial = dialogues.Where(x => x.GetDialogueType() == Dialogues.DialogueType.Information)
+                    .OrderBy(x => Random.value)
+                    .FirstOrDefault();
                 ShowDialogue(dial);
                 UpdateStats(dial);
                 ShowStats();
                 break;
             case 3:
-                dial = dialoguesReaction[Random.Range(0, dialoguesReaction.Count)];
+                dial = dialogues.Where(x => x.GetDialogueType() == Dialogues.DialogueType.Reaction)
+                    .OrderBy(x => Random.value)
+                    .FirstOrDefault();
                 ShowDialogue(dial);
                 UpdateStats(dial);
                 ShowStats();
@@ -96,6 +111,25 @@ public class DialoguesInhabitant : MonoBehaviour
             default:
                 break;
         }
+    }
+    
+    public void SelectDialogueByID(string id)
+    {
+        Dialogues dial = null;
+        
+        dial = dialogues.Where(x => x.GetID() == id)
+            .OrderBy(x => Random.value)
+            .FirstOrDefault();
+        
+        if (dial == null)
+        {
+            Debug.LogError($"Dialogue with ID {id} not found.");
+            return;
+        }
+        
+        ShowDialogue(dial);
+        UpdateStats(dial);
+        ShowStats();
     }
 
     private void UpdateStats(Dialogues dialogue)
@@ -146,38 +180,7 @@ public class DialoguesInhabitant : MonoBehaviour
 
     private void GetUIElements()
     {
-        // dialogueText = GameObject.Find("Dialogue Text").GetComponent<TMP_Text>();
-        // dialogueBox = GameObject.Find("Dialogue Canvas");
-        
-        dialogueText = accessibilityOptions.dialogueText;
-        dialogueBox = accessibilityOptions.dialogueBox;
-        
-        dialogueBox.SetActive(false);
-    }
-    
-    private void GetAllDialogues()
-    {
-        var dialoguesObj = Resources.LoadAll("Dialogues");
-        
-        foreach (var obj in dialoguesObj)
-        {
-            if (obj is Dialogues dialogue)
-            {
-                switch (dialogue.GetDialogueType())
-                {
-                    case Dialogues.DialogueType.Reaction:
-                        dialoguesReaction.Add(dialogue);
-                        break;
-                    case Dialogues.DialogueType.Dream:
-                        dialoguesDream.Add(dialogue);
-                        break;
-                    case Dialogues.DialogueType.Information:
-                        dialoguesInformation.Add(dialogue);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
-        }
+        dialogueText = dialoguesManager.dialogueText;
+        dialogueBox = dialoguesManager.dialogueBox;
     }
 }

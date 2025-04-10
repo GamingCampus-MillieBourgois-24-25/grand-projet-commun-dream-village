@@ -6,9 +6,27 @@
   <component name="ChangeListManager">
     <list default="true" id="133297ab-59a1-4172-bc85-0cebe864daf4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Dialogues Reaction Shared Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Dialogues Reaction Shared Data.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Dialogues Reaction_en.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Dialogues Reaction_en.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Dialogues Reaction_fr.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Dialogues Reaction_fr.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/ReactionSwimmingPool.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/ReactionSwimmingPool.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/ReactionTheater.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/ReactionTheater.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test/Dialogues.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test/Dialogues.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesInhabitant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesInhabitant.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesTest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Option/AccessibilityOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Option/AccessibilityOptions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Bench.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Bench.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Café.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Café.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Cinema.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Cinema.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Fountain.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Fountain.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Gym.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Gym.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Librairy.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Librairy.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Pool.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Pool.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Well.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Other/Buildings/Well.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +37,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesInhabitantTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.annulusgames.lit-motion@b946c3a108/Runtime/Options/NoOptions.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -31,25 +49,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "DialogueSuite",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;DialogueSuite&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\jhussenet\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\jhussenet\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\jhussenet\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\jhussenet\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\jhussenet\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\jhussenet\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\2022.3.32f1\Editor\Unity.exe" />
@@ -99,7 +117,8 @@
       <workItem from="1743593855185" duration="1130000" />
       <workItem from="1743595654421" duration="1620000" />
       <workItem from="1743595654421" duration="9558000" />
-      <workItem from="1744198535324" duration="14659000" />
+      <workItem from="1744198535324" duration="15078000" />
+      <workItem from="1744286327452" duration="7442000" />
     </task>
     <servers />
   </component>

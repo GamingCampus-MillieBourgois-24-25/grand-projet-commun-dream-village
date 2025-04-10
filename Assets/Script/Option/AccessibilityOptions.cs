@@ -55,9 +55,6 @@ public class AccessibilityOptions : MonoBehaviour
     public TextSpeedStruct CurrentTextSpeedStruct;
     
     #endregion
-
-    public GameObject dialogueBox;
-    public TMP_Text dialogueText;
     
     private void Awake()
     {

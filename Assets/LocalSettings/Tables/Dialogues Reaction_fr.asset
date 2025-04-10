@@ -26,6 +26,30 @@ MonoBehaviour:
     m_Localized: "Un nouveau cin\xE9ma ! Je devrais aller voir un film."
     m_Metadata:
       m_Items: []
+  - m_Id: 365673057054720
+    m_Localized: FR Reac Banc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365670624358400
+    m_Localized: "FR Reac Caf\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365663905083392
+    m_Localized: FR Reac Fontaine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365659127771136
+    m_Localized: FR Reac Salle de sport
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365654300127232
+    m_Localized: FR Reac Librairie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365650881769472
+    m_Localized: FR Reac Puit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

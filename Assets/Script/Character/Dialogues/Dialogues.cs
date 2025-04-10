@@ -34,11 +34,22 @@ public class Dialogues : ScriptableObject
         public BonusType bonusType;
     }
     
-    public string ID;
+    [SerializeField] private string ID;
+    [SerializeField] private string relatedElementID;
     [SerializeField] private LocalizedString dialogueText;
     
     [SerializeField] private DialogueType dialogueType;
     [SerializeField] private Stats stats;
+    
+    public string GetID()
+    {
+        return ID;
+    }
+    
+    public string GetRelatedElementID()
+    {
+        return relatedElementID;
+    }
     
     public DialogueType GetDialogueType()
     {

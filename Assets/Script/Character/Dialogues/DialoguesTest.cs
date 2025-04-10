@@ -1,18 +1,27 @@
+using System;
 using UnityEngine;
 
 public class DialoguesTest : MonoBehaviour
 {
-    public bool showDialogue;
-    [Range(1, 3)] public int type;
-    public DialoguesInhabitant dialInhabitant;
+    public delegate void DialogueDelegate(string id);
+    private DialogueDelegate selectDialogueByIDDelegate;
 
-    private void Update()
+    public DialoguesInhabitant dialInhabitant;
+    public string dialogueID;
+    
+    
+
+    private void Start()
     {
-        if (showDialogue)
+        if (dialInhabitant != null)
         {
-            dialInhabitant.ShowDialogue(type);
-            
-            showDialogue = false;
+            selectDialogueByIDDelegate = dialInhabitant.SelectDialogueByID;
         }
+    }
+
+    [ContextMenu("CallTest")]
+    public void CallTest()
+    {
+        selectDialogueByIDDelegate.Invoke(dialogueID);
     }
 }
