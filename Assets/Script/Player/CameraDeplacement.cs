@@ -71,8 +71,6 @@ public class CameraDeplacement : MonoBehaviour
 
     private void OnPinch()
     {
-        Vector3 initialCameraPosition = Camera.main.transform.position;
-
         Vector3 finger1 = zoom1Action.action.ReadValue<Vector2>();
         Vector3 finger2 = zoom2Action.action.ReadValue<Vector2>(); 
         float magnitude = (finger1 - finger2).magnitude;
