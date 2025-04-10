@@ -13,7 +13,10 @@ public class PlaceableObject : MonoBehaviour
     public Vector3Int OriginalPosition
     {
         get => originalPosition;
-        set => originalPosition = value;
+        set {
+            originalPosition = value;
+            Debug.Log("New Original position: "+originalPosition);
+        }
     }
 
     public Renderer cachedRenderer;
@@ -32,7 +35,8 @@ public class PlaceableObject : MonoBehaviour
 
     public void ResetPosition()
     {
-        transform.position = new Vector3(OriginalPosition.x, transform.position.y, OriginalPosition.z);
+        Vector3 centerWorld = IM.Instance.tilemapObjects.GetCellCenterWorld(OriginalPosition);
+        transform.position = GetCenterObject(IM.Instance.tilemapObjects, centerWorld);
     }
 
     public Vector3 GetSize()
@@ -73,7 +77,7 @@ public class PlaceableObject : MonoBehaviour
 
     public Vector3 GetCenterObject(Tilemap tilemap, Vector3 centerPoint)
     {
-        Vector3 adjustedCenter = new Vector3(centerPoint.x - 0.01f, centerPoint.y, centerPoint.z);
+        Vector3 adjustedCenter = new Vector3(centerPoint.x - 0.01f, centerPoint.y, centerPoint.z - 0.01f);
         Vector3Int cell = tilemap.WorldToCell(adjustedCenter);
         Vector3 cellCenterWorld = tilemap.GetCellCenterWorld(cell);
         //cellCenterWorld.y = transform.position.y;

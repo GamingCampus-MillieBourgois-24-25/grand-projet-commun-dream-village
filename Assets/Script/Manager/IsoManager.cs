@@ -286,7 +286,7 @@ public class IsoManager : MonoBehaviour
     {
         if (obj == null) return; // Sécurité
 
-        Debug.Log("OnObjectSelected");
+        //Debug.Log("OnObjectSelected");
 
         // Si un objet est déjà sélectionné, il revient à sa position initiale
         if (selectedObject != null)
@@ -295,7 +295,6 @@ public class IsoManager : MonoBehaviour
             selectedObject.ResetPosition();
         }
 
-        Debug.Log(String.Join(",", obj.GetOccupiedTiles()));
         occupiedTilePositions.ExceptWith(obj.GetOccupiedTiles());
 
         selectedObject = obj;
@@ -352,10 +351,10 @@ public class IsoManager : MonoBehaviour
 
         obj.transform.position = new Vector3(obj.transform.position.x, newYPosition, obj.transform.position.z);
 
-        occupiedTilePositions.Union((obj.GetOccupiedTiles()));
+        occupiedTilePositions.UnionWith((obj.GetOccupiedTiles()));
 
         // SET NEW POSITION
-        obj.OriginalPosition = tilemapObjects.WorldToCell(transform.position);
+        obj.OriginalPosition = tilemapObjects.WorldToCell(obj.transform.position);
 
         // Réinitialiser
         ChangeTileUnderObject(selectedObject, null);
