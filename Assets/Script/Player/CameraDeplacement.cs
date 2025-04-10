@@ -172,7 +172,7 @@ public class CameraDeplacement : MonoBehaviour
                     float normalizedValue = Mathf.InverseLerp(0, distanceBords.x, posTouch.x);
 
                     // Interpoler la vitesse entre 0 et outsideSpeedDeplacementMax.x
-                    movement.x = Mathf.Lerp(0, outsideSpeedDeplacementMax.x, normalizedValue);
+                    movement.x = Mathf.Lerp(outsideSpeedDeplacementMax.x, 0, normalizedValue);
                 }
 
                 if (posTouch.x > screenSize.x - distanceBords.x)
@@ -188,7 +188,7 @@ public class CameraDeplacement : MonoBehaviour
                     // Normaliser posTouch.y entre 0 et distanceBords.y
                     float normalizedValue = Mathf.InverseLerp(0, distanceBords.y, posTouch.y);
                     // Interpoler la vitesse entre 0 et outsideSpeedDeplacementMax.y
-                    movement.y = Mathf.Lerp(0, outsideSpeedDeplacementMax.y, normalizedValue);
+                    movement.y = Mathf.Lerp(outsideSpeedDeplacementMax.y, 0, normalizedValue);
                 }
 
                 if (posTouch.y > screenSize.y - distanceBords.y)
