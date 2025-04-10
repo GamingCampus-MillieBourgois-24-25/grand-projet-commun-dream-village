@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -84,16 +85,6 @@ public class CameraDeplacement : MonoBehaviour
         prevMagnitude = magnitude;
 
         CameraZoom(-dif * zoomSpeed);
-
-/*        // Calcul de la position moyenne entre les deux doigts
-        Vector2 midpoint = (finger1 + finger2) / 2;
-
-        // Convertir la position de l'écran en position dans le monde
-        Vector3 worldMidpoint = Camera.main.ScreenToWorldPoint(new Vector3(midpoint.x, midpoint.y, Camera.main.transform.position.y));
-
-        // Interpoler la position de la caméra à 50% entre sa position initiale et le point médian
-        Camera.main.transform.position = Vector3.Lerp(initialCameraPosition, worldMidpoint, 0.5f);
-*/
     }
 
     void RemoveTouch()
@@ -158,12 +149,14 @@ public class CameraDeplacement : MonoBehaviour
 
     IEnumerator CameraDeplacementEditCorout()
     {
-        while (touch1Action.action.IsPressed())
+        if (isoManager.IsEditMode())
         {
-            Vector2 movement = Vector2.zero;
 
-            if (isoManager.IsEditMode())
+            while (touch1Action.action.IsPressed())
             {
+                Vector2 movement = Vector2.zero;
+                // Vérifier si le toucher est sur l'UI
+
                 Vector2 posTouch = zoom1Action.action.ReadValue<Vector2>();
 
                 if (posTouch.x < distanceBords.x)
@@ -204,13 +197,15 @@ public class CameraDeplacement : MonoBehaviour
 
                 Debug.Log(movement);
                 CameraMovement(movement, true);
+                yield return null;
             }
-            else
-            {
-                cameraMovementCoroutine = null;
-                yield break;
-            }
-            yield return null;
         }
+        else
+        {
+            cameraMovementCoroutine = null;
+            yield break;
+        }
+        cameraMovementCoroutine = null;
+        yield break;
     }
 }
