@@ -1396,6 +1396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialInhabitant: {fileID: 1480218082}
   dialogueID: 
+  buildingTest: {fileID: 11400000, guid: 31f1a186190744f45bc0945ea910114e, type: 2}
 --- !u!4 &302496528
 Transform:
   m_ObjectHideFlags: 0

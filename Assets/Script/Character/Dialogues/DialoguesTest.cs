@@ -8,8 +8,10 @@ public class DialoguesTest : MonoBehaviour
 
     public DialoguesInhabitant dialInhabitant;
     public string dialogueID;
-    
-    
+
+    // =============== PROTOTYPE
+    public static event Action<Building> OnBuildingPlaced;
+    public Building buildingTest;
 
     private void Start()
     {
@@ -23,5 +25,13 @@ public class DialoguesTest : MonoBehaviour
     public void CallTest()
     {
         selectDialogueByIDDelegate.Invoke(dialogueID);
+    }
+    
+    
+    // =============== PROTOTYPE
+    [ContextMenu("PlaceBuildingTest")]
+    public void PlaceBuildingTest()
+    {
+        OnBuildingPlaced?.Invoke(buildingTest);
     }
 }

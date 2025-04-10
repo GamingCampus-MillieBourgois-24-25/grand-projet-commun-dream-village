@@ -16,6 +16,8 @@ public class DialoguesInhabitant : MonoBehaviour
     [SerializeField] private Inhabitant inhabitant;
     [SerializeField] private Dialogues.Stats stats;
     
+    
+    
     private DialoguesManager dialoguesManager;
     
     private List<Dialogues> dialogues = new List<Dialogues>();
@@ -54,12 +56,26 @@ public class DialoguesInhabitant : MonoBehaviour
     {
         touchAction.action.Enable();
         positionAction.action.Enable();
+        
+        DialoguesTest.OnBuildingPlaced += ReactToBuildingPlacement;
     }
     
     private void OnDisable()
     {
         touchAction.action.Disable();
         positionAction.action.Disable();
+        
+        DialoguesTest.OnBuildingPlaced -= ReactToBuildingPlacement;
+    }
+    
+    // React to building placement ======= PROTOTYPE
+    private void ReactToBuildingPlacement(Building building)
+    {
+        if (building.name == "Bench")
+        {
+            SelectDialogueByID("Reac001");
+        }
+        
     }
 
     // If NPC is touched, select a random dialogue
