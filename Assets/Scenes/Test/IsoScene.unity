@@ -852,9 +852,9 @@ MonoBehaviour:
   MoveAction: {fileID: -5858042902885645956, guid: 17d2802e60a33174bb9df2936fd7b31f,
     type: 3}
   centerCamera: {x: 0, y: 0}
-  limCam: {x: 10, y: 10}
-  outsideSpeedDeplacementMax: {x: 0.1, y: 0.1}
-  lambdaDeplacement: {x: 1.8, y: 0.6}
+  limCam: {x: 10, y: 5}
+  outsideSpeedDeplacementMax: {x: 0.3, y: 0.3}
+  lambdaDeplacement: {x: 1, y: 1.2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

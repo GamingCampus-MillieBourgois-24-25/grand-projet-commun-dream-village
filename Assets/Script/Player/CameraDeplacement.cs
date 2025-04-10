@@ -32,6 +32,7 @@ public class CameraDeplacement : MonoBehaviour
     private int touchCount = 0;
     IsoManager isoManager;
     Coroutine cameraMovementCoroutine = null;
+    float actualZoom;
 
     void Start()
     {
@@ -65,6 +66,7 @@ public class CameraDeplacement : MonoBehaviour
         touch1Action.action.performed +=  ctx => CameraMovementEdit();
         touch1Action.action.canceled += ctx => CameraMovementEdit();
 
+        actualZoom = Camera.main.orthographicSize;
     }
 
 
@@ -102,6 +104,7 @@ public class CameraDeplacement : MonoBehaviour
     private void CameraZoom(float incr)
     {
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + incr, minZoom, maxZoom);
+        actualZoom = Camera.main.orthographicSize;
     }
 
     private void CameraMovement(Vector2 movement, bool isEdit = false)
@@ -111,22 +114,22 @@ public class CameraDeplacement : MonoBehaviour
 
         Vector3 newPosition = Camera.main.transform.localPosition;
 
-        newPosition.x -= movement.x / lambdaDeplacement.x;
+        newPosition.x -= movement.x / lambdaDeplacement.x / (6/actualZoom);
         //newPosition.y += movement.x/* / lambdaDeplacement.x*/;
 
 
         //newPosition.x -= movement.y/* * lambdaDeplacement.y*/;
-        newPosition.y -= movement.y * lambdaDeplacement.y;
+        newPosition.y -= movement.y * lambdaDeplacement.y / (6/actualZoom);
 
 
         if(newPosition.x < centerCamera.x - limCam.x)
             newPosition.x = centerCamera.x - limCam.x;
-        if (newPosition.x > centerCamera.x + limCam.x)
+        else if (newPosition.x > centerCamera.x + limCam.x)
             newPosition.x = centerCamera.x + limCam.x;
 
         if (newPosition.y < centerCamera.y - limCam.y)
             newPosition.y = centerCamera.y - limCam.y;
-        if (newPosition.y > centerCamera.y + limCam.y)
+        else if (newPosition.y > centerCamera.y + limCam.y)
             newPosition.y = centerCamera.y + limCam.y;
 
 
