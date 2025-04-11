@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6386484326531825761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3872169923019111321}
+  - component: {fileID: 5854431403976497302}
+  - component: {fileID: 6031897025310654014}
+  - component: {fileID: 8215822274098560426}
+  m_Layer: 0
+  m_Name: OptionsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3872169923019111321
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6386484326531825761}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5854431403976497302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6386484326531825761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463f6444c8f15754daf606acf4a04b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vsync: 1
+  targetFrameRate: 60
+  fpsLimitRange: {x: 30, y: 60}
+  qualitySettings: []
+  currentQualitySettings: 
+  fpsText: {fileID: 0}
+--- !u!114 &6031897025310654014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6386484326531825761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17ea6fb2e264fd94795187d35e380e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameVolume: 0.5
+  musicVolume: 0.5
+  uiVolume: 0.5
+  audioMixer: {fileID: 24100000, guid: 25ee6e66aedfed8469c9d70a36ea9227, type: 2}
+--- !u!114 &8215822274098560426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6386484326531825761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729081fe569799744a1cfc4b4d936640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLanguage: 0
+  languageDropdown: {fileID: 0}
+  languageDropdownTemplate: {fileID: 0}
+  languageDropdownViewport: {fileID: 0}
+  languageDropdownHeight: 150
+  textSpeedButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

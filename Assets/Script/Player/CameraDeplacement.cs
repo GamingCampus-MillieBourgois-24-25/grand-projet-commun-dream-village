@@ -69,8 +69,23 @@ public class CameraDeplacement : MonoBehaviour
         actualZoom = Camera.main.orthographicSize;
     }
 
+    public void OnEnable()
+    {
+        touch1Action.action.Enable();
+        touch2Action.action.Enable();
+        zoom1Action.action.Enable();
+        zoom2Action.action.Enable();
+        MoveAction.action.Enable();
+    }
 
-
+    public void OnDisable()
+    {
+        touch1Action.action.Disable();
+        touch2Action.action.Disable();
+        zoom1Action.action.Disable();
+        zoom2Action.action.Disable();
+        MoveAction.action.Disable();
+    }
 
     private void OnPinch()
     {

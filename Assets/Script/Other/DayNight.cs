@@ -3,13 +3,19 @@ using LitMotion;
 using LitMotion.Extensions;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class DayNight : MonoBehaviour
 {
     [SerializeField] private bool isDay;
     
     [SerializeField] private TMP_Text timeText;
-    
+
+    [SerializeField] private GameObject dreamCanvas;
+    [SerializeField] private GameObject buildButtons;
+    [SerializeField] private CameraDeplacement cameraDeplacementScript;
+
     [Header("Light Parameters")]
     [SerializeField] private Light sun;
     [SerializeField] private Color dayColor;
@@ -41,6 +47,10 @@ public class DayNight : MonoBehaviour
         LMotion.Create(curtain.transform.position.x, shownPosition.x, animationDuration)
             .WithEase(Ease.OutCubic).WithOnComplete(SwitchTime)
             .BindToPositionX(curtain.transform);
+
+        dreamCanvas.SetActive(!isDay);
+        buildButtons.SetActive(isDay);
+        cameraDeplacementScript.enabled = isDay;
     }
 
     private void SwitchTime()
