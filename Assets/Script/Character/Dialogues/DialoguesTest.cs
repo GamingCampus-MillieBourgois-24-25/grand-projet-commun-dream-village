@@ -1,4 +1,6 @@
 using System;
+using TMPro;
+
 using UnityEngine;
 
 public class DialoguesTest : MonoBehaviour

@@ -1,34 +1,97 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class PlaceableObject : MonoBehaviour
 {
-    private Vector3 originalPosition;
-    public Vector3 OriginalPosition
+    [SerializeField]
+    private Vector2Int sizeInTiles;
+    public Vector2Int SizeInTiles => sizeInTiles;
+
+    private Vector3Int originalPosition;
+    public Vector3Int OriginalPosition
     {
         get => originalPosition;
-        set => originalPosition = value;
+        set {
+            originalPosition = value;
+            Debug.Log("New Original position: "+originalPosition);
+        }
+    }
+
+    public Renderer cachedRenderer;
+
+    private void Awake()
+    {
+        cachedRenderer = GetComponent<Renderer>();
     }
 
     public void Start()
     {
+        sizeInTiles = GetCellSizeWithBounds();
         CenterObject(IM.Instance.tilemapObjects);
-        OriginalPosition = transform.position;
+        OriginalPosition = IM.Instance.tilemapObjects.WorldToCell(transform.position);
     }
 
     public void ResetPosition()
     {
-        transform.position = OriginalPosition;
+        Vector3 centerWorld = IM.Instance.tilemapObjects.GetCellCenterWorld(OriginalPosition);
+        transform.position = GetCenterObject(IM.Instance.tilemapObjects, centerWorld);
     }
 
     public Vector3 GetSize()
     {
-        Renderer renderer = GetComponent<Renderer>();
-        if (renderer != null)
+        if (cachedRenderer != null)
         {
-            return renderer.bounds.size;
+            return cachedRenderer.bounds.size;
         }
         return Vector3.one; // Valeur par défaut si pas de Renderer
+    }
+
+    public HashSet<Vector3Int> GetOccupiedTiles()
+    {
+        HashSet<Vector3Int> occupiedTiles = new HashSet<Vector3Int>();
+
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer == null) return occupiedTiles;
+
+        foreach (var cellPos in IsoManager.GetCoveredCells(renderer, IM.Instance.tilemapObjects))
+        {
+            occupiedTiles.Add(cellPos);
+        }
+
+        Debug.Log("OccupiedTiles de: "+this.gameObject.name+""+String.Join(",", occupiedTiles));
+        return occupiedTiles;
+    }
+
+
+    private Vector2Int GetCellSizeWithBounds()
+    {
+        Vector3 size = cachedRenderer.bounds.size;
+        Vector3 cellSize = IM.Instance.tilemapObjects.cellSize;
+        return new Vector2Int(
+            Mathf.CeilToInt(size.x / cellSize.x),
+            Mathf.CeilToInt(size.z / cellSize.y)
+        );
+    }
+
+    public Vector3 GetCenterObject(Tilemap tilemap, Vector3 centerPoint)
+    {
+        Vector3 adjustedCenter = new Vector3(centerPoint.x - 0.01f, centerPoint.y, centerPoint.z - 0.01f);
+        Vector3Int cell = tilemap.WorldToCell(adjustedCenter);
+        Vector3 cellCenterWorld = tilemap.GetCellCenterWorld(cell);
+        //cellCenterWorld.y = transform.position.y;
+
+        int tilesX = sizeInTiles.x;
+        int tilesZ = sizeInTiles.y;
+
+        // Calcul de l'offset pour centrer correctement
+        float offsetX = (tilesX % 2 == 0) ? 0.5f * tilemap.cellSize.x : 0f; // 0.5 si pair, 0 si impair
+        float offsetZ = (tilesZ % 2 == 0) ? 0.5f * tilemap.cellSize.y : 0f;
+
+        //Debug.Log($"Object centered on tile: Cell {cell}, WorldPos {cellCenterWorld}");
+
+        return new Vector3(cellCenterWorld.x + offsetX, transform.position.y, cellCenterWorld.z + offsetZ);
     }
 
     public void CenterObject(Tilemap tilemap)
@@ -37,56 +100,8 @@ public class PlaceableObject : MonoBehaviour
         if (renderer == null || tilemap == null) return;
 
         Vector3 boundsCenter = renderer.bounds.center;
-        Vector3Int cell = tilemap.WorldToCell(boundsCenter);
-        Vector3 cellCenterWorld = tilemap.GetCellCenterWorld(cell);
-        //cellCenterWorld.y = transform.position.y;
-
-        // Calculer combien de tiles l'objet occupe
-        Vector3 size = renderer.bounds.size;
-        int tilesX = Mathf.CeilToInt(size.x / tilemap.cellSize.x);
-        int tilesZ = Mathf.CeilToInt(size.z / tilemap.cellSize.y);
-
-        // Calcul de l'offset pour centrer correctement
-        float offsetX = (tilesX % 2 == 0) ? 0.5f * tilemap.cellSize.x : 0f; // 0.5 si pair, 0 si impair
-        float offsetZ = (tilesZ % 2 == 0) ? 0.5f * tilemap.cellSize.y : 0f;
-
-        transform.position = new Vector3(cellCenterWorld.x + offsetX, transform.position.y, cellCenterWorld.z + offsetZ);
-
-        Debug.Log($"Object centered on tile: Cell {cell}, WorldPos {cellCenterWorld}");
+        transform.position = GetCenterObject(tilemap, boundsCenter);
     }
-
-    //public void CenterObject(Tilemap tilemap)
-    //{
-    //Vector3Int minCellCoords = tilemap.WorldToCell(renderer.bounds.min);
-
-    //// Calculer combien de tiles l'objet occupe
-    //Vector3 size = renderer.bounds.size;
-    //int tilesX = Mathf.CeilToInt(size.x / tilemap.cellSize.x);
-    //int tilesZ = Mathf.CeilToInt(size.z / tilemap.cellSize.y);
-
-    //// Tile en bas à gauche
-    //Vector3Int minCell = tilemap.WorldToCell(renderer.bounds.min);
-    //Vector3 minCellWorld = tilemap.CellToWorld(minCell);
-
-    //// Calcul de l'offset pour centrer correctement
-    //float offsetX = (tilesX % 2 == 0) ? 0f : 0.5f; // 0 si pair, 0.5 si impair
-    //float offsetZ = (tilesZ % 2 == 0) ? 0f : 0.5f;
-
-    //// Trouver la position centrale des tiles occupées
-    //Vector3 centeredWorldPosition = new Vector3(
-    //    minCellWorld.x + (tilesX / 2f - offsetX) * tilemap.cellSize.x,
-    //    transform.position.y,
-    //    minCellWorld.y + (tilesZ / 2f - offsetZ) * tilemap.cellSize.y
-    //);
-
-    //// Convertir en position monde et ajuster
-    ////Vector3 centeredWorldPosition = tilemap.GetCellCenterWorld(Vector3Int.FloorToInt(centerCell));
-    //transform.position = centeredWorldPosition;
-
-    //Debug.Log($"minCellWorld : {minCellWorld.x}, TilesX/2 : {(tilesX / 2f)}, OffestX: {offsetX} Taille : {tilesX}x{tilesZ} tiles, CenterCell {centeredWorldPosition}");
-//}
-
-
 
     void OnDrawGizmos()
     {
