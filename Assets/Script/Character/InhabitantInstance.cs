@@ -48,4 +48,6 @@ public class InhabitantInstance
     public Sprite Icon => baseData.Icon;
     public List<InterestCategory> Likes => baseData.Likes;
     public List<InterestCategory> Dislikes => baseData.Dislikes;
+
+    public float GoldMultiplier => baseData.GoldMultiplier;
 }
