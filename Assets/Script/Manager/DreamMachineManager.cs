@@ -55,7 +55,7 @@ public class DreamMachineManager : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    // Enregistrer la position de départ du swipe
+                    // Enregistrer la position de dï¿½part du swipe
                     startTouchPosition = touch.position;
                     break;
 
@@ -68,12 +68,12 @@ public class DreamMachineManager : MonoBehaviour
                         // Si le swipe est assez long, changer de personnage
                         if (swipeDistance > 0)
                         {
-                            // Swipe à droite -> personnage précédent
+                            // Swipe ï¿½ droite -> personnage prï¿½cï¿½dent
                             PreviousInhabitant();
                         }
                         else
                         {
-                            // Swipe à gauche -> personnage suivant
+                            // Swipe ï¿½ gauche -> personnage suivant
                             NextInhabitant();
                         }
                     }
@@ -103,14 +103,16 @@ public class DreamMachineManager : MonoBehaviour
 
         foreach (var displayable in dreams)
         {
+            // Crï¿½er le bouton pour chaque rï¿½ve
             GameObject dreamButton = Instantiate(dreamButtonPrefab, dreamsContainer);
+
+            // Rï¿½cupï¿½rer les images dans le bouton
             Image[] images = dreamButton.GetComponentsInChildren<Image>();
 
-            var ordered = displayable.orderedElements;
-
-            images[1].sprite = ordered[0].icon;
-            images[2].sprite = ordered[1].icon;
-            images[3].sprite = ordered[2].icon;
+            // Assigner les bonnes images (Positive, Negative, Random)
+            images[1].sprite = option.positiveElement.icon;  // Image pour l'ï¿½lï¿½ment positif
+            images[2].sprite = option.negativeElement.icon;  // Image pour l'ï¿½lï¿½ment nï¿½gatif
+            images[3].sprite = option.randomElement.icon;    // Image pour l'ï¿½lï¿½ment alï¿½atoire
 
             Debug.Log($"Dream Order: {ordered[0].interestName}, {ordered[1].interestName}, {ordered[2].interestName}");
         }
@@ -164,7 +166,7 @@ public class DreamMachineManager : MonoBehaviour
         (option) => new List<InterestCategory> { option.negativeElement, option.randomElement, option.positiveElement }
     };
 
-        // Mélange les permutations pour cette série
+        // Mï¿½lange les permutations pour cette sï¿½rie
         for (int i = 0; i < permutations.Count; i++)
         {
             int r = Random.Range(i, permutations.Count);
