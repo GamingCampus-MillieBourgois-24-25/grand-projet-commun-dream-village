@@ -6,37 +6,45 @@ public class VillageManager : MonoBehaviour
     public static VillageManager instance { get; private set; }
 
     [Header("Village Data")]
-    public List<Inhabitant> inhabitants = new List<Inhabitant>();
+    public List<Inhabitant> baseInhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
+
+    public List<InhabitantInstance> inhabitants { get; private set; } = new List<InhabitantInstance>();
 
     private void Awake()
     {
-        //Si jamais faut assurer qu'il y a qu'un seul Village ou Game Manager
-        
+        // Singleton check
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Crée les instances runtime à partir des SO
+            foreach (var inhabitant in baseInhabitants)
+            {
+                inhabitants.Add(new InhabitantInstance(inhabitant));
+            }
         }
         else
         {
             Destroy(gameObject);
         }
-        
     }
 
     public void AddInhabitant(Inhabitant newInhabitant)
     {
-        inhabitants.Add(newInhabitant);
+        baseInhabitants.Add(newInhabitant);
+        inhabitants.Add(new InhabitantInstance(newInhabitant));
         Debug.Log($"New inhabitant added: {newInhabitant.FirstName} {newInhabitant.LastName}");
     }
 
-    public void RemoveInhabitant(Inhabitant inhabitant)
+    public void RemoveInhabitant(InhabitantInstance instanceToRemove)
     {
         if (inhabitants.Count > 1)
         {
-            inhabitants.Remove(inhabitant);
-            Debug.Log($"Inhabitant removed: {inhabitant.FirstName} {inhabitant.LastName}");
+            baseInhabitants.Remove(instanceToRemove.baseData);
+            inhabitants.Remove(instanceToRemove);
+            Debug.Log($"Inhabitant removed: {instanceToRemove.FirstName} {instanceToRemove.LastName}");
         }
     }
 
