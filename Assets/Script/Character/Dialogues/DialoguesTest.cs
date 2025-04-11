@@ -1,16 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
+
 using UnityEngine;
 
 public class DialoguesTest : MonoBehaviour
 {
-    public Dialogues dialogues;
-    
-    public TMP_Text dialogueText;
-    
+    public delegate void DialogueDelegate(string id);
+    private DialogueDelegate selectDialogueByIDDelegate;
+
+    public DialoguesInhabitant dialInhabitant;
+    public string dialogueID;
+
+    // =============== PROTOTYPE
+    public static event Action<Building> OnBuildingPlaced;
+    public Building buildingTest;
+
     private void Start()
     {
-        dialogueText.text = dialogues.GetDialogueText();
+        if (dialInhabitant != null)
+        {
+            selectDialogueByIDDelegate = dialInhabitant.SelectDialogueByID;
+        }
+    }
+
+    [ContextMenu("CallTest")]
+    public void CallTest()
+    {
+        selectDialogueByIDDelegate.Invoke(dialogueID);
+    }
+    
+    
+    // =============== PROTOTYPE
+    [ContextMenu("PlaceBuildingTest")]
+    public void PlaceBuildingTest()
+    {
+        OnBuildingPlaced?.Invoke(buildingTest);
     }
 }

@@ -60,6 +60,7 @@ public class DreamMachineManager : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
+                    // Enregistrer la position de d�part du swipe
                     startTouchPosition = touch.position;
                     break;
 
@@ -70,10 +71,12 @@ public class DreamMachineManager : MonoBehaviour
                     {
                         if (swipeDistance > 0)
                         {
+                            // Swipe � droite -> personnage pr�c�dentt
                             PreviousInhabitant();
                         }
                         else
                         {
+                            // Swipe � gauche -> personnage suivant
                             NextInhabitant();
                         }
                     }
@@ -128,7 +131,10 @@ public class DreamMachineManager : MonoBehaviour
         for (int i = 0; i < dreams.Count; i++)
         {
             var displayable = dreams[i];
+            // Cr�er le bouton pour chaque r�ve
             GameObject dreamButton = Instantiate(dreamButtonPrefab, dreamsContainer);
+
+            // R�cup�rer les images dans le bouton
             Image[] images = dreamButton.GetComponentsInChildren<Image>();
 
             var ordered = displayable.orderedElements;
