@@ -59,16 +59,16 @@ public class DreamMachineManager : MonoBehaviour
 
         foreach (var option in dreamOptions)
         {
-            // Créer le bouton pour chaque rêve
+            // Crï¿½er le bouton pour chaque rï¿½ve
             GameObject dreamButton = Instantiate(dreamButtonPrefab, dreamsContainer);
 
-            // Récupérer les images dans le bouton
+            // Rï¿½cupï¿½rer les images dans le bouton
             Image[] images = dreamButton.GetComponentsInChildren<Image>();
 
             // Assigner les bonnes images (Positive, Negative, Random)
-            images[1].sprite = option.positiveElement.icon;  // Image pour l'élément positif
-            images[2].sprite = option.negativeElement.icon;  // Image pour l'élément négatif
-            images[3].sprite = option.randomElement.icon;    // Image pour l'élément aléatoire
+            images[1].sprite = option.positiveElement.icon;  // Image pour l'ï¿½lï¿½ment positif
+            images[2].sprite = option.negativeElement.icon;  // Image pour l'ï¿½lï¿½ment nï¿½gatif
+            images[3].sprite = option.randomElement.icon;    // Image pour l'ï¿½lï¿½ment alï¿½atoire
 
         }
     }

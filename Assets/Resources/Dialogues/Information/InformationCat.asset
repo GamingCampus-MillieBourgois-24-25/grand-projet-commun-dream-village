@@ -12,5 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13e6beaa89ee5d418d873cd6e279228, type: 3}
   m_Name: InformationCat
   m_EditorClassIdentifier: 
+  ID: Info001
+  dialogueText:
+    m_TableReference:
+      m_TableCollectionName: GUID:880108c781a23314faa294ca35dd2ae9
+    m_TableEntryReference:
+      m_KeyId: 30914867200
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   dialogueType: 2
-  dialogueText: I had a cat when I was a kid, I miss him.
+  attributeEffects: []
+  stats:
+    Mood: 5
+    Serenity: 0
+    Energy: 0
+    Hearts: 0
+  references:
+    version: 2
+    RefIds: []
