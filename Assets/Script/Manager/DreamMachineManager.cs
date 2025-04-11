@@ -29,7 +29,7 @@ public class DreamMachineManager : MonoBehaviour
 
     private void Start()
     {
-        inhabitants = VillageManager.instance.inhabitants;
+        inhabitants = GM.VM.inhabitants;
 
         if (inhabitants.Count > 0)
         {

@@ -15,7 +15,7 @@ public class House : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!IM.Instance.isEditMode)
+        if (!GM.IM.isEditMode)
         {
             if (canvasHabitant != null && !canvasHabitant.activeSelf)
                 canvasHabitant.SetActive(true);

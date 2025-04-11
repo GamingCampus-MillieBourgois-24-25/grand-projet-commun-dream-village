@@ -7,7 +7,11 @@ public class GameManager : MonoBehaviour
 {
     #region Variables
 
-    public static GameManager instance;
+    public static GameManager instance { get; private set; } //Singleton 
+
+    [Header("Managers")]
+    public VillageManager villageManager;
+    public IsoManager isoManager;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -45,4 +49,11 @@ public class GameManager : MonoBehaviour
             buildings.Add(building);
         }
     }
+}
+
+public static class GM
+{
+    public static GameManager Instance => GameManager.instance;
+    public static IsoManager IM => GameManager.instance.isoManager;
+    public static VillageManager VM => GameManager.instance.villageManager;
 }
