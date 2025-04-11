@@ -376,10 +376,15 @@ public class IsoManager : MonoBehaviour
 
 
 
-    public bool IsEditMode()
+    public bool hasSelectedObject()
     {
-        return isEditMode;
+        if(isEditMode && selectedObject != null)
+        {
+            return true;
+        }
+        return false;
     }
+
 }
 
 public static class IM
