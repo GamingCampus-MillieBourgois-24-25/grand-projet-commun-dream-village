@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -109,7 +110,7 @@ public class CameraDeplacement : MonoBehaviour
 
     private void CameraMovement(Vector2 movement, bool isEdit = false)
     {
-        if (isoManager.IsEditMode() && !isEdit)
+        if (isoManager.hasSelectedObject() && !isEdit)
             return;
 
         Vector3 newPosition = Camera.main.transform.localPosition;
@@ -151,15 +152,24 @@ public class CameraDeplacement : MonoBehaviour
 
     IEnumerator CameraDeplacementEditCorout()
     {
-        if (isoManager.IsEditMode())
+        if (isoManager.hasSelectedObject())
         {
 
             while (touch1Action.action.IsPressed())
             {
                 Vector2 movement = Vector2.zero;
                 // Vérifier si le toucher est sur l'UI
-
                 Vector2 posTouch = zoom1Action.action.ReadValue<Vector2>();
+
+
+
+                if (IsPointerOverUIElement(posTouch))
+                {
+                    yield break;
+                }
+
+
+
 
                 if (posTouch.x < distanceBords.x)
                 {
@@ -209,5 +219,22 @@ public class CameraDeplacement : MonoBehaviour
         }
         cameraMovementCoroutine = null;
         yield break;
+    }
+
+
+
+    private bool IsPointerOverUIElement(Vector2 screenPosition)
+    {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
+        {
+            position = screenPosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, results);
+
+        Debug.Log("Results: " + results.Count);
+
+        return results.Count > 0; // If there's any UI element under the pointer, return true
     }
 }
