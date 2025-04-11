@@ -4,7 +4,6 @@ using UnityEngine.AI;
 public class InhabitantBehavior : MonoBehaviour
 {
     private NavMeshAgent agent;
-    [SerializeField] private Unity.AI.Navigation.NavMeshSurface surface;
 
     void Start()
     {
@@ -18,12 +17,15 @@ public class InhabitantBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!IM.Instance.isEditMode)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Input.GetMouseButtonDown(0))
             {
-                GoTo(hit.point);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    GoTo(hit.point);
+                }
             }
         }
     }
