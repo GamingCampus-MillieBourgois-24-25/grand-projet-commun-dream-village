@@ -39,4 +39,5 @@ MonoBehaviour:
   <HeartsBeforeLeaving>k__BackingField: 0
   <Icon>k__BackingField: {fileID: 21300000, guid: 8794667d732546e4881dde9c7401eae6,
     type: 3}
-  <InhabitantPrefab>k__BackingField: {fileID: 0}
+  <InhabitantPrefab>k__BackingField: {fileID: 919132149155446097, guid: 6f9d44ad242913e459730feb1dd29acd,
+    type: 3}
