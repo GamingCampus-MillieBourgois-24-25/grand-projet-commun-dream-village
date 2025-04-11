@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.VersionControl.Message;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class InhabitantInstance
 {

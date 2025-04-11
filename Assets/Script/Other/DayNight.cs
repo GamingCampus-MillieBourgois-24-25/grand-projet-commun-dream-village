@@ -3,8 +3,6 @@ using LitMotion;
 using LitMotion.Extensions;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.SearchService;
-using UnityEngine.SceneManagement;
 
 public class DayNight : MonoBehaviour
 {
