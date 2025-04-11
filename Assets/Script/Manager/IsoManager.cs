@@ -27,7 +27,7 @@ public class IsoManager : MonoBehaviour
     private HashSet<Vector3Int> validWhiteTilePositions;
     private HashSet<Vector3Int> occupiedTilePositions;
     private PlaceableObject selectedObject;
-    private bool isEditMode = false;
+    public bool isEditMode = false;
 
     private bool isClicking = false;
 
