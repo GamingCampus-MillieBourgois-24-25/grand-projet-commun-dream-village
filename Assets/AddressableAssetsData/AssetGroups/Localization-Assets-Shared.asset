@@ -22,6 +22,21 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7780982e9b822044886529c7a682b1dc
+    m_Address: Assets/LocalSettings/Tables/Dialogue Dream Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 880108c781a23314faa294ca35dd2ae9
+    m_Address: Assets/LocalSettings/Tables/Dialogues Information Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f36e9338e6be5e409d1d764ea6df474
+    m_Address: Assets/LocalSettings/Tables/Dialogues Reaction Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b2886dc44f367cc4784b3a637a476509, type: 2}
   m_SchemaSet:

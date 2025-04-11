@@ -10,4 +10,5 @@ public class DreamOption
         negativeElement = neg;
         randomElement = random;
     }
+
 }

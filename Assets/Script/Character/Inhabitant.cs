@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "NewInhabitant", menuName = "Character")]
 public class Inhabitant : ScriptableObject

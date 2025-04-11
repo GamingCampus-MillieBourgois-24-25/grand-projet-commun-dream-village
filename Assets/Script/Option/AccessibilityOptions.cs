@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,6 +7,10 @@ using UnityEngine.UI;
 
 public class AccessibilityOptions : MonoBehaviour
 {
+    public static AccessibilityOptions Instance;
+    
+    #region Language
+    
     public enum LanguageParameter
     {
         English,
@@ -16,18 +19,6 @@ public class AccessibilityOptions : MonoBehaviour
     
     public LanguageParameter currentLanguage = LanguageParameter.English;
     
-    public enum TextSpeedParameter
-    {
-        Slow,
-        Normal,
-        Fast
-    }
-    
-    public TextSpeedParameter currentTextSpeed = TextSpeedParameter.Normal;
-    
-    [Header("Interface")]
-    
-    #region Language Dropdown
     public TMP_Dropdown languageDropdown;
     public RectTransform languageDropdownTemplate;
     public RectTransform languageDropdownViewport;
@@ -37,15 +28,50 @@ public class AccessibilityOptions : MonoBehaviour
     #endregion
     
     #region Text Speed
+    
     public List<GameObject> textSpeedButtons;
+    
+    public enum TextSpeedParameter
+    {
+        Slow,
+        Normal,
+        Fast
+    }
+    
+    public struct TextSpeedStruct
+    {
+        public TextSpeedParameter TextSpeedParameter;
+        public float TextSpeed;
+    }
+
+    private TextSpeedStruct[] _textSpeedParameters = new TextSpeedStruct[3]
+    {
+        new TextSpeedStruct {TextSpeedParameter = TextSpeedParameter.Slow, TextSpeed = 3f},
+        new TextSpeedStruct {TextSpeedParameter = TextSpeedParameter.Normal, TextSpeed = 2f},
+        new TextSpeedStruct {TextSpeedParameter = TextSpeedParameter.Fast, TextSpeed = 1f}
+    };
+    
+    public TextSpeedStruct CurrentTextSpeedStruct;
+    
     #endregion
     
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         InitLanguageDropdown();
 
-        SetTextSpeedParameter((int) currentTextSpeed);
+        SetTextSpeedParameter(CurrentTextSpeedStruct.TextSpeedParameter == TextSpeedParameter.Slow ? 0 : CurrentTextSpeedStruct.TextSpeedParameter == TextSpeedParameter.Normal ? 1 : 2);
     }
     
     private void InitLanguageDropdown()
@@ -71,7 +97,7 @@ public class AccessibilityOptions : MonoBehaviour
     
     public void SetTextSpeedParameter(int value)
     {
-        currentTextSpeed = (TextSpeedParameter) value;
+        CurrentTextSpeedStruct = _textSpeedParameters[value];
         ChangeTextSpeedButtonColor(value);
     }
 
