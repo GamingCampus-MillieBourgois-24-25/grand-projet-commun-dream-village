@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 
 
-[CreateAssetMenu(fileName = "BuildingDatabase", menuName = "Building", order = 1)]
+[CreateAssetMenu(fileName = "BuildingDatabase", menuName = "ScriptableObjects/Building", order = 1)]
 public class Building : ScriptableObject
 {
     #region Variable Serialized

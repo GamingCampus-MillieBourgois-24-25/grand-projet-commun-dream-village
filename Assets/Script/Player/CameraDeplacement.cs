@@ -37,7 +37,7 @@ public class CameraDeplacement : MonoBehaviour
 
     void Start()
     {
-        isoManager = IsoManager.Instance;
+        isoManager = GM.IM;
         screenSize = new Vector2(Screen.width, Screen.height);
         distanceBords = new Vector2(screenSize.x * 0.15f, screenSize.y * 0.15f);
 

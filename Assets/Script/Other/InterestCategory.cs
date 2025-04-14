@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewInterest", menuName = "Interest")]
+[CreateAssetMenu(fileName = "NewInterest", menuName = "ScriptableObjects/Interest")]
 public class InterestCategory : ScriptableObject
 {
     #region "Variables"
