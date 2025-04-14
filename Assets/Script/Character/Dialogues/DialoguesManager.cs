@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -6,7 +8,17 @@ public class DialoguesManager : MonoBehaviour
 {
     public static DialoguesManager Instance;
     
-    private List<Dialogues> dialogues = new List<Dialogues>();
+    [SerializeField] private List<Dialogues> dialogues = new List<Dialogues>();
+    
+    [Serializable]
+    public struct DictStrings
+    {
+        public string varName;
+        public string ID => varName;
+        public string variable;
+    }
+    
+    public List<DictStrings> localizedStrings;
     
     [Header("UI Elements")]
     public GameObject dialogueBox;
@@ -24,6 +36,7 @@ public class DialoguesManager : MonoBehaviour
         }
         
         LoadAllDialogues();
+        CompleteDialogueArguments();
     }
     
     private void LoadAllDialogues()
@@ -43,4 +56,39 @@ public class DialoguesManager : MonoBehaviour
     {
         return dialogues;
     }
+
+    [ContextMenu("CompleteDialogueArguments")]
+    public void CompleteDialogueArguments()
+    {
+        foreach (var dial in dialogues)
+        {
+            Dictionary<string, string> smartArgs = new Dictionary<string, string>();
+
+            foreach (var truc in localizedStrings)
+            {
+                smartArgs[truc.varName] = truc.variable;
+            }
+
+            dial.GetLocalizedString().Arguments = new object[] { smartArgs };
+            
+            dial.GetLocalizedString().StringChanged += (localizedText) =>
+            {
+                Debug.Log(localizedText);
+            };
+        }
+    }
+
+    [ContextMenu("ShowIntroDialogue")]
+    public void ShowIntroDialogue()
+    {
+        foreach (var dial in dialogues)
+        {
+            if (dial.GetDialogueType() == Dialogues.DialogueType.Introduction)
+            {
+                Debug.Log(dial.GetDialogueText());
+            }
+        }
+    }
+
+
 }

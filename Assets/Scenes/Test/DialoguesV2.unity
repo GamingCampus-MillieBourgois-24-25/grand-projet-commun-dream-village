@@ -8965,6 +8965,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f7ca2cff5a518249b3ac084791a9464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogues: []
+  localizedStrings:
+  - varName: playerName
+    variable: Roumain Boudou
+  - varName: villageName
+    variable: Boudou City
   dialogueBox: {fileID: 660368921}
   dialogueText: {fileID: 2091034642}
 --- !u!1001 &1705861466
