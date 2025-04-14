@@ -9,7 +9,7 @@ public class LevelProgression : MonoBehaviour
     [System.Serializable]
     public class Level
     {
-        [SerializeField] private List<ScriptableObject> unlockable;
+        public List<ScriptableObject> unlockable;
     }
 
     #region properties drawer to change name of the list

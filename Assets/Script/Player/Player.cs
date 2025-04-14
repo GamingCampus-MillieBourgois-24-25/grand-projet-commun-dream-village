@@ -1,3 +1,5 @@
+using LitMotion;
+using LitMotion.Extensions;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -19,11 +21,17 @@ public class Player : MonoBehaviour
     private float multExp = 1.3f;
     private int expLevel;
 
+    [Header("Progression")]
+    public LevelProgression levelProgression;
+
+
     [Header("UI")]
     [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private TMP_InputField cityNameInputField;
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private TextMeshProUGUI levelText;
+
+    [SerializeField] private GameObject levelUpCanvas;
 
 
     private void Start()
@@ -64,9 +72,26 @@ public class Player : MonoBehaviour
             CurrentXP -= expLevel;
             Level++;
             expLevel = Mathf.RoundToInt(expLevel * multExp);
+            CheckUnlockedItem();
             Debug.Log($"Level Up! New level: {Level}");
         }
     }
+
+    private void CheckUnlockedItem()
+    {
+        LevelProgression.Level levelUnlockItem = levelProgression.GetLevel(Level);
+        if(levelUnlockItem.unlockable.Count != 0)
+        {
+            levelUpCanvas.SetActive(true);
+            RectTransform target = levelUpCanvas.transform.GetChild(0).GetComponent<RectTransform>();
+            target.localScale = Vector3.zero;
+
+            LMotion.Create(Vector3.zero, Vector3.one, 0.5f)
+             .WithEase(Ease.InCubic) 
+             .BindToLocalScale(target);
+        }
+    }
+
     #endregion
 
     #region Inventory

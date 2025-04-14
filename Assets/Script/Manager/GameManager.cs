@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Player")]
     public bool isPlayerCreated = false;
-
+    [SerializeField] private GameObject playerFormCanvas;
 
     #endregion
 
@@ -39,10 +39,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Initialize player
-        if (isPlayerCreated)
+        if (!isPlayerCreated)
         {
-
+            playerFormCanvas.SetActive(true);
         }
     }
 
