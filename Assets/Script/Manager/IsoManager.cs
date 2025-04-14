@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 public class IsoManager : MonoBehaviour
 {
-    public static IsoManager Instance { get; private set; } // Singleton
 
     [SerializeField] private InputActionAsset inputActions;
 
@@ -37,16 +36,6 @@ public class IsoManager : MonoBehaviour
     private TilemapRenderer tileRenderer;
 
     #region Unity Functions
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject); // Supprime les doublons
-            return;
-        }
-
-        Instance = this;
-    }
 
     private void Start()
     {
@@ -338,8 +327,8 @@ public class IsoManager : MonoBehaviour
 
         float objectHeight = obj.GetComponent<Renderer>().bounds.size.y;
         // TODO: à changer plus tard si toutes les origines des batiments sont en bas !
-        //float newYPosition = IM.Instance.transform.position.y + (objectHeight / 2f);
-        float newYPosition = IM.Instance.transform.position.y;
+        //float newYPosition = GM.IM.transform.position.y + (objectHeight / 2f);
+        float newYPosition = GM.IM.transform.position.y;
 
         obj.transform.position = new Vector3(obj.transform.position.x, newYPosition, obj.transform.position.z);
 
@@ -385,10 +374,5 @@ public class IsoManager : MonoBehaviour
         return false;
     }
 
-}
-
-public static class IM
-{
-    public static IsoManager Instance => IsoManager.Instance;
 }
 

@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class VillageManager : MonoBehaviour
 {
-    public static VillageManager instance { get; private set; }
-
     [Header("Village Data")]
     public List<Inhabitant> baseInhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -13,21 +11,10 @@ public class VillageManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton check
-        if (instance == null)
+        // Crée les instances runtime à partir des SO
+        foreach (var inhabitant in baseInhabitants)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            // Crée les instances runtime à partir des SO
-            foreach (var inhabitant in baseInhabitants)
-            {
-                inhabitants.Add(new InhabitantInstance(inhabitant));
-            }
-        }
-        else
-        {
-            Destroy(gameObject);
+            inhabitants.Add(new InhabitantInstance(inhabitant));
         }
     }
 

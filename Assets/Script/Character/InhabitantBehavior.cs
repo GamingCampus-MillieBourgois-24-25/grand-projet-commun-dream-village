@@ -17,7 +17,7 @@ public class InhabitantBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (!IM.Instance.isEditMode)
+        if (!GM.IM.isEditMode)
         {
             if (Input.GetMouseButtonDown(0))
             {
