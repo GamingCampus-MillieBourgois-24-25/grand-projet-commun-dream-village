@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
   m_Name: Well
   m_EditorClassIdentifier: 
-  effect:
-    name: Well
-    description: 
-    utilisationDuration: 5
-    energy: 0
-    mood: 0
-    serenity: 10
-    attributeEffects:
-    - attribute: {fileID: 11400000, guid: a15712b2b029c254cb82c3bbe0b7b6c8, type: 2}
-      bonus: 2
-      bonusType: 0
-  price: 750
-  maximumInInv: 3
-  unlockLevel: 1
+  <Name>k__BackingField: Well
+  <Description>k__BackingField: 
+  <EffectDuration>k__BackingField: 300
+  <AttributeEffects>k__BackingField:
+  - attribute: {fileID: 11400000, guid: a15712b2b029c254cb82c3bbe0b7b6c8, type: 2}
+    bonus: 2
+    bonusType: 0
+  <Mood>k__BackingField: 5
+  <Serenity>k__BackingField: 10
+  <Energy>k__BackingField: 0
+  <InitialPrice>k__BackingField: 1000
+  <MaximumInInv>k__BackingField: 2
+  <Icon>k__BackingField: {fileID: 0}
+  <BuildingPrefab>k__BackingField: {fileID: 0}

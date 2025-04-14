@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
   m_Name: Bench
   m_EditorClassIdentifier: 
-  effect:
-    name: Bench
-    description: 
-    utilisationDuration: 3
-    energy: 5
-    mood: 0
-    serenity: 0
-    attributeEffects:
-    - attribute: {fileID: 11400000, guid: df15dce0f8fb50544b99b12e25ae75de, type: 2}
-      bonus: 2
-      bonusType: 0
-  price: 500
-  maximumInInv: 10
-  unlockLevel: 0
+  <Name>k__BackingField: Bench
+  <Description>k__BackingField: 
+  <EffectDuration>k__BackingField: 60
+  <AttributeEffects>k__BackingField:
+  - attribute: {fileID: 11400000, guid: df15dce0f8fb50544b99b12e25ae75de, type: 2}
+    bonus: 3
+    bonusType: 1
+  <Mood>k__BackingField: 0
+  <Serenity>k__BackingField: 0
+  <Energy>k__BackingField: 2
+  <InitialPrice>k__BackingField: 500
+  <MaximumInInv>k__BackingField: 10
+  <Icon>k__BackingField: {fileID: 0}
+  <BuildingPrefab>k__BackingField: {fileID: 0}
