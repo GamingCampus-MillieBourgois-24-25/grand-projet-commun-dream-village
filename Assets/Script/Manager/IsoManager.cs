@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using static Player;
+using System.Collections;
 
 public class IsoManager : MonoBehaviour
 {
@@ -39,6 +39,8 @@ public class IsoManager : MonoBehaviour
     [SerializeField] private InputActionReference dragAction;
 
     private TilemapRenderer tileRenderer;
+
+    private Coroutine scaleAnimationCoroutine;
 
     #region Unity Functions
 
@@ -113,6 +115,7 @@ public class IsoManager : MonoBehaviour
     {
         if (!isEditMode) return;
         isClicking = false;
+        if (selectedObject) scaleAnimationCoroutine = StartCoroutine(AnimateScalePop(selectedObject.transform));
     }
     #endregion
 
@@ -311,6 +314,15 @@ public class IsoManager : MonoBehaviour
         selectedObject = null;
     }
 
+    public bool HasSelectedObject()
+    {
+        if (isEditMode && selectedObject != null)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void CheckObjectOnTilemap(PlaceableObject obj)
     {
         if (obj == null) return; // Sécurité
@@ -370,6 +382,39 @@ public class IsoManager : MonoBehaviour
     }
     #endregion
 
+    #region Anims
+    private IEnumerator AnimateScalePop(Transform target, float offset = 2f, float duration = 0.1f)
+    {
+        if (target == null) yield break;
+
+        Vector3 originalScale = target.localScale;
+        Vector3 targetScale = originalScale + new Vector3(offset, offset, offset);
+
+        float time = 0f;
+        while (time < duration)
+        {
+            target.localScale = Vector3.Lerp(originalScale, targetScale, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        target.localScale = targetScale;
+
+        // Retour au scale original
+        time = 0f;
+        while (time < duration)
+        {
+            target.localScale = Vector3.Lerp(targetScale, originalScale, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        target.localScale = originalScale;
+    }
+
+
+    #endregion
+
     #region Btns Functions
     public void BS_PlaceSelectedObject()
     {
@@ -418,18 +463,6 @@ public class IsoManager : MonoBehaviour
     }
 
     #endregion
-
-
-
-
-    public bool HasSelectedObject()
-    {
-        if(isEditMode && selectedObject != null)
-        {
-            return true;
-        }
-        return false;
-    }
 
 }
 
