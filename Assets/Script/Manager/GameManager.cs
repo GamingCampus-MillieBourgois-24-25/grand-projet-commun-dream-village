@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,7 +17,10 @@ public class GameManager : MonoBehaviour
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
 
- 
+    [Header("Player")]
+    public bool isPlayerCreated = false;
+
+
     #endregion
 
     private void Awake()
@@ -31,6 +35,15 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         LoadAllResources();
+    }
+
+    private void Start()
+    {
+        // Initialize player
+        if (isPlayerCreated)
+        {
+
+        }
     }
 
     // Load all resources for shop from the Resources folder

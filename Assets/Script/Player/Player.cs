@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class Player
+public class Player : MonoBehaviour
 {
     public Dictionary<Inhabitant, InventoryItem<Inhabitant>> InhabitantInventory { get; private set; } = new();
     public Dictionary<Deco, InventoryItem<Deco>> DecoInventory { get; private set; } = new();
@@ -18,17 +19,37 @@ public class Player
     private float multExp = 1.3f;
     private int expLevel;
 
-    public Player(string name, string city)
+    [Header("UI")]
+    [SerializeField] private TMP_InputField playerNameInputField;
+    [SerializeField] private TMP_InputField cityNameInputField;
+    [SerializeField] private TextMeshProUGUI playerNameText;
+    [SerializeField] private TextMeshProUGUI levelText;
+
+
+    private void Start()
     {
-        PlayerName = name;
-        CityName = city;
         expLevel = baseExpPerLevel;
     }
-    public void SetPlayerInfo(string name, string city)
+
+    public void SetPlayerInfo()
     {
-        PlayerName = name;
-        CityName = city;
+        PlayerName = playerNameInputField.text;
+        CityName = cityNameInputField.text;
+        if (string.IsNullOrEmpty(PlayerName))
+        {
+            Debug.LogError("Player name cannot be empty.");
+            return;
+        }
+        if (string.IsNullOrEmpty(CityName))
+        {
+            Debug.LogError("City name cannot be empty.");
+            return;
+        }
+        playerNameText.text = PlayerName;
+        levelText.text = Level.ToString();
+        Debug.Log($"Player created: {PlayerName}, City: {CityName}");
     }
+
 
     #region EXP
     public void AddXP(int amount)
