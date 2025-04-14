@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using static Player;
 
 public class IsoManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class IsoManager : MonoBehaviour
 
 
     [SerializeField] private Canvas editModeCanvas;
+    [SerializeField] private GameObject inventoryParent;
+    [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private Canvas stockCanvas;
     [SerializeField] private float yStockCanvas;
     [SerializeField] private Button placeBtn;
@@ -43,6 +46,8 @@ public class IsoManager : MonoBehaviour
     {
         tileRenderer = transform.GetChild(0).GetComponent<TilemapRenderer>();
         tileRenderer.enabled = isEditMode;
+
+        editModeCanvas.gameObject.SetActive(isEditMode);
 
         CacheWhiteTilePositions();
         AddExistingObjectsToOccupiedPositions();
@@ -292,13 +297,13 @@ public class IsoManager : MonoBehaviour
         }
 
         selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y + yMovingObject, selectedObject.transform.position.z);
-        placeBtn.interactable = true;
+        if (placeBtn) placeBtn.interactable = true;
         CheckObjectOnTilemap(selectedObject);
 
         Debug.Log("Objet sélectionné : " + obj.name);
     }
 
-    private void unSelectObject()
+    private void UnSelectObject()
     {
         if (selectedObject == null) return; // Sécurité
 
@@ -314,12 +319,12 @@ public class IsoManager : MonoBehaviour
 
         if (canPlace)
         {
-            placeBtn.interactable = true;
+            if (placeBtn) placeBtn.interactable = true;
             ChangeTileUnderObject(obj, greenTile);
         }
         else
         {
-            placeBtn.interactable = false;
+            if (placeBtn) placeBtn.interactable = false;
             ChangeTileUnderObject(obj, redTile); 
         }
     }
@@ -360,7 +365,7 @@ public class IsoManager : MonoBehaviour
 
         // Réinitialiser
         ChangeTileUnderObject(selectedObject, null);
-        unSelectObject();
+        UnSelectObject();
         placeBtn.interactable = false;
     }
     #endregion
@@ -379,14 +384,45 @@ public class IsoManager : MonoBehaviour
         editModeCanvas.gameObject.SetActive(isEditMode);
         tilemapObjects.ClearAllTiles();
         if (selectedObject != null) selectedObject.ResetPosition();
-        unSelectObject();
+        UnSelectObject();
     }
-#endregion
+    public void BS_StockSelectedObject()
+    {
+        tilemapObjects.ClearAllTiles();
+        UnSelectObject();
+    }
+
+    public void BS_TakeInventoryItem<T>(T item, Dictionary<T, InventoryItem<T>> inventory, IsoManager isoManager) where T : ScriptableObject
+    {
+        if (!inventory.TryGetValue(item, out var entry) || entry.prefab == null)
+        {
+            Debug.LogWarning("Item not in inventory or prefab is missing.");
+            return;
+        }
+
+        Vector3 centerPos = tilemapBase.CellToWorld(Vector3Int.zero);
+        centerPos.y += yMovingObject;
+
+        GameObject newObj = Instantiate(entry.prefab, centerPos, Quaternion.identity);
+        PlaceableObject placeable = newObj.GetComponent<PlaceableObject>();
+
+        if (placeable != null)
+        {
+            OnObjectSelected(placeable);
+            // + le retirer de l'inventaire
+        }
+        else
+        {
+            Debug.LogError("Prefab does not contain a PlaceableObject.");
+        }
+    }
+
+    #endregion
 
 
 
 
-    public bool hasSelectedObject()
+    public bool HasSelectedObject()
     {
         if(isEditMode && selectedObject != null)
         {
