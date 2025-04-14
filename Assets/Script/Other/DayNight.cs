@@ -10,10 +10,6 @@ public class DayNight : MonoBehaviour
     
     [SerializeField] private TMP_Text timeText;
 
-    [SerializeField] private GameObject dreamCanvas;
-    [SerializeField] private GameObject buildButtons;
-    [SerializeField] private CameraDeplacement cameraDeplacementScript;
-
     [Header("Light Parameters")]
     [SerializeField] private Light sun;
     [SerializeField] private Color dayColor;
@@ -30,7 +26,7 @@ public class DayNight : MonoBehaviour
     [SerializeField] private float animationDuration;
     [SerializeField] private Vector3 hiddenPosition;
     [SerializeField] private Vector3 shownPosition;
-    
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -42,13 +38,14 @@ public class DayNight : MonoBehaviour
     public void ChangeTime()
     {
         isDay = !isDay;
-        LMotion.Create(curtain.transform.position.x, shownPosition.x, animationDuration)
+        RectTransform transform = curtain.GetComponent<RectTransform>();
+        LMotion.Create(hiddenPosition.x, shownPosition.x, animationDuration)
             .WithEase(Ease.OutCubic).WithOnComplete(SwitchTime)
-            .BindToPositionX(curtain.transform);
-
-        dreamCanvas.SetActive(!isDay);
-        buildButtons.SetActive(isDay);
-        cameraDeplacementScript.enabled = isDay;
+            .Bind(x =>
+            {
+                var rect = transform.rect;
+                transform.sizeDelta = new Vector2(x, rect.height);
+            });
     }
 
     private void SwitchTime()
@@ -56,11 +53,15 @@ public class DayNight : MonoBehaviour
         sun.color = isDay ? dayColor : nightColor;
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
-        
-        LMotion.Create(curtain.transform.position.x, hiddenPosition.x, animationDuration)
+        RectTransform transform = curtain.GetComponent<RectTransform>();
+        LMotion.Create(shownPosition.x, hiddenPosition.x, animationDuration)
             .WithEase(Ease.OutCubic)
-            .BindToPositionX(curtain.transform);
-        
+            .Bind(x =>
+            {
+                var rect = transform.rect;
+                transform.sizeDelta = new Vector2(x, rect.height);
+            });
+
         timeText.text = isDay ? "Day" : "Night";
     }
 }
