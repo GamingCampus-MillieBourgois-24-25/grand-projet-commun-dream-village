@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
   m_Name: Gym
   m_EditorClassIdentifier: 
-  effect:
-    name: Gym
-    description: 
-    utilisationDuration: 45
-    energy: -10
-    mood: 20
-    serenity: 10
-    attributeEffects:
-    - attribute: {fileID: 11400000, guid: a9097d07afa0b0346ba116afeded535c, type: 2}
-      bonus: 2.5
-      bonusType: 0
-    - attribute: {fileID: 11400000, guid: 7557c9e9f1dc06c498ae86fc236b1391, type: 2}
-      bonus: 10
-      bonusType: 1
-  price: 2500
-  maximumInInv: 1
-  unlockLevel: 7
+  <Name>k__BackingField: Gym
+  <Description>k__BackingField: 
+  <EffectDuration>k__BackingField: 2700
+  <AttributeEffects>k__BackingField:
+  - attribute: {fileID: 11400000, guid: a9097d07afa0b0346ba116afeded535c, type: 2}
+    bonus: 2.5
+    bonusType: 0
+  - attribute: {fileID: 11400000, guid: 7557c9e9f1dc06c498ae86fc236b1391, type: 2}
+    bonus: 10
+    bonusType: 1
+  <Mood>k__BackingField: 20
+  <Serenity>k__BackingField: 10
+  <Energy>k__BackingField: -10
+  <InitialPrice>k__BackingField: 2500
+  <MaximumInInv>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 0}
+  <BuildingPrefab>k__BackingField: {fileID: 0}

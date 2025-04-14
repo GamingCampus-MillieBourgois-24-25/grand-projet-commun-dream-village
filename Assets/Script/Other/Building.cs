@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using static Dialogues;
 
 
 
@@ -7,53 +8,51 @@ using System.Collections.Generic;
 public class Building : ScriptableObject
 {
     #region Variable Serialized
-    [Header("Building Information")]
-    [SerializeField] public BuildingEffect effect;
+    #region Basic Information
+    [field: Header("Basic Information")]
+    [field: SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public string Description { get; private set; }
+    #endregion
 
-    [Header("Stats")]
-    [SerializeField] public int price;
-    [SerializeField] int maximumInInv;
-    [SerializeField] int unlockLevel;
+    #region Effects
+    [field: Header("Effects")]
+    [field: SerializeField] public int EffectDuration { get; private set; }
+    [field: SerializeField] public List<AttributeEffect> AttributeEffects { get; private set; }
+    #endregion
 
+    #region Stats
+    [field: Header("Stats")]
+    [field: SerializeField] public int Mood { get; private set; }
+    [field: SerializeField] public int Serenity { get; private set; }
+    [field: SerializeField] public int Energy { get; private set; }
+    #endregion
 
+    #region Economy
+    [field: Header("Progression & Economy")]
+    [field: SerializeField] public int InitialPrice { get; private set; }
+    [field: SerializeField] public int MaximumInInv { get; private set; }
+    #endregion
+
+    #region Visuals
+    [field: Header("Visuals")]
+    [field: SerializeField] public Sprite Icon { get; private set; }
+    [field: SerializeField] public GameObject BuildingPrefab { get; private set; }
+    #endregion
     #endregion
 
 
     [System.Serializable]
-    public class BuildingEffect
+    public class AttributeEffect
     {
-        [SerializeField] public string name;
-        [SerializeField] private string description;
-        [SerializeField][Tooltip("in minutes")] private int utilisationDuration;
-
-        [Header("Statistics")]
-        [SerializeField] private int energy;
-        [SerializeField] private int mood;
-        [SerializeField] private int serenity;
-
-        [Header("Stats")]
-        [SerializeField] private List<AttributeEffect> attributeEffects;
-
-        [Header("Visuals")]
-        [SerializeField] public Sprite icon;
-        [SerializeField] private GameObject buildingPrefab;
-
-
-        [System.Serializable]
-        class AttributeEffect
-        { 
-            enum BonusType
-            {
-                Multiple,
-                Add
-            }
-
-
-            [SerializeField] private InterestCategory attribute;
-            [SerializeField] private float bonus;
-            [SerializeField] private BonusType bonusType;
+        enum BonusType
+        {
+            Multiple,
+            Add
         }
-    }
 
-    
+
+        [field: SerializeField] private InterestCategory attribute;
+        [field: SerializeField] private float bonus;
+        [field: SerializeField] private BonusType bonusType;
+    }
 }
