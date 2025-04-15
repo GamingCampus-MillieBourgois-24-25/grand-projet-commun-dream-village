@@ -34,6 +34,7 @@ public class IsoManager : MonoBehaviour
     public bool isEditMode = false;
 
     private bool isClicking = false;
+    private bool isDragging = false;
 
     [SerializeField] private InputActionReference clickAction;
     [SerializeField] private InputActionReference dragAction;
@@ -106,6 +107,8 @@ public class IsoManager : MonoBehaviour
     {
         if (!isEditMode || !isClicking) return;
 
+        isDragging = true;
+
         //Debug.Log("OnDragPerformed");
         Vector2 pointerPos = context.ReadValue<Vector2>();
         CheckUnderPointerMove(pointerPos);
@@ -114,8 +117,21 @@ public class IsoManager : MonoBehaviour
     private void OnClickCancelled(InputAction.CallbackContext context)
     {
         if (!isEditMode) return;
+        
+        if (selectedObject && isDragging)
+        {
+            scaleAnimationCoroutine = StartCoroutine(AnimateScalePop(selectedObject.transform));
+
+            if (CanPlaceObjectOnTilemap(selectedObject))
+            {
+                ChangeTileUnderObject(selectedObject, null);
+                PlacePlaceableObject(selectedObject);
+                UnSelectObject();
+            }
+        }
+
         isClicking = false;
-        if (selectedObject) scaleAnimationCoroutine = StartCoroutine(AnimateScalePop(selectedObject.transform));
+        isDragging = false;
     }
     #endregion
 
