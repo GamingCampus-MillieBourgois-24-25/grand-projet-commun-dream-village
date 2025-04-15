@@ -7305,7 +7305,7 @@ MonoBehaviour:
   stockCanvas: {fileID: 1605642177}
   yStockCanvas: 0.2
   placeBtn: {fileID: 0}
-  yMovingObject: 0.001
+  yMovingObject: 0
   isEditMode: 0
   clickAction: {fileID: -4091184503687712298, guid: 17d2802e60a33174bb9df2936fd7b31f,
     type: 3}

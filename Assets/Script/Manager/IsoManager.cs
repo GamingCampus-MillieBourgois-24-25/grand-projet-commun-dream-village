@@ -283,7 +283,14 @@ public class IsoManager : MonoBehaviour
         if (selectedObject != null)
         {
             ChangeTileUnderObject(selectedObject, null);
-            selectedObject.ResetPosition();
+            if (CanPlaceObjectOnTilemap(selectedObject))
+            {
+                PlacePlaceableObject(selectedObject);
+            }
+            else
+            {
+                selectedObject.ResetPosition();
+            }
         }
 
         occupiedTilePositions.ExceptWith(obj.GetOccupiedTiles());
@@ -299,7 +306,7 @@ public class IsoManager : MonoBehaviour
             stockCanvas.gameObject.SetActive(true);
         }
 
-        selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y + yMovingObject, selectedObject.transform.position.z);
+        selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, transform.position.y + yMovingObject, selectedObject.transform.position.z);
         if (placeBtn) placeBtn.interactable = true;
         CheckObjectOnTilemap(selectedObject);
 
@@ -378,7 +385,7 @@ public class IsoManager : MonoBehaviour
         // Réinitialiser
         ChangeTileUnderObject(selectedObject, null);
         UnSelectObject();
-        placeBtn.interactable = false;
+        if (placeBtn) placeBtn.interactable = false;
     }
     #endregion
 
@@ -428,7 +435,8 @@ public class IsoManager : MonoBehaviour
 
         editModeCanvas.gameObject.SetActive(isEditMode);
         tilemapObjects.ClearAllTiles();
-        if (selectedObject != null) selectedObject.ResetPosition();
+        //if (selectedObject != null) selectedObject.ResetPosition();
+        if (selectedObject != null) PlacePlaceableObject(selectedObject);
         UnSelectObject();
     }
     public void BS_StockSelectedObject()
