@@ -6,19 +6,29 @@ using UnityEngine.Tilemaps;
 public class PlaceableObject : MonoBehaviour
 {
     [SerializeField]
+    private bool canBeStocked = true;
+
+    public bool CanBeStocked
+    {
+        get { return canBeStocked; }
+    }
+
     private Vector2Int sizeInTiles;
+    [HideInInspector]
     public Vector2Int SizeInTiles => sizeInTiles;
 
     private Vector3Int originalPosition;
+    [HideInInspector]
     public Vector3Int OriginalPosition
     {
         get => originalPosition;
         set {
             originalPosition = value;
-            Debug.Log("New Original position: "+originalPosition);
+            //Debug.Log("New Original position: "+originalPosition);
         }
     }
 
+    [HideInInspector]
     public Renderer cachedRenderer;
 
     private void Awake()
@@ -60,7 +70,7 @@ public class PlaceableObject : MonoBehaviour
             occupiedTiles.Add(cellPos);
         }
 
-        Debug.Log("OccupiedTiles de: "+this.gameObject.name+""+String.Join(",", occupiedTiles));
+        //Debug.Log("OccupiedTiles de: "+this.gameObject.name+""+String.Join(",", occupiedTiles));
         return occupiedTiles;
     }
 

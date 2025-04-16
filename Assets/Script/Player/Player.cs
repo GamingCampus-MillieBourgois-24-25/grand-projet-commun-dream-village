@@ -5,6 +5,7 @@ using System.Threading;
 using TMPro;
 using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 
@@ -126,7 +127,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Inventory
-    public void AddToInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : ScriptableObject
+    public void AddToInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory, GameObject prefab = null) where T : ScriptableObject
     {
         if (inventory.TryGetValue(item, out var existing))
         {
@@ -134,7 +135,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            inventory[item] = new InventoryItem<T>(item, amount);
+            inventory[item] = new InventoryItem<T>(item, amount, prefab);
         }
     }
 
@@ -154,5 +155,11 @@ public class Player : MonoBehaviour
         }
         return false;
     }
+
+    public interface IPlaceable
+    {
+        GameObject GetPrefab();
+    }
+
     #endregion
 }

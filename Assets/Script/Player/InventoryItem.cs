@@ -7,12 +7,14 @@ public class InventoryItem<T> where T : ScriptableObject
 {
     public T item;
     public int quantity;
+    public GameObject prefab;
 
     // Constructeur 
-    public InventoryItem(T item, int quantity)
+    public InventoryItem(T item, int quantity, GameObject prefab = null)
     {
         this.item = item;
         this.quantity = quantity;
+        this.prefab = prefab;
     }
 }
 
