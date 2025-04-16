@@ -51,7 +51,7 @@ public class DialoguesManager : MonoBehaviour
 
     private string GetVariable(string key)
     {
-        return localizedStrings.FirstOrDefault(x => x.varName == key).variable ?? "???";
+        return localizedStrings.FirstOrDefault(x => x.varName.ToLower() == key.ToLower()).variable ?? "???";
     }
 
     [ContextMenu("ShowIntroDialogue")]
@@ -66,8 +66,8 @@ public class DialoguesManager : MonoBehaviour
 
     public Dialogues debugDialogue;
     
-    [ContextMenu("DebugShowIntroDialogue")]
-    public void DebugShowIntroDialogue()
+    [ContextMenu("DebugShowDialogue")]
+    public void DebugShowDialogue()
     {
         if (debugDialogue != null)
         {
@@ -109,13 +109,12 @@ public class DialoguesManager : MonoBehaviour
     {
         for (int i = 0; i < localizedStrings.Count; i++)
         {
-            if (localizedStrings[i].varName == variableName)
-            {
-                var temp = localizedStrings[i];
-                temp.variable = variableValue;
-                localizedStrings[i] = temp;
-                break;
-            }
+            if (!string.Equals(localizedStrings[i].varName, variableName, StringComparison.OrdinalIgnoreCase)) continue;
+            
+            var temp = localizedStrings[i];
+            temp.variable = variableValue;
+            localizedStrings[i] = temp;
+            break;
         }
     }
 }

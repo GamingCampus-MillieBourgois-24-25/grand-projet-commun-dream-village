@@ -7570,6 +7570,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   editModeCanvas: {fileID: 732063512}
+  inventoryParent: {fileID: 0}
+  inventorySlotPrefab: {fileID: 0}
+  stockCanvas: {fileID: 0}
+  yStockCanvas: 0
   placeBtn: {fileID: 782546247}
   yMovingObject: 0
   isEditMode: 0
@@ -8971,6 +8975,8 @@ MonoBehaviour:
     variable: Roumain Boudou
   - varName: villageName
     variable: Boudou City
+  - varName: firstVillagerName
+    variable: Nillith
   dialogueBox: {fileID: 660368921}
   dialogueText: {fileID: 2091034642}
   debugDialogue: {fileID: 11400000, guid: 99a53ab7b83e7d741bfa82352b651904, type: 2}
