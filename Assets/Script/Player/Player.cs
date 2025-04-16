@@ -1,8 +1,12 @@
 using LitMotion;
 using LitMotion.Extensions;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
+using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class Player : MonoBehaviour
 {
@@ -32,6 +36,8 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
 
     [SerializeField] private GameObject levelUpCanvas;
+    [SerializeField] private RectTransform levelUpItemContainer;
+    [SerializeField] private GameObject unlockedItemPrefab;
 
 
     private void Start()
@@ -73,6 +79,7 @@ public class Player : MonoBehaviour
             Level++;
             expLevel = Mathf.RoundToInt(expLevel * multExp);
             CheckUnlockedItem();
+            levelText.text = Level.ToString();
             Debug.Log($"Level Up! New level: {Level}");
         }
     }
@@ -82,6 +89,30 @@ public class Player : MonoBehaviour
         LevelProgression.Level levelUnlockItem = levelProgression.GetLevel(Level);
         if(levelUnlockItem.unlockable.Count != 0)
         {
+            Vector2 size = levelUpItemContainer.sizeDelta;
+            size.x = levelUnlockItem.unlockable.Count * unlockedItemPrefab.gameObject.GetComponent<RectTransform>().rect.width +
+                levelUpItemContainer.gameObject.GetComponent<HorizontalLayoutGroup>().spacing * (levelUnlockItem.unlockable.Count - 1);
+            levelUpItemContainer.sizeDelta = size;
+
+            for (int i = 0; i < levelUnlockItem.unlockable.Count; i++)
+            {
+                GameObject unlockedItem = Instantiate(unlockedItemPrefab, levelUpItemContainer.transform);
+                switch (levelUnlockItem.unlockable[i])
+                {
+                    case Inhabitant inhabitant:
+                        unlockedItem.GetComponent<UnlockedItem>().SetItemContent(inhabitant.Icon, inhabitant.FirstName + " " + inhabitant.LastName); ;
+                        break;
+                    case Building building:
+                        unlockedItem.GetComponent<UnlockedItem>().SetItemContent(building.Icon, building.Name);
+                        break;
+                    //case Decoration decoration:
+                    //    SetItemContent(decoration, obj);
+                    //    break;
+                    default:
+                        break;
+                }
+            }
+
             levelUpCanvas.SetActive(true);
             RectTransform target = levelUpCanvas.transform.GetChild(0).GetComponent<RectTransform>();
             target.localScale = Vector3.zero;
