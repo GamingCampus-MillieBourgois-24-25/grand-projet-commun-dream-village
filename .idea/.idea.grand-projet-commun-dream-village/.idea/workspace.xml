@@ -5,14 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="133297ab-59a1-4172-bc85-0cebe864daf4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction_en.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction_en.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction010.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction010.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction012.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction012.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction014.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction014.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction015.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction015.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test/DialoguesV2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test/DialoguesV2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +102,7 @@
       <workItem from="1744364774952" duration="562000" />
       <workItem from="1744614408851" duration="7547000" />
       <workItem from="1744623145424" duration="5225000" />
-      <workItem from="1744803028866" duration="2648000" />
+      <workItem from="1744803028866" duration="3012000" />
     </task>
     <servers />
   </component>

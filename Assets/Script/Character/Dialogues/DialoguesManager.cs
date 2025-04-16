@@ -96,4 +96,26 @@ public class DialoguesManager : MonoBehaviour
         dialogueBox.SetActive(true);
         dialogueText.text = text;
     }
+
+    public string debugVariable;
+    
+    [ContextMenu("DebugUpdateArguments")]
+    public void DebugUpdateArguments()
+    {
+        UpdateArguments("playerName", debugVariable);
+    }
+
+    public void UpdateArguments(string variableName, string variableValue)
+    {
+        for (int i = 0; i < localizedStrings.Count; i++)
+        {
+            if (localizedStrings[i].varName == variableName)
+            {
+                var temp = localizedStrings[i];
+                temp.variable = variableValue;
+                localizedStrings[i] = temp;
+                break;
+            }
+        }
+    }
 }
