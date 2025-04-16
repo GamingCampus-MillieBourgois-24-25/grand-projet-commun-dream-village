@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: InformationRain
   m_EditorClassIdentifier: 
   ID: Info002
+  relatedElementID: 
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:880108c781a23314faa294ca35dd2ae9
@@ -22,8 +23,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  dialogueType: 2
-  attributeEffects: []
+  dialogueType: 3
   stats:
     Mood: -5
     Serenity: 0
