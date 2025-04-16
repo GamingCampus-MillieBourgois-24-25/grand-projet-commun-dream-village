@@ -32,13 +32,14 @@ public class CharacterJournalManager : MonoBehaviour
     [Header("UI - Sprites")]
     [SerializeField] private Sprite heartFullSprite;
     [SerializeField] private Sprite heartEmptySprite;
+    [SerializeField] private Sprite unknownIcon;
 
     private List<InhabitantInstance> inhabitants;
     private int currentIndex = 0;
 
     private void Start()
     {
-        inhabitants = VillageManager.instance.inhabitants;
+        inhabitants = GM.VM.inhabitants;
 
         nextButton.onClick.AddListener(ShowNext);
         previousButton.onClick.AddListener(ShowPrevious);
@@ -71,31 +72,40 @@ public class CharacterJournalManager : MonoBehaviour
         serenitySlider.value = currentInhabitant.Serenity;
         energySlider.value = currentInhabitant.Energy;
 
-        RefreshIcons(likesContainer, currentInhabitant.Likes);
-        RefreshIcons(dislikesContainer, currentInhabitant.Dislikes);
+        DisplayInterestIcons(currentInhabitant.baseData.Likes, likesContainer, currentInhabitant.DiscoveredLikes);
+        DisplayInterestIcons(currentInhabitant.baseData.Dislikes, dislikesContainer, currentInhabitant.DiscoveredDislikes);
 
         RefreshHearts(currentInhabitant.Hearts);
 
         indexText.text = $"{currentIndex + 1}/{inhabitants.Count}";
     }
 
-    private void RefreshIcons(Transform container, List<InterestCategory> interests)
+    private void DisplayInterestIcons(List<InterestCategory> interests, Transform container, HashSet<InterestCategory> discovered)
     {
         foreach (Transform child in container)
-        {
             Destroy(child.gameObject);
-        }
 
         foreach (var interest in interests)
         {
-            GameObject newGO = new GameObject("Icon", typeof(RectTransform), typeof(Image));
-            newGO.transform.SetParent(container, false);
+            GameObject iconGO = new GameObject("InterestIcon", typeof(RectTransform), typeof(Image));
+            iconGO.transform.SetParent(container, false);
 
-            Image img = newGO.GetComponent<Image>();
-            img.sprite = interest.icon;
+            Image img = iconGO.GetComponent<Image>();
+            if (discovered.Contains(interest))
+            {
+                img.sprite = interest.icon; // Dévoilé
+            }
+            else
+            {
+                img.sprite = unknownIcon; // Sprite de "?"
+            }
             img.preserveAspect = true;
+
+            RectTransform rt = iconGO.GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(48, 48);
         }
     }
+
 
     private void RefreshHearts(int currentHearts)
     {
