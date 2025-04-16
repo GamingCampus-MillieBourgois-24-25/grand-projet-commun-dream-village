@@ -29,7 +29,7 @@ public class DreamMachineManager : MonoBehaviour
 
     private void Start()
     {
-        inhabitants = VillageManager.instance.inhabitants;
+        inhabitants = GM.VM.inhabitants;
 
         if (inhabitants.Count > 0)
         {
@@ -371,12 +371,23 @@ public class DreamMachineManager : MonoBehaviour
             inhabitant.Serenity += GetStatChange(ordered[1], inhabitant);
             inhabitant.Energy += GetStatChange(ordered[2], inhabitant);
 
+            // 🎁 Découverte progressive
+            foreach (var element in ordered)
+            {
+                if (inhabitant.Likes.Contains(element))
+                    inhabitant.DiscoveredLikes.Add(element);
+
+                if (inhabitant.Dislikes.Contains(element))
+                    inhabitant.DiscoveredDislikes.Add(element);
+            }
+
             // 📊 Stats après
             Debug.Log($"[After] {inhabitant.FirstName} {inhabitant.LastName} | Mood: {inhabitant.Mood}, Serenity: {inhabitant.Serenity}, Energy: {inhabitant.Energy}");
 
             // 🔄 Désélection
             dream.isSelected = false;
         }
+
 
         // ♻️ Reset
         selectedDreamByInhabitant.Clear();

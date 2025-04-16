@@ -50,7 +50,7 @@ public class Shop : MonoBehaviour
                     obj.GetComponent<ShopItem>().SetItemContent(inhabitant.Icon, inhabitant.FirstName + " " + inhabitant.LastName, inhabitant.InitialPrice);
                     break;
                 case Building building:
-                    obj.GetComponent<ShopItem>().SetItemContent(building.effect.icon, building.effect.name, building.price);
+                    obj.GetComponent<ShopItem>().SetItemContent(building.Icon, building.Name, building.InitialPrice);
                     break;
                 //case Decoration decoration:
                 //    SetItemContent(decoration, obj);

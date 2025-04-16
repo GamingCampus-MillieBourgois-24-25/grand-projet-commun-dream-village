@@ -6,19 +6,29 @@ using UnityEngine.Tilemaps;
 public class PlaceableObject : MonoBehaviour
 {
     [SerializeField]
+    private bool canBeStocked = true;
+
+    public bool CanBeStocked
+    {
+        get { return canBeStocked; }
+    }
+
     private Vector2Int sizeInTiles;
+    [HideInInspector]
     public Vector2Int SizeInTiles => sizeInTiles;
 
     private Vector3Int originalPosition;
+    [HideInInspector]
     public Vector3Int OriginalPosition
     {
         get => originalPosition;
         set {
             originalPosition = value;
-            Debug.Log("New Original position: "+originalPosition);
+            //Debug.Log("New Original position: "+originalPosition);
         }
     }
 
+    [HideInInspector]
     public Renderer cachedRenderer;
 
     private void Awake()
@@ -29,14 +39,14 @@ public class PlaceableObject : MonoBehaviour
     public void Start()
     {
         sizeInTiles = GetCellSizeWithBounds();
-        CenterObject(IM.Instance.tilemapObjects);
-        OriginalPosition = IM.Instance.tilemapObjects.WorldToCell(transform.position);
+        CenterObject(GM.IM.tilemapObjects);
+        OriginalPosition = GM.IM.tilemapObjects.WorldToCell(transform.position);
     }
 
     public void ResetPosition()
     {
-        Vector3 centerWorld = IM.Instance.tilemapObjects.GetCellCenterWorld(OriginalPosition);
-        transform.position = GetCenterObject(IM.Instance.tilemapObjects, centerWorld);
+        Vector3 centerWorld = GM.IM.tilemapObjects.GetCellCenterWorld(OriginalPosition);
+        transform.position = GetCenterObject(GM.IM.tilemapObjects, centerWorld);
     }
 
     public Vector3 GetSize()
@@ -55,12 +65,12 @@ public class PlaceableObject : MonoBehaviour
         Renderer renderer = GetComponent<Renderer>();
         if (renderer == null) return occupiedTiles;
 
-        foreach (var cellPos in IsoManager.GetCoveredCells(renderer, IM.Instance.tilemapObjects))
+        foreach (var cellPos in IsoManager.GetCoveredCells(renderer, GM.IM.tilemapObjects))
         {
             occupiedTiles.Add(cellPos);
         }
 
-        Debug.Log("OccupiedTiles de: "+this.gameObject.name+""+String.Join(",", occupiedTiles));
+        //Debug.Log("OccupiedTiles de: "+this.gameObject.name+""+String.Join(",", occupiedTiles));
         return occupiedTiles;
     }
 
@@ -68,7 +78,7 @@ public class PlaceableObject : MonoBehaviour
     private Vector2Int GetCellSizeWithBounds()
     {
         Vector3 size = cachedRenderer.bounds.size;
-        Vector3 cellSize = IM.Instance.tilemapObjects.cellSize;
+        Vector3 cellSize = GM.IM.tilemapObjects.cellSize;
         return new Vector2Int(
             Mathf.CeilToInt(size.x / cellSize.x),
             Mathf.CeilToInt(size.z / cellSize.y)
