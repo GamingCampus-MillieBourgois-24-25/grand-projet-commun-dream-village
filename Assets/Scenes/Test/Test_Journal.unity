@@ -1388,12 +1388,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 498476800}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &498476802 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6311077526891478424, guid: 6ba71c337aaeb5949beeadcc473de1fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 498476800}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &508116826 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5720530461518691076, guid: e8db015efc51ef842965717a72dd6060,
@@ -7667,6 +7661,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   editModeCanvas: {fileID: 732063512}
+  inventoryParent: {fileID: 0}
+  inventorySlotPrefab: {fileID: 0}
+  stockCanvas: {fileID: 0}
+  yStockCanvas: 0
   placeBtn: {fileID: 782546247}
   yMovingObject: 0
   isEditMode: 0
@@ -11519,7 +11517,7 @@ PrefabInstance:
         type: 3}
       propertyPath: canvasHabitant
       value: 
-      objectReference: {fileID: 498476802}
+      objectReference: {fileID: 610919611}
     - target: {fileID: 6928413354110429948, guid: bd6da1a2db11c26458fee734c88d6840,
         type: 3}
       propertyPath: m_LocalPosition.x
