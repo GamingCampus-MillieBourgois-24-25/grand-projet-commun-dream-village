@@ -55,7 +55,7 @@ public class Inhabitant : ScriptableObject
 
 
 
-    private int IsAffectedBy(InterestCategory element)
+    public int IsAffectedBy(InterestCategory element)
     {
         if (Likes.Contains(element))
         {

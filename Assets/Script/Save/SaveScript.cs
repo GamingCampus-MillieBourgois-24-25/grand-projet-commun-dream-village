@@ -40,6 +40,18 @@ static public class SaveScript
 
         string path = savePath + '/' + fileName + extension;
 
+
+        if (!File.Exists(path))
+        {
+            if (Directory.Exists(savePath) == false)
+            {
+                Directory.CreateDirectory(savePath);
+            }
+
+            File.Create(path).Close();
+            return "";
+        }
+
         byte[] data = File.ReadAllBytes(path);
         string dataStringLoad = Decrypt(data, key);
 
