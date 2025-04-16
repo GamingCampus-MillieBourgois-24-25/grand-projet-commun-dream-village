@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class House : MonoBehaviour
+public class HouseObject : MonoBehaviour
 {
     [SerializeField] private Inhabitant inhabitant;
     [SerializeField] private GameObject canvasHabitant;
