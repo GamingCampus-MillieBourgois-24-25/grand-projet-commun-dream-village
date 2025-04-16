@@ -24,7 +24,8 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   requiredArguments: []
-  dialogueType: 2
+  dialogueType: 5
+  subDialogueType: 1
   stats:
     Mood: 0
     Serenity: 0

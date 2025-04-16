@@ -24,8 +24,9 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   requiredArguments:
-  - firstVillagerName
-  dialogueType: 1
+  - FIRST_VILLAGER_NAME
+  dialogueType: 5
+  subDialogueType: 8
   stats:
     Mood: 0
     Serenity: 0

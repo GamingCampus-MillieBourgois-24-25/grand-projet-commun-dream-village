@@ -6,18 +6,103 @@
   <component name="ChangeListManager">
     <list default="true" id="133297ab-59a1-4172-bc85-0cebe864daf4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Assets-Shared.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Assets-Shared.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Locales.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Locales.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-English (en).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-English (en).asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-French (fr).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-French (fr).asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-Spanish (es).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-Spanish (es).asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Localization-String-Tables-Spanish (es)_BundledAssetGroupSchema.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Localization-String-Tables-Spanish (es)_BundledAssetGroupSchema.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending Shared Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending Shared Data.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending_en.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending_en.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-Spanish.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-Spanish.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending_es.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending_es.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoActivity Shared Data.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoActivity Shared Data.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoActivity.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoActivity.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoActivity_en.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoActivity_en.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoActivity_es.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoActivity_es.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoActivity_fr.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoActivity_fr.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoHouse Shared Data.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoHouse Shared Data.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoHouse.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoHouse.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoHouse_en.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoHouse_en.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoHouse_es.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoHouse_es.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoHouse_fr.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/TutoHouse_fr.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamBirdsB.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamBirdsB.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamCats.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamCats.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamDogs.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamDogs.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Information.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Information/InformationCat.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Information/InformationCat.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Information/InformationRain.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Information/InformationRain.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd001.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd002.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd003.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction001.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction002.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction003.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction004.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction004.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction005.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction005.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction006.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction006.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction007.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction007.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction008.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction008.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction009.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction009.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction010.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction010.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction011.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction011.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction012.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction012.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction013.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction013.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction014.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction014.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction015.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction015.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Bench.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Bench.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Cafe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Cafe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Cinema.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Cinema.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Fountain.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Fountain.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Gym.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Gym.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Library.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Library.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Swimming Pool.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Swimming Pool.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Well.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Well.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity001.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity002.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity003.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity004.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity004.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity005.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity005.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity006.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity006.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity007.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/Activity/TutoActivity007.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse001.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse002.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse003.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse004.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse004.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse005.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse005.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse006.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse006.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse007.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse007.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse008.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse008.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse009.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse009.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse010.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Tutorials/House &amp; Infos/TutoHouse010.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Localization/1.4.5/Smart Strings - Persistent Variables/String Table/Spanish (es).asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Localization/1.4.5/Smart Strings - Persistent Variables/String Table/Spanish (es).asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -24,8 +24,9 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   requiredArguments:
-  - benchName
-  dialogueType: 2
+  - BENCH_NAME
+  dialogueType: 5
+  subDialogueType: 1
   stats:
     Mood: 0
     Serenity: 0

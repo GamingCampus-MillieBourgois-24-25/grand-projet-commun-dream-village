@@ -9,12 +9,26 @@ public class Dialogues : ScriptableObject
 {
     public enum DialogueType
     {
-        Introduction,
-        TutoHouse,
-        TutoActivity,
-        Reaction,
+        Dialogue,
         Dream,
-        Information
+        Information,
+        Introduction,
+        Reaction,
+        Tutorial,
+    }
+    
+    public enum SubDialogueType
+    {
+        None,
+        Activity,
+        All,
+        CharacterSpecific,
+        Dream,
+        Edit,
+        Ending,
+        Heart,
+        House,
+        Shop
     }
     
     [System.Serializable]
@@ -46,6 +60,7 @@ public class Dialogues : ScriptableObject
     [SerializeField] private string[] requiredArguments;
     
     [SerializeField] private DialogueType dialogueType;
+    [SerializeField] private SubDialogueType subDialogueType;
     [SerializeField] private Stats stats;
     
     public string GetID()
@@ -62,6 +77,12 @@ public class Dialogues : ScriptableObject
     {
         return dialogueType;
     }
+    
+    public SubDialogueType GetSubDialogueType()
+    {
+        return subDialogueType;
+    }
+    
     public LocalizedString GetLocalizedString()
     {
         return dialogueText;

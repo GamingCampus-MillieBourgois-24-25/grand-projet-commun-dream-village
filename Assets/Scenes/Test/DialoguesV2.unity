@@ -8971,11 +8971,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues: []
   localizedStrings:
-  - varName: playerName
+  - varName: PLAYER_NAME
     variable: Roumain Boudou
-  - varName: villageName
+  - varName: VILLAGE_NAME
     variable: Boudou City
-  - varName: firstVillagerName
+  - varName: FIRST_VILLAGER_NAME
     variable: Nillith
   dialogueBox: {fileID: 660368921}
   dialogueText: {fileID: 2091034642}

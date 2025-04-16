@@ -51,7 +51,7 @@ public class DialoguesManager : MonoBehaviour
 
     private string GetVariable(string key)
     {
-        return localizedStrings.FirstOrDefault(x => x.varName.ToLower() == key.ToLower()).variable ?? "???";
+        return localizedStrings.FirstOrDefault(x => x.varName.ToLower() == key.ToLower()).variable ?? "ERROR";
     }
 
     [ContextMenu("ShowIntroDialogue")]
@@ -78,7 +78,7 @@ public class DialoguesManager : MonoBehaviour
     private void DisplayDialogue(Dialogues dialogue)
     {
         LocalizedString localized = dialogue.GetLocalizedString();
-        localized.Arguments = null; // reset
+        localized.Arguments = null;
 
         var args = new List<object>();
         foreach (var argKey in dialogue.GetRequiredArguments())

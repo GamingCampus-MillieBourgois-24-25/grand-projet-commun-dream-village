@@ -23,7 +23,9 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  dialogueType: 0
+  requiredArguments: []
+  dialogueType: 3
+  subDialogueType: 0
   stats:
     Mood: 0
     Serenity: 0
