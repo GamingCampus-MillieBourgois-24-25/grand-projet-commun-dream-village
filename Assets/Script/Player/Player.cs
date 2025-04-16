@@ -94,36 +94,32 @@ public class Player : MonoBehaviour
             for (int i = 0; i < levelUnlockItem.unlockable.Count; i++)
             {
                 GameObject unlockedItem = Instantiate(unlockedItemPrefab, levelUpItemContainer.transform);
-                switch (levelUnlockItem.unlockable[i])
-                {
-                    case Inhabitant inhabitant:
-                        unlockedItem.GetComponent<UnlockedItem>().SetItemContent(inhabitant.Icon, inhabitant.FirstName + " " + inhabitant.LastName); ;
-                        break;
-                    case Building building:
-                        unlockedItem.GetComponent<UnlockedItem>().SetItemContent(building.Icon, building.Name);
-                        break;
-                    //case Decoration decoration:
-                    //    SetItemContent(decoration, obj);
-                    //    break;
-                    default:
-                        break;
-                }
+                unlockedItem.GetComponent<UnlockedItem>().SetItemContent(levelUnlockItem.unlockable[i].Icon, levelUnlockItem.unlockable[i].Name);
             }
+        }
+        levelUpCanvas.SetActive(true);
+        RectTransform target = levelUpCanvas.transform.GetChild(0).GetComponent<RectTransform>();
+        target.localScale = Vector3.zero;
 
-            levelUpCanvas.SetActive(true);
-            RectTransform target = levelUpCanvas.transform.GetChild(0).GetComponent<RectTransform>();
-            target.localScale = Vector3.zero;
+        LMotion.Create(Vector3.zero, Vector3.one, 0.5f)
+         .WithEase(Ease.InCubic)
+         .BindToLocalScale(target);
 
-            LMotion.Create(Vector3.zero, Vector3.one, 0.5f)
-             .WithEase(Ease.InCubic) 
-             .BindToLocalScale(target);
+    }
+
+    public void DisableLvlUpCanvas()
+    {
+        levelUpCanvas.SetActive(false);
+        foreach (Transform child in levelUpItemContainer)
+        {
+            Destroy(child.gameObject);
         }
     }
 
     #endregion
 
     #region Inventory
-    public void AddToInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory, GameObject prefab = null) where T : ScriptableObject
+    public void AddToInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory, GameObject prefab = null) where T : IScriptableElement
     {
         if (inventory.TryGetValue(item, out var existing))
         {
@@ -135,7 +131,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool RemoveFromInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : ScriptableObject
+    public bool RemoveFromInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : IScriptableElement
     {
         if (inventory.TryGetValue(item, out var existing))
         {

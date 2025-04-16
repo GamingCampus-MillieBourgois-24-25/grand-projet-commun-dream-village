@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class InventoryItem<T> where T : ScriptableObject
+public class InventoryItem<T> where T : IScriptableElement
 {
     public T item;
     public int quantity;

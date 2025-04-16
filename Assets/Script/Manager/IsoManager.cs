@@ -461,7 +461,7 @@ public class IsoManager : MonoBehaviour
         UnSelectObject();
     }
 
-    public void BS_TakeInventoryItem<T>(T item, Dictionary<T, InventoryItem<T>> inventory, IsoManager isoManager) where T : ScriptableObject
+    public void BS_TakeInventoryItem<T>(T item, Dictionary<T, InventoryItem<T>> inventory, IsoManager isoManager) where T : IScriptableElement
     {
         if (!inventory.TryGetValue(item, out var entry) || entry.prefab == null)
         {

@@ -32,33 +32,13 @@ public class Shop : MonoBehaviour
         InitCatagory(categoryContainers[1], GameManager.instance.buildings);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     
-    private void InitCatagory<T>(GameObject _container, List<T> _contents)
+    private void InitCatagory<T>(GameObject _container, List<T> _contents) where T : IScriptableElement
     {
-        foreach(T item in _contents)
+        foreach(IScriptableElement item in _contents)
         {
             GameObject obj = Instantiate(itemPrefab, _container.transform);
-            switch (item)
-            {
-                case Inhabitant inhabitant:
-                    obj.GetComponent<ShopItem>().SetItemContent(inhabitant.Icon, inhabitant.FirstName + " " + inhabitant.LastName, inhabitant.InitialPrice);
-                    break;
-                case Building building:
-                    obj.GetComponent<ShopItem>().SetItemContent(building.Icon, building.Name, building.InitialPrice);
-                    break;
-                //case Decoration decoration:
-                //    SetItemContent(decoration, obj);
-                //    break;
-                default:
-                    Debug.LogWarning($"Type {typeof(T)} non pris en charge dans SetItemContent.");
-                    break;
-            }
+            obj.GetComponent<ShopItem>().SetItemContent(item.Icon, item.Name, item.InitialPrice);
         }
     }
 
