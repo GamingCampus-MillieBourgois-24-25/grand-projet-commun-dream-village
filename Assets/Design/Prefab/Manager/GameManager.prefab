@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4170913923509021992}
   - component: {fileID: 2984640881235056443}
+  - component: {fileID: 691484844297795610}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,5 +45,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564802fb596cf624883a72c911beb5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  villageManager: {fileID: 0}
+  isoManager: {fileID: 0}
   inhabitants: []
   buildings: []
+--- !u!114 &691484844297795610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215533133193416815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8398009d1c30d4ca3a68e77c3c0052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels:
+  - unlockable:
+    - {fileID: 11400000, guid: 1bc7a0baf6da4a4449e408c3f1d84b83, type: 2}
+    - {fileID: 11400000, guid: 31f1a186190744f45bc0945ea910114e, type: 2}
+  - unlockable:
+    - {fileID: 11400000, guid: 0a6322da7c5df2146b0c76b979834566, type: 2}
+    - {fileID: 11400000, guid: ed5e21c38189e6142ad0e90c76fa1bb4, type: 2}
+  - unlockable:
+    - {fileID: 11400000, guid: 600889fa865d07041a73e6948054101b, type: 2}
+  - unlockable: []
+  - unlockable:
+    - {fileID: 11400000, guid: 6c011cc3151d1cc40a63b831756fe83d, type: 2}
+    - {fileID: 11400000, guid: 8678a84b4e4144e4abae675e19e61590, type: 2}
+  - unlockable: []
+  - unlockable:
+    - {fileID: 11400000, guid: d0fc3a8068525ce48b56e157caf795ba, type: 2}
+  - unlockable: []
+  - unlockable: []
+  - unlockable:
+    - {fileID: 11400000, guid: ab4690d478194f743a287d1a5cdce5c3, type: 2}
+    - {fileID: 11400000, guid: 4e5054285ffad694096ceedde2b60277, type: 2}
+  - unlockable: []
+  - unlockable: []
+  - unlockable: []
+  - unlockable: []
+  - unlockable:
+    - {fileID: 11400000, guid: 11aa267b6e5d2a24ab70f449c3b185b8, type: 2}

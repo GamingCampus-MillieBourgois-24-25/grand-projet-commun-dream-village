@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a1b9f91182c991a4f84027f5a6648485, type: 2}
   - {fileID: 11400000, guid: 629b924ae2a253b43a4103920a8ecc89, type: 2}
   - {fileID: 11400000, guid: 7557c9e9f1dc06c498ae86fc236b1391, type: 2}
-  - {fileID: 11400000, guid: edbd5b4cf4ecb6048a9d9bd47572a306, type: 2}
+  - {fileID: 11400000, guid: a15712b2b029c254cb82c3bbe0b7b6c8, type: 2}
   <Dislikes>k__BackingField:
   - {fileID: 11400000, guid: 2b574a8cd29d59942bb785cfb05c2317, type: 2}
   - {fileID: 11400000, guid: c438e252334d1a04caea8daffd796dd4, type: 2}
@@ -33,7 +33,6 @@ MonoBehaviour:
   <Hearts>k__BackingField: 0
   <Limit>k__BackingField: 100
   <GoldMultiplier>k__BackingField: 1
-  <UnlockLevel>k__BackingField: 1
   <InitialPrice>k__BackingField: 0
   <CanLeave>k__BackingField: 0
   <HeartsBeforeLeaving>k__BackingField: 0
