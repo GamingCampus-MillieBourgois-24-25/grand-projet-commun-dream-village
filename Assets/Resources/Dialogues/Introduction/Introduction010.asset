@@ -23,6 +23,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  requiredArguments:
+  - playerName
   dialogueType: 0
   stats:
     Mood: 0

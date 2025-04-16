@@ -41,6 +41,7 @@ public class Dialogues : ScriptableObject
     [SerializeField] private string ID;
     [SerializeField] private string relatedElementID;
     [SerializeField] private LocalizedString dialogueText;
+    [SerializeField] private string[] requiredArguments;
     
     [SerializeField] private DialogueType dialogueType;
     [SerializeField] private Stats stats;
@@ -71,5 +72,10 @@ public class Dialogues : ScriptableObject
     public Stats GetStats()
     {
         return stats;
+    }
+
+    public string[] GetRequiredArguments()
+    {
+        return requiredArguments;
     }
 }

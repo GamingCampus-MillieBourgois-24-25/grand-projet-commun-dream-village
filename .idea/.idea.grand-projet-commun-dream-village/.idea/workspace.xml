@@ -6,26 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="133297ab-59a1-4172-bc85-0cebe864daf4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Assets-Shared.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Assets-Shared.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Locales.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Locales.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-English (en).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-English (en).asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-French (fr).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-French (fr).asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/link.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/link.xml.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamBirdsB.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamBirdsB.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamCats.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamCats.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamDogs.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Dream/DreamDogs.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Information/InformationCat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Information/InformationCat.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Information/InformationRain.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Information/InformationRain.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Bench.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Bench.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Cafe.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Cafe.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Cinema.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Cinema.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Fountain.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Fountain.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Gym.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Gym.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Library.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Library.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Swimming Pool.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Swimming Pool.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Well.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Reaction/Reaction Well.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction_en.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction_en.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction010.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction010.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction012.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction012.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction014.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction014.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction015.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction/Introduction015.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test/DialoguesV2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test/DialoguesV2.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" afterDir="false" />
@@ -124,7 +109,8 @@
       <workItem from="1744286327452" duration="10068000" />
       <workItem from="1744364774952" duration="562000" />
       <workItem from="1744614408851" duration="7547000" />
-      <workItem from="1744623145424" duration="5058000" />
+      <workItem from="1744623145424" duration="5225000" />
+      <workItem from="1744803028866" duration="2648000" />
     </task>
     <servers />
   </component>

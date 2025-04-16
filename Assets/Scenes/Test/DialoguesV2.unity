@@ -8973,6 +8973,7 @@ MonoBehaviour:
     variable: Boudou City
   dialogueBox: {fileID: 660368921}
   dialogueText: {fileID: 2091034642}
+  debugDialogue: {fileID: 11400000, guid: 99a53ab7b83e7d741bfa82352b651904, type: 2}
 --- !u!1001 &1705861466
 PrefabInstance:
   m_ObjectHideFlags: 0

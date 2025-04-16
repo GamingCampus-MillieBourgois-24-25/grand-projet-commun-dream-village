@@ -58,7 +58,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2689851944960
-    m_Localized: "Oh\u2026 {playerName}... it suits you well I guess."
+    m_Localized: "Oh\u2026 {0}... it suits you well I guess."
     m_Metadata:
       m_Items:
       - rid: 4777453113262735366
@@ -68,8 +68,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2903954386944
-    m_Localized: That is why you,  {playerName}, are also promoted to mayor of this
-      village! It will help you hide your identity.
+    m_Localized: That is why you,  {0}, are also promoted to mayor of this village!
+      It will help you hide your identity.
     m_Metadata:
       m_Items:
       - rid: 4777453113262735366
@@ -78,12 +78,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2989052620800
-    m_Localized: "Then\u2026 *mayor*  {playerName}... how should you name your village?"
+    m_Localized: "Then\u2026 *mayor*  {0}... how should you name your village?"
     m_Metadata:
       m_Items:
       - rid: 4777453113262735366
   - m_Id: 3147442122752
-    m_Localized: "Let\u2019s take a closer look at {villageName}!"
+    m_Localized: "Let\u2019s take a closer look at {0}!"
     m_Metadata:
       m_Items:
       - rid: 4777453113262735366
