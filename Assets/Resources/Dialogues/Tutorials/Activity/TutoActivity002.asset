@@ -10,23 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e13e6beaa89ee5d418d873cd6e279228, type: 3}
-  m_Name: IntroEnd003
+  m_Name: TutoActivity002
   m_EditorClassIdentifier: 
-  ID: IntroEnd003
+  ID: TutoActivity002
   relatedElementID: 
   dialogueText:
     m_TableReference:
-      m_TableCollectionName: GUID:8a4358b2d52704d4faffc78d6ca427c9
+      m_TableCollectionName: GUID:87a78c4e8df18794faeedb1045c7c26b
     m_TableEntryReference:
-      m_KeyId: 17547620352
+      m_KeyId: 25126727680
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  requiredArguments:
-  - playerName
-  - villageName
-  dialogueType: 0
+  requiredArguments: []
+  dialogueType: 2
   stats:
     Mood: 0
     Serenity: 0

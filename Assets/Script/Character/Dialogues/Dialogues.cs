@@ -10,6 +10,8 @@ public class Dialogues : ScriptableObject
     public enum DialogueType
     {
         Introduction,
+        TutoHouse,
+        TutoActivity,
         Reaction,
         Dream,
         Information

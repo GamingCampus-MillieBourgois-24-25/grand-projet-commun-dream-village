@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="133297ab-59a1-4172-bc85-0cebe864daf4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Assets-Shared.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Assets-Shared.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-English (en).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-English (en).asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-French (fr).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-French (fr).asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-Spanish (es).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-Spanish (es).asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Localization-String-Tables-Spanish (es)_BundledAssetGroupSchema.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Localization-String-Tables-Spanish (es)_BundledAssetGroupSchema.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending Shared Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending Shared Data.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending_en.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending_en.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd001.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd002.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd003.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +114,7 @@
       <workItem from="1744364774952" duration="562000" />
       <workItem from="1744614408851" duration="7547000" />
       <workItem from="1744623145424" duration="5225000" />
-      <workItem from="1744803028866" duration="3012000" />
+      <workItem from="1744803028866" duration="4217000" />
     </task>
     <servers />
   </component>

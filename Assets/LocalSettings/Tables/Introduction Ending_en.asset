@@ -16,8 +16,28 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 8a4358b2d52704d4faffc78d6ca427c9, type: 2}
   m_Metadata:
-    m_Items: []
-  m_TableData: []
+    m_Items:
+    - rid: 4777453162711744519
+  m_TableData:
+  - m_Id: 5941981184
+    m_Localized: I think you know everything now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9813323776
+    m_Localized: "If you ever forget something, just open the OPTIONS menu. You\u2019ll
+      find a REPLAY TUTORIAL button there!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17547620352
+    m_Localized: Farewell, {0}. Be the best mayor - and the best dream-bringer -
+      {1} has ever seen.
+    m_Metadata:
+      m_Items:
+      - rid: 4777453162711744519
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4777453162711744519
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070eb1504000000

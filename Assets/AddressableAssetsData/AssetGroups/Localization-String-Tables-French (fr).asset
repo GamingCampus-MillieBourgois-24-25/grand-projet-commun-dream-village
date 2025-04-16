@@ -54,6 +54,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-fr
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e84b5335cdbc7f46ab2e56daf6fe6fb
+    m_Address: TutoHouse_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b92c1c3d15885248803a8545f51b108
+    m_Address: TutoActivity_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b2886dc44f367cc4784b3a637a476509, type: 2}
   m_SchemaSet:

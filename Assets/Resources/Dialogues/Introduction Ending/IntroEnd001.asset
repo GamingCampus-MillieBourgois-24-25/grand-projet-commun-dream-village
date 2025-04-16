@@ -16,9 +16,9 @@ MonoBehaviour:
   relatedElementID: 
   dialogueText:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:8a4358b2d52704d4faffc78d6ca427c9
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 5941981184
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

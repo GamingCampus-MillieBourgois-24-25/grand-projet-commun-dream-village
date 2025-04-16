@@ -16,7 +16,25 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 82a4d078315c54845bbe7a1210217a0e
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 24c089371d9c1554b813801e2f09a422
+    m_Address: Introduction Ending_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: efc450fe663947448a792d1fe78adedd
+    m_Address: TutoHouse_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a3926e5e70e43b448100314c23b43c2
+    m_Address: TutoActivity_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b2886dc44f367cc4784b3a637a476509, type: 2}
   m_SchemaSet:

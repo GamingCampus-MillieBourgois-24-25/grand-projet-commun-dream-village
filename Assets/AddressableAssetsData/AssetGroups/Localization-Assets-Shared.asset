@@ -59,6 +59,16 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72d91b9481dd09147846ac20901bda6a
+    m_Address: Assets/LocalSettings/Tables/TutoHouse Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87a78c4e8df18794faeedb1045c7c26b
+    m_Address: Assets/LocalSettings/Tables/TutoActivity Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b2886dc44f367cc4784b3a637a476509, type: 2}
   m_SchemaSet:
