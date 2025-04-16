@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TutoActivity_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 87a78c4e8df18794faeedb1045c7c26b, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4777453162711744531
+  m_TableData:
+  - m_Id: 22442373120
+    m_Localized: Here look! A bench! Click on it!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25126727680
+    m_Localized: As you can see, the bench will give your inhabitant energy. With
+      a bonus if they like to be!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27844636672
+    m_Localized: Have {0} use it.
+    m_Metadata:
+      m_Items:
+      - rid: 4777453162711744531
+  - m_Id: 30709346304
+    m_Localized: "Activities take time. But don\u2019t worry, I\u2019ve got you covered
+      this time."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33095905280
+    m_Localized: Here, you can pass the timer now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37286014976
+    m_Localized: "Nice! {0} seems to feel better now. Let\u2019s visit him again."
+    m_Metadata:
+      m_Items:
+      - rid: 4777453162711744531
+  - m_Id: 41736171520
+    m_Localized: Well, it seems that he neither likes nor dislikes being {0}, or
+      else it would be written in there.
+    m_Metadata:
+      m_Items:
+      - rid: 4777453162711744531
+  references:
+    version: 2
+    RefIds:
+    - rid: 4777453162711744531
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070ab7b0600000000706bae080000000070abb709000000

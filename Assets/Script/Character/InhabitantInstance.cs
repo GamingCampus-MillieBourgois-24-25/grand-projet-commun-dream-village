@@ -9,6 +9,8 @@ public class InhabitantInstance
     private int energy;
     private int hearts;
 
+    public HashSet<InterestCategory> DiscoveredLikes = new();
+    public HashSet<InterestCategory> DiscoveredDislikes = new();
 
     public int Mood
     {
@@ -42,10 +44,22 @@ public class InhabitantInstance
         Energy = data.Energy;
         Hearts = data.Hearts;
     }
+    
+    public void DiscoverInterest(InterestCategory category)
+    {
+        if (baseData.Likes.Contains(category))
+            DiscoveredLikes.Add(category);
+
+        if (baseData.Dislikes.Contains(category))
+            DiscoveredDislikes.Add(category);
+    }
+
 
     public string FirstName => baseData.FirstName;
     public string LastName => baseData.LastName;
     public Sprite Icon => baseData.Icon;
     public List<InterestCategory> Likes => baseData.Likes;
     public List<InterestCategory> Dislikes => baseData.Dislikes;
+
+    public float GoldMultiplier => baseData.GoldMultiplier;
 }

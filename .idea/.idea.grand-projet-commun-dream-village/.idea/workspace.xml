@@ -6,9 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="133297ab-59a1-4172-bc85-0cebe864daf4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test/Dialogues.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test/Dialogues.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesInhabitant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesInhabitant.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Assets-Shared.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Assets-Shared.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-English (en).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-English (en).asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-French (fr).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-French (fr).asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-Spanish (es).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-Spanish (es).asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Localization-String-Tables-Spanish (es)_BundledAssetGroupSchema.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Localization-String-Tables-Spanish (es)_BundledAssetGroupSchema.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending Shared Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending Shared Data.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending_en.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LocalSettings/Tables/Introduction Ending_en.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd001.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd002.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Dialogues/Introduction Ending/IntroEnd003.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +30,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.annulusgames.lit-motion@b946c3a108/Runtime/Options/NoOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.localization@1.4.5/Runtime/Localized Reference/LocalizedString.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -34,7 +44,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;DialogueSuite&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;DialoguesV2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -101,6 +111,10 @@
       <workItem from="1743595654421" duration="9558000" />
       <workItem from="1744198535324" duration="15078000" />
       <workItem from="1744286327452" duration="10068000" />
+      <workItem from="1744364774952" duration="562000" />
+      <workItem from="1744614408851" duration="7547000" />
+      <workItem from="1744623145424" duration="5225000" />
+      <workItem from="1744803028866" duration="4217000" />
     </task>
     <servers />
   </component>
