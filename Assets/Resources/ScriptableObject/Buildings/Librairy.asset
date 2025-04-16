@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
   m_Name: Librairy
   m_EditorClassIdentifier: 
-  effect:
-    name: Librairy
-    description: 
-    utilisationDuration: 90
-    energy: 0
-    mood: -5
-    serenity: 20
-    attributeEffects:
-    - attribute: {fileID: 11400000, guid: 2b574a8cd29d59942bb785cfb05c2317, type: 2}
-      bonus: 25
-      bonusType: 1
-  price: 3500
-  maximumInInv: 1
-  unlockLevel: 10
+  <Name>k__BackingField: Librairy
+  <Description>k__BackingField: 
+  <EffectDuration>k__BackingField: 5400
+  <AttributeEffects>k__BackingField:
+  - attribute: {fileID: 11400000, guid: 2b574a8cd29d59942bb785cfb05c2317, type: 2}
+    bonus: 25
+    bonusType: 1
+  <Mood>k__BackingField: -5
+  <Serenity>k__BackingField: 20
+  <Energy>k__BackingField: 0
+  <InitialPrice>k__BackingField: 3500
+  <MaximumInInv>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 0}
+  <BuildingPrefab>k__BackingField: {fileID: 0}

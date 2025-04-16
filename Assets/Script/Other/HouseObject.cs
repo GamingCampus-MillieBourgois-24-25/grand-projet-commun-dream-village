@@ -17,8 +17,16 @@ public class HouseObject : MonoBehaviour
     {
         if (!GM.IM.isEditMode)
         {
-            if (canvasHabitant != null && !canvasHabitant.activeSelf)
+            if (!canvasHabitant.activeSelf)
+            {
                 canvasHabitant.SetActive(true);
+            }
+
+            CharacterJournalManager journalManager = FindObjectOfType<CharacterJournalManager>();
+            if (journalManager != null && inhabitant != null)
+            {
+                journalManager.ShowInhabitantByData(inhabitant);
+            }
 
             if (inhabitant != null && inhabitant.InhabitantPrefab != null && instantiatedPrefab == null)
             {
@@ -39,4 +47,5 @@ public class HouseObject : MonoBehaviour
             }
         }
     }
+
 }

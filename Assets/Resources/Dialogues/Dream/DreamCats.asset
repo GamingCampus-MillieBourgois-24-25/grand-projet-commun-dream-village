@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DreamCats
   m_EditorClassIdentifier: 
   ID: Dream001
+  relatedElementID: 
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:7780982e9b822044886529c7a682b1dc
@@ -22,11 +23,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  dialogueType: 1
-  attributeEffects:
-  - attribute: {fileID: 11400000, guid: c438e252334d1a04caea8daffd796dd4, type: 2}
-    bonus: 10
-    bonusType: 1
+  dialogueType: 2
   stats:
     Mood: 10
     Serenity: 0

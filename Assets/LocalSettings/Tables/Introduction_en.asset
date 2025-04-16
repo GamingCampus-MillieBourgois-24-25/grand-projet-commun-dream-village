@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Introduction_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 3575041cfccaf4e4884f5987c04b8901, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4777453113262735366
+  m_TableData:
+  - m_Id: 1881123024896
+    m_Localized: Oh dear! The new dreambringer has finally arrived!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2101403676672
+    m_Localized: "Nice to meet you, dream-bringer. I\u2019m Nosphy."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2124610760704
+    m_Localized: "I was the dream-bringer of this humble island\u2026 until you appeared."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2165018685440
+    m_Localized: "It\u2019s been so long since I had time for myself, and, thanks
+      to you, I can finally retire from the job!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2205321752576
+    m_Localized: Good luck!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2396745592832
+    m_Localized: "\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2400906342400
+    m_Localized: "\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2491968876544
+    m_Localized: "Oh I\u2019m sorry! Right. You\u2019re new! I need to teach you
+      a few things before leaving."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530514530304
+    m_Localized: "But first - what\u2019s your name, dream-bringer?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2689851944960
+    m_Localized: "Oh\u2026 {0}... it suits you well I guess."
+    m_Metadata:
+      m_Items:
+      - rid: 4777453113262735366
+  - m_Id: 2845431263232
+    m_Localized: "You should know that as dream-bringers, we can\u2019t reveal our
+      powers to the mortals."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903954386944
+    m_Localized: That is why you,  {0}, are also promoted to mayor of this village!
+      It will help you hide your identity.
+    m_Metadata:
+      m_Items:
+      - rid: 4777453113262735366
+  - m_Id: 2947906498560
+    m_Localized: Mayor by day, dream-bringer by night.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2989052620800
+    m_Localized: "Then\u2026 *mayor*  {0}... how should you name your village?"
+    m_Metadata:
+      m_Items:
+      - rid: 4777453113262735366
+  - m_Id: 3147442122752
+    m_Localized: "Let\u2019s take a closer look at {0}!"
+    m_Metadata:
+      m_Items:
+      - rid: 4777453113262735366
+  references:
+    version: 2
+    RefIds:
+    - rid: 4777453113262735366
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00706bf1b70200000070ab477202000000702b21a402000000702bd2dc020000
