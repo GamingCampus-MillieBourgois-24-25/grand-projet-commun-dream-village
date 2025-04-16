@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 
 public class IsoManager : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class IsoManager : MonoBehaviour
 
 
     [SerializeField] private Canvas editModeCanvas;
+    [SerializeField] private GameObject inventoryParent;
+    [SerializeField] private GameObject inventorySlotPrefab;
+    [SerializeField] private Canvas stockCanvas;
+    [SerializeField] private float yStockCanvas;
     [SerializeField] private Button placeBtn;
 
     [SerializeField] private float yMovingObject;
@@ -29,11 +34,14 @@ public class IsoManager : MonoBehaviour
     public bool isEditMode = false;
 
     private bool isClicking = false;
+    private bool isDragging = false;
 
     [SerializeField] private InputActionReference clickAction;
     [SerializeField] private InputActionReference dragAction;
 
     private TilemapRenderer tileRenderer;
+
+    private Coroutine scaleAnimationCoroutine;
 
     #region Unity Functions
 
@@ -41,6 +49,8 @@ public class IsoManager : MonoBehaviour
     {
         tileRenderer = transform.GetChild(0).GetComponent<TilemapRenderer>();
         tileRenderer.enabled = isEditMode;
+
+        editModeCanvas.gameObject.SetActive(isEditMode);
 
         CacheWhiteTilePositions();
         AddExistingObjectsToOccupiedPositions();
@@ -97,6 +107,8 @@ public class IsoManager : MonoBehaviour
     {
         if (!isEditMode || !isClicking) return;
 
+        isDragging = true;
+
         //Debug.Log("OnDragPerformed");
         Vector2 pointerPos = context.ReadValue<Vector2>();
         CheckUnderPointerMove(pointerPos);
@@ -105,7 +117,21 @@ public class IsoManager : MonoBehaviour
     private void OnClickCancelled(InputAction.CallbackContext context)
     {
         if (!isEditMode) return;
+        
+        if (selectedObject && isDragging)
+        {
+            scaleAnimationCoroutine = StartCoroutine(AnimateScalePop(selectedObject.transform));
+
+            if (CanPlaceObjectOnTilemap(selectedObject))
+            {
+                ChangeTileUnderObject(selectedObject, null);
+                PlacePlaceableObject(selectedObject);
+                UnSelectObject();
+            }
+        }
+
         isClicking = false;
+        isDragging = false;
     }
     #endregion
 
@@ -273,18 +299,53 @@ public class IsoManager : MonoBehaviour
         if (selectedObject != null)
         {
             ChangeTileUnderObject(selectedObject, null);
-            selectedObject.ResetPosition();
+            if (CanPlaceObjectOnTilemap(selectedObject))
+            {
+                PlacePlaceableObject(selectedObject);
+            }
+            else
+            {
+                selectedObject.ResetPosition();
+            }
         }
 
         occupiedTilePositions.ExceptWith(obj.GetOccupiedTiles());
 
         selectedObject = obj;
-        selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y + yMovingObject, selectedObject.transform.position.z);
-        placeBtn.interactable = true;
+
+        if (stockCanvas != null)
+        {
+            stockCanvas.transform.position = new Vector3(obj.transform.position.x, (obj.cachedRenderer.bounds.size.y ) + yStockCanvas, obj.transform.position.z);
+            Debug.Log(obj.cachedRenderer.bounds.size.y + " " + obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y + " " + ((obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y) + yStockCanvas));
+            stockCanvas.transform.SetParent(selectedObject.transform, worldPositionStays: true);
+            stockCanvas.transform.rotation = Quaternion.Euler(0f, 45f, 0f);
+            stockCanvas.gameObject.SetActive(true);
+        }
+
+        selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, transform.position.y + yMovingObject, selectedObject.transform.position.z);
+        if (placeBtn) placeBtn.interactable = true;
         CheckObjectOnTilemap(selectedObject);
 
         Debug.Log("Objet sélectionné : " + obj.name);
     }
+
+    private void UnSelectObject()
+    {
+        if (selectedObject == null) return; // Sécurité
+
+        stockCanvas.gameObject.SetActive(false);
+        selectedObject = null;
+    }
+
+    public bool HasSelectedObject()
+    {
+        if (isEditMode && selectedObject != null)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void CheckObjectOnTilemap(PlaceableObject obj)
     {
         if (obj == null) return; // Sécurité
@@ -293,12 +354,12 @@ public class IsoManager : MonoBehaviour
 
         if (canPlace)
         {
-            placeBtn.interactable = true;
+            if (placeBtn) placeBtn.interactable = true;
             ChangeTileUnderObject(obj, greenTile);
         }
         else
         {
-            placeBtn.interactable = false;
+            if (placeBtn) placeBtn.interactable = false;
             ChangeTileUnderObject(obj, redTile); 
         }
     }
@@ -339,9 +400,42 @@ public class IsoManager : MonoBehaviour
 
         // Réinitialiser
         ChangeTileUnderObject(selectedObject, null);
-        selectedObject = null;
-        placeBtn.interactable = false;
+        UnSelectObject();
+        if (placeBtn) placeBtn.interactable = false;
     }
+    #endregion
+
+    #region Anims
+    private IEnumerator AnimateScalePop(Transform target, float offset = 2f, float duration = 0.1f)
+    {
+        if (target == null) yield break;
+
+        Vector3 originalScale = target.localScale;
+        Vector3 targetScale = originalScale + new Vector3(offset, offset, offset);
+
+        float time = 0f;
+        while (time < duration)
+        {
+            target.localScale = Vector3.Lerp(originalScale, targetScale, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        target.localScale = targetScale;
+
+        // Retour au scale original
+        time = 0f;
+        while (time < duration)
+        {
+            target.localScale = Vector3.Lerp(targetScale, originalScale, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        target.localScale = originalScale;
+    }
+
+
     #endregion
 
     #region Btns Functions
@@ -357,22 +451,42 @@ public class IsoManager : MonoBehaviour
 
         editModeCanvas.gameObject.SetActive(isEditMode);
         tilemapObjects.ClearAllTiles();
-        if (selectedObject != null) selectedObject.ResetPosition();
-        selectedObject = null;
+        //if (selectedObject != null) selectedObject.ResetPosition();
+        if (selectedObject != null) PlacePlaceableObject(selectedObject);
+        UnSelectObject();
     }
-#endregion
-
-
-
-
-    public bool hasSelectedObject()
+    public void BS_StockSelectedObject()
     {
-        if(isEditMode && selectedObject != null)
-        {
-            return true;
-        }
-        return false;
+        tilemapObjects.ClearAllTiles();
+        UnSelectObject();
     }
+
+    public void BS_TakeInventoryItem<T>(T item, Dictionary<T, InventoryItem<T>> inventory, IsoManager isoManager) where T : ScriptableObject
+    {
+        if (!inventory.TryGetValue(item, out var entry) || entry.prefab == null)
+        {
+            Debug.LogWarning("Item not in inventory or prefab is missing.");
+            return;
+        }
+
+        Vector3 centerPos = tilemapBase.CellToWorld(Vector3Int.zero);
+        centerPos.y += yMovingObject;
+
+        GameObject newObj = Instantiate(entry.prefab, centerPos, Quaternion.identity);
+        PlaceableObject placeable = newObj.GetComponent<PlaceableObject>();
+
+        if (placeable != null)
+        {
+            OnObjectSelected(placeable);
+            // + le retirer de l'inventaire
+        }
+        else
+        {
+            Debug.LogError("Prefab does not contain a PlaceableObject.");
+        }
+    }
+
+    #endregion
 
 }
 

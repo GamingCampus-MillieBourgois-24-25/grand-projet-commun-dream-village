@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Player
 {
@@ -49,7 +50,7 @@ public class Player
     #endregion
 
     #region Inventory
-    public void AddToInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : ScriptableObject
+    public void AddToInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory, GameObject prefab = null) where T : ScriptableObject
     {
         if (inventory.TryGetValue(item, out var existing))
         {
@@ -57,7 +58,7 @@ public class Player
         }
         else
         {
-            inventory[item] = new InventoryItem<T>(item, amount);
+            inventory[item] = new InventoryItem<T>(item, amount, prefab);
         }
     }
 
@@ -77,5 +78,11 @@ public class Player
         }
         return false;
     }
+
+    public interface IPlaceable
+    {
+        GameObject GetPrefab();
+    }
+
     #endregion
 }

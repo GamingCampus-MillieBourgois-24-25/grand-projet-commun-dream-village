@@ -125,7 +125,7 @@ public class CameraDeplacement : MonoBehaviour
 
     private void CameraMovement(Vector2 movement, bool isEdit = false)
     {
-        if (isoManager.hasSelectedObject() && !isEdit)
+        if (isoManager.HasSelectedObject() && !isEdit)
             return;
 
         Vector3 newPosition = Camera.main.transform.localPosition;
@@ -167,7 +167,7 @@ public class CameraDeplacement : MonoBehaviour
 
     IEnumerator CameraDeplacementEditCorout()
     {
-        if (isoManager.hasSelectedObject())
+        if (isoManager.HasSelectedObject())
         {
 
             while (touch1Action.action.IsPressed())

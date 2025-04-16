@@ -17,16 +17,16 @@ public class InhabitantBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (!GM.IM.isEditMode)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    GoTo(hit.point);
-                }
-            }
-        }
+        //if (!GM.IM.isEditMode)
+        //{
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //        if (Physics.Raycast(ray, out RaycastHit hit))
+        //        {
+        //            GoTo(hit.point);
+        //        }
+        //    }
+        //}
     }
 }
