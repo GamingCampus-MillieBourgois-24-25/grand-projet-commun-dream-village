@@ -91,6 +91,7 @@ public class DreamMachineManager : MonoBehaviour
 
         characterImage.sprite = currentInhabitant.Icon;
         characterNameText.text = $"{currentInhabitant.FirstName} {currentInhabitant.LastName}";
+        //LayoutRebuilder.ForceRebuildLayoutImmediate(characterNameText.transform.parent.GetComponent<RectTransform>());
 
         moodSlider.value = currentInhabitant.Mood;
         serenitySlider.value = currentInhabitant.Serenity;
@@ -98,7 +99,7 @@ public class DreamMachineManager : MonoBehaviour
 
         index.text = $"{currentIndex + 1}/{inhabitants.Count}";
 
-        // 🔁 Reset slider colors to default (white)
+        // Reset slider colors to default (white)
         ResetSliderColors();
     }
 
