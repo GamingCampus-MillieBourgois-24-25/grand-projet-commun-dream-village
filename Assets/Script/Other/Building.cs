@@ -44,15 +44,15 @@ public class Building : IScriptableElement
     [System.Serializable]
     public class AttributeEffect
     {
-        enum BonusType
+        public enum BonusType
         {
             Multiple,
             Add
         }
 
 
-        [field: SerializeField] private InterestCategory attribute;
-        [field: SerializeField] private float bonus;
-        [field: SerializeField] private BonusType bonusType;
+        [field: SerializeField] public InterestCategory attribute { get; private set; }
+        [field: SerializeField] public float bonus { get; private set; }
+        [field: SerializeField] public BonusType bonusType { get; private set; }
     }
 }
