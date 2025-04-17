@@ -39,7 +39,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     {
         baseInhabitants.Add(newInhabitant);
         inhabitants.Add(new InhabitantInstance(newInhabitant));
-        Debug.Log($"New inhabitant added: {newInhabitant.FirstName} {newInhabitant.LastName}");
+        Debug.Log($"New inhabitant added: {newInhabitant.Name}");
     }
 
     public void RemoveInhabitant(InhabitantInstance instanceToRemove)
@@ -48,7 +48,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         {
             baseInhabitants.Remove(instanceToRemove.baseData);
             inhabitants.Remove(instanceToRemove);
-            Debug.Log($"Inhabitant removed: {instanceToRemove.FirstName} {instanceToRemove.LastName}");
+            Debug.Log($"Inhabitant removed: {instanceToRemove.Name}");
         }
     }
 

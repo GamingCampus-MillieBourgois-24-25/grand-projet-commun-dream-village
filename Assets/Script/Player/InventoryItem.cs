@@ -1,20 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 [System.Serializable]
-public class InventoryItem<T> where T : ScriptableObject
+public class InventoryItem<T> where T : IScriptableElement
 {
     public T item;
     public int quantity;
-    public GameObject prefab;
+    public InventorySlotItem inventorySlotItem;
 
     // Constructeur 
-    public InventoryItem(T item, int quantity, GameObject prefab = null)
+    public InventoryItem(T _item, int _quantity)
     {
-        this.item = item;
-        this.quantity = quantity;
-        this.prefab = prefab;
+        this.item = _item;
+        this.quantity = _quantity;
+    }
+
+    public void SetInventorySlotItem(InventorySlotItem _inventorySlotItem)
+    {
+        this.inventorySlotItem = _inventorySlotItem;
     }
 }
 

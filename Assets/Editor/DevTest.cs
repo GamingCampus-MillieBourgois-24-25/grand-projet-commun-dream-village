@@ -19,4 +19,10 @@ public class DevTest
     {
         SaveScript.DeleteSave();
     }
+  
+    [MenuItem("Tools/DevTest/AddItemInventory")]
+    public static void AddItemInventory()
+    {
+        GM.Instance.player.AddToInventory(GM.Instance.inhabitants[0], 1, GM.Instance.player.InhabitantInventory);
+    }
 }

@@ -8,7 +8,7 @@ public class LevelProgression : MonoBehaviour
     [System.Serializable]
     public class Level
     {
-        public List<ScriptableObject> unlockable;
+        public List<IScriptableElement> unlockable;
     }
 
     public Level GetLevel(int level)

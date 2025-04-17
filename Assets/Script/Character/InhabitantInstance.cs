@@ -58,8 +58,7 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
 
 
 
-    public string FirstName => baseData.FirstName;
-    public string LastName => baseData.LastName;
+    public string Name => baseData.Name;
     public Sprite Icon => baseData.Icon;
     public List<InterestCategory> Likes => baseData.Likes;
     public List<InterestCategory> Dislikes => baseData.Dislikes;

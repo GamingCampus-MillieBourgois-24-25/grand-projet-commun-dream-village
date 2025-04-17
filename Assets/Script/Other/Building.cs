@@ -5,12 +5,12 @@ using static Dialogues;
 
 
 [CreateAssetMenu(fileName = "BuildingDatabase", menuName = "ScriptableObjects/Building", order = 1)]
-public class Building : ScriptableObject
+public class Building : IScriptableElement
 {
     #region Variable Serialized
     #region Basic Information
     [field: Header("Basic Information")]
-    [field: SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public override string Name => base.Name;
     [field: SerializeField] public string Description { get; private set; }
     #endregion
 
@@ -29,14 +29,14 @@ public class Building : ScriptableObject
 
     #region Economy
     [field: Header("Progression & Economy")]
-    [field: SerializeField] public int InitialPrice { get; private set; }
+    [field: SerializeField] public override int InitialPrice => base.InitialPrice;
     [field: SerializeField] public int MaximumInInv { get; private set; }
     #endregion
 
     #region Visuals
     [field: Header("Visuals")]
-    [field: SerializeField] public Sprite Icon { get; private set; }
-    [field: SerializeField] public GameObject BuildingPrefab { get; private set; }
+    public override Sprite Icon => base.Icon;
+    [field: SerializeField] public override GameObject InstantiatePrefab => base.InstantiatePrefab;
     #endregion
     #endregion
 
