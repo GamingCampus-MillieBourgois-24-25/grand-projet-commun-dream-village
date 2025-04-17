@@ -33,25 +33,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             inhabitants.Add(new InhabitantInstance(inhabitant));
         }
 
-        // Trouver un élément sur la scene nommé CoffeeShop
-        GameObject coffeeShop = GameObject.Find("CoffeeShop");
-        if (coffeeShop != null)
-        {
-            BuildingObject buildingObject = coffeeShop.GetComponent<BuildingObject>();
-            if (buildingObject != null)
-            {
-                buildings.Add(buildingObject);
-                baseBuildings.Add(buildingObject.building);
-            }
-            else
-            {
-                Debug.LogError("BuildingObject component not found on CoffeeShop.");
-            }
-        }
-        else
-        {
-            Debug.LogError("CoffeeShop GameObject not found in the scene.");
-        }
     }
 
     public void AddInhabitant(Inhabitant newInhabitant)
@@ -127,6 +108,15 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             //loadedInhabitant.Deserialize(inhabitantData);
             //inhabitants.Add(loadedInhabitant);
             //baseInhabitants.Add(loadedInhabitant.baseData);
+        }
+
+        if (data.buildings.Count == 0)
+        {
+            GameObject buildingInstanciate = Instantiate(GM.Instance.GetBuildingByName("CoffeeShop").BuildingPrefab, Vector3.zero, Quaternion.identity);
+            BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
+            buildingInstanciate.GetComponent<PlaceableObject>().OriginalPosition = new Vector3Int(0, 6, 0);
+            buildings.Add(loadedBuilding);
+            baseBuildings.Add(loadedBuilding.building);
         }
     }
 }
