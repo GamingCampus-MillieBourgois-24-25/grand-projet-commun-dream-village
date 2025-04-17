@@ -7,15 +7,15 @@ using UnityEngine.Localization;
 
 public class DialoguesManager : MonoBehaviour
 {
-    public static DialoguesManager Instance;
+    private GameManager gameManager;
 
     [SerializeField] private List<Dialogues> dialogues = new();
     
     [Serializable]
     public struct DictStrings
     {
-        public string varName;
-        public string variable;
+        public string name;
+        public string value;
     }
 
     [SerializeField] private List<DictStrings> localizedStrings;
@@ -26,15 +26,14 @@ public class DialoguesManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        gameManager = GameManager.instance;
 
         LoadAllDialogues();
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void LoadAllDialogues()
@@ -51,7 +50,7 @@ public class DialoguesManager : MonoBehaviour
 
     private string GetVariable(string key)
     {
-        return localizedStrings.FirstOrDefault(x => x.varName.ToLower() == key.ToLower()).variable ?? "ERROR";
+        return localizedStrings.FirstOrDefault(x => x.name.ToLower() == key.ToLower()).value ?? "ERROR";
     }
 
     [ContextMenu("ShowIntroDialogue")]
@@ -103,17 +102,17 @@ public class DialoguesManager : MonoBehaviour
     [ContextMenu("DebugUpdateArguments")]
     public void DebugUpdateArguments()
     {
-        UpdateArguments("playerName", debugVariable);
+        UpdateArgument("PLAYER_NAME", debugVariable);
     }
 
-    public void UpdateArguments(string variableName, string variableValue)
+    public void UpdateArgument(string variableName, string variableValue)
     {
         for (int i = 0; i < localizedStrings.Count; i++)
         {
-            if (!string.Equals(localizedStrings[i].varName, variableName, StringComparison.OrdinalIgnoreCase)) continue;
+            if (!string.Equals(localizedStrings[i].name, variableName, StringComparison.OrdinalIgnoreCase)) continue;
             
             var temp = localizedStrings[i];
-            temp.variable = variableValue;
+            temp.value = variableValue;
             localizedStrings[i] = temp;
             break;
         }

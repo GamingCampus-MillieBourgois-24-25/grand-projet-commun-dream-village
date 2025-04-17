@@ -6,10 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="133297ab-59a1-4172-bc85-0cebe864daf4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Design/Prefab/Canvas/Dialogue Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Design/Prefab/Canvas/Dialogue Canvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test/DialoguesV2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test/DialoguesV2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test/DialoguesV3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test/DialoguesV3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesInhabitant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesInhabitant.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/IA_DIalogue.inputactions" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/IA_DIalogue.inputactions.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

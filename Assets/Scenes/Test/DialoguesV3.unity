@@ -9816,6 +9816,8 @@ MonoBehaviour:
     Serenity: 0
     Energy: 0
     Hearts: 0
+  touchAction: {fileID: 0}
+  positionAction: {fileID: 0}
   textAnimationSettings:
     startValue:
       utf8LengthInBytes: 0
@@ -10515,6 +10517,17 @@ PrefabInstance:
     - target: {fileID: 4651549909331078501, guid: 86c2440593a799147abfe91ada691d3e,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703247538995506213, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a9edf998d9c88144ab9b831c125fa570,
+        type: 2}
+    - target: {fileID: 4703247538995506213, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5613725209329420874, guid: 86c2440593a799147abfe91ada691d3e,
@@ -11233,6 +11246,36 @@ PrefabInstance:
       propertyPath: dialogueCanvas
       value: 
       objectReference: {fileID: 274650912}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: localizedStrings.Array.data[0].name
+      value: PLAYER_NAME
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: localizedStrings.Array.data[1].name
+      value: VILLAGE_NAME
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: localizedStrings.Array.data[2].name
+      value: FIRST_VILLAGER_NAME
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: localizedStrings.Array.data[0].value
+      value: Flash McQueen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: localizedStrings.Array.data[1].value
+      value: Vroumville
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: localizedStrings.Array.data[2].value
+      value: Willith Warm
+      objectReference: {fileID: 0}
     - target: {fileID: 7773874029115950907, guid: 2eb96c2eef63f0647a4f93221f7d3349,
         type: 3}
       propertyPath: m_LocalPosition.x

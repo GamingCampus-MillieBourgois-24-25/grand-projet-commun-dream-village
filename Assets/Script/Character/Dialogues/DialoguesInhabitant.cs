@@ -34,7 +34,6 @@ public class DialoguesInhabitant : MonoBehaviour
     private void Start()
     {
         accessibilityOptions = AccessibilityOptions.Instance;
-        dialoguesManager = DialoguesManager.Instance;
 
         if (dialoguesManager)
         {

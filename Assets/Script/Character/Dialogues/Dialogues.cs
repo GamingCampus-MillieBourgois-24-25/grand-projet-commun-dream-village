@@ -55,7 +55,6 @@ public class Dialogues : ScriptableObject
     }
     
     [SerializeField] private string ID;
-    [SerializeField] private string relatedElementID;
     [SerializeField] private LocalizedString dialogueText;
     [SerializeField] private string[] requiredArguments;
     
@@ -66,11 +65,6 @@ public class Dialogues : ScriptableObject
     public string GetID()
     {
         return ID;
-    }
-    
-    public string GetRelatedElementID()
-    {
-        return relatedElementID;
     }
     
     public DialogueType GetDialogueType()
