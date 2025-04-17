@@ -35,8 +35,8 @@ public class Building : IScriptableElement
 
     #region Visuals
     [field: Header("Visuals")]
-    [field: SerializeField] public override Sprite Icon => base.Icon;
-    [field: SerializeField] public GameObject BuildingPrefab { get; private set; }
+    public override Sprite Icon => base.Icon;
+    [field: SerializeField] public override GameObject InstantiatePrefab => base.InstantiatePrefab;
     #endregion
     #endregion
 

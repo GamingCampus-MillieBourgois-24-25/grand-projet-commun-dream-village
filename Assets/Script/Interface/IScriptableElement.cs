@@ -7,9 +7,11 @@ public class IScriptableElement : ScriptableObject
 {
     #region Variables Serialized
 
-    public virtual string Name { get; private set; }
-    public virtual Sprite Icon { get; private set; }
-    public virtual int InitialPrice { get; private set; }
+    [field : Header("Base")]
+    [field : SerializeField] public virtual string Name { get; private set; }
+    [field: SerializeField] public virtual Sprite Icon { get; private set; }
+    [field: SerializeField] public virtual int InitialPrice { get; private set; }
+    [field: SerializeField] public virtual GameObject InstantiatePrefab { get; set; }
 
     #endregion
 }

@@ -11,7 +11,7 @@ public class Inhabitant : IScriptableElement
     [field: Header("Basic Information")]
     [field: SerializeField] private string FirstName;
     [field: SerializeField] private string LastName;
-    public override string Name => $"{LastName} {FirstName}";
+    public override string Name => $"{FirstName} {LastName}";
     [field: SerializeField] public Pronouns Pronouns { get; private set; }
     [field: SerializeField] public InhabitantEnums MBTI { get; private set; }
     [field: SerializeField] public List<Personalities> Personnality { get; private set; }
@@ -42,8 +42,10 @@ public class Inhabitant : IScriptableElement
 
     #region Visuals
     [field: Header("Visuals")]
-    [field: SerializeField] public override Sprite Icon => base.Icon;
+    public override Sprite Icon => base.Icon;
+    [field: SerializeField] public override GameObject InstantiatePrefab => base.InstantiatePrefab;
     [field: SerializeField] public GameObject InhabitantPrefab { get; private set; }
+    [field: SerializeField] public Building InhabitantHouse { get; private set; }
     #endregion
     #endregion
 
@@ -53,6 +55,10 @@ public class Inhabitant : IScriptableElement
     private void Awake()
     {
         Hearts = HeartsBeforeLeaving;
+        if (InhabitantHouse != null)
+        {
+            InstantiatePrefab = InhabitantHouse.InstantiatePrefab;
+        }
     }
 
 

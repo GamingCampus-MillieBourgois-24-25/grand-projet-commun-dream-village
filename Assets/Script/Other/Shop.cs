@@ -28,12 +28,12 @@ public class Shop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitCatagory(categoryContainers[0], GameManager.instance.inhabitants);
-        InitCatagory(categoryContainers[1], GameManager.instance.buildings);
+        InitCategory(categoryContainers[0], GameManager.instance.inhabitants);
+        InitCategory(categoryContainers[1], GameManager.instance.buildings);
     }
 
     
-    private void InitCatagory<T>(GameObject _container, List<T> _contents) where T : IScriptableElement
+    private void InitCategory<T>(GameObject _container, List<T> _contents) where T : IScriptableElement
     {
         foreach(IScriptableElement item in _contents)
         {
