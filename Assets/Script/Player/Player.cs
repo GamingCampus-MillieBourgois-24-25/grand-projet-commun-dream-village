@@ -1,13 +1,9 @@
 using LitMotion;
 using LitMotion.Extensions;
 using System.Collections.Generic;
-using System.Threading;
 using TMPro;
-using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class Player : MonoBehaviour
 {
