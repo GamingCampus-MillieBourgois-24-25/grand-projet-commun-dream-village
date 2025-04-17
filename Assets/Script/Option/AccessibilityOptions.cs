@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
@@ -11,13 +12,6 @@ public class AccessibilityOptions : MonoBehaviour
     
     #region Language
     
-    public enum LanguageParameter
-    {
-        English,
-        French
-    }
-    
-    public LanguageParameter currentLanguage = LanguageParameter.English;
     
     public TMP_Dropdown languageDropdown;
     public RectTransform languageDropdownTemplate;
@@ -30,6 +24,8 @@ public class AccessibilityOptions : MonoBehaviour
     #region Text Speed
     
     public List<GameObject> textSpeedButtons;
+    [SerializeField] private Sprite unselectedButtonSpeed;
+    [SerializeField] private Sprite selectedButtonSpeed;
     
     public enum TextSpeedParameter
     {
@@ -70,7 +66,7 @@ public class AccessibilityOptions : MonoBehaviour
     void Start()
     {
         InitLanguageDropdown();
-
+        
         SetTextSpeedParameter(CurrentTextSpeedStruct.TextSpeedParameter == TextSpeedParameter.Slow ? 0 : CurrentTextSpeedStruct.TextSpeedParameter == TextSpeedParameter.Normal ? 1 : 2);
     }
     
@@ -85,13 +81,32 @@ public class AccessibilityOptions : MonoBehaviour
         languageDropdown.AddOptions(options);
         languageDropdownTemplate.sizeDelta = new Vector2(0, languageDropdownHeight * options.Count);
         languageDropdownViewport.sizeDelta = new Vector2(languageDropdownViewport.rect.width, languageDropdownHeight * options.Count);
-        languageDropdown.value = (int) currentLanguage;
+        
+        int savedLocaleKey = PlayerPrefs.GetInt("LocaleKey", -1);
+        if (savedLocaleKey == -1)
+        {
+            var systemLanguage = Application.systemLanguage.ToString();
+            for (int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; i++)
+            {
+                if (LocalizationSettings.AvailableLocales.Locales[i].Identifier.Code.Equals(systemLanguage, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    languageDropdown.value = i;
+                    SetLanguageParameter(i);
+                    PlayerPrefs.SetInt("LocaleKey", i);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            languageDropdown.value = savedLocaleKey;
+            SetLanguageParameter(savedLocaleKey);
+        }
     }
 
     public void SetLanguageParameter(int value)
     {
         if (_localizationActive) return;
-        currentLanguage = (LanguageParameter) value;
         StartCoroutine(SetLocale(value));
     }
     
@@ -105,7 +120,7 @@ public class AccessibilityOptions : MonoBehaviour
     {
         for (int i = 0; i < textSpeedButtons.Count; i++)
         {
-            textSpeedButtons[i].GetComponent<Image>().color = i == value ? Color.yellow : Color.white;
+            textSpeedButtons[i].GetComponent<Image>().sprite = i == value ? selectedButtonSpeed : unselectedButtonSpeed;
         }
     }
     

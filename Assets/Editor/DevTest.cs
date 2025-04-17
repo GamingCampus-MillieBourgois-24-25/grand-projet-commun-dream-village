@@ -7,4 +7,22 @@ public class DevTest
     {
         GM.Instance.player.AddXP(300);
     }
+
+    [MenuItem("Tools/DevTest/Save")]
+    public static void Save()
+    {
+        GM.Instance.SaveGame();
+    }
+
+    [MenuItem("Tools/DevTest/DeleteSave")]
+    public static void DeleteSave()
+    {
+        SaveScript.DeleteSave();
+    }
+  
+    [MenuItem("Tools/DevTest/AddItemInventory")]
+    public static void AddItemInventory()
+    {
+        GM.Instance.player.AddToInventory(GM.Instance.inhabitants[0], 1, GM.Instance.player.InhabitantInventory);
+    }
 }

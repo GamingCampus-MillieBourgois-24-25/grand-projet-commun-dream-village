@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
-  m_Name: "Caf\xE9"
+  m_Name: CoffeeShop
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: "Caf\xE9"
+  <Name>k__BackingField: CoffeeShop
+  <Icon>k__BackingField: {fileID: 0}
+  <InitialPrice>k__BackingField: 1500
+  <InstantiatePrefab>k__BackingField: {fileID: 669072585116683299, guid: f9660f1ca0498a54e8ae7606dd8d657c,
+    type: 3}
   <Description>k__BackingField: 
   <EffectDuration>k__BackingField: 1800
   <AttributeEffects>k__BackingField:
-  - attribute: {fileID: 11400000, guid: 7557c9e9f1dc06c498ae86fc236b1391, type: 2}
-    bonus: 20
-    bonusType: 1
+  - <attribute>k__BackingField: {fileID: 0}
+    <bonus>k__BackingField: 0
+    <bonusType>k__BackingField: 0
   <Mood>k__BackingField: 10
   <Serenity>k__BackingField: -5
   <Energy>k__BackingField: 10
-  <InitialPrice>k__BackingField: 1500
   <MaximumInInv>k__BackingField: 4
-  <Icon>k__BackingField: {fileID: 0}
-  <BuildingPrefab>k__BackingField: {fileID: 0}

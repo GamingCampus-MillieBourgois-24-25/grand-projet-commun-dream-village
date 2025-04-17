@@ -54,7 +54,7 @@ public class CharacterJournalManager : MonoBehaviour
         InhabitantInstance currentInhabitant = inhabitants[currentIndex];
 
         iconImage.sprite = currentInhabitant.Icon;
-        nameText.text = $"{currentInhabitant.FirstName} {currentInhabitant.LastName}";
+        nameText.text = currentInhabitant.Name;
         pronounsText.text = currentInhabitant.baseData.Pronouns.ToString();
         mbtiText.text = currentInhabitant.baseData.MBTI.ToString();
         personalitiesText.text = string.Join(" / ", currentInhabitant.baseData.Personnality);
