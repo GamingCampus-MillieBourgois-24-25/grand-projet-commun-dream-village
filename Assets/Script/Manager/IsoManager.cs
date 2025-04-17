@@ -19,12 +19,16 @@ public class IsoManager : MonoBehaviour
     [SerializeField] private LayerMask IslandLayer;
 
 
+    [SerializeField] private Canvas mainCanvas;
     [SerializeField] private Canvas editModeCanvas;
     [SerializeField] private GameObject inventoryParent;
     [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private Canvas stockCanvas;
     [SerializeField] private float yStockCanvas;
     [SerializeField] private Button placeBtn;
+
+    private GameObject canvasBottomLeft;
+    private GameObject canvasBottomRight;
 
     [SerializeField] private float yMovingObject;
 
@@ -42,6 +46,7 @@ public class IsoManager : MonoBehaviour
     private TilemapRenderer tileRenderer;
 
     private Coroutine scaleAnimationCoroutine;
+    private Coroutine inventoryMoveCoroutine;
 
     #region Unity Functions
 
@@ -51,6 +56,9 @@ public class IsoManager : MonoBehaviour
         tileRenderer.enabled = isEditMode;
 
         editModeCanvas.gameObject.SetActive(isEditMode);
+
+        canvasBottomLeft = mainCanvas.transform.Find("BottomLeft").gameObject;
+        canvasBottomRight = mainCanvas.transform.Find("BottomRight").gameObject;
 
         CacheWhiteTilePositions();
         AddExistingObjectsToOccupiedPositions();
@@ -84,18 +92,6 @@ public class IsoManager : MonoBehaviour
     {
         if (!isEditMode) return;
 
-        // Cancel si click sur un bouton de l'UI
-        //foreach (var touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches) { 
-        //    if (EventSystem.current.IsPointerOverGameObject(touch.touchId))
-        //    {
-        //        return; 
-        //    }
-        //}
-        //if (EventSystem.current.IsPointerOverGameObject(-1))
-        //{
-        //    return;
-        //}
-
         isClicking = true;
 
         //Debug.Log("OnClickPerformed");
@@ -117,8 +113,8 @@ public class IsoManager : MonoBehaviour
     private void OnClickCancelled(InputAction.CallbackContext context)
     {
         if (!isEditMode) return;
-        
-        if (selectedObject && isDragging)
+
+        if ((selectedObject && isDragging))
         {
             scaleAnimationCoroutine = StartCoroutine(AnimateScalePop(selectedObject.transform));
 
@@ -308,6 +304,10 @@ public class IsoManager : MonoBehaviour
                 selectedObject.ResetPosition();
             }
         }
+        else
+        {
+            ToggleInventorySmooth(false);
+        }
 
         occupiedTilePositions.ExceptWith(obj.GetOccupiedTiles());
 
@@ -394,6 +394,7 @@ public class IsoManager : MonoBehaviour
         obj.transform.position = new Vector3(obj.transform.position.x, newYPosition, obj.transform.position.z);
 
         occupiedTilePositions.UnionWith((obj.GetOccupiedTiles()));
+        ToggleInventorySmooth(true);
 
         // SET NEW POSITION
         obj.OriginalPosition = tilemapObjects.WorldToCell(obj.transform.position);
@@ -403,6 +404,22 @@ public class IsoManager : MonoBehaviour
         UnSelectObject();
         if (placeBtn) placeBtn.interactable = false;
     }
+    #endregion
+
+    #region UI
+    private void HideMainUI(bool hide)
+    {
+        if (hide)
+        {
+            canvasBottomLeft.SetActive(false);
+            canvasBottomRight.SetActive(false);
+        } else
+        {
+            canvasBottomLeft.SetActive(true);
+            canvasBottomRight.SetActive(true);
+        }
+    }
+
     #endregion
 
     #region Anims
@@ -435,6 +452,39 @@ public class IsoManager : MonoBehaviour
         target.localScale = originalScale;
     }
 
+    public void ToggleInventorySmooth(bool open)
+    {
+        if (inventoryMoveCoroutine != null)
+            StopCoroutine(inventoryMoveCoroutine);
+
+        inventoryMoveCoroutine = StartCoroutine(SmoothMoveInventory(open));
+    }
+
+    private IEnumerator SmoothMoveInventory(bool open)
+    {
+        RectTransform bottom = editModeCanvas.transform.Find("Bottom").GetComponent<RectTransform>();
+        RectTransform under = bottom.Find("Under").GetComponent<RectTransform>();
+
+        float duration = 0.25f;
+        float time = 0f;
+
+        Vector2 startPos = bottom.anchoredPosition;
+        float targetY = open ? 0f : -under.rect.height;
+        Vector2 targetPos = new Vector2(startPos.x, targetY);
+
+        while (time < duration)
+        {
+            float t = time / duration;
+            t = t * t * (3f - 2f * t); // Smoothstep
+            bottom.anchoredPosition = Vector2.Lerp(startPos, targetPos, t);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        bottom.anchoredPosition = targetPos;
+    }
+
+
 
     #endregion
 
@@ -447,7 +497,15 @@ public class IsoManager : MonoBehaviour
     {
         isEditMode = !isEditMode;
 
-        tileRenderer.enabled = isEditMode;
+        if (isEditMode) {
+            HideMainUI(true);
+        }
+        else
+        {
+            HideMainUI(false);
+        }
+
+            tileRenderer.enabled = isEditMode;
 
         editModeCanvas.gameObject.SetActive(isEditMode);
         tilemapObjects.ClearAllTiles();
