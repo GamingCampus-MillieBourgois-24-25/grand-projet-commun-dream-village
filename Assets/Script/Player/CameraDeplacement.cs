@@ -91,7 +91,13 @@ public class CameraDeplacement : MonoBehaviour
     private void OnPinch()
     {
         Vector3 finger1 = zoom1Action.action.ReadValue<Vector2>();
-        Vector3 finger2 = zoom2Action.action.ReadValue<Vector2>(); 
+        Vector3 finger2 = zoom2Action.action.ReadValue<Vector2>();
+
+        if (IsPointerOverUIElement(finger1) || IsPointerOverUIElement(finger2))
+        {
+            return;
+        }
+
         float magnitude = (finger1 - finger2).magnitude;
         if (prevMagnitude == 0f)
         {
@@ -125,6 +131,12 @@ public class CameraDeplacement : MonoBehaviour
 
     private void CameraMovement(Vector2 movement, bool isEdit = false)
     {
+        Vector2 posTouch = zoom1Action.action.ReadValue<Vector2>();
+        if (IsPointerOverUIElement(posTouch))
+        {
+            return;
+        }
+
         if (isoManager.HasSelectedObject() && !isEdit)
             return;
 
