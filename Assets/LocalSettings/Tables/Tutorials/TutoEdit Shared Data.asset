@@ -16,15 +16,15 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 8b60c89231d77df46975de3eff2d3416
   m_Entries:
   - m_Id: 4058738688
-    m_Key: TutoEdit001
+    m_Key: Tuto_Edit_001
     m_Metadata:
       m_Items: []
   - m_Id: 6227193856
-    m_Key: TutoEdit002
+    m_Key: Tuto_Edit_002
     m_Metadata:
       m_Items: []
   - m_Id: 9364533248
-    m_Key: TutoEdit003
+    m_Key: Tuto_Edit_003
     m_Metadata:
       m_Items: []
   m_Metadata:

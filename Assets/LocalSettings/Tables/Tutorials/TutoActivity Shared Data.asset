@@ -16,31 +16,31 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 87a78c4e8df18794faeedb1045c7c26b
   m_Entries:
   - m_Id: 22442373120
-    m_Key: TutoActivity001
+    m_Key: Tuto_Activity_001
     m_Metadata:
       m_Items: []
   - m_Id: 25126727680
-    m_Key: TutoActivity002
+    m_Key: Tuto_Activity_002
     m_Metadata:
       m_Items: []
   - m_Id: 27844636672
-    m_Key: TutoActivity003
+    m_Key: Tuto_Activity_003
     m_Metadata:
       m_Items: []
   - m_Id: 30709346304
-    m_Key: TutoActivity004
+    m_Key: Tuto_Activity_004
     m_Metadata:
       m_Items: []
   - m_Id: 33095905280
-    m_Key: TutoActivity005
+    m_Key: Tuto_Activity_005
     m_Metadata:
       m_Items: []
   - m_Id: 37286014976
-    m_Key: TutoActivity006
+    m_Key: Tuto_Activity_006
     m_Metadata:
       m_Items: []
   - m_Id: 41736171520
-    m_Key: TutoActivity007
+    m_Key: Tuto_Activity_007
     m_Metadata:
       m_Items: []
   m_Metadata:

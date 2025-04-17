@@ -16,27 +16,27 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: f38f8bf1e031cb148a0bfd0ba4690bfb
   m_Entries:
   - m_Id: 20986949632
-    m_Key: TutoShop001
+    m_Key: Tuto_Shop_001
     m_Metadata:
       m_Items: []
   - m_Id: 25479049216
-    m_Key: TutoShop002
+    m_Key: Tuto_Shop_002
     m_Metadata:
       m_Items: []
   - m_Id: 29044207616
-    m_Key: TutoShop003
+    m_Key: Tuto_Shop_003
     m_Metadata:
       m_Items: []
   - m_Id: 32408039424
-    m_Key: TutoShop004
+    m_Key: Tuto_Shop_004
     m_Metadata:
       m_Items: []
   - m_Id: 39097954304
-    m_Key: TutoShop005
+    m_Key: Tuto_Shop_005
     m_Metadata:
       m_Items: []
   - m_Id: 45867560960
-    m_Key: TutoShop006
+    m_Key: Tuto_Shop_006
     m_Metadata:
       m_Items: []
   m_Metadata:

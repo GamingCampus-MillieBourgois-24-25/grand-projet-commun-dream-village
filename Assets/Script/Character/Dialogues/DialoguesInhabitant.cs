@@ -20,10 +20,6 @@ public class DialoguesInhabitant : MonoBehaviour
     
     private List<Dialogues> dialogues = new List<Dialogues>();
     
-    [Header("Input Settings")]
-    [SerializeField] private InputActionReference touchAction;
-    [SerializeField] private InputActionReference positionAction;
-    
     private AccessibilityOptions accessibilityOptions;
 
     [Header("Animation Settings")]
@@ -37,9 +33,6 @@ public class DialoguesInhabitant : MonoBehaviour
     
     private void Start()
     {
-        touchAction.action.Enable();
-        positionAction.action.Enable();
-        touchAction.action.performed += OnTouch;
         accessibilityOptions = AccessibilityOptions.Instance;
         dialoguesManager = DialoguesManager.Instance;
 
@@ -49,22 +42,6 @@ public class DialoguesInhabitant : MonoBehaviour
             dialogues = dialoguesManager.GetDialogues();
         }
     }
-
-    private void OnEnable()
-    {
-        touchAction.action.Enable();
-        positionAction.action.Enable();
-        
-        DialoguesTest.OnBuildingPlaced += ReactToBuildingPlacement;
-    }
-    
-    private void OnDisable()
-    {
-        touchAction.action.Disable();
-        positionAction.action.Disable();
-        
-        DialoguesTest.OnBuildingPlaced -= ReactToBuildingPlacement;
-    }
     
     // React to building placement ======= PROTOTYPE
     private void ReactToBuildingPlacement(Building building)
@@ -72,24 +49,6 @@ public class DialoguesInhabitant : MonoBehaviour
         if (building.name == "Bench")
         {
             SelectDialogueByID("Reac001");
-        }
-        
-    }
-
-    // If NPC is touched, select a random dialogue
-    private void OnTouch(InputAction.CallbackContext ctx)
-    {
-        if (ctx.action.triggered && !dialogueBox.activeSelf)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(positionAction.action.ReadValue<Vector2>());
-            
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider.CompareTag("NPC"))
-                {
-                    SelectDialogue(Random.Range(1, 4));
-                }
-            }
         }
     }
 

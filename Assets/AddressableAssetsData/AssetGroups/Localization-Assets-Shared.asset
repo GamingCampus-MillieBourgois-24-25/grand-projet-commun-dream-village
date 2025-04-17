@@ -89,6 +89,29 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31227703947268344b145d584fb78ab6
+    m_Address: Assets/LocalSettings/Tables/Dialogues/DialoguesGlobal Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7b6952ea84e7334282b9a1336f30eac
+    m_Address: Assets/LocalSettings/Tables/Dialogues/CharacterSpecific/DialoguesWillithWarm
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b9e9f7a0fd4df244b25a54e664bfc70
+    m_Address: Assets/LocalSettings/Tables/Dialogues/CharacterSpecific/DialoguesFestiaHest
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ddbcaa726fc0d349aac34691376c3bf
+    m_Address: Assets/LocalSettings/Tables/Dialogues/CharacterSpecific/DialoguesNillieZel
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b2886dc44f367cc4784b3a637a476509, type: 2}
   m_SchemaSet:

@@ -20,7 +20,7 @@ public class DialoguesManager : MonoBehaviour
 
     [SerializeField] private List<DictStrings> localizedStrings;
 
-    [Header("UI Elements")]
+    [Header("UI Elements")] public GameObject dialogueCanvas;
     public GameObject dialogueBox;
     public TMP_Text dialogueText;
 
@@ -39,7 +39,7 @@ public class DialoguesManager : MonoBehaviour
 
     private void LoadAllDialogues()
     {
-        var dialoguesObj = Resources.LoadAll("Dialogues", typeof(Dialogues));
+        var dialoguesObj = Resources.LoadAll("ScriptableObject/Dialogues", typeof(Dialogues));
         foreach (var obj in dialoguesObj)
         {
             if (obj is Dialogues dialogue)
@@ -93,6 +93,7 @@ public class DialoguesManager : MonoBehaviour
 
     private void DisplayInBox(string text)
     {
+        dialogueCanvas.SetActive(true);
         dialogueBox.SetActive(true);
         dialogueText.text = text;
     }

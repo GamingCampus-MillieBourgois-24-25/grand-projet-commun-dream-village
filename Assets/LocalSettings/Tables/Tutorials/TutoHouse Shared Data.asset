@@ -16,43 +16,43 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 72d91b9481dd09147846ac20901bda6a
   m_Entries:
   - m_Id: 20999532544
-    m_Key: TutoHouse001
+    m_Key: Tuto_House_001
     m_Metadata:
       m_Items: []
   - m_Id: 23239290880
-    m_Key: TutoHouse002
+    m_Key: Tuto_House_002
     m_Metadata:
       m_Items: []
   - m_Id: 25567129600
-    m_Key: TutoHouse003
+    m_Key: Tuto_House_003
     m_Metadata:
       m_Items: []
   - m_Id: 28062740480
-    m_Key: TutoHouse004
+    m_Key: Tuto_House_004
     m_Metadata:
       m_Items: []
   - m_Id: 30369607680
-    m_Key: TutoHouse005
+    m_Key: Tuto_House_005
     m_Metadata:
       m_Items: []
   - m_Id: 46970662912
-    m_Key: TutoHouse006
+    m_Key: Tuto_House_006
     m_Metadata:
       m_Items: []
   - m_Id: 50372243456
-    m_Key: TutoHouse007
+    m_Key: Tuto_House_007
     m_Metadata:
       m_Items: []
   - m_Id: 53174038528
-    m_Key: TutoHouse008
+    m_Key: Tuto_House_008
     m_Metadata:
       m_Items: []
   - m_Id: 56558841856
-    m_Key: TutoHouse009
+    m_Key: Tuto_House_009
     m_Metadata:
       m_Items: []
   - m_Id: 58815377408
-    m_Key: TutoHouse010
+    m_Key: Tuto_House_010
     m_Metadata:
       m_Items: []
   m_Metadata:
