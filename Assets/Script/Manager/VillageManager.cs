@@ -15,7 +15,7 @@ public class VillageManager : MonoBehaviour
         foreach (var inhabitant in baseInhabitants)
         {
             inhabitants.Add(new InhabitantInstance(inhabitant));
-        }
+        } 
     }
 
     public void AddInhabitant(Inhabitant newInhabitant)

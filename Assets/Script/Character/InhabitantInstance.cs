@@ -15,25 +15,25 @@ public class InhabitantInstance
     public int Mood
     {
         get => mood;
-        set => mood = Mathf.Clamp(value, -100, 100);
+        set => mood = Mathf.Clamp(value, -baseData.Limit, baseData.Limit);
     }
 
     public int Serenity
     {
         get => serenity;
-        set => serenity = Mathf.Clamp(value, -100, 100);
+        set => serenity = Mathf.Clamp(value, -baseData.Limit, baseData.Limit);
     }
 
     public int Energy
     {
         get => energy;
-        set => energy = Mathf.Clamp(value, -100, 100);
+        set => energy = Mathf.Clamp(value, -baseData.Limit, baseData.Limit);
     }
 
     public int Hearts
     {
         get => hearts;
-        set => hearts = Mathf.Clamp(value, 0, baseData.Limit);
+        set => hearts = Mathf.Clamp(value, 0, baseData.HeartsBeforeLeaving);
     }
 
     public InhabitantInstance(Inhabitant data)

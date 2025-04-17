@@ -33,7 +33,6 @@ MonoBehaviour:
   <Hearts>k__BackingField: 3
   <Limit>k__BackingField: 100
   <GoldMultiplier>k__BackingField: 1.1
-  <UnlockLevel>k__BackingField: 2
   <InitialPrice>k__BackingField: 1000
   <CanLeave>k__BackingField: 1
   <HeartsBeforeLeaving>k__BackingField: 3
