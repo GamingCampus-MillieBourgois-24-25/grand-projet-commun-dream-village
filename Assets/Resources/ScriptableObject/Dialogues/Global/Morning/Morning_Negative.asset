@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Morning_Negative
   m_EditorClassIdentifier: 
   ID: Morning_Negative
-  relatedElementID: 
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:31227703947268344b145d584fb78ab6
@@ -26,12 +25,8 @@ MonoBehaviour:
   requiredArguments:
   - DISLIKE
   dialogueType: 0
-  subDialogueType: 2
-  stats:
-    Mood: 0
-    Serenity: 0
-    Energy: 0
-    Hearts: 0
+  dialogueCondition: 5
+  tutorialType: 0
   references:
     version: 2
     RefIds: []

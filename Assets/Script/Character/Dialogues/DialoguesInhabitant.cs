@@ -12,7 +12,6 @@ public class DialoguesInhabitant : MonoBehaviour
 {
     [Header("Inhabitant Settings")]
     [SerializeField] private Inhabitant inhabitant;
-    [SerializeField] private Dialogues.Stats stats;
     
     
     
@@ -61,24 +60,18 @@ public class DialoguesInhabitant : MonoBehaviour
                     .OrderBy(x => Random.value)
                     .FirstOrDefault();
                 ShowDialogue(dial);
-                UpdateStats(dial);
-                ShowStats();
                 break;
             case 2:
                 dial = dialogues.Where(x => x.GetDialogueType() == Dialogues.DialogueType.Information)
                     .OrderBy(x => Random.value)
                     .FirstOrDefault();
                 ShowDialogue(dial);
-                UpdateStats(dial);
-                ShowStats();
                 break;
             case 3:
                 dial = dialogues.Where(x => x.GetDialogueType() == Dialogues.DialogueType.Reaction)
                     .OrderBy(x => Random.value)
                     .FirstOrDefault();
                 ShowDialogue(dial);
-                UpdateStats(dial);
-                ShowStats();
                 break;
             default:
                 break;
@@ -100,16 +93,6 @@ public class DialoguesInhabitant : MonoBehaviour
         }
         
         ShowDialogue(dial);
-        UpdateStats(dial);
-        ShowStats();
-    }
-
-    private void UpdateStats(Dialogues dialogue)
-    {
-        stats.Mood += dialogue.GetStats().Mood;
-        stats.Serenity += dialogue.GetStats().Serenity;
-        stats.Energy += dialogue.GetStats().Energy;
-        stats.Hearts += dialogue.GetStats().Hearts;
     }
     
     private void ShowDialogue(Dialogues dialogue)
@@ -132,14 +115,6 @@ public class DialoguesInhabitant : MonoBehaviour
     public void StopTextAnimation()
     {
         textAnimationHandle.TryComplete();
-    }
-
-    private void ShowStats()
-    {
-        Debug.Log($"Mood : {stats.Mood}");
-        Debug.Log($"Serenity : {stats.Serenity}");
-        Debug.Log($"Energy : {stats.Energy}");
-        Debug.Log($"Hearts : {stats.Hearts}");
     }
     
     

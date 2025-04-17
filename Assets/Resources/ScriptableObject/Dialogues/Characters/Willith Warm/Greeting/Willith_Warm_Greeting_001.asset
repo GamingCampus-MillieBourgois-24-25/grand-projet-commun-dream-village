@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Willith_Warm_Greeting_001
   m_EditorClassIdentifier: 
   ID: Willith_Warm_Greeting_001
-  relatedElementID: 
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:f7b6952ea84e7334282b9a1336f30eac
@@ -25,12 +24,8 @@ MonoBehaviour:
     m_LocalVariables: []
   requiredArguments: []
   dialogueType: 0
-  subDialogueType: 3
-  stats:
-    Mood: 0
-    Serenity: 0
-    Energy: 0
-    Hearts: 0
+  dialogueCondition: 2
+  tutorialType: 0
   references:
     version: 2
     RefIds: []

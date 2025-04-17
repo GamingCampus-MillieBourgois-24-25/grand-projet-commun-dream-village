@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Festia_Hest_First_Greeting_001
   m_EditorClassIdentifier: 
   ID: Festia_Hest_First_Greeting_001
-  relatedElementID: 
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:3b9e9f7a0fd4df244b25a54e664bfc70
@@ -25,12 +24,8 @@ MonoBehaviour:
     m_LocalVariables: []
   requiredArguments: []
   dialogueType: 0
-  subDialogueType: 3
-  stats:
-    Mood: 0
-    Serenity: 0
-    Energy: 0
-    Hearts: 0
+  dialogueCondition: 1
+  tutorialType: 0
   references:
     version: 2
     RefIds: []

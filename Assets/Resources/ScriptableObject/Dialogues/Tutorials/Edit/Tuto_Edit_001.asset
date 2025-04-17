@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Tuto_Edit_001
   m_EditorClassIdentifier: 
   ID: Tuto_Edit_001
-  relatedElementID: 
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:8b60c89231d77df46975de3eff2d3416
@@ -25,12 +24,8 @@ MonoBehaviour:
     m_LocalVariables: []
   requiredArguments: []
   dialogueType: 5
-  subDialogueType: 5
-  stats:
-    Mood: 0
-    Serenity: 0
-    Energy: 0
-    Hearts: 0
+  dialogueCondition: 7
+  tutorialType: 3
   references:
     version: 2
     RefIds: []

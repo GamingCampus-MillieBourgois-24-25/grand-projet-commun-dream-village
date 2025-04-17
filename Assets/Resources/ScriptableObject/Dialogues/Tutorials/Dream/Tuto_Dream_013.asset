@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Tuto_Dream_013
   m_EditorClassIdentifier: 
   ID: Tuto_Dream_013
-  relatedElementID: 
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:85753728e70574449a9548b06cefa37a
@@ -25,12 +24,8 @@ MonoBehaviour:
     m_LocalVariables: []
   requiredArguments: []
   dialogueType: 5
-  subDialogueType: 4
-  stats:
-    Mood: 0
-    Serenity: 0
-    Energy: 0
-    Hearts: 0
+  dialogueCondition: 7
+  tutorialType: 2
   references:
     version: 2
     RefIds: []

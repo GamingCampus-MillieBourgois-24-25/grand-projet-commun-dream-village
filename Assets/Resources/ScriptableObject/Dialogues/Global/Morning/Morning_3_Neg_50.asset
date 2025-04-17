@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Morning_3_Neg_50
   m_EditorClassIdentifier: 
   ID: Morning_3_Neg_50
-  relatedElementID: 
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:31227703947268344b145d584fb78ab6
@@ -25,12 +24,8 @@ MonoBehaviour:
     m_LocalVariables: []
   requiredArguments: []
   dialogueType: 0
-  subDialogueType: 2
-  stats:
-    Mood: 0
-    Serenity: 0
-    Energy: 0
-    Hearts: 0
+  dialogueCondition: 3
+  tutorialType: 0
   references:
     version: 2
     RefIds: []
