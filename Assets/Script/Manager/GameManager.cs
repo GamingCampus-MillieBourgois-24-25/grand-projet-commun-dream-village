@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
 
     #region save Data
+    [System.Serializable]
     public class SavePartData : ISaveData
     {
         public DateTime lastTimeConnected;
@@ -67,7 +68,6 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     private void LoadAllResources()
     {
         this.Load("GameManager");
-        villageManager.Load("VillageManager");
 
 
         // Load all inhabitants
@@ -82,9 +82,38 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         {
             buildings.Add(building);
         }
+
+
+        villageManager.Load("VillageManager");
     }
 
 
+
+    public Inhabitant GetInhabitantByName(string name)
+    {
+        foreach (Inhabitant inhabitant in inhabitants)
+        {
+            if (inhabitant.FirstName == name)
+            {
+                return inhabitant;
+            }
+        }
+        Debug.LogError("Inhabitant not found: " + name);
+        return null;
+    }
+
+    public Building GetBuildingByName(string name)
+    {
+        foreach (Building building in buildings)
+        {
+            if (building.Name == name)
+            {
+                return building;
+            }
+        }
+        Debug.LogError("Building not found: " + name);
+        return null;
+    }
 
 
     public void SetActualTime()

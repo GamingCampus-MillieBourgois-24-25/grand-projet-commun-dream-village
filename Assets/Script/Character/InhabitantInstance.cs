@@ -111,7 +111,7 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
 
     public class SavePartData : ISaveData
     {
-        public Inhabitant baseInhabitant;
+        public string baseInhabitantName;
 
         public int mood;
         public int serenity;
@@ -125,7 +125,7 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
     {
         var data = new SavePartData();
 
-        data.baseInhabitant = baseData;
+        data.baseInhabitantName = baseData.FirstName;
 
         data.mood = Mood;
         data.serenity = Serenity;
@@ -140,7 +140,7 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
 
     public void Deserialize(SavePartData data)
     {
-        baseData = data.baseInhabitant;
+        baseData = GM.Instance.GetInhabitantByName(data.baseInhabitantName);
         Mood = data.mood;
         Serenity = data.serenity;
         Energy = data.energy;

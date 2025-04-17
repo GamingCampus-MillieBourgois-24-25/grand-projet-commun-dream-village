@@ -11,7 +11,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     public List<InhabitantInstance> inhabitants { get; private set; } = new List<InhabitantInstance>();
     public List<BuildingObject> buildings { get; private set; } = new List<BuildingObject>();
 
-
+    [System.Serializable]
     public class SavePartData : ISaveData
     {
         public List<BuildingObject.SavePartData> buildings = new List<BuildingObject.SavePartData>();
@@ -31,6 +31,26 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         foreach (var inhabitant in baseInhabitants)
         {
             inhabitants.Add(new InhabitantInstance(inhabitant));
+        }
+
+        // Trouver un élément sur la scene nommé CoffeeShop
+        GameObject coffeeShop = GameObject.Find("CoffeeShop");
+        if (coffeeShop != null)
+        {
+            BuildingObject buildingObject = coffeeShop.GetComponent<BuildingObject>();
+            if (buildingObject != null)
+            {
+                buildings.Add(buildingObject);
+                baseBuildings.Add(buildingObject.building);
+            }
+            else
+            {
+                Debug.LogError("BuildingObject component not found on CoffeeShop.");
+            }
+        }
+        else
+        {
+            Debug.LogError("CoffeeShop GameObject not found in the scene.");
         }
     }
 
@@ -56,6 +76,18 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         return inhabitants.Count;
     }
 
+    public InhabitantInstance GetInhabitant(Inhabitant inhabitant)
+    {
+        foreach (var instance in inhabitants)
+        {
+            if (instance.baseData == inhabitant)
+            {
+                return instance;
+            }
+        }
+        return null;
+    }
+
 
 
 
@@ -79,9 +111,12 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
 
     public void Deserialize(SavePartData data)
     {
+
         foreach (var buildingData in data.buildings)
         {
-            BuildingObject loadedBuilding = new BuildingObject();
+            GameObject buildingInstanciate = Instantiate(GM.Instance.GetBuildingByName(buildingData.baseBuildingName).BuildingPrefab, Vector3.zero, Quaternion.identity);
+
+            BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
             loadedBuilding.Deserialize(buildingData);
             buildings.Add(loadedBuilding);
             baseBuildings.Add(loadedBuilding.building);

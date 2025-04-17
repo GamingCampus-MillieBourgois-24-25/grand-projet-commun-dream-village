@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     [SerializeField] public Building building;
     private InhabitantInstance inhabitantUsing;
 
-    [SerializeField] private GameObject canvasBuilding;
+    public GameObject canvasBuilding;
 
 
     #region Waiting
@@ -26,9 +27,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
     IEnumerator WaitingCoroutine()
     {
-        while (true)
-        {
-            if (isUsed)
+            while (isUsed)
             {
                 timeRemaining -= Time.deltaTime;
                 if (timeRemaining <= 0f)
@@ -38,16 +37,16 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
                     isUsed = false;
                 }
                 timeText.text = timeRemaining.ToString() + "s";
+
+                yield return null;
             }
-            yield return null;
-        }
     }
 
     IEnumerator RestartCoroutine()
     {
         yield return null;
 
-        if (isUsed)
+        if (isUsed && waitingCoroutine == null)
         {
             TimeSpan elapsedTime = System.DateTime.Now - gameManager.GetLastTimeSaved();
             timeRemaining -= (float)elapsedTime.TotalSeconds;
@@ -62,13 +61,18 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     {
         gameManager = GameManager.instance;
 
-        if(isUsed)
+        if(isUsed && waitingCoroutine == null)
         {
             TimeSpan elapsedTime = System.DateTime.Now - gameManager.GetLastTimeSaved();
             timeRemaining -= (float)elapsedTime.TotalSeconds;
 
             waitingCoroutine = StartCoroutine(WaitingCoroutine());
         }
+    }
+
+    private void Awake()
+    {
+        SetupCanvas();
     }
 
     private void OnMouseDown()
@@ -78,7 +82,6 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             if (!canvasBuilding.activeSelf)
             {
                 canvasBuilding.SetActive(true);
-                SetupCanvas();
             }
         }
     }
@@ -184,34 +187,37 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     #region Save
     public void Deserialize(SavePartData data)
     {
-        building = data.baseBuilding;
-        inhabitantUsing = data.inhabitantUsing;
+        inhabitantUsing = GM.VM.GetInhabitant(GM.Instance.GetInhabitantByName(data.inhabitantUsingName));
         isUsed = data.isUsed;
         timeRemaining = data.timeRemaining;
 
-        Debug.Log("Deserialized data: " + building.Name);
+        GetComponent<PlaceableObject>().OriginalPosition = data.originalPosition;
+        GetComponent<PlaceableObject>().ResetPosition();
     }
 
     public SavePartData Serialize()
     {
         SavePartData data = new SavePartData();
-        inhabitantUsing = data.inhabitantUsing;
+        data.baseBuildingName = building.Name;
+        data.inhabitantUsingName = (inhabitantUsing != null) ? inhabitantUsing.FirstName : null;
 
-        data.baseBuilding = building;
         data.isUsed = isUsed;
         data.timeRemaining = timeRemaining;
 
-        Debug.Log("Serialized data: " + data.baseBuilding.Name);
+        data.originalPosition = GetComponent<PlaceableObject>().OriginalPosition;
         return data;
     }
 
+    [System.Serializable]
     public class SavePartData : ISaveData
     {
-        public Building baseBuilding;
-        public InhabitantInstance inhabitantUsing;
+        public string baseBuildingName;
+        public string inhabitantUsingName;
 
         public bool isUsed = false;
         public float timeRemaining = 0f;
+
+        public Vector3Int originalPosition;
     }
     #endregion
 }

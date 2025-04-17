@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
 using UnityEngine;
 
 static public class SaveScript
@@ -11,16 +12,31 @@ static public class SaveScript
     private static string key = "Kwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; // Clé de 16, 24 ou 32 caractères
 
 
+
+
+    public static void DeleteSave()
+    {
+        Debug.Log("Deleting save files...");
+        string path = Application.persistentDataPath + "/Saves";
+        if (Directory.Exists(path))
+        {
+            Directory.Delete(path, true); // Le second paramètre "true" permet de supprimer récursivement
+        }
+    }
+
+
     static private void SaveFile(string dataJson, string fileName)
     {
-        byte[] data = Encrypt(dataJson);
+        //byte[] data = Encrypt(dataJson);
 
         string path = savePath + '/' + fileName + extension;
 
         if (!File.Exists(path))
         {
+            Debug.LogError("File does not exist, creating it: " + path);
             if (Directory.Exists(savePath) == false)
             {
+                Debug.LogError("Directory does not exist, creating it: " + savePath);
                 Directory.CreateDirectory(savePath);
             }
 
@@ -28,9 +44,14 @@ static public class SaveScript
         }
 
         // Écrire dans le fichier s'il existe
-        using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite))
+        /*using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite))
         {
             fs.Write(data, 0, data.Length);
+        }*/
+
+        using (StreamWriter writer = new StreamWriter(path, false, Encoding.UTF8)) // false pour écraser le contenu existant
+        {
+            writer.Write(dataJson);
         }
 
     }
@@ -43,22 +64,23 @@ static public class SaveScript
 
         if (!File.Exists(path))
         {
+            Debug.LogError("Le fichier de sauvegarde n'existe pas : " + path);
             if (Directory.Exists(savePath) == false)
             {
+                Debug.LogError("Le répertoire de sauvegarde n'existe pas, création du répertoire : " + savePath);
                 Directory.CreateDirectory(savePath);
             }
 
             File.Create(path).Close();
             return "";
         }
+        //byte[] data = File.ReadAllBytes(path);
+        //string dataStringLoad = Decrypt(data, key);
 
-        byte[] data = File.ReadAllBytes(path);
-        string dataStringLoad = Decrypt(data, key);
-
+        string dataStringLoad = File.ReadAllText(path); // enlever le decrypt pour tester
         if (string.IsNullOrEmpty(dataStringLoad))
         {
-            Debug.LogError("Erreur lors du chargement des données. Le fichier peut être corrompu.");
-            Application.Quit();
+            Debug.LogError("Erreur lors du chargement des données. Le fichier peut être corrompu. (vide ou null)");
             return null;
         }
 
@@ -116,23 +138,28 @@ static public class SaveScript
         }
     }
 
+
     public static void Save<Data>(this ISaveable<Data> saveable, string fileName) where Data : ISaveData
     {
         Data data = saveable.Serialize();
 
-        string json = JsonUtility.ToJson(data);
+        // Sérialisation avec Newtonsoft.Json
+        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+
         SaveFile(json, fileName);
     }
 
     public static void Load<Data>(this ISaveable<Data> saveable, string fileName) where Data : ISaveData
     {
         string json = LoadFile(fileName);
-        if (json != null)
+        if (!string.IsNullOrEmpty(json))
         {
-            Data saveData = JsonUtility.FromJson<Data>(json);
+            // Désérialisation avec Newtonsoft.Json
+            Data saveData = JsonConvert.DeserializeObject<Data>(json);
             saveable.Deserialize(saveData);
         }
     }
+
 }
 
 public interface ISaveable
