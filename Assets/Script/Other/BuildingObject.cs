@@ -199,7 +199,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     {
         SavePartData data = new SavePartData();
         data.baseBuildingName = building.Name;
-        data.inhabitantUsingName = (inhabitantUsing != null) ? inhabitantUsing.FirstName : null;
+        data.inhabitantUsingName = (inhabitantUsing != null) ? inhabitantUsing.Name : null;
 
         data.isUsed = isUsed;
         data.timeRemaining = timeRemaining;

@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     {
         foreach (Inhabitant inhabitant in inhabitants)
         {
-            if (inhabitant.FirstName == name)
+            if (inhabitant.Name == name)
             {
                 return inhabitant;
             }

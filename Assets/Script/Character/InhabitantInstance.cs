@@ -124,7 +124,7 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
     {
         var data = new SavePartData();
 
-        data.baseInhabitantName = baseData.FirstName;
+        data.baseInhabitantName = baseData.Name;
 
         data.mood = Mood;
         data.serenity = Serenity;
