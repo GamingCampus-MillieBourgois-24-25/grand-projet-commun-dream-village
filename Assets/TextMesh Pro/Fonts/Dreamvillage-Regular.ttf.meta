@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d3722e089253f574b8a33e255e07a0f3
+guid: a4a146a30c153434b8bfd759600e1cb8
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - MergedFont
+  - Dreamvillage_chiffre
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
