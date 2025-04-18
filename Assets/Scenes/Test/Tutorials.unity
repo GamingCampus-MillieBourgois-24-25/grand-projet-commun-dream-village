@@ -6278,6 +6278,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6593398517875634362, guid: 23b12ba7d9b20314e9bea8789a682a26,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1491762163}
+    - target: {fileID: 6593398517875634362, guid: 23b12ba7d9b20314e9bea8789a682a26,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetLanguageParameter
+      objectReference: {fileID: 0}
     - target: {fileID: 6881180283174755046, guid: 23b12ba7d9b20314e9bea8789a682a26,
         type: 3}
       propertyPath: m_AnchorMax.x

@@ -26,6 +26,7 @@ public class DialoguesManager : MonoBehaviour
     
     [Header("Text Animation")]
     private MotionHandle textAnimationHandle;
+    private bool isTextAnimationActive;
     [SerializeField] private SerializableMotionSettings<FixedString128Bytes, StringOptions> textAnimationSettings;
 
     [Header("UI Elements")] public GameObject dialogueCanvas;
@@ -111,7 +112,7 @@ public class DialoguesManager : MonoBehaviour
             EndValue = text,
             Duration = textSpeed,
         };
-        
+        isTextAnimationActive = true;
         textAnimationHandle = LMotion.String.Create128Bytes(textAnimationSettings.StartValue, textAnimationSettings.EndValue, textAnimationSettings.Duration)
             .BindToText(dialogueText);
     }
@@ -146,5 +147,6 @@ public class DialoguesManager : MonoBehaviour
     public void StopTextAnimation()
     {
         textAnimationHandle.TryComplete();
+        isTextAnimationActive = false;
     }
 }

@@ -50,7 +50,7 @@ public class AccessibilityOptions : MonoBehaviour
     
     #endregion
 
-    void Start()
+    private void Awake()
     {
         InitLanguageDropdown();
         
@@ -78,7 +78,7 @@ public class AccessibilityOptions : MonoBehaviour
                 if (LocalizationSettings.AvailableLocales.Locales[i].Identifier.Code.Equals(systemLanguage, System.StringComparison.OrdinalIgnoreCase))
                 {
                     languageDropdown.value = i;
-                    SetLanguageParameter(i);
+                    SetLocale(i);
                     PlayerPrefs.SetInt("LocaleKey", i);
                     break;
                 }
@@ -87,14 +87,14 @@ public class AccessibilityOptions : MonoBehaviour
         else
         {
             languageDropdown.value = savedLocaleKey;
-            SetLanguageParameter(savedLocaleKey);
+            SetLocale(savedLocaleKey);
         }
     }
 
     public void SetLanguageParameter(int value)
     {
         if (_localizationActive) return;
-        StartCoroutine(SetLocale(value));
+        SetLocale(value);
     }
     
     public void SetTextSpeedParameter(int value)
@@ -111,10 +111,9 @@ public class AccessibilityOptions : MonoBehaviour
         }
     }
     
-    IEnumerator SetLocale(int localeID)
+    private void SetLocale(int localeID)
     {
         _localizationActive = true;
-        yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale=LocalizationSettings.AvailableLocales.Locales[localeID];
         PlayerPrefs.SetInt("LocaleKey", localeID);
         _localizationActive = false;
