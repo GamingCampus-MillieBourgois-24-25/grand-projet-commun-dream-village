@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3031843463496097701}
   - component: {fileID: 5381805519631779413}
   - component: {fileID: 1687848160979168970}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RemainingTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 3291052367307299147}
   - component: {fileID: 6626373230526824751}
   - component: {fileID: 1585506090588938217}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TimeRemaining
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 5329728013011494199}
   - component: {fileID: 4915968487089691836}
   - component: {fileID: 8722688284849005260}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}

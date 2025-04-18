@@ -97,19 +97,16 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     //    SetupCanvas();
     //}
 
-    private void OnMouseDown()
+    public void ClickOnBuiding()
     {
-        if (!GM.IM.isEditMode)
+        if ((canvasBuilding.transform.IsChildOf(transform) && canvasBuilding.activeSelf) || isUsed)
         {
-            if ((canvasBuilding.transform.IsChildOf(transform) && canvasBuilding.activeSelf) || isUsed)
-            {
-                canvasBuilding.SetActive(false);
-            }
-            else
-            {
-                canvasBuilding.SetActive(true);
-                SetupCanvas();
-            }
+            canvasBuilding.SetActive(false);
+        }
+        else
+        {
+            canvasBuilding.SetActive(true);
+            SetupCanvas();
         }
     }
 

@@ -92,7 +92,7 @@ public class IsoManager : MonoBehaviour
         isClicking = true;
 
         //Debug.Log("OnClickPerformed");
-        Vector2 pointerPos = GetPointerPosition(context);
+        Vector2 pointerPos = GM.Instance.GetPointerPosition(context);
         CheckUnderPointerTouch(pointerPos);
     }
 
@@ -129,30 +129,30 @@ public class IsoManager : MonoBehaviour
     #endregion
 
     #region Touch/Move
-    private Vector2 GetPointerPosition(InputAction.CallbackContext context)
-    {
-        // Si besoin de récupérer la position à partir du device
-        if (Pointer.current != null)
-            return Pointer.current.position.ReadValue();
-        return Vector2.zero;
-    }
-    private bool IsPointerOverUIElement(Vector2 screenPosition)
-    {
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
-        {
-            position = screenPosition
-        };
+    //private Vector2 GetPointerPosition(InputAction.CallbackContext context)
+    //{
+    //    // Si besoin de récupérer la position à partir du device
+    //    if (Pointer.current != null)
+    //        return Pointer.current.position.ReadValue();
+    //    return Vector2.zero;
+    //}
+    //private bool IsPointerOverUIElement(Vector2 screenPosition)
+    //{
+    //    PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
+    //    {
+    //        position = screenPosition
+    //    };
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, results);
+    //    List<RaycastResult> results = new List<RaycastResult>();
+    //    EventSystem.current.RaycastAll(pointerEventData, results);
 
-        return results.Count > 0; // If there's any UI element under the pointer, return true
-    }
+    //    return results.Count > 0; // If there's any UI element under the pointer, return true
+    //}
 
     private void CheckUnderPointerTouch(Vector2 screenPosition)
     {
         // Cancel si click sur un bouton de l'UI
-        if (IsPointerOverUIElement(screenPosition))
+        if (GM.Instance.IsPointerOverUIElement(screenPosition))
         {
             return;
         }
@@ -176,7 +176,7 @@ public class IsoManager : MonoBehaviour
     private void CheckUnderPointerMove(Vector2 screenPosition)
     {
         // Cancel si click sur un bouton de l'UI
-        if (IsPointerOverUIElement(screenPosition))
+        if (GM.Instance.IsPointerOverUIElement(screenPosition))
         {
             return;
         }

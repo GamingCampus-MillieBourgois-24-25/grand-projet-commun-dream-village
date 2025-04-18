@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 {
@@ -167,6 +169,26 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         {
             return $"{seconds}s";
         }
+    }
+
+    public bool IsPointerOverUIElement(Vector2 screenPosition)
+    {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
+        {
+            position = screenPosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, results);
+
+        return results.Count > 0; // If there's any UI element under the pointer, return true
+    }
+
+    public Vector2 GetPointerPosition(InputAction.CallbackContext context)
+    {
+        if (Pointer.current != null)
+            return Pointer.current.position.ReadValue();
+        return Vector2.zero;
     }
 
     #region Check Game closed
