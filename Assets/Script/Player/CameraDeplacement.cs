@@ -34,7 +34,9 @@ public class CameraDeplacement : MonoBehaviour
     IsoManager isoManager;
     Coroutine cameraMovementCoroutine = null;
     float actualZoom;
+
     bool canMove = true;
+    bool firstTouch = false;
 
     void Start()
     {
@@ -97,11 +99,11 @@ public class CameraDeplacement : MonoBehaviour
         Vector3 finger1 = zoom1Action.action.ReadValue<Vector2>();
         Vector3 finger2 = zoom2Action.action.ReadValue<Vector2>();
 
-        if (IsPointerOverUIElement(finger1) || IsPointerOverUIElement(finger2))
-        {
-            canMove = false;
+        CheckFirstTouch(finger1);
+        CheckFirstTouch(finger2);
+
+        if (!canMove)
             return;
-        }
 
         float magnitude = (finger1 - finger2).magnitude;
         if (prevMagnitude == 0f)
@@ -126,6 +128,7 @@ public class CameraDeplacement : MonoBehaviour
         {
             touchCount = 0;
             canMove = true;
+            firstTouch = false;
         }
     }
 
@@ -139,16 +142,17 @@ public class CameraDeplacement : MonoBehaviour
     {
         if (!canMove && !isEdit)
         {
-            Debug.Log("Stop : " + isEdit + " " + canMove);
             return;
         }
 
         Vector2 posTouch = zoom1Action.action.ReadValue<Vector2>();
-        if (IsPointerOverUIElement(posTouch))
+        CheckFirstTouch(posTouch);
+
+        if (!canMove && !isEdit)
         {
-            canMove = false;
             return;
         }
+
 
         if (isoManager.HasSelectedObject() && !isEdit)
             return;
@@ -254,6 +258,20 @@ public class CameraDeplacement : MonoBehaviour
         }
         cameraMovementCoroutine = null;
         yield break;
+    }
+
+
+
+    void CheckFirstTouch(Vector2 pos)
+    {
+        if (firstTouch)
+            return;
+
+        if (IsPointerOverUIElement(pos))
+        {
+            canMove = false;
+        }
+        firstTouch = true;
     }
 
 
