@@ -8,7 +8,6 @@ using System.Collections;
 
 public class IsoManager : MonoBehaviour
 {
-
     [SerializeField] private InputActionAsset inputActions;
 
     [SerializeField] private Tilemap tilemapBase;
@@ -18,11 +17,9 @@ public class IsoManager : MonoBehaviour
     [SerializeField] private TileBase redTile;
     [SerializeField] private LayerMask IslandLayer;
 
-
+    [Header("UI")]
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private Canvas editModeCanvas;
-    [SerializeField] private GameObject inventoryParent;
-    [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private Canvas stockCanvas;
     [SerializeField] private float yStockCanvas;
     [SerializeField] private Button placeBtn;
@@ -519,9 +516,9 @@ public class IsoManager : MonoBehaviour
         UnSelectObject();
     }
 
-    public void BS_TakeInventoryItem<T>(T item, Dictionary<T, InventoryItem<T>> inventory, IsoManager isoManager) where T : ScriptableObject
+    public void BS_TakeInventoryItem<T>(T item, Dictionary<T, InventoryItem<T>> inventory, IsoManager isoManager) where T : IScriptableElement
     {
-        if (!inventory.TryGetValue(item, out var entry) || entry.prefab == null)
+        if (!inventory.TryGetValue(item, out var entry))
         {
             Debug.LogWarning("Item not in inventory or prefab is missing.");
             return;
@@ -530,7 +527,7 @@ public class IsoManager : MonoBehaviour
         Vector3 centerPos = tilemapBase.CellToWorld(Vector3Int.zero);
         centerPos.y += yMovingObject;
 
-        GameObject newObj = Instantiate(entry.prefab, centerPos, Quaternion.identity);
+        GameObject newObj = Instantiate(entry.item.InstantiatePrefab, centerPos, Quaternion.identity);
         PlaceableObject placeable = newObj.GetComponent<PlaceableObject>();
 
         if (placeable != null)
