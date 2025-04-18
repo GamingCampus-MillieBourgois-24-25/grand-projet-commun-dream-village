@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 {
     private enum InventoryCategory
     {
@@ -54,6 +54,39 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    #region Save
+    public class SavePartData : ISaveData
+    {
+        public string playerName;
+        public string cityName;
+        public int level;
+        public int currentXP;
+    }
+
+    public SavePartData Serialize()
+    {
+        SavePartData data = new SavePartData();
+
+        data.playerName = PlayerName;
+        data.cityName = CityName;
+        data.level = Level;
+        data.currentXP = CurrentXP;
+
+        return data;
+    }
+
+    public void Deserialize(SavePartData data)
+    {
+        PlayerName = data.playerName;
+        CityName = data.cityName;
+        Level = data.level;
+        CurrentXP = data.currentXP;
+
+        playerNameText.text = PlayerName;
+        levelText.text = Level.ToString();
+    }
+    #endregion
+
 
     private void Start()
     {
@@ -77,6 +110,8 @@ public class Player : MonoBehaviour
         playerNameText.text = PlayerName;
         levelText.text = Level.ToString();
         Debug.Log($"Player created: {PlayerName}, City: {CityName}");
+
+        this.Save("PlayerData");
     }
 
 
@@ -85,6 +120,8 @@ public class Player : MonoBehaviour
     {
         CurrentXP += amount;
         CheckLevelUp();
+
+        this.Save("PlayerData");
     }
 
     private void CheckLevelUp()
@@ -204,6 +241,7 @@ public class Player : MonoBehaviour
         categoryContainers[_category].SetActive(true);
         scrollView.content = categoryContainers[_category].GetComponent<RectTransform>();
     }
+
 
 
     public interface IPlaceable
