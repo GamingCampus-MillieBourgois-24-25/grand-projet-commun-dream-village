@@ -98,7 +98,7 @@ public class DreamMachineManager : MonoBehaviour
 
         index.text = $"{currentIndex + 1}/{inhabitants.Count}";
 
-        // 🔁 Reset slider colors to default (white)
+        // Reset slider colors to default (white)
         ResetSliderColors();
     }
 
