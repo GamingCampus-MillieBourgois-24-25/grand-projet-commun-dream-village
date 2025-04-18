@@ -1668,40 +1668,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2041555471}
-    - target: {fileID: 1335793684580859540, guid: 86c2440593a799147abfe91ada691d3e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StopTextAnimation
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335793684580859540, guid: 86c2440593a799147abfe91ada691d3e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DialoguesManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4703247538995506213, guid: 86c2440593a799147abfe91ada691d3e,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 48
-      objectReference: {fileID: 0}
-    - target: {fileID: 4703247538995506213, guid: 86c2440593a799147abfe91ada691d3e,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 48
-      objectReference: {fileID: 0}
     - target: {fileID: 5613725209329420874, guid: 86c2440593a799147abfe91ada691d3e,
         type: 3}
       propertyPath: m_Name
       value: Dialogue Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5613725209329420874, guid: 86c2440593a799147abfe91ada691d3e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8856628756762802850, guid: 86c2440593a799147abfe91ada691d3e,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1750
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
