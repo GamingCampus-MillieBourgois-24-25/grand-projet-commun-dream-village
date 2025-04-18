@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DialoguesWillithWarm_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: f7b6952ea84e7334282b9a1336f30eac, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4777453186010316805
+  m_TableData:
+  - m_Id: 21137944576
+    m_Localized: "Oh, hello fella! So you\u2019re the new mayor?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23780356096
+    m_Localized: "I am glad to meet you. My name\u2019s Willith Warm. In hopes to
+      see {0} become the best village in the world!"
+    m_Metadata:
+      m_Items:
+      - rid: 4777453186010316805
+  - m_Id: 27089661952
+    m_Localized: Hello fella!
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4777453186010316805
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00706b8905000000

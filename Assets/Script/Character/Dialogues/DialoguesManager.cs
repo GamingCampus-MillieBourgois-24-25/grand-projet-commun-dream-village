@@ -7,39 +7,38 @@ using UnityEngine.Localization;
 
 public class DialoguesManager : MonoBehaviour
 {
-    public static DialoguesManager Instance;
+    private GameManager gameManager;
 
     [SerializeField] private List<Dialogues> dialogues = new();
     
     [Serializable]
     public struct DictStrings
     {
-        public string varName;
-        public string variable;
+        public string name;
+        public string value;
     }
 
     [SerializeField] private List<DictStrings> localizedStrings;
 
-    [Header("UI Elements")]
+    [Header("UI Elements")] public GameObject dialogueCanvas;
     public GameObject dialogueBox;
     public TMP_Text dialogueText;
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        gameManager = GameManager.instance;
 
         LoadAllDialogues();
     }
 
+    private void Start()
+    {
+        
+    }
+
     private void LoadAllDialogues()
     {
-        var dialoguesObj = Resources.LoadAll("Dialogues", typeof(Dialogues));
+        var dialoguesObj = Resources.LoadAll("ScriptableObject/Dialogues", typeof(Dialogues));
         foreach (var obj in dialoguesObj)
         {
             if (obj is Dialogues dialogue)
@@ -51,7 +50,7 @@ public class DialoguesManager : MonoBehaviour
 
     private string GetVariable(string key)
     {
-        return localizedStrings.FirstOrDefault(x => x.varName == key).variable ?? "???";
+        return localizedStrings.FirstOrDefault(x => x.name.ToLower() == key.ToLower()).value ?? "ERROR";
     }
 
     [ContextMenu("ShowIntroDialogue")]
@@ -66,8 +65,8 @@ public class DialoguesManager : MonoBehaviour
 
     public Dialogues debugDialogue;
     
-    [ContextMenu("DebugShowIntroDialogue")]
-    public void DebugShowIntroDialogue()
+    [ContextMenu("DebugShowDialogue")]
+    public void DebugShowDialogue()
     {
         if (debugDialogue != null)
         {
@@ -78,7 +77,7 @@ public class DialoguesManager : MonoBehaviour
     private void DisplayDialogue(Dialogues dialogue)
     {
         LocalizedString localized = dialogue.GetLocalizedString();
-        localized.Arguments = null; // reset
+        localized.Arguments = null;
 
         var args = new List<object>();
         foreach (var argKey in dialogue.GetRequiredArguments())
@@ -93,6 +92,7 @@ public class DialoguesManager : MonoBehaviour
 
     private void DisplayInBox(string text)
     {
+        dialogueCanvas.SetActive(true);
         dialogueBox.SetActive(true);
         dialogueText.text = text;
     }
@@ -102,20 +102,19 @@ public class DialoguesManager : MonoBehaviour
     [ContextMenu("DebugUpdateArguments")]
     public void DebugUpdateArguments()
     {
-        UpdateArguments("playerName", debugVariable);
+        UpdateArgument("PLAYER_NAME", debugVariable);
     }
 
-    public void UpdateArguments(string variableName, string variableValue)
+    public void UpdateArgument(string variableName, string variableValue)
     {
         for (int i = 0; i < localizedStrings.Count; i++)
         {
-            if (localizedStrings[i].varName == variableName)
-            {
-                var temp = localizedStrings[i];
-                temp.variable = variableValue;
-                localizedStrings[i] = temp;
-                break;
-            }
+            if (!string.Equals(localizedStrings[i].name, variableName, StringComparison.OrdinalIgnoreCase)) continue;
+            
+            var temp = localizedStrings[i];
+            temp.value = variableValue;
+            localizedStrings[i] = temp;
+            break;
         }
     }
 }
