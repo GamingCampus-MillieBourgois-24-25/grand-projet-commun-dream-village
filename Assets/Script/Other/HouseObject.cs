@@ -25,6 +25,10 @@ public class HouseObject : MonoBehaviour
             CharacterJournalManager journalManager = FindObjectOfType<CharacterJournalManager>();
             if (journalManager != null && inhabitant != null)
             {
+                GM.JournalPanel.SetActive(false);
+                GM.ShopPanel.SetActive(false);
+                GM.InventoryPanel.SetActive(false);
+                GM.DayNightPanel.SetActive(false);
                 journalManager.ShowInhabitantByData(inhabitant);
             }
 

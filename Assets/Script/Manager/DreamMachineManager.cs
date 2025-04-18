@@ -16,6 +16,8 @@ public class DreamMachineManager : MonoBehaviour
     public Transform dreamsContainer;
     public Button validateButton;
 
+    [SerializeField] private RectTransform nameBackgroundRectTransform;
+
     public InterestDatabase interestDatabase;
 
     private List<InhabitantInstance> inhabitants;

@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public Player player;   
     [SerializeField] private GameObject playerFormCanvas;
 
+    [Header("UI Buttons")]
+    public GameObject dreamPanel;
+    public GameObject dayNightPanel;
+    public GameObject journalPanel;
+    public GameObject inventoryPanel;
+    public GameObject shopPanel;
 
 
     DateTime lastTimeSaved;
@@ -36,10 +42,6 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     #endregion
 
     #endregion
-
-
-
-
 
     private void Awake()
     {
@@ -179,6 +181,11 @@ public static class GM
     public static GameManager Instance => GameManager.instance;
     public static IsoManager IM => GameManager.instance.isoManager;
     public static VillageManager VM => GameManager.instance.villageManager;
-
     public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
+    public static GameObject DreamPanel => Instance.dreamPanel;
+    public static GameObject DayNightPanel => Instance.dayNightPanel;
+    public static GameObject JournalPanel => Instance.journalPanel;
+    public static GameObject InventoryPanel => Instance.inventoryPanel;
+    public static GameObject ShopPanel => Instance.shopPanel;
+
 }

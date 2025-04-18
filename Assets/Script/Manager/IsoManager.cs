@@ -496,13 +496,15 @@ public class IsoManager : MonoBehaviour
 
         if (isEditMode) {
             HideMainUI(true);
+            GM.JournalPanel.SetActive(false);
         }
         else
         {
             HideMainUI(false);
+            GM.JournalPanel.SetActive(true);
         }
 
-            tileRenderer.enabled = isEditMode;
+        tileRenderer.enabled = isEditMode;
 
         editModeCanvas.gameObject.SetActive(isEditMode);
         tilemapObjects.ClearAllTiles();
