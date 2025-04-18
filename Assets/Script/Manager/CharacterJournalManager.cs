@@ -162,12 +162,12 @@ public class CharacterJournalManager : MonoBehaviour
 
                 if (inhabitant.Hearts <= 0)
                 {
-                    Debug.Log($"{inhabitant.FirstName} quitte le village !");
+                    Debug.Log($"{inhabitant.Name} quitte le village !");
                     toRemove.Add(inhabitant);
                 }
                 else
                 {
-                    Debug.Log($"{inhabitant.FirstName} a perdu un cœur. Reste {inhabitant.Hearts}");
+                    Debug.Log($"{inhabitant.Name} a perdu un cœur. Reste {inhabitant.Hearts}");
                 }
             }
         }
@@ -203,7 +203,7 @@ public class CharacterJournalManager : MonoBehaviour
             if (maxStats >= 2 && onePositive && inhabitant.Hearts < inhabitant.baseData.HeartsBeforeLeaving)
             {
                 inhabitant.Hearts += 1;
-                Debug.Log($"💖 {inhabitant.FirstName} {inhabitant.LastName} a gagné un cœur ! ({inhabitant.Hearts}/{inhabitant.baseData.HeartsBeforeLeaving})");
+                Debug.Log($"💖 {inhabitant.Name} a gagné un cœur ! ({inhabitant.Hearts}/{inhabitant.baseData.HeartsBeforeLeaving})");
             }
         }
 
