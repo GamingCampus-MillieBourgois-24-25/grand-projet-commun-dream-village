@@ -90,7 +90,7 @@ public class DreamMachineManager : MonoBehaviour
         InhabitantInstance currentInhabitant = inhabitants[currentIndex];
 
         characterImage.sprite = currentInhabitant.Icon;
-        characterNameText.text = $"{currentInhabitant.FirstName} {currentInhabitant.LastName}";
+        characterNameText.text = $"{currentInhabitant.Name}";
 
         moodSlider.value = currentInhabitant.Mood;
         serenitySlider.value = currentInhabitant.Serenity;
@@ -364,7 +364,7 @@ public class DreamMachineManager : MonoBehaviour
             var ordered = dream.orderedElements;
 
             // 🔍 Stats avant
-            Debug.Log($"[Before] {inhabitant.FirstName} {inhabitant.LastName} | Mood: {inhabitant.Mood}, Serenity: {inhabitant.Serenity}, Energy: {inhabitant.Energy}");
+            Debug.Log($"[Before] {inhabitant.Name} | Mood: {inhabitant.Mood}, Serenity: {inhabitant.Serenity}, Energy: {inhabitant.Energy}");
 
             // ✨ Application des effets
             inhabitant.Mood += GetStatChange(ordered[0], inhabitant);
@@ -382,7 +382,7 @@ public class DreamMachineManager : MonoBehaviour
             }
 
             // 📊 Stats après
-            Debug.Log($"[After] {inhabitant.FirstName} {inhabitant.LastName} | Mood: {inhabitant.Mood}, Serenity: {inhabitant.Serenity}, Energy: {inhabitant.Energy}");
+            Debug.Log($"[After] {inhabitant.Name}| Mood: {inhabitant.Mood}, Serenity: {inhabitant.Serenity}, Energy: {inhabitant.Energy}");
 
             // 🔄 Désélection
             dream.isSelected = false;
@@ -396,6 +396,8 @@ public class DreamMachineManager : MonoBehaviour
         // 🔁 Rafraîchissement UI
         DisplayCurrentInhabitant();
         DisplayDreams(dreamsByInhabitant[inhabitants[currentIndex]]);
+
+        GM.Cjm.DisplayInhabitant();
     }
 
 

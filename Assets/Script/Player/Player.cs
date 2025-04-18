@@ -1,19 +1,24 @@
 using LitMotion;
 using LitMotion.Extensions;
 using System.Collections.Generic;
-using System.Threading;
 using TMPro;
-using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class Player : MonoBehaviour
 {
+    private enum InventoryCategory
+    {
+        InhabitantCategory,
+        BuildingCategory,
+        DecorationCategory,
+    }
+
+    #region Variables
+
     public Dictionary<Inhabitant, InventoryItem<Inhabitant>> InhabitantInventory { get; private set; } = new();
-    public Dictionary<Deco, InventoryItem<Deco>> DecoInventory { get; private set; } = new();
     public Dictionary<Building, InventoryItem<Building>> BuildingInventory { get; private set; } = new();
+    public Dictionary<Decoration, InventoryItem<Decoration>> DecorationInventory { get; private set; } = new();
 
 
     public string PlayerName { get; private set; }
@@ -30,7 +35,7 @@ public class Player : MonoBehaviour
     public LevelProgression levelProgression;
 
 
-    [Header("UI")]
+    [Header("Player UI")]
     [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private TMP_InputField cityNameInputField;
     [SerializeField] private TextMeshProUGUI playerNameText;
@@ -39,6 +44,15 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject levelUpCanvas;
     [SerializeField] private RectTransform levelUpItemContainer;
     [SerializeField] private GameObject unlockedItemPrefab;
+
+    [Header("Inventory Menu UI")]
+    [SerializeField] private InventoryCategory inventoryCategory = InventoryCategory.InhabitantCategory;
+    [SerializeField] private GameObject itemPrefab;
+    [SerializeField] private ScrollRect scrollView;
+    [SerializeField] private List<Button> categoryButtons;
+    [SerializeField] private List<GameObject> categoryContainers;
+
+    #endregion
 
 
     private void Start()
@@ -98,48 +112,65 @@ public class Player : MonoBehaviour
             for (int i = 0; i < levelUnlockItem.unlockable.Count; i++)
             {
                 GameObject unlockedItem = Instantiate(unlockedItemPrefab, levelUpItemContainer.transform);
-                switch (levelUnlockItem.unlockable[i])
-                {
-                    case Inhabitant inhabitant:
-                        unlockedItem.GetComponent<UnlockedItem>().SetItemContent(inhabitant.Icon, inhabitant.FirstName + " " + inhabitant.LastName); ;
-                        break;
-                    case Building building:
-                        unlockedItem.GetComponent<UnlockedItem>().SetItemContent(building.Icon, building.Name);
-                        break;
-                    //case Decoration decoration:
-                    //    SetItemContent(decoration, obj);
-                    //    break;
-                    default:
-                        break;
-                }
+                unlockedItem.GetComponent<UnlockedItem>().SetItemContent(levelUnlockItem.unlockable[i].Icon, levelUnlockItem.unlockable[i].Name);
             }
+        }
+        levelUpCanvas.SetActive(true);
+        RectTransform target = levelUpCanvas.transform.GetChild(0).GetComponent<RectTransform>();
+        target.localScale = Vector3.zero;
 
-            levelUpCanvas.SetActive(true);
-            RectTransform target = levelUpCanvas.transform.GetChild(0).GetComponent<RectTransform>();
-            target.localScale = Vector3.zero;
+        LMotion.Create(Vector3.zero, Vector3.one, 0.5f)
+         .WithEase(Ease.InCubic)
+         .BindToLocalScale(target);
 
-            LMotion.Create(Vector3.zero, Vector3.one, 0.5f)
-             .WithEase(Ease.InCubic) 
-             .BindToLocalScale(target);
+    }
+
+    public void DisableLvlUpCanvas()
+    {
+        levelUpCanvas.SetActive(false);
+        foreach (Transform child in levelUpItemContainer)
+        {
+            Destroy(child.gameObject);
         }
     }
 
     #endregion
 
     #region Inventory
-    public void AddToInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory, GameObject prefab = null) where T : ScriptableObject
+
+    public void AddToInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : IScriptableElement
     {
         if (inventory.TryGetValue(item, out var existing))
         {
             existing.quantity += amount;
+            existing.inventorySlotItem.UpdateItemContent(existing.quantity);
         }
         else
         {
-            inventory[item] = new InventoryItem<T>(item, amount, prefab);
+            inventory[item] = new InventoryItem<T>(item, amount);
+            GameObject inventorySlot = null;
+            switch (item)
+            {
+                case Inhabitant inhabitant:
+                    inventorySlot = Instantiate(itemPrefab, categoryContainers[0].transform);
+                    break;
+                case Building building:
+                    inventorySlot = Instantiate(itemPrefab, categoryContainers[1].transform);
+                    break;
+                case Decoration decoration:
+                    inventorySlot = Instantiate(itemPrefab, categoryContainers[2].transform);
+                    break;
+            }
+            if (inventorySlot != null)
+            {
+                InventorySlotItem slotComponent = inventorySlot.GetComponent<InventorySlotItem>();
+                inventory[item].SetInventorySlotItem(slotComponent);
+                slotComponent.SetItemContent(item, amount);
+            }
         }
     }
 
-    public bool RemoveFromInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : ScriptableObject
+    public bool RemoveFromInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : IScriptableElement
     {
         if (inventory.TryGetValue(item, out var existing))
         {
@@ -155,6 +186,25 @@ public class Player : MonoBehaviour
         }
         return false;
     }
+
+    public void BS_SwitchInventoryCategory(int _category)
+    {
+        if (_category < 0 || _category > 2)
+        {
+            Debug.LogError("Invalid shop category index");
+            return;
+        }
+
+        categoryButtons[(int)inventoryCategory].interactable = true;
+        categoryContainers[(int)inventoryCategory].SetActive(false);
+
+        inventoryCategory = (InventoryCategory)_category;
+
+        categoryButtons[_category].interactable = false;
+        categoryContainers[_category].SetActive(true);
+        scrollView.content = categoryContainers[_category].GetComponent<RectTransform>();
+    }
+
 
     public interface IPlaceable
     {

@@ -24,8 +24,6 @@ public class DayNight : MonoBehaviour
     [Header("Curtain Parameters")]
     [SerializeField] private RawImage curtain;
     [SerializeField] private float animationDuration;
-    [SerializeField] private Vector3 hiddenPosition;
-    [SerializeField] private Vector3 shownPosition;
 
     // Start is called before the first frame update
     private void Awake()
@@ -39,13 +37,20 @@ public class DayNight : MonoBehaviour
     {
         isDay = !isDay;
         RectTransform transform = curtain.GetComponent<RectTransform>();
-        LMotion.Create(hiddenPosition.x, shownPosition.x, animationDuration)
+        Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
+        LMotion.Create(0, target.x, animationDuration)
             .WithEase(Ease.OutCubic).WithOnComplete(SwitchTime)
             .Bind(x =>
             {
                 var rect = transform.rect;
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
+        if (isDay)
+        {
+            GM.Cjm.CheckStatsAndHandleDeparture();
+            GM.Cjm.CheckForHeartBonus();
+            Debug.Log("Daytime: Checking stats and handling departure.");
+        }
     }
 
     private void SwitchTime()
@@ -54,7 +59,8 @@ public class DayNight : MonoBehaviour
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RectTransform transform = curtain.GetComponent<RectTransform>();
-        LMotion.Create(shownPosition.x, hiddenPosition.x, animationDuration)
+        Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
+        LMotion.Create(target.x, 0, animationDuration)
             .WithEase(Ease.OutCubic)
             .Bind(x =>
             {
@@ -63,5 +69,6 @@ public class DayNight : MonoBehaviour
             });
 
         timeText.text = isDay ? "Day" : "Night";
+
     }
 }
