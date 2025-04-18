@@ -34,6 +34,7 @@ public class CameraDeplacement : MonoBehaviour
     IsoManager isoManager;
     Coroutine cameraMovementCoroutine = null;
     float actualZoom;
+    bool canMove = true;
 
     void Start()
     {
@@ -90,11 +91,15 @@ public class CameraDeplacement : MonoBehaviour
 
     private void OnPinch()
     {
+        if(!canMove)
+            return;
+
         Vector3 finger1 = zoom1Action.action.ReadValue<Vector2>();
         Vector3 finger2 = zoom2Action.action.ReadValue<Vector2>();
 
         if (IsPointerOverUIElement(finger1) || IsPointerOverUIElement(finger2))
         {
+            canMove = false;
             return;
         }
 
@@ -120,6 +125,7 @@ public class CameraDeplacement : MonoBehaviour
         if (touchCount <= 0)
         {
             touchCount = 0;
+            canMove = true;
         }
     }
 
@@ -131,9 +137,16 @@ public class CameraDeplacement : MonoBehaviour
 
     private void CameraMovement(Vector2 movement, bool isEdit = false)
     {
+        if (!canMove && !isEdit)
+        {
+            Debug.Log("Stop : " + isEdit + " " + canMove);
+            return;
+        }
+
         Vector2 posTouch = zoom1Action.action.ReadValue<Vector2>();
         if (IsPointerOverUIElement(posTouch))
         {
+            canMove = false;
             return;
         }
 
@@ -166,7 +179,8 @@ public class CameraDeplacement : MonoBehaviour
 
     void CameraMovementEdit()
     {
-        if(cameraMovementCoroutine != null)
+        Debug.Log("CameraMovementEdit : " + isoManager.HasSelectedObject());
+        if (cameraMovementCoroutine != null)
         {
             StopCoroutine(cameraMovementCoroutine);
             cameraMovementCoroutine = null;
@@ -179,21 +193,15 @@ public class CameraDeplacement : MonoBehaviour
 
     IEnumerator CameraDeplacementEditCorout()
     {
+        yield return null;
         if (isoManager.HasSelectedObject())
         {
-
+            Debug.Log("HasItem");
             while (touch1Action.action.IsPressed())
             {
+                Debug.Log("while");
                 Vector2 movement = Vector2.zero;
-                // Vérifier si le toucher est sur l'UI
                 Vector2 posTouch = zoom1Action.action.ReadValue<Vector2>();
-
-
-
-                if (IsPointerOverUIElement(posTouch))
-                {
-                    yield break;
-                }
 
 
 
@@ -234,13 +242,13 @@ public class CameraDeplacement : MonoBehaviour
                 if (movement == Vector2.zero)
                     yield return null;
 
-                Debug.Log(movement);
                 CameraMovement(movement, true);
                 yield return null;
             }
         }
         else
         {
+            Debug.Log("HasNotItem");
             cameraMovementCoroutine = null;
             yield break;
         }
@@ -259,8 +267,6 @@ public class CameraDeplacement : MonoBehaviour
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerEventData, results);
-
-        Debug.Log("Results: " + results.Count);
 
         return results.Count > 0; // If there's any UI element under the pointer, return true
     }
