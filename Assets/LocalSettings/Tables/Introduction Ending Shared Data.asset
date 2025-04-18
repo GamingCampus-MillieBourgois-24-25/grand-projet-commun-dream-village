@@ -16,15 +16,15 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 8a4358b2d52704d4faffc78d6ca427c9
   m_Entries:
   - m_Id: 5941981184
-    m_Key: IntroEnd001
+    m_Key: Intro_End_001
     m_Metadata:
       m_Items: []
   - m_Id: 9813323776
-    m_Key: IntroEnd002
+    m_Key: Intro_End_002
     m_Metadata:
       m_Items: []
   - m_Id: 17547620352
-    m_Key: IntroEnd003
+    m_Key: Intro_End_003
     m_Metadata:
       m_Items: []
   m_Metadata:

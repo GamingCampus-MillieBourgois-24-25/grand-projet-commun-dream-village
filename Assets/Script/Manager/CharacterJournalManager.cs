@@ -51,14 +51,14 @@ public class CharacterJournalManager : MonoBehaviour
         DisplayInhabitant();
     }
 
-    private void DisplayInhabitant()
+    public void DisplayInhabitant()
     {
         if (inhabitants.Count == 0) return;
 
         InhabitantInstance currentInhabitant = inhabitants[currentIndex];
 
         iconImage.sprite = currentInhabitant.Icon;
-        nameText.text = $"{currentInhabitant.FirstName} {currentInhabitant.LastName}";
+        nameText.text = currentInhabitant.Name;
         pronounsText.text = currentInhabitant.baseData.Pronouns.ToString();
         mbtiText.text = currentInhabitant.baseData.MBTI.ToString();
         personalitiesText.text = string.Join(" / ", currentInhabitant.baseData.Personnality);
@@ -117,24 +117,22 @@ public class CharacterJournalManager : MonoBehaviour
     private void RefreshHearts(int currentHearts)
     {
         foreach (Transform child in heartsContainer)
-        {
             Destroy(child.gameObject);
-        }
 
-        // Right here, si l'habitant ne peut pas se barrer et n'a pas de coeur, afficher un coeur doré
+        int heartMax = inhabitants[currentIndex].baseData.HeartsBeforeLeaving;
 
-        for (int i = 0; i < currentHearts; i++)
+        for (int i = 0; i < heartMax; i++)
         {
             //GameObject heartGO = new GameObject("Heart", typeof(RectTransform), typeof(Image));
             GameObject heartGO = Instantiate(heartPrefab);
             heartGO.transform.SetParent(heartsContainer, false);
 
             Image img = heartGO.GetComponent<Image>();
-            img.sprite = heartFullSprite; 
+            img.sprite = i < currentHearts ? heartFullSprite : heartEmptySprite;
             img.preserveAspect = true;
 
             RectTransform rt = heartGO.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(100, 100); 
+            rt.sizeDelta = new Vector2(100, 100);
         }
     }
 
@@ -147,6 +145,70 @@ public class CharacterJournalManager : MonoBehaviour
             currentIndex = index;
             DisplayInhabitant();
         }
+    }
+
+    public void CheckStatsAndHandleDeparture()
+    {
+        List<InhabitantInstance> toRemove = new();
+
+        foreach (var inhabitant in inhabitants)
+        {
+            bool allNegative = inhabitant.Mood < 0 && inhabitant.Serenity < 0 && inhabitant.Energy < 0;
+
+            if (allNegative && inhabitant.baseData.CanLeave)
+            {
+                inhabitant.Hearts--;
+                Debug.Log(inhabitant.Hearts); // Correction effectuée ici
+
+                if (inhabitant.Hearts <= 0)
+                {
+                    Debug.Log($"{inhabitant.FirstName} quitte le village !");
+                    toRemove.Add(inhabitant);
+                }
+                else
+                {
+                    Debug.Log($"{inhabitant.FirstName} a perdu un cœur. Reste {inhabitant.Hearts}");
+                }
+            }
+        }
+
+        foreach (var leaver in toRemove)
+        {
+            GM.VM.RemoveInhabitant(leaver);
+        }
+
+        // Remise à jour du journal
+        if (inhabitants.Count > 0)
+        {
+            currentIndex = Mathf.Clamp(currentIndex, 0, inhabitants.Count - 1);
+            DisplayInhabitant();
+        }
+    }
+
+    public void CheckForHeartBonus()
+    {
+        foreach (var inhabitant in GM.VM.inhabitants)
+        {
+            if (!inhabitant.baseData.CanLeave) continue; // Juste au cas où on veut restreindre ça aussi
+
+            int maxLimit = inhabitant.baseData.Limit;
+
+            int maxStats = 0;
+            if (inhabitant.Mood >= maxLimit) maxStats++;
+            if (inhabitant.Serenity >= maxLimit) maxStats++;
+            if (inhabitant.Energy >= maxLimit) maxStats++;
+
+            bool onePositive = inhabitant.Mood > 0 || inhabitant.Serenity > 0 || inhabitant.Energy > 0;
+
+            if (maxStats >= 2 && onePositive && inhabitant.Hearts < inhabitant.baseData.HeartsBeforeLeaving)
+            {
+                inhabitant.Hearts += 1;
+                Debug.Log($"💖 {inhabitant.FirstName} {inhabitant.LastName} a gagné un cœur ! ({inhabitant.Hearts}/{inhabitant.baseData.HeartsBeforeLeaving})");
+            }
+        }
+
+        // Actualise l'affichage
+        DisplayInhabitant();
     }
 
 

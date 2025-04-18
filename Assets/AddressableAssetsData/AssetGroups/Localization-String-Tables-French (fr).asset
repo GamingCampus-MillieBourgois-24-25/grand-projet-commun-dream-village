@@ -66,6 +66,54 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-fr
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 106fad199d9d19b49a1bbf36ae7fd39f
+    m_Address: TutoDream_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d71dbb3e6f63039419b1286be3fc3a2e
+    m_Address: TutoShop_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b10d29144d7dfca4faaa4d39aa2084d5
+    m_Address: TutoEdit_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c39597ada4494d47ada52d65ea53839
+    m_Address: TutoHeart_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87e805f37c7417443a8b096a1a10518c
+    m_Address: DialoguesGlobal_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2faf2b66ade5e3c4eb42d54a9b2e5e77
+    m_Address: DialoguesWillithWarm_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1324621c77432e24cbdbe3d1e58b8217
+    m_Address: DialoguesFestiaHest_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 245a27abddaf64c4ebb39b9fa7d9dd4f
+    m_Address: DialoguesNillieZel_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b2886dc44f367cc4784b3a637a476509, type: 2}
   m_SchemaSet:

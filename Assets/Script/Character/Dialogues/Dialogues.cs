@@ -9,59 +9,66 @@ public class Dialogues : ScriptableObject
 {
     public enum DialogueType
     {
-        Introduction,
-        TutoHouse,
-        TutoActivity,
-        Reaction,
+        Dialogue,
         Dream,
-        Information
+        Information,
+        Introduction,
+        Reaction,
+        Tutorial,
     }
     
-    [System.Serializable]
-    public struct Stats
+    public enum DialogueCondition
     {
-        public int Mood;
-        public int Serenity;
-        public int Energy;
-        public int Hearts;
+        None,
+        FirstGreeting,
+        GreetingRandom,
+        MorningNegative,
+        MorningPositive,
+        PostDreamNegative,
+        PostDreamPositive,
+        TutorialSpecific,
     }
-
-    [System.Serializable]
-    public class AttributeEffect
-    { 
-        public enum BonusType
-        {
-            Multiple,
-            Add
-        }
-        
-        public InterestCategory attribute;
-        public float bonus;
-        public BonusType bonusType;
+    
+    public enum TutorialType
+    {
+        None,
+        Activity,
+        Dream,
+        Edit,
+        Heart,
+        House,
+        Shop
     }
     
     [SerializeField] private string ID;
-    [SerializeField] private string relatedElementID;
     [SerializeField] private LocalizedString dialogueText;
     [SerializeField] private string[] requiredArguments;
     
     [SerializeField] private DialogueType dialogueType;
-    [SerializeField] private Stats stats;
+    [SerializeField] private DialogueCondition dialogueCondition;
+    [SerializeField] private TutorialType tutorialType;
+    
     
     public string GetID()
     {
         return ID;
     }
     
-    public string GetRelatedElementID()
-    {
-        return relatedElementID;
-    }
-    
     public DialogueType GetDialogueType()
     {
         return dialogueType;
     }
+    
+    public DialogueCondition GetDialogueCondition()
+    {
+        return dialogueCondition;
+    }
+    
+    public TutorialType GetTutorialType()
+    {
+        return tutorialType;
+    }
+    
     public LocalizedString GetLocalizedString()
     {
         return dialogueText;
@@ -70,10 +77,6 @@ public class Dialogues : ScriptableObject
     public string GetDialogueText()
     {
         return dialogueText.GetLocalizedString();
-    }
-    public Stats GetStats()
-    {
-        return stats;
     }
 
     public string[] GetRequiredArguments()

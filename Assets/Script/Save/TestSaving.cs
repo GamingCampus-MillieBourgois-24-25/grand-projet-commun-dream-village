@@ -7,7 +7,7 @@ public class TestSaving : MonoBehaviour, ISaveable<TestSaving.SavePartData>
     public class SavePartData : ISaveData
     {
         public string name = "Player";
-        float floatifloata = 0.5f;
+/*        float floatifloata = 0.5f;
         int intotiti = 456;
         bool boolabool = true;
         List<int> listou = new List<int> { 1, 2, 3, 4, 5 };
@@ -16,7 +16,7 @@ public class TestSaving : MonoBehaviour, ISaveable<TestSaving.SavePartData>
             { "Key1", InhabitantEnums.INTJ },
             { "Key2", InhabitantEnums.INFP},
             { "Key3", InhabitantEnums.ENTP}
-        };
+        };*/
     }
 
     private string name;
