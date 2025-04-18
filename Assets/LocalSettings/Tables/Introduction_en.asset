@@ -68,7 +68,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2903954386944
-    m_Localized: That is why you,  {0}, are also promoted to mayor of this village!
+    m_Localized: That is why you, {0}, are also promoted to mayor of this village!
       It will help you hide your identity.
     m_Metadata:
       m_Items:
@@ -78,7 +78,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2989052620800
-    m_Localized: "Then\u2026 *mayor*  {0}... how should you name your village?"
+    m_Localized: "Then\u2026 *mayor* {0}... how should you name your village?"
     m_Metadata:
       m_Items:
       - rid: 4777453113262735366

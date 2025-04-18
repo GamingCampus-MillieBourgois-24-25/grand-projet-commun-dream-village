@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class AccessibilityOptions : MonoBehaviour
 {
-    public static AccessibilityOptions Instance;
     
     #region Language
     
@@ -50,18 +49,6 @@ public class AccessibilityOptions : MonoBehaviour
     public TextSpeedStruct CurrentTextSpeedStruct;
     
     #endregion
-    
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void Start()
     {

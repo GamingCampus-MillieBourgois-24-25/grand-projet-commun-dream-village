@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public VillageManager villageManager;
     public IsoManager isoManager;
     public CharacterJournalManager characterJournalManager;
+    public DialoguesManager dialoguesManager;
+    public TutorialsManager tutorialsManager;
+    public AccessibilityOptions accessibilityOptions;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -21,6 +24,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public bool isPlayerCreated = false;
     public Player player;   
     [SerializeField] private GameObject playerFormCanvas;
+    public GameObject mainUiCanvas;
 
 
 
@@ -57,10 +61,10 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
     private void Start()
     {
-        if (!isPlayerCreated)
-        {
-            playerFormCanvas.SetActive(true);
-        }
+        // if (!isPlayerCreated)
+        // {
+        //     playerFormCanvas.SetActive(true);
+        // }
     }
 
     // Load all resources for shop from the Resources folder
@@ -181,4 +185,11 @@ public static class GM
     public static VillageManager VM => GameManager.instance.villageManager;
 
     public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
+    
+    public static DialoguesManager Dm => GameManager.instance.dialoguesManager;
+    
+    public static TutorialsManager Tm => GameManager.instance.tutorialsManager;
+    
+    
+    public static AccessibilityOptions Ao => GameManager.instance.accessibilityOptions;
 }

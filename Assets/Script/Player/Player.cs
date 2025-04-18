@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     public Dictionary<Building, InventoryItem<Building>> BuildingInventory { get; private set; } = new();
     public Dictionary<Decoration, InventoryItem<Decoration>> DecorationInventory { get; private set; } = new();
 
+    public delegate void PlayerInfoAssignDelegate();
+    public PlayerInfoAssignDelegate OnPlayerInfoAssigned;
 
     public string PlayerName { get; private set; }
     public string CityName { get; private set; }
@@ -77,6 +79,15 @@ public class Player : MonoBehaviour
         playerNameText.text = PlayerName;
         levelText.text = Level.ToString();
         Debug.Log($"Player created: {PlayerName}, City: {CityName}");
+        
+        GM.Dm.UpdateLocalizedArguments("PLAYER_NAME", PlayerName);
+        GM.Dm.UpdateLocalizedArguments("VILLAGE_NAME", CityName);
+        
+        GM.Tm.holdDialogues = false;
+        
+        GM.Instance.isPlayerCreated = true;
+        
+        OnPlayerInfoAssigned?.Invoke();
     }
 
 

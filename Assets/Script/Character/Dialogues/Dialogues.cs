@@ -48,6 +48,8 @@ public class Dialogues : ScriptableObject
     [SerializeField] private DialogueCondition dialogueCondition;
     [SerializeField] private TutorialType tutorialType;
     
+    [SerializeField] private bool shouldHoldDialogues = false;
+    
     
     public string GetID()
     {
@@ -82,5 +84,10 @@ public class Dialogues : ScriptableObject
     public string[] GetRequiredArguments()
     {
         return requiredArguments;
+    }
+    
+    public bool ShouldHoldDialogues()
+    {
+        return shouldHoldDialogues;
     }
 }

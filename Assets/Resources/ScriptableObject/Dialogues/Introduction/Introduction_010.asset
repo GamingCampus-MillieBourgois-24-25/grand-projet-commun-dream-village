@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Introduction_010
   m_EditorClassIdentifier: 
   ID: Intro_010
-  relatedElementID: 
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:3575041cfccaf4e4884f5987c04b8901
@@ -26,12 +25,9 @@ MonoBehaviour:
   requiredArguments:
   - PLAYER_NAME
   dialogueType: 3
-  subDialogueType: 0
-  stats:
-    Mood: 0
-    Serenity: 0
-    Energy: 0
-    Hearts: 0
+  dialogueCondition: 0
+  tutorialType: 0
+  shouldHoldDialogues: 1
   references:
     version: 2
     RefIds: []
