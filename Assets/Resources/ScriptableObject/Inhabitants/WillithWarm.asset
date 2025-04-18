@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6963ced5b706aa4e896fd214196de3b, type: 3}
   m_Name: WillithWarm
   m_EditorClassIdentifier: 
-  <FirstName>k__BackingField: Willith
-  <LastName>k__BackingField: Warm
+  <Name>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: 8794667d732546e4881dde9c7401eae6,
+    type: 3}
+  <InitialPrice>k__BackingField: 0
+  <InstantiatePrefab>k__BackingField: {fileID: 0}
+  FirstName: Willith
+  LastName: Warm
   <Pronouns>k__BackingField: 0
   <MBTI>k__BackingField: 6
   <Personnality>k__BackingField: 000000000100000002000000030000000400000005000000
@@ -33,10 +38,8 @@ MonoBehaviour:
   <Hearts>k__BackingField: 0
   <Limit>k__BackingField: 100
   <GoldMultiplier>k__BackingField: 1
-  <InitialPrice>k__BackingField: 0
   <CanLeave>k__BackingField: 0
   <HeartsBeforeLeaving>k__BackingField: 0
-  <Icon>k__BackingField: {fileID: 21300000, guid: 8794667d732546e4881dde9c7401eae6,
+  <InhabitantPrefab>k__BackingField: {fileID: 919132149155446097, guid: 472562410776d3f4e810da89bfd9e3f3,
     type: 3}
-  <InhabitantPrefab>k__BackingField: {fileID: 919132149155446097, guid: 6f9d44ad242913e459730feb1dd29acd,
-    type: 3}
+  <InhabitantHouse>k__BackingField: {fileID: 0}

@@ -40,6 +40,10 @@ public class BuildingManager : MonoBehaviour
     //    clickAction.action.actionMap.Disable();
     //}
 
+    private void Start()
+    {
+        UpdateSelectionCanvas();
+    }
     #endregion
 
     public void StartActivity(InhabitantInstance _inhabitant)
@@ -68,8 +72,19 @@ public class BuildingManager : MonoBehaviour
         {
             GameObject go = Instantiate(selectInhabitantPrefab, inhabitantsContainer.transform);
 
-            Sprite sprite = go.transform.GetChild(0).GetChild(0).GetComponent<Sprite>();
-            sprite = inhabitant.Icon;
+            Image image = go.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+            image.sprite = inhabitant.Icon;
+
+
+            GameObject statsContainer = go.transform.GetChild(1).gameObject;
+
+            Slider mood = statsContainer.transform.GetChild(0).GetComponent<Slider>();
+            Slider serenity = statsContainer.transform.GetChild(1).GetComponent<Slider>();
+            Slider energy = statsContainer.transform.GetChild(2).GetComponent<Slider>();
+
+            mood.value = inhabitant.Mood;
+            serenity.value = inhabitant.Serenity;
+            energy.value = inhabitant.Energy;
 
             Button btn = go.GetComponent<Button>();
             if (btn != null)
@@ -90,6 +105,7 @@ public class BuildingManager : MonoBehaviour
 
     public void BS_OpenSelectionCanvas()
     {
+        // TODO: MOCHE
         UpdateSelectionCanvas();
 
         DisableButton(selectedButton, true);
@@ -129,6 +145,7 @@ public class BuildingManager : MonoBehaviour
         {
             StartActivity(selectedInhabitant);
             selectONEInhabitant.gameObject.SetActive(false);
+            UpdateSelectionCanvas();
         }
     }
 

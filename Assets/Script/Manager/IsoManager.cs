@@ -509,7 +509,16 @@ public class IsoManager : MonoBehaviour
         editModeCanvas.gameObject.SetActive(isEditMode);
         tilemapObjects.ClearAllTiles();
         //if (selectedObject != null) selectedObject.ResetPosition();
-        if (selectedObject != null) PlacePlaceableObject(selectedObject);
+        if (selectedObject != null)
+        {
+            if (CanPlaceObjectOnTilemap(selectedObject)) {
+                PlacePlaceableObject(selectedObject);
+            }
+            else
+            {
+                selectedObject.ResetPosition();
+            }
+        }
         UnSelectObject();
     }
     public void BS_StockSelectedObject()
