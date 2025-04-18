@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: DialoguesGlobal Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: DialoguesGlobal
+  m_TableCollectionNameGuidString: 31227703947268344b145d584fb78ab6
+  m_Entries:
+  - m_Id: 31799865344
+    m_Key: Greeting_001
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34589077504
+    m_Key: Greeting_002
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37562839040
+    m_Key: Greeting_003
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40616292352
+    m_Key: Morning_3_Neg_50
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43430670336
+    m_Key: Morning_3_Pos_50
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47830495232
+    m_Key: Morning_Negative
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50858782720
+    m_Key: Morning_Positive
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4777453186010316802
+  references:
+    version: 2
+    RefIds:
+    - rid: 4777453186010316802
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1744899855707

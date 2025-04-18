@@ -34,6 +34,10 @@ public class CharacterJournalManager : MonoBehaviour
     [SerializeField] private Sprite heartEmptySprite;
     [SerializeField] private Sprite unknownIcon;
 
+    [Header("UI - Prefabs")]
+    [SerializeField] private GameObject heartPrefab;
+    [SerializeField] private GameObject preferencePrefab;
+
     private List<InhabitantInstance> inhabitants;
     private int currentIndex = 0;
 
@@ -82,12 +86,15 @@ public class CharacterJournalManager : MonoBehaviour
 
     private void DisplayInterestIcons(List<InterestCategory> interests, Transform container, HashSet<InterestCategory> discovered)
     {
-        foreach (Transform child in container)
-            Destroy(child.gameObject);
+        for (int i = 1; i < container.childCount; i++)
+        {
+            Destroy(container.GetChild(i).gameObject);
+        }
 
         foreach (var interest in interests)
         {
-            GameObject iconGO = new GameObject("InterestIcon", typeof(RectTransform), typeof(Image));
+            //GameObject iconGO = new GameObject("InterestIcon", typeof(RectTransform), typeof(Image));
+            GameObject iconGO = Instantiate(preferencePrefab);
             iconGO.transform.SetParent(container, false);
 
             Image img = iconGO.GetComponent<Image>();
@@ -116,7 +123,8 @@ public class CharacterJournalManager : MonoBehaviour
 
         for (int i = 0; i < heartMax; i++)
         {
-            GameObject heartGO = new GameObject("Heart", typeof(RectTransform), typeof(Image));
+            //GameObject heartGO = new GameObject("Heart", typeof(RectTransform), typeof(Image));
+            GameObject heartGO = Instantiate(heartPrefab);
             heartGO.transform.SetParent(heartsContainer, false);
 
             Image img = heartGO.GetComponent<Image>();
@@ -154,12 +162,12 @@ public class CharacterJournalManager : MonoBehaviour
 
                 if (inhabitant.Hearts <= 0)
                 {
-                    Debug.Log($"{inhabitant.FirstName} quitte le village !");
+                    Debug.Log($"{inhabitant.Name} quitte le village !");
                     toRemove.Add(inhabitant);
                 }
                 else
                 {
-                    Debug.Log($"{inhabitant.FirstName} a perdu un cœur. Reste {inhabitant.Hearts}");
+                    Debug.Log($"{inhabitant.Name} a perdu un cœur. Reste {inhabitant.Hearts}");
                 }
             }
         }
@@ -195,7 +203,7 @@ public class CharacterJournalManager : MonoBehaviour
             if (maxStats >= 2 && onePositive && inhabitant.Hearts < inhabitant.baseData.HeartsBeforeLeaving)
             {
                 inhabitant.Hearts += 1;
-                Debug.Log($"💖 {inhabitant.FirstName} {inhabitant.LastName} a gagné un cœur ! ({inhabitant.Hearts}/{inhabitant.baseData.HeartsBeforeLeaving})");
+                Debug.Log($"💖 {inhabitant.Name} a gagné un cœur ! ({inhabitant.Hearts}/{inhabitant.baseData.HeartsBeforeLeaving})");
             }
         }
 
