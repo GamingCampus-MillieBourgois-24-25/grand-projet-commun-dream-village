@@ -494,6 +494,8 @@ public class IsoManager : MonoBehaviour
     {
         isEditMode = !isEditMode;
 
+        GM.BM.canvasBuilding.gameObject.SetActive(false);
+
         if (isEditMode) {
             HideMainUI(true);
         }

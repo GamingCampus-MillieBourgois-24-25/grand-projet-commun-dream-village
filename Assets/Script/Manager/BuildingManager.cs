@@ -57,12 +57,12 @@ public class BuildingManager : MonoBehaviour
         else
         {
             Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
             {
                 BuildingObject obj = hit.collider.GetComponent<BuildingObject>();
                 if (obj != null)
                 {
-                    obj.ClickOnBuiding();
+                    //obj.ClickOnBuiding();
                 }
             }
         }
