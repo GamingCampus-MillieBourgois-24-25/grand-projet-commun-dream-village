@@ -162,6 +162,8 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             inhabitantUsing = null;
         }
 
+        // TODO : changer l'exp en fonction du building
+        GM.Instance.player.AddXP(100);
         Destroy(remainingTimeUI);
     }
 

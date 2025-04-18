@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fcb961e62672942939249e73bd7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeInTiles: {x: 0, y: 0}
+  canBeStocked: 0
   cachedRenderer: {fileID: 0}
 --- !u!114 &-2287234931181842320
 MonoBehaviour:
