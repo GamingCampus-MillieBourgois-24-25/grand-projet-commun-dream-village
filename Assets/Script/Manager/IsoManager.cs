@@ -516,18 +516,19 @@ public class IsoManager : MonoBehaviour
         UnSelectObject();
     }
 
-    public void BS_TakeInventoryItem<T>(T item, Dictionary<T, InventoryItem<T>> inventory, IsoManager isoManager) where T : IScriptableElement
+    public void BS_TakeInventoryItem<T>(T item, Vector3 _spawnPoint) where T : IScriptableElement
     {
+        Dictionary<T, InventoryItem> inventory = GM.Instance.player.GetInventory(item);
         if (!inventory.TryGetValue(item, out var entry))
         {
             Debug.LogWarning("Item not in inventory or prefab is missing.");
             return;
         }
 
-        Vector3 centerPos = tilemapBase.CellToWorld(Vector3Int.zero);
+        Vector3 centerPos = tilemapBase.WorldToCell(_spawnPoint);
         centerPos.y += yMovingObject;
 
-        GameObject newObj = Instantiate(entry.item.InstantiatePrefab, centerPos, Quaternion.identity);
+        GameObject newObj = Instantiate(item.InstantiatePrefab, centerPos, Quaternion.identity);
         PlaceableObject placeable = newObj.GetComponent<PlaceableObject>();
 
         if (placeable != null)

@@ -2,12 +2,13 @@ using LitMotion;
 using LitMotion.Extensions;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    private enum InventoryCategory
+    public enum InventoryCategory
     {
         InhabitantCategory,
         BuildingCategory,
@@ -16,10 +17,9 @@ public class Player : MonoBehaviour
 
     #region Variables
 
-    public Dictionary<Inhabitant, InventoryItem<Inhabitant>> InhabitantInventory { get; private set; } = new();
-    public Dictionary<Building, InventoryItem<Building>> BuildingInventory { get; private set; } = new();
-    public Dictionary<Decoration, InventoryItem<Decoration>> DecorationInventory { get; private set; } = new();
-
+    private Dictionary<Inhabitant, InventoryItem> inhabitantsInventory = new();
+    private Dictionary<Building, InventoryItem> buildingsInventory = new();
+    private Dictionary<Decoration, InventoryItem> decorationsInventory = new();
 
     public string PlayerName { get; private set; }
     public string CityName { get; private set; }
@@ -138,8 +138,56 @@ public class Player : MonoBehaviour
 
     #region Inventory
 
-    public void AddToInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : IScriptableElement
+    public Dictionary<T, InventoryItem> GetInventory<T>(T item)
     {
+        if (item is Inhabitant inhabitant)
+        {
+            return inhabitantsInventory as Dictionary<T, InventoryItem>;
+        }
+        else if (item is Building building)
+        {
+            return buildingsInventory as Dictionary<T, InventoryItem>;
+        }
+        else if (item is Decoration decoration)
+        {
+            return decorationsInventory as Dictionary<T, InventoryItem>;
+        }
+        return null;
+    }
+
+    public bool GetItemInInventory<T>(T item, out InventoryItem inventoryItem)
+    {
+        switch (item)
+        {
+            case Inhabitant inhabitant:
+                if (inhabitantsInventory.TryGetValue(inhabitant, out var existing))
+                {
+                    inventoryItem = existing;
+                    return true;
+                }
+                break;
+            case Building building:
+                if(buildingsInventory.TryGetValue(building, out var existing2))
+                {
+                    inventoryItem = existing2;
+                    return true;
+                }
+                break;
+            case Decoration decoration:
+                if (decorationsInventory.TryGetValue(decoration, out var existing3))
+                {
+                    inventoryItem = existing3;
+                    return true;
+                }
+                break;
+        }
+        inventoryItem = null;
+        return false;
+    }
+
+    public void AddToInventory<T>(T item, int amount) where T : IScriptableElement
+    {
+        Dictionary<T, InventoryItem> inventory = GetInventory(item);
         if (inventory.TryGetValue(item, out var existing))
         {
             existing.quantity += amount;
@@ -147,7 +195,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            inventory[item] = new InventoryItem<T>(item, amount);
+            inventory[item] = new InventoryItem(amount);
             GameObject inventorySlot = null;
             switch (item)
             {
@@ -161,6 +209,7 @@ public class Player : MonoBehaviour
                     inventorySlot = Instantiate(itemPrefab, categoryContainers[2].transform);
                     break;
             }
+            Debug.Log($"Added {amount} of {item} to inventory.");
             if (inventorySlot != null)
             {
                 InventorySlotItem slotComponent = inventorySlot.GetComponent<InventorySlotItem>();
@@ -170,17 +219,29 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool RemoveFromInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : IScriptableElement
+    public bool RemoveFromInventory<T>(T item, int amount) where T : IScriptableElement
     {
-        if (inventory.TryGetValue(item, out var existing))
+        if (GetItemInInventory(item, out var existing))
         {
             if (existing.quantity >= amount)
             {
                 existing.quantity -= amount;
                 if (existing.quantity == 0)
                 {
-                    inventory.Remove(item);
+                    switch (item)
+                    {
+                        case Inhabitant inhabitant:
+                            inhabitantsInventory.Remove(inhabitant);
+                            break;
+                        case Building building:
+                            buildingsInventory.Remove(building);
+                            break;
+                        case Decoration decoration:
+                            decorationsInventory.Remove(decoration);
+                            break;
+                    }
                 }
+                Debug.Log($"Removed {amount} of {item.name} from inventory.");
                 return true;
             }
         }
@@ -206,10 +267,6 @@ public class Player : MonoBehaviour
     }
 
 
-    public interface IPlaceable
-    {
-        GameObject GetPrefab();
-    }
 
     #endregion
 }
