@@ -396,6 +396,8 @@ public class DreamMachineManager : MonoBehaviour
         // 🔁 Rafraîchissement UI
         DisplayCurrentInhabitant();
         DisplayDreams(dreamsByInhabitant[inhabitants[currentIndex]]);
+
+        GM.Cjm.DisplayInhabitant();
     }
 
 

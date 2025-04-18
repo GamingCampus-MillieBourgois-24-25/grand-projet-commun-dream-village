@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     [Header("Managers")]
     public VillageManager villageManager;
     public IsoManager isoManager;
+    public CharacterJournalManager characterJournalManager;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -178,4 +179,6 @@ public static class GM
     public static GameManager Instance => GameManager.instance;
     public static IsoManager IM => GameManager.instance.isoManager;
     public static VillageManager VM => GameManager.instance.villageManager;
+
+    public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
 }

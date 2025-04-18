@@ -27,12 +27,11 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
 
     private void Awake()
     {
-        // Crée les instances runtime à partir des SO
+        // CrÃ©e les instances runtime Ã  partir des SO
         foreach (var inhabitant in baseInhabitants)
         {
             inhabitants.Add(new InhabitantInstance(inhabitant));
-        }
-
+        } 
     }
 
     public void AddInhabitant(Inhabitant newInhabitant)

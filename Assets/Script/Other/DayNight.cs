@@ -45,6 +45,12 @@ public class DayNight : MonoBehaviour
                 var rect = transform.rect;
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
+        if (isDay)
+        {
+            GM.Cjm.CheckStatsAndHandleDeparture();
+            GM.Cjm.CheckForHeartBonus();
+            Debug.Log("Daytime: Checking stats and handling departure.");
+        }
     }
 
     private void SwitchTime()
@@ -63,5 +69,6 @@ public class DayNight : MonoBehaviour
             });
 
         timeText.text = isDay ? "Day" : "Night";
+
     }
 }
