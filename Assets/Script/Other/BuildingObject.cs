@@ -104,7 +104,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
     public void ClickOnBuiding()
     {
-        Debug.Log("JE CLICK SUR LE BUILDING");
+        //Debug.Log("JE CLICK SUR LE BUILDING");
         if (!GM.IM.isEditMode)
         {
             if ((!canvasBuilding.transform.IsChildOf(transform) || !canvasBuilding.activeSelf) && !isUsed)

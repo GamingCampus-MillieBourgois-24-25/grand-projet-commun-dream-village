@@ -134,13 +134,13 @@ public class BuildingManager : MonoBehaviour
         {
             selectedInhabitant = inhabitant;
             BS_ChangeSelectedButton(button);
-            Debug.Log("Selected: " + inhabitant.Name);
+            //Debug.Log("Selected: " + inhabitant.Name);
         }
     }
 
     public void BS_SendSelectedInhabitant()
     {
-        Debug.Log("VA MOUSSAILLON");
+        //Debug.Log("VA MOUSSAILLON");
         if (selectedInhabitant != null)
         {
             StartActivity(selectedInhabitant);
