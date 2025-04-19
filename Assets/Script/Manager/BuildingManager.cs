@@ -23,22 +23,22 @@ public class BuildingManager : MonoBehaviour
     private InhabitantInstance selectedInhabitant;
     private GameObject selectedButton;
 
-    //[Header("Other")]
-    //[SerializeField] private InputActionReference clickAction;
+    [Header("Other")]
+    [SerializeField] private InputActionReference clickAction;
 
 
     #region Unity Functions
-    //private void OnEnable()
-    //{
-    //    clickAction.action.performed += OnClickPerformed;
-    //    clickAction.action.Enable();
-    //}
+    private void OnEnable()
+    {
+        clickAction.action.performed += OnClickPerformed;
+        clickAction.action.Enable();
+    }
 
-    //private void OnDisable()
-    //{
-    //    clickAction.action.performed -= OnClickPerformed;
-    //    clickAction.action.actionMap.Disable();
-    //}
+    private void OnDisable()
+    {
+        clickAction.action.performed -= OnClickPerformed;
+        clickAction.action.actionMap.Disable();
+    }
 
     private void Start()
     {
@@ -163,25 +163,29 @@ public class BuildingManager : MonoBehaviour
 
 
 
-    //public void OnClickPerformed(InputAction.CallbackContext context)
-    //{
-    //    Vector2 screenPosition = GM.Instance.GetPointerPosition(context);
+    public void OnClickPerformed(InputAction.CallbackContext context)
+    {
+        Vector2 screenPosition = GM.Instance.GetPointerPosition(context);
 
-    //    if (GM.Instance.IsPointerOverUIElement(screenPosition) && GM.IM.isEditMode)
-    //    {
-    //        return;
-    //    }
-    //    else
-    //    {
-    //        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-    //        if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
-    //        {
-    //            BuildingObject obj = hit.collider.GetComponent<BuildingObject>();
-    //            if (obj != null)
-    //            {
-    //                //obj.ClickOnBuiding();
-    //            }
-    //        }
-    //    }
-    //}
+        if (GM.Instance.IsPointerOverUIElement(screenPosition) || GM.IM.isEditMode)
+        {
+            return;
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
+            {
+                BuildingObject obj = hit.collider.GetComponent<BuildingObject>();
+                if (obj != null)
+                {
+                    obj.ClickOnBuiding();
+                }
+                else if (canvasBuilding.gameObject.activeSelf)
+                {
+                    canvasBuilding.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
 }

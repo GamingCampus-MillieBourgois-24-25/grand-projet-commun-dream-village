@@ -97,7 +97,12 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     //    SetupCanvas();
     //}
 
-    private void OnMouseDown()
+    //private void OnMouseDown()
+    //{
+    //    ClickOnBuiding();
+    //}
+
+    public void ClickOnBuiding()
     {
         Debug.Log("JE CLICK SUR LE BUILDING");
         if (!GM.IM.isEditMode)
@@ -108,25 +113,6 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
                 canvasBuilding.SetActive(true);
             }
         }
-    }
-
-    public void ClickOnBuiding()
-    {
-        //if ((canvasBuilding.transform.IsChildOf(transform) && canvasBuilding.activeSelf) || isUsed)
-        //{
-        //    canvasBuilding.SetActive(false);
-        //}
-        //else
-        //{
-        //    canvasBuilding.SetActive(true);
-        //    SetupCanvas();
-        //}
-        if (!canvasBuilding.activeSelf)
-            if (!canvasBuilding.transform.IsChildOf(transform) && !isUsed)
-            {
-                canvasBuilding.SetActive(true);
-                SetupCanvas();
-            }
     }
 
 
