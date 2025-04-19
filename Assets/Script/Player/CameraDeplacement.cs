@@ -260,7 +260,6 @@ public class CameraDeplacement : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerEventData, results);
 
-        Debug.Log("Results: " + results.Count);
 
         return results.Count > 0; // If there's any UI element under the pointer, return true
     }

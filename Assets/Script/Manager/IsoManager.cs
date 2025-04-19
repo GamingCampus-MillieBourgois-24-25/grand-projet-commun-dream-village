@@ -10,7 +10,7 @@ public class IsoManager : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputActions;
 
-    [SerializeField] private Tilemap tilemapBase;
+    [SerializeField] public Tilemap tilemapBase;
     [SerializeField] public Tilemap tilemapObjects;
     [SerializeField] private TileBase whiteTile;
     [SerializeField] private TileBase greenTile;
@@ -527,24 +527,25 @@ public class IsoManager : MonoBehaviour
         UnSelectObject();
     }
 
-    public void BS_TakeInventoryItem<T>(T item, Dictionary<T, InventoryItem<T>> inventory, IsoManager isoManager) where T : IScriptableElement
+    public void BS_TakeInventoryItem<T>(T item, Vector3 _spawnPoint) where T : IScriptableElement
     {
-        if (!inventory.TryGetValue(item, out var entry))
+        Dictionary<T, InventoryItem> inventory = GM.Instance.player.GetInventory(item);
+        if (!GM.Instance.player.GetItemInInventory(item, out var entry))
         {
             Debug.LogWarning("Item not in inventory or prefab is missing.");
             return;
         }
 
-        Vector3 centerPos = tilemapBase.CellToWorld(Vector3Int.zero);
+        Vector3 centerPos = tilemapBase.WorldToCell(_spawnPoint);
         centerPos.y += yMovingObject;
 
-        GameObject newObj = Instantiate(entry.item.InstantiatePrefab, centerPos, Quaternion.identity);
+        GameObject newObj = Instantiate(item.InstantiatePrefab, centerPos, Quaternion.identity);
         PlaceableObject placeable = newObj.GetComponent<PlaceableObject>();
 
         if (placeable != null)
         {
             OnObjectSelected(placeable);
-            // + le retirer de l'inventaire
+            GM.Instance.player.RemoveFromInventory(item, 1);
         }
         else
         {
