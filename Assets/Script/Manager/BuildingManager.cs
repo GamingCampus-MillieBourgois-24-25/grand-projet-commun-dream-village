@@ -185,6 +185,13 @@ public class BuildingManager : MonoBehaviour
                 {
                     canvasBuilding.gameObject.SetActive(false);
                 }
+
+                // ATTENTION OPEN JOURNAL VIA HOUSE
+                HouseObject house = hit.collider.GetComponent<HouseObject>();
+                if (house != null)
+                {
+                    house.OpenInhabitantJournal();
+                }
             }
         }
     }

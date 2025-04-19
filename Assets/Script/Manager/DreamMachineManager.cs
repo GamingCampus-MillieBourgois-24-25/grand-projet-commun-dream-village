@@ -310,9 +310,9 @@ public class DreamMachineManager : MonoBehaviour
         energySlider.value = currentInhabitant.Energy + energyChange;
 
         // Appliquer la couleur selon les changements
-        UpdateSliderColor(moodSlider, moodChange);
-        UpdateSliderColor(serenitySlider, serenityChange);
-        UpdateSliderColor(energySlider, energyChange);
+        //UpdateSliderColor(moodSlider, moodChange);
+        //UpdateSliderColor(serenitySlider, serenityChange);
+        //UpdateSliderColor(energySlider, energyChange);
     }
 
     private void UpdateSliderColor(Slider slider, int change)

@@ -16,7 +16,8 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     private GameObject canvasBuilding;
 
     #region Waiting
-    bool isUsed = false;
+    private bool isUsed = false;
+    public bool IsUsed => isUsed;
 
     float timeRemaining = 0f;
 
