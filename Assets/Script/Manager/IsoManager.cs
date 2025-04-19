@@ -10,7 +10,7 @@ public class IsoManager : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputActions;
 
-    [SerializeField] private Tilemap tilemapBase;
+    [SerializeField] public Tilemap tilemapBase;
     [SerializeField] public Tilemap tilemapObjects;
     [SerializeField] private TileBase whiteTile;
     [SerializeField] private TileBase greenTile;
@@ -519,7 +519,7 @@ public class IsoManager : MonoBehaviour
     public void BS_TakeInventoryItem<T>(T item, Vector3 _spawnPoint) where T : IScriptableElement
     {
         Dictionary<T, InventoryItem> inventory = GM.Instance.player.GetInventory(item);
-        if (!inventory.TryGetValue(item, out var entry))
+        if (!GM.Instance.player.GetItemInInventory(item, out var entry))
         {
             Debug.LogWarning("Item not in inventory or prefab is missing.");
             return;
@@ -534,7 +534,7 @@ public class IsoManager : MonoBehaviour
         if (placeable != null)
         {
             OnObjectSelected(placeable);
-            // + le retirer de l'inventaire
+            GM.Instance.player.RemoveFromInventory(item, 1);
         }
         else
         {

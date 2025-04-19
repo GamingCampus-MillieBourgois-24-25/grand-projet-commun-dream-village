@@ -41,4 +41,5 @@ MonoBehaviour:
   <CanLeave>k__BackingField: 1
   <HeartsBeforeLeaving>k__BackingField: 3
   <InhabitantPrefab>k__BackingField: {fileID: 0}
-  <InhabitantHouse>k__BackingField: {fileID: 0}
+  <InhabitantHouse>k__BackingField: {fileID: 11400000, guid: 8678a84b4e4144e4abae675e19e61590,
+    type: 2}

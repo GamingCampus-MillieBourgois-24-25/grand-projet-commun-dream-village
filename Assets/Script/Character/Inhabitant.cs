@@ -44,9 +44,9 @@ public class Inhabitant : IScriptableElement
     #region Visuals
     [field: Header("Visuals")]
     public override Sprite Icon => base.Icon;
-    [field: SerializeField] public override GameObject InstantiatePrefab => base.InstantiatePrefab;
     [field: SerializeField] public GameObject InhabitantPrefab { get; private set; }
     [field: SerializeField] public Building InhabitantHouse { get; private set; }
+    public override GameObject InstantiatePrefab => InhabitantHouse.InstantiatePrefab;
     #endregion
     #endregion
 
@@ -56,10 +56,6 @@ public class Inhabitant : IScriptableElement
     private void Awake()
     {
         Hearts = HeartsBeforeLeaving;
-        if (InhabitantHouse != null)
-        {
-            InstantiatePrefab = InhabitantHouse.InstantiatePrefab;
-        }
     }
 
 

@@ -2,6 +2,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -62,15 +63,56 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
         rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, initialHeight);
     }
 
-    private void SpawnPrefab(Vector2 _mousPos)
+    private void SpawnPrefab(Vector2 _mousePos)
     {
-        GM.Instance.player.RemoveFromInventory(inventoryItem, 1);
-        Ray ray = Camera.main.ScreenPointToRay(_mousPos);
+        Ray ray = Camera.main.ScreenPointToRay(_mousePos);
+
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             GM.IM.BS_TakeInventoryItem(inventoryItem, hit.point);
-            Destroy(gameObject);
         }
+        else
+        {
+            Tilemap tilemap = GM.IM.tilemapBase;
+            Plane gridPlane = new Plane(Vector3.up, tilemap.transform.position);
+
+            if (gridPlane.Raycast(ray, out float distance))
+            {
+                Vector3 projectedPoint = ray.GetPoint(distance);
+                Vector3Int cell = tilemap.WorldToCell(projectedPoint);
+
+                Debug.Log("Spawn position: " + cell);
+                BoundsInt bounds = tilemap.cellBounds;
+
+                if(cell.x < bounds.min.x)
+                {
+                    cell.x = bounds.min.x;
+                }
+                else if(cell.x > bounds.max.x)
+                {
+                    cell.x = bounds.max.x;
+                }
+
+                if (cell.y < bounds.min.y)
+                {
+                    cell.y = bounds.min.y;
+                }
+                else if (cell.y > bounds.max.y)
+                {
+                    cell.y = bounds.max.y;
+                }
+
+                Vector3 spawnPos = tilemap.GetCellCenterWorld(cell);
+
+                GM.IM.BS_TakeInventoryItem(inventoryItem, spawnPos);
+            }
+            else
+            {
+                Debug.LogWarning("Impossible de projeter la souris sur la grille.");
+            }
+        }
+
+        Destroy(gameObject);
     }
 
 }
