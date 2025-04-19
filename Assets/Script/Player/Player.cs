@@ -27,9 +27,13 @@ public class Player : MonoBehaviour
     public int Level { get; private set; } = 1;
     public int CurrentXP { get; private set; } = 0;
 
-    private int baseExpPerLevel = 300;
-    private float multExp = 1.3f;
+    private int baseExpPerLevel = 100;
+    private float multExp = 1.9f;
     private int expLevel;
+
+    // Currency
+    private int gold = 100;
+    private int star = 100;
 
     [Header("Progression")]
     public LevelProgression levelProgression;
@@ -79,6 +83,39 @@ public class Player : MonoBehaviour
         Debug.Log($"Player created: {PlayerName}, City: {CityName}");
     }
 
+    #region Currency
+
+    // GOLD
+    public int GetGold() => gold;
+    public void SetGold(int value) => gold = Mathf.Max(0, value); // ne jamais avoir un solde négatif
+
+    public void AddGold(int amount) => gold += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
+    public bool SpendGold(int amount)
+    {
+        if (gold >= amount)
+        {
+            gold -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    // STAR
+    public int GetStar() => star;
+    public void SetStar(int value) => star = Mathf.Max(0, value);
+
+    public void AddStar(int amount) => star += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
+    public bool SpendStar(int amount)
+    {
+        if (star >= amount)
+        {
+            star -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    #endregion
 
     #region EXP
     public void AddXP(int amount)

@@ -22,7 +22,7 @@ public class IsoManager : MonoBehaviour
     [SerializeField] private Canvas editModeCanvas;
     [SerializeField] private Canvas stockCanvas;
     [SerializeField] private float yStockCanvas;
-    [SerializeField] private Button placeBtn;
+    //[SerializeField] private Button placeBtn;
 
     private GameObject canvasBottomLeft;
     private GameObject canvasBottomRight;
@@ -115,12 +115,17 @@ public class IsoManager : MonoBehaviour
         {
             scaleAnimationCoroutine = StartCoroutine(AnimateScalePop(selectedObject.transform));
 
+            ChangeTileUnderObject(selectedObject, null);
             if (CanPlaceObjectOnTilemap(selectedObject))
             {
-                ChangeTileUnderObject(selectedObject, null);
                 PlacePlaceableObject(selectedObject);
-                UnSelectObject();
+            } 
+            else
+            {
+                selectedObject.ResetPosition();
+                ToggleInventorySmooth(true);
             }
+            UnSelectObject();
         }
 
         isClicking = false;
@@ -324,7 +329,7 @@ public class IsoManager : MonoBehaviour
         }
 
         selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, transform.position.y + yMovingObject, selectedObject.transform.position.z);
-        if (placeBtn) placeBtn.interactable = true;
+        //if (placeBtn) placeBtn.interactable = true;
         CheckObjectOnTilemap(selectedObject);
 
         Debug.Log("Objet sélectionné : " + obj.name);
@@ -355,12 +360,12 @@ public class IsoManager : MonoBehaviour
 
         if (canPlace)
         {
-            if (placeBtn) placeBtn.interactable = true;
+            //if (placeBtn) placeBtn.interactable = true;
             ChangeTileUnderObject(obj, greenTile);
         }
         else
         {
-            if (placeBtn) placeBtn.interactable = false;
+            //if (placeBtn) placeBtn.interactable = false;
             ChangeTileUnderObject(obj, redTile); 
         }
     }
@@ -403,7 +408,7 @@ public class IsoManager : MonoBehaviour
         // Réinitialiser
         ChangeTileUnderObject(selectedObject, null);
         UnSelectObject();
-        if (placeBtn) placeBtn.interactable = false;
+        //if (placeBtn) placeBtn.interactable = false;
     }
     #endregion
 
@@ -508,7 +513,7 @@ public class IsoManager : MonoBehaviour
             HideMainUI(false);
         }
 
-            tileRenderer.enabled = isEditMode;
+        tileRenderer.enabled = isEditMode;
 
         editModeCanvas.gameObject.SetActive(isEditMode);
         tilemapObjects.ClearAllTiles();

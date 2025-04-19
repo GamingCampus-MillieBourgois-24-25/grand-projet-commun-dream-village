@@ -45,8 +45,18 @@ public class PlaceableObject : MonoBehaviour
 
     public void ResetPosition()
     {
-        Vector3 centerWorld = GM.IM.tilemapObjects.GetCellCenterWorld(OriginalPosition);
+        Vector3 centerWorld;
+        if (sizeInTiles.x % 2 == 0)
+        {
+            centerWorld = GM.IM.tilemapObjects.CellToWorld(OriginalPosition);
+        }
+        else
+        {
+            centerWorld = GM.IM.tilemapObjects.GetCellCenterWorld(OriginalPosition);
+        }
+
         transform.position = GetCenterObject(GM.IM.tilemapObjects, centerWorld);
+        Debug.Log("Reset Position: original "+ OriginalPosition +" centerWorld: "+ centerWorld+ " getCenterObject: " + GetCenterObject(GM.IM.tilemapObjects, centerWorld));
     }
 
     public Vector3 GetSize()

@@ -30,6 +30,7 @@ public class Shop : MonoBehaviour
     {
         InitCategory(categoryContainers[0], GameManager.instance.inhabitants);
         InitCategory(categoryContainers[1], GameManager.instance.buildings);
+        //InitCategory(categoryContainers[2], GameManager.instance.decorations);
     }
 
     
