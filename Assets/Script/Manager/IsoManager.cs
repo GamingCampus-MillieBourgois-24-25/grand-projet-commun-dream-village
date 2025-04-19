@@ -162,9 +162,13 @@ public class IsoManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             PlaceableObject obj = hit.collider.GetComponent<PlaceableObject>();
+            BuildingObject bat = hit.collider.GetComponent<BuildingObject>();
             if (obj != null && obj != selectedObject)
             {
-                OnObjectSelected(obj);
+                if (!(bat && bat.IsUsed))
+                {
+                    OnObjectSelected(obj);
+                }
             }
             else if (selectedObject != null)
             {
