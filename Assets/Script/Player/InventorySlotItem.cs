@@ -80,8 +80,6 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
             {
                 Vector3 projectedPoint = ray.GetPoint(distance);
                 Vector3Int cell = tilemap.WorldToCell(projectedPoint);
-
-                Debug.Log("Spawn position: " + cell);
                 BoundsInt bounds = tilemap.cellBounds;
 
                 if(cell.x < bounds.min.x)
@@ -104,7 +102,8 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
                 Vector3 spawnPos = tilemap.GetCellCenterWorld(cell);
 
-                GM.IM.BS_TakeInventoryItem(inventoryItem, spawnPos);
+                GameObject obj = GM.IM.SpawnInventoryItem(inventoryItem, spawnPos);
+                GM.VM.CreateInstanceofScriptable(inventoryItem, obj);
             }
             else
             {

@@ -19,12 +19,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     }
 
 
-
-
-
-
-
-
     private void Awake()
     {
         // Crée les instances runtime à partir des SO
@@ -34,11 +28,25 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         } 
     }
 
-    public void AddInhabitant(Inhabitant newInhabitant)
+    public void CreateInstanceofScriptable<T>(T _item, GameObject _obj) where T : IScriptableElement
     {
-        baseInhabitants.Add(newInhabitant);
-        inhabitants.Add(new InhabitantInstance(newInhabitant));
-        Debug.Log($"New inhabitant added: {newInhabitant.Name}");
+        switch (_item)
+        {
+            case Inhabitant inhabitant:
+                baseInhabitants.Add(inhabitant);
+                inhabitants.Add(new InhabitantInstance(inhabitant));
+                Debug.Log($"New inhabitant added: {inhabitant.Name}");
+                break;
+            case Building building:
+                baseBuildings.Add(building);
+                BuildingObject loadedBuilding = _obj.GetComponent<BuildingObject>();
+                buildings.Add(loadedBuilding);
+                Debug.Log($"New building added: {building.Name}");
+                break;
+            default:
+                Debug.LogError("Unknown type");
+                break;
+        }
     }
 
     public void RemoveInhabitant(InhabitantInstance instanceToRemove)
