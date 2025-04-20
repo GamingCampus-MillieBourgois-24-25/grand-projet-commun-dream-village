@@ -23,6 +23,6 @@ public class DevTest
     [MenuItem("Tools/DevTest/AddItemInventory")]
     public static void AddItemInventory()
     {
-        GM.Instance.player.AddToInventory(GM.Instance.inhabitants[0], 1, GM.Instance.player.InhabitantInventory);
+        GM.Instance.player.AddToInventory(GM.Instance.inhabitants[0], 1);
     }
 }
