@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
 
         villageManager.Load("VillageManager");
+        player.Load("PlayerData");
     }
 
 

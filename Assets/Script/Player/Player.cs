@@ -6,7 +6,7 @@ using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 {
     public enum InventoryCategory
     {
@@ -60,6 +60,47 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    #region Save
+    public class SavePartData : ISaveData
+    {
+        public string playerName;
+        public string cityName;
+        public int level;
+        public int currentXP;
+        public int gold;
+        public int star;
+    }
+
+    public SavePartData Serialize()
+    {
+        SavePartData data = new SavePartData();
+
+        data.playerName = PlayerName;
+        data.cityName = CityName;
+        data.level = Level;
+        data.currentXP = CurrentXP;
+        
+        data.star = star;
+        data.gold = star;
+
+        return data;
+    }
+
+    public void Deserialize(SavePartData data)
+    {
+        PlayerName = data.playerName;
+        CityName = data.cityName;
+        Level = data.level;
+        CurrentXP = data.currentXP;
+
+        playerNameText.text = PlayerName;
+        levelText.text = Level.ToString();
+        
+        star = data.star;
+        gold = data.gold;
+    }
+    #endregion
+
 
     private void Start()
     {
@@ -85,6 +126,8 @@ public class Player : MonoBehaviour
         playerNameText.text = PlayerName;
         levelText.text = Level.ToString();
         Debug.Log($"Player created: {PlayerName}, City: {CityName}");
+
+        this.Save("PlayerData");
     }
 
     #region Currency
@@ -92,7 +135,7 @@ public class Player : MonoBehaviour
     // GOLD
     public int GetGold() => gold;
     public void SetGold(int value) {
-        gold = Mathf.Max(0, value); // ne jamais avoir un solde négatif
+        gold = Mathf.Max(0, value); // ne jamais avoir un solde nÃ©gatif
         UpdateGoldText();
     } 
 
@@ -162,6 +205,8 @@ public class Player : MonoBehaviour
     {
         CurrentXP += amount;
         CheckLevelUp();
+
+        this.Save("PlayerData");
     }
 
     private void CheckLevelUp()
