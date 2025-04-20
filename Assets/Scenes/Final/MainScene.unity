@@ -18062,6 +18062,12 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 8293250436908638852, guid: 1db27110019430948829919a2ee837de,
         type: 3}
+      propertyPath: unknownIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 37396956628b61c4f8190af07830937b,
+        type: 3}
+    - target: {fileID: 8293250436908638852, guid: 1db27110019430948829919a2ee837de,
+        type: 3}
       propertyPath: energySlider
       value: 
       objectReference: {fileID: 1579652198}
