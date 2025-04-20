@@ -69,7 +69,7 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            GM.IM.BS_TakeInventoryItem(inventoryItem, hit.point);
+            GM.IM.SpawnInventoryItem(inventoryItem, hit.point);
         }
         else
         {

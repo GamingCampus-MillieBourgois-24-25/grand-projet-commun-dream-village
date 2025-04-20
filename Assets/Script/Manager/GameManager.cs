@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
+    public List<Decoration> decorations = new List<Decoration>();
 
     [Header("Player")]
     public bool isPlayerCreated = false;
@@ -84,12 +85,16 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         {
             buildings.Add(building);
         }
+        // Load all decorations
+        Decoration[] allDecorations = Resources.LoadAll<Decoration>("ScriptableObject/Decorations");
+        foreach (Decoration decoration in allDecorations)
+        {
+            decorations.Add(decoration);
+        }
 
 
         villageManager.Load("VillageManager");
     }
-
-
 
     public Inhabitant GetInhabitantByName(string name)
     {
@@ -116,6 +121,19 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         Debug.LogError("Building not found: " + name);
         return null;
     }
+    public Decoration GetDecorationByName(string name)
+    {
+        foreach (Decoration decoration in decorations)
+        {
+            if (decoration.Name == name)
+            {
+                return decoration;
+            }
+        }
+        Debug.LogError("Decoration not found: " + name);
+        return null;
+    }
+
 
 
     public void SetActualTime()

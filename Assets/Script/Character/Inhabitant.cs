@@ -9,7 +9,7 @@ public class Inhabitant : IScriptableElement
     #region Variables Serialized
     #region Basic Information
     [field: Header("Basic Information")]
-    public override Player.InventoryCategory Category => Player.InventoryCategory.InhabitantCategory;
+    public override Player.ItemCategory Category => Player.ItemCategory.InhabitantCategory;
     [field: SerializeField] private string FirstName;
     [field: SerializeField] private string LastName;
     public override string Name => $"{FirstName} {LastName}";

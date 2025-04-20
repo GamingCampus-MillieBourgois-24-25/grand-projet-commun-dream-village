@@ -77,10 +77,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     }
 
 
-
-
-
-
     public SavePartData Serialize()
     {
         SavePartData data = new SavePartData();

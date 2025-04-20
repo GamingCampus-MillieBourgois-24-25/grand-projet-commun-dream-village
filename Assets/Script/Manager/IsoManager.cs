@@ -542,7 +542,6 @@ public class IsoManager : MonoBehaviour
 
     public GameObject SpawnInventoryItem<T>(T item, Vector3 _spawnPoint) where T : IScriptableElement
     {
-        Dictionary<T, InventoryItem> inventory = GM.Instance.player.GetInventory(item);
         if (!GM.Instance.player.GetItemInInventory(item, out var entry))
         {
             Debug.LogWarning("Item not in inventory or prefab is missing.");

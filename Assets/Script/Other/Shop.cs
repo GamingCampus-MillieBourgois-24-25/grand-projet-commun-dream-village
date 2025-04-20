@@ -30,7 +30,7 @@ public class Shop : MonoBehaviour
     {
         InitCategory(categoryContainers[0], GameManager.instance.inhabitants);
         InitCategory(categoryContainers[1], GameManager.instance.buildings);
-        //InitCategory(categoryContainers[2], GameManager.instance.decorations);
+        InitCategory(categoryContainers[2], GameManager.instance.decorations);
     }
 
     
@@ -39,7 +39,7 @@ public class Shop : MonoBehaviour
         foreach(IScriptableElement item in _contents)
         {
             GameObject obj = Instantiate(itemPrefab, _container.transform);
-            obj.GetComponent<ShopItem>().SetItemContent(item.Icon, item.Name, item.InitialPrice);
+            obj.GetComponent<ShopItem>().SetItemContent(item.Category, item.Icon, item.Name, item.InitialPrice);
         }
     }
 
