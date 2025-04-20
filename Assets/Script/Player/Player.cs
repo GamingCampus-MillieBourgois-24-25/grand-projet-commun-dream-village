@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     private int expLevel;
 
     // Currency
-    private int gold = 100;
+    private int gold = 100000;
     private int star = 100;
 
     [Header("Progression")]
@@ -295,6 +295,7 @@ public class Player : MonoBehaviour
                             decorationsInventory.Remove(decoration);
                             break;
                     }
+                    Destroy(existing.inventorySlotItem.gameObject);
                 }
                 Debug.Log($"Removed {amount} of {item.name} from inventory.");
                 return true;

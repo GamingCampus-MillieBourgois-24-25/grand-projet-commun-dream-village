@@ -551,7 +551,7 @@ public class IsoManager : MonoBehaviour
         Vector3 centerPos = tilemapBase.WorldToCell(_spawnPoint);
         centerPos.y += yMovingObject;
 
-        GameObject newObj = Instantiate(item.InstantiatePrefab, centerPos, Quaternion.identity);
+        GameObject newObj = Instantiate(item.InstantiatePrefab, centerPos, item.InstantiatePrefab.transform.rotation);
         PlaceableObject placeable = newObj.GetComponent<PlaceableObject>();
 
         if (placeable != null)

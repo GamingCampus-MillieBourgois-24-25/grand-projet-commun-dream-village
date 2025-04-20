@@ -28,7 +28,6 @@ public class ShopItem : MonoBehaviour
         switch (itemCategory)
         {
             case Player.ItemCategory.InhabitantCategory:
-                Debug.Log("=> " + GM.Instance.GetInhabitantByName(itemName.text.ToString()));
                 return GM.Instance.GetInhabitantByName(itemName.text.ToString()) as T;
             case Player.ItemCategory.BuildingCategory:
                 return GM.Instance.GetBuildingByName(itemName.text.ToString()) as T;
@@ -42,19 +41,17 @@ public class ShopItem : MonoBehaviour
 
     public void BS_Buy()
     {
-        Debug.Log("Buy");
         BuyItem<IScriptableElement>();
     }
 
     private void BuyItem<T>() where T : IScriptableElement
     {
         T item = GetItem<T>();
-        Debug.Log("Item: " + item.GetType());
         if (GM.Instance.player.SpendGold(item.InitialPrice))
         {
             GM.Instance.player.AddToInventory(item, 1);
             ownedQuantity++;
-            itemOwnedQuantityText.text = ownedQuantity.ToString() + "OWNED";
+            itemOwnedQuantityText.text = ownedQuantity.ToString() + " OWNED";
         }
     }
 }
