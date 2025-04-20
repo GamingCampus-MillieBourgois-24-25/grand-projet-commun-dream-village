@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
     // Currency
     private int gold = 100;
     private int star = 100;
+    [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI starText;
 
     [Header("Progression")]
     public LevelProgression levelProgression;
@@ -62,6 +64,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         expLevel = baseExpPerLevel;
+        UpdateGoldText();
+        UpdateStarText();
     }
 
     public void SetPlayerInfo()
@@ -87,32 +91,68 @@ public class Player : MonoBehaviour
 
     // GOLD
     public int GetGold() => gold;
-    public void SetGold(int value) => gold = Mathf.Max(0, value); // ne jamais avoir un solde négatif
+    public void SetGold(int value) {
+        gold = Mathf.Max(0, value); // ne jamais avoir un solde négatif
+        UpdateGoldText();
+    } 
 
-    public void AddGold(int amount) => gold += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
-    public bool SpendGold(int amount)
+    public void AddGold(int amount) {
+        gold += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
+        UpdateGoldText();
+    } 
+    public bool CanSpendGold(int amount)
     {
         if (gold >= amount)
         {
-            gold -= amount;
             return true;
         }
         return false;
     }
+    public void SpendGold(int amount)
+    {
+        if (CanSpendGold(amount))
+        {
+            gold -= amount;
+            UpdateGoldText();
+        }
+    }
+    private void UpdateGoldText()
+    {
+        goldText.text = GetGold().ToString();
+    }
 
     // STAR
     public int GetStar() => star;
-    public void SetStar(int value) => star = Mathf.Max(0, value);
+    public void SetStar(int value) {
+        star = Mathf.Max(0, value);
+        UpdateStarText();
+    } 
 
-    public void AddStar(int amount) => star += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
-    public bool SpendStar(int amount)
+    public void AddStar(int amount)
+    {
+        star += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
+        UpdateStarText();
+    }
+    public bool CanSpendStar(int amount)
     {
         if (star >= amount)
         {
-            star -= amount;
             return true;
         }
         return false;
+    }
+    public void SpendStar(int amount)
+    {
+        if (CanSpendStar(amount))
+        {
+            star -= amount;
+            UpdateStarText();
+        }
+    }
+
+    private void UpdateStarText()
+    {
+        starText.text = GetStar().ToString();
     }
 
     #endregion
