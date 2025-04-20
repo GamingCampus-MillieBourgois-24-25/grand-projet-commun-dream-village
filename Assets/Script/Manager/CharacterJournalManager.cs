@@ -129,10 +129,10 @@ public class CharacterJournalManager : MonoBehaviour
 
             Image img = heartGO.GetComponent<Image>();
             img.sprite = i < currentHearts ? heartFullSprite : heartEmptySprite;
-            img.preserveAspect = true;
+            //img.preserveAspect = true;
 
-            RectTransform rt = heartGO.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(100, 100);
+            //RectTransform rt = heartGO.GetComponent<RectTransform>();
+            //rt.sizeDelta = new Vector2(100, 100);
         }
     }
 

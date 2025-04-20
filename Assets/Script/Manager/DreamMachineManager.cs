@@ -27,6 +27,11 @@ public class DreamMachineManager : MonoBehaviour
     private Vector2 startTouchPosition;
     private float swipeThreshold = 50f;
 
+    [SerializeField]
+    private int baseGoldPerDream = 200;
+    [SerializeField]
+    private int baseEXPPerDream = 150;
+
     private void Start()
     {
         inhabitants = GM.VM.inhabitants;
@@ -310,9 +315,9 @@ public class DreamMachineManager : MonoBehaviour
         energySlider.value = currentInhabitant.Energy + energyChange;
 
         // Appliquer la couleur selon les changements
-        UpdateSliderColor(moodSlider, moodChange);
-        UpdateSliderColor(serenitySlider, serenityChange);
-        UpdateSliderColor(energySlider, energyChange);
+        //UpdateSliderColor(moodSlider, moodChange);
+        //UpdateSliderColor(serenitySlider, serenityChange);
+        //UpdateSliderColor(energySlider, energyChange);
     }
 
     private void UpdateSliderColor(Slider slider, int change)
@@ -386,7 +391,12 @@ public class DreamMachineManager : MonoBehaviour
 
             // 🔄 Désélection
             dream.isSelected = false;
+
+            GM.Instance.player.AddGold(Mathf.Max(0,Mathf.FloorToInt((baseGoldPerDream + inhabitant.Mood + inhabitant.Serenity + inhabitant.Energy)*inhabitant.GoldMultiplier)));
+            GM.Instance.player.AddXP(Mathf.Max(0,Mathf.FloorToInt((baseEXPPerDream + inhabitant.Mood + inhabitant.Serenity + inhabitant.Energy)*inhabitant.GoldMultiplier)));
+
         }
+        Debug.Log("Player just gained " + GM.Instance.player.GetGold() + " gold and " + GM.Instance.player.CurrentXP+ " exp");
 
 
         // ♻️ Reset

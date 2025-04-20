@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HouseObject : MonoBehaviour
 {
@@ -13,7 +14,12 @@ public class HouseObject : MonoBehaviour
         spawnPoint = transform.Find("SpawnPoint");
     }
 
-    private void OnMouseDown()
+    //private void OnMouseDown()
+    //{
+    //    OpenInhabitantJournal();
+    //}
+
+    public void OpenInhabitantJournal()
     {
         if (!GM.IM.isEditMode)
         {
@@ -22,22 +28,21 @@ public class HouseObject : MonoBehaviour
                 canvasHabitant.SetActive(true);
             }
 
-            CharacterJournalManager journalManager = FindObjectOfType<CharacterJournalManager>();
-            if (journalManager != null && inhabitant != null)
+            if (GM.Cjm != null && inhabitant != null)
             {
-                journalManager.ShowInhabitantByData(inhabitant);
+                GM.Cjm.ShowInhabitantByData(inhabitant);
             }
 
             if (inhabitant != null && inhabitant.InhabitantPrefab != null && instantiatedPrefab == null)
             {
                 if (spawnPoint != null)
                 {
-                    instantiatedPrefab = Instantiate(
-                        inhabitant.InhabitantPrefab,
-                        spawnPoint.position,
-                        spawnPoint.rotation,
-                        spawnPoint
-                    );
+                    //instantiatedPrefab = Instantiate(
+                    //    inhabitant.InhabitantPrefab,
+                    //    spawnPoint.position,
+                    //    spawnPoint.rotation,
+                    //    spawnPoint
+                    //);
                     Debug.Log("Hi I just spawned!");
                 }
                 else

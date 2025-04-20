@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5932507620009452683}
   - component: {fileID: 3027633828509668679}
   - component: {fileID: 8999732784409069603}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StockCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &8999732784409069603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 6551879421701198101}
   - component: {fileID: 5613906770174849846}
   - component: {fileID: 802720896043665326}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StockBTN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 4140163686224542296}
   - component: {fileID: 2356253841403205950}
   - component: {fileID: 2202421117708159910}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Stock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
