@@ -8,6 +8,9 @@ using Unity.VisualScripting;
 
 public class CharacterJournalManager : MonoBehaviour
 {
+    [Header("Canvas")]
+    [SerializeField] private GameObject journalCanvas;
+
     [Header("UI Elements")]
     public Image iconImage;
     public TMP_Text nameText;
@@ -32,6 +35,7 @@ public class CharacterJournalManager : MonoBehaviour
     [Header("UI - Sprites")]
     [SerializeField] private Sprite heartFullSprite;
     [SerializeField] private Sprite heartEmptySprite;
+    [SerializeField] private Sprite heartGoldSprite;
     [SerializeField] private Sprite unknownIcon;
 
     [Header("UI - Prefabs")]
@@ -120,19 +124,33 @@ public class CharacterJournalManager : MonoBehaviour
             Destroy(child.gameObject);
 
         int heartMax = inhabitants[currentIndex].baseData.HeartsBeforeLeaving;
+        bool isLocked = !inhabitants[currentIndex].baseData.CanLeave;
 
-        for (int i = 0; i < heartMax; i++)
+        if (isLocked)
         {
-            //GameObject heartGO = new GameObject("Heart", typeof(RectTransform), typeof(Image));
-            GameObject heartGO = Instantiate(heartPrefab);
-            heartGO.transform.SetParent(heartsContainer, false);
+            GameObject heartGold = Instantiate(heartPrefab);
+            heartGold.transform.SetParent(heartsContainer, false);
+            Image img = heartGold.GetComponent<Image>();
+            img.sprite = heartGoldSprite;
+            RectTransform rt = heartGold.GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(100, 100);
+        }
+        else
+        {
+            for (int i = 0; i < heartMax; i++)
+            {
+                //GameObject heartGO = new GameObject("Heart", typeof(RectTransform), typeof(Image));
+                GameObject heartGO = Instantiate(heartPrefab);
+                heartGO.transform.SetParent(heartsContainer, false);
+                
+                Image img = heartGO.GetComponent<Image>();
+                img.sprite = i < currentHearts ? heartFullSprite : heartEmptySprite;
 
-            Image img = heartGO.GetComponent<Image>();
-            img.sprite = i < currentHearts ? heartFullSprite : heartEmptySprite;
-            //img.preserveAspect = true;
+                //img.preserveAspect = true;
 
-            //RectTransform rt = heartGO.GetComponent<RectTransform>();
-            //rt.sizeDelta = new Vector2(100, 100);
+                //RectTransform rt = heartGO.GetComponent<RectTransform>();
+                //rt.sizeDelta = new Vector2(100, 100);
+             }
         }
     }
 
@@ -222,6 +240,42 @@ public class CharacterJournalManager : MonoBehaviour
     {
         currentIndex = (currentIndex - 1 + inhabitants.Count) % inhabitants.Count;
         DisplayInhabitant();
+    }
+
+    public void OpenJournal()
+    {
+        if (journalCanvas != null)
+        {
+            journalCanvas.SetActive(true);       
+            currentIndex = 0;
+            GM.JournalPanel.SetActive(false);
+            GM.ShopPanel.SetActive(false);
+            GM.InventoryPanel.SetActive(false);
+            GM.DayNightPanel.SetActive(false);
+            DisplayInhabitant();                 
+        }
+        else
+        {
+            Debug.LogWarning("Journal Canvas n'est pas assigné !");
+        }
+    }
+
+    public void CloseJournal()
+    {
+        if (journalCanvas != null)
+        {
+            journalCanvas.SetActive(false);
+            currentIndex = 0;
+            GM.JournalPanel.SetActive(true);
+            GM.ShopPanel.SetActive(true);
+            GM.InventoryPanel.SetActive(true);
+            GM.DayNightPanel.SetActive(true);
+            DisplayInhabitant();
+        }
+        else
+        {
+            Debug.LogWarning("Journal Canvas n'est pas assigné !");
+        }
     }
 
 }

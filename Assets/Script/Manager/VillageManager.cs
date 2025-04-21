@@ -19,12 +19,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     }
 
 
-
-
-
-
-
-
     private void Awake()
     {
         // Crée les instances runtime à partir des SO
@@ -67,10 +61,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         }
         return null;
     }
-
-
-
-
 
 
     public SavePartData Serialize()
