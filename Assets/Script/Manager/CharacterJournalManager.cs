@@ -21,6 +21,7 @@ public class CharacterJournalManager : MonoBehaviour
     public Transform dislikesContainer;
     public TMP_Text GoldMultiplierText;
 
+
     [Header("UI Elements - Statistiques")]
     public Slider moodSlider;
     public Slider serenitySlider;
@@ -49,8 +50,8 @@ public class CharacterJournalManager : MonoBehaviour
     {
         inhabitants = GM.VM.inhabitants;
 
-        nextButton.onClick.AddListener(ShowNext);
-        previousButton.onClick.AddListener(ShowPrevious);
+        //nextButton.onClick.AddListener(ShowNext);
+        //previousButton.onClick.AddListener(ShowPrevious);
 
         DisplayInhabitant();
     }
@@ -230,13 +231,13 @@ public class CharacterJournalManager : MonoBehaviour
     }
 
 
-    private void ShowNext()
+    public void BS_ShowNext()
     {
         currentIndex = (currentIndex + 1) % inhabitants.Count;
         DisplayInhabitant();
     }
 
-    private void ShowPrevious()
+    public void BS_ShowPrevious()
     {
         currentIndex = (currentIndex - 1 + inhabitants.Count) % inhabitants.Count;
         DisplayInhabitant();
@@ -252,6 +253,9 @@ public class CharacterJournalManager : MonoBehaviour
             GM.ShopPanel.SetActive(false);
             GM.InventoryPanel.SetActive(false);
             GM.DayNightPanel.SetActive(false);
+
+            nextButton.gameObject.SetActive(true);
+            previousButton.gameObject.SetActive(true);
             DisplayInhabitant();                 
         }
         else

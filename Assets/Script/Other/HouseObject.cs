@@ -35,6 +35,9 @@ public class HouseObject : MonoBehaviour
                 GM.InventoryPanel.SetActive(false);
                 GM.DayNightPanel.SetActive(false);
                 
+                GM.Cjm.nextButton.gameObject.SetActive(false);
+                GM.Cjm.previousButton.gameObject.SetActive(false);
+
                 GM.Cjm.ShowInhabitantByData(inhabitant);
             }
 
