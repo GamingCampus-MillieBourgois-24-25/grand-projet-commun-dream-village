@@ -16,8 +16,28 @@ MonoBehaviour:
     m_Code: fr
   m_SharedData: {fileID: 11400000, guid: 8a4358b2d52704d4faffc78d6ca427c9, type: 2}
   m_Metadata:
-    m_Items: []
-  m_TableData: []
+    m_Items:
+    - rid: 6238822977345945606
+  m_TableData:
+  - m_Id: 5941981184
+    m_Localized: Je pense que tu sais tout maintenant.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9813323776
+    m_Localized: "Si vous oubliez quelque chose, ouvrez simplement le menu OPTIONS.
+      Vous y trouverez un bouton \xAB\_REVOIR LE TUTORIEL\_\xBB\_!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17547620352
+    m_Localized: "Adieu, {0}. Soyez le meilleur maire \u2013 et le plus grand porteur
+      de r\xEAves \u2013 que {1} ait jamais connu."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945606
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6238822977345945606
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070eb1504000000

@@ -16,8 +16,60 @@ MonoBehaviour:
     m_Code: fr
   m_SharedData: {fileID: 11400000, guid: 72d91b9481dd09147846ac20901bda6a, type: 2}
   m_Metadata:
-    m_Items: []
-  m_TableData: []
+    m_Items:
+    - rid: 6238822977345945610
+  m_TableData:
+  - m_Id: 20999532544
+    m_Localized: 'Voici le premier habitant de votre village : {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945610
+  - m_Id: 23239290880
+    m_Localized: "Cliquez sur sa maison pour le voir de pr\xE8s !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25567129600
+    m_Localized: "Ne vous inqui\xE9tez pas, il ne peut ni nous voir ni nous entendre
+      sous notre forme de porteur de r\xEAves. Nous pouvons parler librement."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28062740480
+    m_Localized: Ceci est votre journal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30369607680
+    m_Localized: "La page de {0} est d\xE9j\xE0 ouverte, o\xF9 vous pouvez obtenir
+      ses informations."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945610
+  - m_Id: 46970662912
+    m_Localized: "Voici ses pr\xE9f\xE9rences."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50372243456
+    m_Localized: "Par d\xE9faut, leurs pr\xE9f\xE9rences sont verrouill\xE9es. Chaque
+      habitant a ses propres pr\xE9f\xE9rences. \xC0 vous de les d\xE9couvrir\_!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53174038528
+    m_Localized: "Comment\_? Ils seront automatiquement d\xE9bloqu\xE9s dans votre
+      journal lorsque vous les ferez r\xEAver ou r\xE9aliser des activit\xE9s au
+      village."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56558841856
+    m_Localized: Voici ses statistiques actuelles.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58815377408
+    m_Localized: "Am\xE9liorons-les maintenant !"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6238822977345945610
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070abe30400000000702b1207000000

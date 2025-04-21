@@ -24,24 +24,6 @@ MonoBehaviour:
     - Locale-fr
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6a6305fdc8b0fe841bbf06781922da4a
-    m_Address: Dialogues Dream_fr
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-fr
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 206f8974a26b8924a8fbea9330e3d501
-    m_Address: Dialogues Information_fr
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-fr
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 71955491588f729499d6f644e97b44a2
-    m_Address: Dialogues Reaction_fr
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-fr
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 42d96200d1c06ed49aed9c1c8229c174
     m_Address: Introduction_fr
     m_ReadOnly: 1
