@@ -559,6 +559,8 @@ public class IsoManager : MonoBehaviour
         stockCanvas.transform.parent = null;
         GM.BM.canvasBuilding.transform.parent = null;
         Destroy(objToDestroy);
+
+        ToggleInventorySmooth(true);
     }
 
     #endregion

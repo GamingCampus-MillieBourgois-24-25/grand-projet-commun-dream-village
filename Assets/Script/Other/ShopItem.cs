@@ -83,8 +83,9 @@ public class ShopItem : MonoBehaviour
     private void BuyItem<T>() where T : IScriptableElement
     {
         T item = GetItem<T>();
-        if (GM.Instance.player.SpendGold(item.InitialPrice))
+        if (GM.Instance.player.CanSpendGold(item.InitialPrice))
         {
+            GM.Instance.player.SpendGold(item.InitialPrice);
             GM.Instance.player.AddToInventory(item, 1);
             ownedQuantity++;
             itemOwnedQuantityText.text = ownedQuantity.ToString() + " OWNED";

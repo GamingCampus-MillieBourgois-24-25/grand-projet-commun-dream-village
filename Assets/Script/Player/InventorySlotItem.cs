@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    
+
     private IScriptableElement inventoryItem;
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI itemName;
@@ -94,11 +94,11 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
                 Vector3Int cell = tilemap.WorldToCell(projectedPoint);
                 BoundsInt bounds = tilemap.cellBounds;
 
-                if(cell.x < bounds.min.x)
+                if (cell.x < bounds.min.x)
                 {
                     cell.x = bounds.min.x;
                 }
-                else if(cell.x > bounds.max.x)
+                else if (cell.x > bounds.max.x)
                 {
                     cell.x = bounds.max.x;
                 }
@@ -124,4 +124,3 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
         }
     }
 }
-
