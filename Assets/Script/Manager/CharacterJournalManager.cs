@@ -136,9 +136,9 @@ public class CharacterJournalManager : MonoBehaviour
         }
     }
 
-    public void ShowInhabitantByData(Inhabitant target)
+    public void ShowInhabitantByData(InhabitantInstance target)
     {
-        int index = inhabitants.FindIndex(i => i.baseData == target);
+        int index = inhabitants.FindIndex(i => i == target);
         Debug.Log(currentIndex);
         if (index != -1)
         {
@@ -174,7 +174,7 @@ public class CharacterJournalManager : MonoBehaviour
 
         foreach (var leaver in toRemove)
         {
-            GM.VM.RemoveInhabitant(leaver);
+            GM.VM.RemoveInstance(leaver.houseObject.gameObject);
         }
 
         // Remise à jour du journal

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b87d20c4875e2488498605b6d4fbae, type: 3}
   m_Name: Decoration
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Fence
   <Icon>k__BackingField: {fileID: 0}
   <InitialPrice>k__BackingField: 0
   <InstantiatePrefab>k__BackingField: {fileID: 0}

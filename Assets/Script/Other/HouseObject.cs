@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HouseObject : MonoBehaviour
 {
-    [SerializeField] private Inhabitant inhabitant;
+    public InhabitantInstance inhabitantInstance;
     [SerializeField] private GameObject canvasHabitant;
     private Transform spawnPoint;
 
@@ -27,12 +27,12 @@ public class HouseObject : MonoBehaviour
                 canvasHabitant.SetActive(true);
             }
 
-            if (GM.Cjm != null && inhabitant != null)
+            if (GM.Cjm != null && inhabitantInstance != null)
             {
-                GM.Cjm.ShowInhabitantByData(inhabitant);
+                GM.Cjm.ShowInhabitantByData(inhabitantInstance);
             }
 
-            if (inhabitant != null && inhabitant.InhabitantPrefab != null && instantiatedPrefab == null)
+            if (inhabitantInstance != null && inhabitantInstance.baseData.InhabitantPrefab != null && instantiatedPrefab == null)
             {
                 if (spawnPoint != null)
                 {

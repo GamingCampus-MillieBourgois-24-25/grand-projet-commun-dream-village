@@ -176,23 +176,6 @@ public class Player : MonoBehaviour
 
     #region Inventory
 
-    private Dictionary<T, InventoryItem> GetInventory<T>(T item)
-    {
-        if (item is Inhabitant inhabitant)
-        {
-            return inhabitantsInventory as Dictionary<T, InventoryItem>;
-        }
-        else if (item is Building building)
-        {
-            return buildingsInventory as Dictionary<T, InventoryItem>;
-        }
-        else if (item is Decoration decoration)
-        {
-            return decorationsInventory as Dictionary<T, InventoryItem>;
-        }
-        return null;
-    }
-
     public bool GetItemInInventory<T>(T item, out InventoryItem inventoryItem)
     {
         switch (item)

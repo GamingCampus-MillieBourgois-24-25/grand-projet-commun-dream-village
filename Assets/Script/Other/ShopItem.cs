@@ -19,7 +19,43 @@ public class ShopItem : MonoBehaviour
         itemIcon.sprite = _icon;
         itemName.text = _name;
         itemPrice.text = _price.ToString();
-        ownedQuantity = GM.Instance.player.GetItemQuantity(GetItem<IScriptableElement>());
+        UpdateOwnedQuantity();
+    }
+
+    public void UpdateOwnedQuantity()
+    {
+        switch (itemCategory)
+        {
+            case Player.ItemCategory.InhabitantCategory:
+                Inhabitant inhabitantItem = GetItem<Inhabitant>();
+                ownedQuantity = GM.Instance.player.GetItemQuantity(inhabitantItem);
+                foreach (var inhabitant in GM.VM.inhabitants)
+                {
+                    if (inhabitant.baseData == inhabitantItem)
+                    {
+                        ownedQuantity++;
+                    }
+                }
+
+                break;
+            case Player.ItemCategory.BuildingCategory:
+                Building buildingItem = GetItem<Building>();
+                ownedQuantity = GM.Instance.player.GetItemQuantity(buildingItem);
+                foreach (var building in GM.VM.buildings)
+                {
+                    if (building.baseData == buildingItem)
+                    {
+                        ownedQuantity++;
+                    }
+                }
+                break;
+            case Player.ItemCategory.DecorationCategory:
+                Debug.LogWarning("Not Implemented");
+                break;
+            default:
+                Debug.LogError("Invalid category");
+                break;
+        }
         itemOwnedQuantityText.text = ownedQuantity.ToString() + " OWNED";
     }
 

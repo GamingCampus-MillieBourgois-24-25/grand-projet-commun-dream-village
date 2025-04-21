@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartData>
 {
-    [Header("Village Data")]
-    public List<Inhabitant> baseInhabitants = new List<Inhabitant>();
-    public List<Building> baseBuildings = new List<Building>();
-
     public List<InhabitantInstance> inhabitants { get; private set; } = new List<InhabitantInstance>();
     public List<BuildingObject> buildings { get; private set; } = new List<BuildingObject>();
+
 
     [System.Serializable]
     public class SavePartData : ISaveData
@@ -18,27 +15,15 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         public List<InhabitantInstance.SavePartData> inhabitants = new List<InhabitantInstance.SavePartData>();
     }
 
-
-    private void Awake()
-    {
-        // Crée les instances runtime à partir des SO
-        foreach (var inhabitant in baseInhabitants)
-        {
-            inhabitants.Add(new InhabitantInstance(inhabitant));
-        } 
-    }
-
     public void CreateInstanceofScriptable<T>(T _item, GameObject _obj) where T : IScriptableElement
     {
         switch (_item)
         {
             case Inhabitant inhabitant:
-                baseInhabitants.Add(inhabitant);
-                inhabitants.Add(new InhabitantInstance(inhabitant));
+                inhabitants.Add(new InhabitantInstance(inhabitant, _obj.GetComponent<HouseObject>()));
                 Debug.Log($"New inhabitant added: {inhabitant.Name}");
                 break;
             case Building building:
-                baseBuildings.Add(building);
                 BuildingObject loadedBuilding = _obj.GetComponent<BuildingObject>();
                 buildings.Add(loadedBuilding);
                 Debug.Log($"New building added: {building.Name}");
@@ -49,19 +34,22 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         }
     }
 
-    public void RemoveInhabitant(InhabitantInstance instanceToRemove)
+    public void RemoveInstance(GameObject _obj)
     {
-        if (inhabitants.Count > 1)
+        if (_obj.TryGetComponent<BuildingObject>(out BuildingObject buildingObj) && buildings.Count >= 1)
         {
-            baseInhabitants.Remove(instanceToRemove.baseData);
-            inhabitants.Remove(instanceToRemove);
-            Debug.Log($"Inhabitant removed: {instanceToRemove.Name}");
+            buildings.Remove(buildingObj);
+            Debug.Log($"Building removed: {buildingObj.baseData.Name}");
         }
-    }
-
-    public int GetInhabitantCount()
-    {
-        return inhabitants.Count;
+        else if (_obj.TryGetComponent<HouseObject>(out HouseObject houseObj) && inhabitants.Count >= 1)
+        {
+            inhabitants.Remove(houseObj.inhabitantInstance);
+            Debug.Log($"Inhabitant removed: {houseObj.inhabitantInstance.baseData.Name}");
+        }
+        else
+        {
+            Debug.LogError("Unknown object type");
+        }
     }
 
     public InhabitantInstance GetInhabitant(Inhabitant inhabitant)
@@ -103,7 +91,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
             loadedBuilding.Deserialize(buildingData);
             buildings.Add(loadedBuilding);
-            baseBuildings.Add(loadedBuilding.building);
         }
         foreach (var inhabitantData in data.inhabitants)
         {
@@ -120,7 +107,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             buildingInstanciate.GetComponent<PlaceableObject>().OriginalPosition = new Vector3Int(0, 6, 0);
             buildingInstanciate.GetComponent<PlaceableObject>().ResetPosition();
             buildings.Add(loadedBuilding);
-            baseBuildings.Add(loadedBuilding.building);
         }
     }
 }

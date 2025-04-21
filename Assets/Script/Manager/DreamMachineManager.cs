@@ -18,7 +18,6 @@ public class DreamMachineManager : MonoBehaviour
 
     public InterestDatabase interestDatabase;
 
-    private List<InhabitantInstance> inhabitants;
     private int currentIndex = 0;
 
     private Dictionary<InhabitantInstance, List<DisplayableDream>> dreamsByInhabitant = new();
@@ -29,11 +28,9 @@ public class DreamMachineManager : MonoBehaviour
 
     private void Start()
     {
-        inhabitants = GM.VM.inhabitants;
-
-        if (inhabitants.Count > 0)
+        if (GM.VM.inhabitants.Count > 0)
         {
-            var current = inhabitants[currentIndex];
+            var current = GM.VM.inhabitants[currentIndex];
 
             if (!dreamsByInhabitant.ContainsKey(current))
             {
@@ -87,7 +84,7 @@ public class DreamMachineManager : MonoBehaviour
 
     private void DisplayCurrentInhabitant()
     {
-        InhabitantInstance currentInhabitant = inhabitants[currentIndex];
+        InhabitantInstance currentInhabitant = GM.VM.inhabitants[currentIndex];
 
         characterImage.sprite = currentInhabitant.Icon;
         characterNameText.text = $"{currentInhabitant.Name}";
@@ -96,7 +93,7 @@ public class DreamMachineManager : MonoBehaviour
         serenitySlider.value = currentInhabitant.Serenity;
         energySlider.value = currentInhabitant.Energy;
 
-        index.text = $"{currentIndex + 1}/{inhabitants.Count}";
+        index.text = $"{currentIndex + 1}/{GM.VM.inhabitants.Count}";
 
         // Reset slider colors to default (white)
         ResetSliderColors();
@@ -126,7 +123,7 @@ public class DreamMachineManager : MonoBehaviour
             Destroy(child.gameObject);
 
         List<Button> buttons = new();
-        InhabitantInstance currentInhabitant = inhabitants[currentIndex];
+        InhabitantInstance currentInhabitant = GM.VM.inhabitants[currentIndex];
 
         for (int i = 0; i < dreams.Count; i++)
         {
@@ -186,10 +183,10 @@ public class DreamMachineManager : MonoBehaviour
     
     public void NextInhabitant()
     {
-        currentIndex = (currentIndex + 1) % inhabitants.Count;
+        currentIndex = (currentIndex + 1) % GM.VM.inhabitants.Count;
         DisplayCurrentInhabitant();
 
-        var current = inhabitants[currentIndex];
+        var current = GM.VM.inhabitants[currentIndex];
 
         if (!dreamsByInhabitant.ContainsKey(current))
         {
@@ -207,10 +204,10 @@ public class DreamMachineManager : MonoBehaviour
 
     public void PreviousInhabitant()
     {
-        currentIndex = (currentIndex - 1 + inhabitants.Count) % inhabitants.Count;
+        currentIndex = (currentIndex - 1 + GM.VM.inhabitants.Count) % GM.VM.inhabitants.Count;
         DisplayCurrentInhabitant();
 
-        var current = inhabitants[currentIndex];
+        var current = GM.VM.inhabitants[currentIndex];
 
         if (!dreamsByInhabitant.ContainsKey(current))
         {
@@ -297,7 +294,7 @@ public class DreamMachineManager : MonoBehaviour
     
     private void PreviewStats(DisplayableDream displayable)
     {
-        var currentInhabitant = inhabitants[currentIndex];
+        var currentInhabitant = GM.VM.inhabitants[currentIndex];
 
         // Calculer les changements
         int moodChange = GetStatChange(displayable.orderedElements[0], currentInhabitant);
@@ -342,7 +339,7 @@ public class DreamMachineManager : MonoBehaviour
     {
         bool allSelected = true;
 
-        foreach (var inhabitant in inhabitants)
+        foreach (var inhabitant in GM.VM.inhabitants)
         {
             if (!selectedDreamByInhabitant.ContainsKey(inhabitant))
             {
@@ -395,11 +392,9 @@ public class DreamMachineManager : MonoBehaviour
 
         // 🔁 Rafraîchissement UI
         DisplayCurrentInhabitant();
-        DisplayDreams(dreamsByInhabitant[inhabitants[currentIndex]]);
+        DisplayDreams(dreamsByInhabitant[GM.VM.inhabitants[currentIndex]]);
 
         GM.Cjm.DisplayInhabitant();
     }
-
-
 }
 

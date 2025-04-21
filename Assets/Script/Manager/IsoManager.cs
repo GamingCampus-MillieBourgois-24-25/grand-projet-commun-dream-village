@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 public class IsoManager : MonoBehaviour
 {
@@ -532,8 +533,29 @@ public class IsoManager : MonoBehaviour
     }
     public void BS_StockSelectedObject()
     {
+        if(selectedObject.TryGetComponent<BuildingObject>(out BuildingObject buildingObj))
+        {
+            GM.VM.RemoveInstance(buildingObj.gameObject);
+            GM.Instance.player.AddToInventory(buildingObj.baseData, 1);
+        }
+        else if (selectedObject.TryGetComponent<HouseObject>(out HouseObject houseObj))
+        {
+            GM.VM.RemoveInstance(houseObj.gameObject);
+            GM.Instance.player.AddToInventory(houseObj.inhabitantInstance.baseData, 1);
+        }
+        else
+        {
+            Debug.LogWarning("Selected object is not a BuildingObject or HouseObject.");
+            return;
+        }
+
+        GameObject objToDestroy = selectedObject.gameObject;
+
         tilemapObjects.ClearAllTiles();
         UnSelectObject();
+        stockCanvas.transform.parent = null;
+        GM.BM.canvasBuilding.transform.parent = null;
+        Destroy(objToDestroy);
     }
 
     #endregion

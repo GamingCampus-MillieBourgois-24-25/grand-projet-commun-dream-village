@@ -33,19 +33,19 @@ public class Shop : MonoBehaviour
         InitCategory(categoryContainers[2], GameManager.instance.decorations);
     }
 
-    
+
     private void InitCategory<T>(GameObject _container, List<T> _contents) where T : IScriptableElement
     {
-        foreach(IScriptableElement item in _contents)
+        foreach (IScriptableElement item in _contents)
         {
             GameObject obj = Instantiate(itemPrefab, _container.transform);
             obj.GetComponent<ShopItem>().SetItemContent(item.Category, item.Icon, item.Name, item.InitialPrice);
         }
     }
 
-    public void SwitchCategory(int _category)
+    public void BS_SwitchCategory(int _category)
     {
-        if(_category < 0 || _category > 3)
+        if (_category < 0 || _category > 3)
         {
             Debug.LogError("Invalid shop category index");
             return;
@@ -59,5 +59,30 @@ public class Shop : MonoBehaviour
         categoryButtons[_category].interactable = false;
         categoryContainers[_category].SetActive(true);
         scrollView.content = categoryContainers[_category].GetComponent<RectTransform>();
+    }
+
+    public void BS_UpdateOwnedQuantityItem()
+    {
+        foreach (Transform item in categoryContainers[0].transform)
+        {
+            if (item.TryGetComponent<ShopItem>(out ShopItem shopItem))
+            {
+                shopItem.UpdateOwnedQuantity();
+            }
+        }
+        foreach (Transform item in categoryContainers[1].transform)
+        {
+            if (item.TryGetComponent<ShopItem>(out ShopItem shopItem))
+            {
+                shopItem.UpdateOwnedQuantity();
+            }
+        }
+        foreach (Transform item in categoryContainers[2].transform)
+        {
+            if (item.TryGetComponent<ShopItem>(out ShopItem shopItem))
+            {
+                shopItem.UpdateOwnedQuantity();
+            }
+        }
     }
 }
