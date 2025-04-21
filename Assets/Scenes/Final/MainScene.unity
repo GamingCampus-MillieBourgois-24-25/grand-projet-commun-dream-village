@@ -128,6 +128,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4311155344099329666}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &37795768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6795425277219049440, guid: 9bec3195043d1214db1a10fe7222fefa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401959904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &85192248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,6 +601,12 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.029000001, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &272313839 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5833310871334443231, guid: 9bec3195043d1214db1a10fe7222fefa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401959904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &287955137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7095,6 +7107,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 342499708}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &967803091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1003439185293265953, guid: 9bec3195043d1214db1a10fe7222fefa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401959904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1006139104 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2745071312370223761, guid: 721dba7f516ffdd41af74044c52f92de,
@@ -11314,6 +11332,12 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.015000001, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &1535578536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2981206637790905166, guid: 9bec3195043d1214db1a10fe7222fefa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401959904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1539446253 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1778663115372625918, guid: c2742e185167e8f4794157e86fb087f2,
@@ -11505,6 +11529,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1576997161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2582547645378901977, guid: 9bec3195043d1214db1a10fe7222fefa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401959904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1579652198 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 995696840241549050, guid: e8db015efc51ef842965717a72dd6060,
@@ -12232,9 +12262,34 @@ PrefabInstance:
       objectReference: {fileID: 1705861469}
     - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}
+      propertyPath: shopPanel
+      value: 
+      objectReference: {fileID: 1576997161}
+    - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
+        type: 3}
+      propertyPath: dreamPanel
+      value: 
+      objectReference: {fileID: 1535578536}
+    - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
+        type: 3}
       propertyPath: isoManager
       value: 
       objectReference: {fileID: 1329695094}
+    - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
+        type: 3}
+      propertyPath: journalPanel
+      value: 
+      objectReference: {fileID: 37795768}
+    - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
+        type: 3}
+      propertyPath: dayNightPanel
+      value: 
+      objectReference: {fileID: 272313839}
+    - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
+        type: 3}
+      propertyPath: inventoryPanel
+      value: 
+      objectReference: {fileID: 967803091}
     - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}
       propertyPath: villageManager
