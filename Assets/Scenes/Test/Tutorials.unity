@@ -663,6 +663,21 @@ PrefabInstance:
       propertyPath: dialogueCanvas
       value: 
       objectReference: {fileID: 2124351212}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: localizedArguments.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: localizedArguments.Array.data[2].name
+      value: FIRST_VILLAGER_NAME
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: localizedArguments.Array.data[2].value
+      value: Willith Warm
+      objectReference: {fileID: 0}
     - target: {fileID: 7773874029115950907, guid: 2eb96c2eef63f0647a4f93221f7d3349,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1668,6 +1683,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2041555471}
+    - target: {fileID: 1683150132605822619, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5613725209329420874, guid: 86c2440593a799147abfe91ada691d3e,
         type: 3}
       propertyPath: m_Name
@@ -9892,7 +9912,7 @@ PrefabInstance:
     - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}
       propertyPath: isPlayerCreated
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}

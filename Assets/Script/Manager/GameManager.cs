@@ -26,7 +26,9 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     [SerializeField] private GameObject playerFormCanvas;
     public GameObject mainUiCanvas;
 
-
+    
+    public delegate void HouseTutoDelegate();
+    public HouseTutoDelegate OnHouseTuto;
 
     DateTime lastTimeSaved;
 

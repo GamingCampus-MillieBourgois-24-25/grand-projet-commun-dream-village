@@ -17,6 +17,13 @@ public class HouseObject : MonoBehaviour
     {
         if (!GM.IM.isEditMode)
         {
+
+            if (!GM.Tm.isHouseTutorialAlreadyPlayed)
+            {
+                GM.Instance.OnHouseTuto?.Invoke();
+                Debug.Log("House Clicked");
+            }
+            
             if (!canvasHabitant.activeSelf)
             {
                 canvasHabitant.SetActive(true);

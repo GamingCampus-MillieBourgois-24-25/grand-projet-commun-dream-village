@@ -5,76 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="133297ab-59a1-4172-bc85-0cebe864daf4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.grand-projet-commun-dream-village/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Festia Hest/First Greeting/Festia_Hest_First_Greeting_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Festia Hest/First Greeting/Festia_Hest_First_Greeting_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Festia Hest/First Greeting/Festia_Hest_First_Greeting_002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Festia Hest/First Greeting/Festia_Hest_First_Greeting_002.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Festia Hest/First Greeting/Festia_Hest_First_Greeting_003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Festia Hest/First Greeting/Festia_Hest_First_Greeting_003.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Festia Hest/Greeting/Festia_Hest_Greeting_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Festia Hest/Greeting/Festia_Hest_Greeting_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/First Greeting/Nillie_Zel_First_Greeting_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/First Greeting/Nillie_Zel_First_Greeting_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/First Greeting/Nillie_Zel_First_Greeting_002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/First Greeting/Nillie_Zel_First_Greeting_002.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/First Greeting/Nillie_Zel_First_Greeting_003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/First Greeting/Nillie_Zel_First_Greeting_003.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/First Greeting/Nillie_Zel_First_Greeting_004.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/First Greeting/Nillie_Zel_First_Greeting_004.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/First Greeting/Nillie_Zel_First_Greeting_005.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/First Greeting/Nillie_Zel_First_Greeting_005.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/Greeting/Nillie_Zel_Greeting_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Nillie Zel/Greeting/Nillie_Zel_Greeting_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Willith Warm/First Greeting/Willith_Warm_First_Greeting_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Willith Warm/First Greeting/Willith_Warm_First_Greeting_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Willith Warm/First Greeting/Willith_Warm_First_Greeting_002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Willith Warm/First Greeting/Willith_Warm_First_Greeting_002.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Willith Warm/Greeting/Willith_Warm_Greeting_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Characters/Willith Warm/Greeting/Willith_Warm_Greeting_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Greeting/Greeting_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Greeting/Greeting_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Greeting/Greeting_002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Greeting/Greeting_002.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Greeting/Greeting_003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Greeting/Greeting_003.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Morning/Morning_3_Neg_50.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Morning/Morning_3_Neg_50.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Morning/Morning_3_Pos_50.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Morning/Morning_3_Pos_50.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Morning/Morning_Negative.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Morning/Morning_Negative.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Morning/Morning_Positive.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Global/Morning/Morning_Positive.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_002.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_003.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_004.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_004.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_005.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_005.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_006.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_006.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_007.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Activity/Tuto_Activity_007.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_002.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_003.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_004.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_004.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_005.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_005.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_006.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_006.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_007.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_007.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_008.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_008.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_009.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_009.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_010.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_010.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_011.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_011.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_012.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_012.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_013.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Dream/Tuto_Dream_013.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Edit/Tuto_Edit_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Edit/Tuto_Edit_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Edit/Tuto_Edit_002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Edit/Tuto_Edit_002.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Edit/Tuto_Edit_003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Edit/Tuto_Edit_003.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Heart/Tuto_Heart_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Heart/Tuto_Heart_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Heart/Tuto_Heart_002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Heart/Tuto_Heart_002.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Heart/Tuto_Heart_003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Heart/Tuto_Heart_003.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Heart/Tuto_Heart_004.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Heart/Tuto_Heart_004.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Heart/Tuto_Heart_005.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Heart/Tuto_Heart_005.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_001.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_002.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_003.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_004.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_004.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_005.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_005.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_006.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_006.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_007.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_007.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_008.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_008.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_009.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_009.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_010.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/House &amp; Infos/Tuto_House_010.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_001.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_001.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_002.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_002.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_003.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_003.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_004.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_004.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_005.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_005.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_006.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScriptableObject/Dialogues/Tutorials/Shop/Tuto_Shop_006.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/Dialogues.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesInhabitant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesInhabitant.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Final/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Final/MainScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Option/AccessibilityOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Option/AccessibilityOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Option/AudioOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Option/AudioOptions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test/Tutorials.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test/Tutorials.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Character/Dialogues/DialoguesManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Manager/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Other/HouseObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Other/HouseObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Tutorials/TutorialsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Tutorials/TutorialsManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,28 +37,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\jhussenet\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\jhussenet\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\jhussenet\\AppData\\Local\\Symbols\\src"
-    ]
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Tutorials&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\2022.3.32f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Unity\Editor\2022.3.32f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\jhussenet\Documents\grand-projet-commun-dream-village -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\jhussenet\Documents\grand-projet-commun-dream-village" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -127,7 +60,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\2022.3.32f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Unity\Editor\2022.3.32f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\jhussenet\Documents\grand-projet-commun-dream-village -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\jhussenet\Documents\grand-projet-commun-dream-village" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -139,6 +72,9 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -149,6 +85,9 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -173,6 +112,8 @@
       <workItem from="1744623145424" duration="5225000" />
       <workItem from="1744803028866" duration="4217000" />
       <workItem from="1744891733510" duration="4651000" />
+      <workItem from="1745238564769" duration="3165000" />
+      <workItem from="1745249288688" duration="6391000" />
     </task>
     <servers />
   </component>
