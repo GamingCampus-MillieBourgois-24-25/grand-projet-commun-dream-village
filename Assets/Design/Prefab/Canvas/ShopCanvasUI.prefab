@@ -972,9 +972,11 @@ MonoBehaviour:
   categoryButtons:
   - {fileID: 3640799496746875928}
   - {fileID: 3053862252269007791}
+  - {fileID: 4013728078689959900}
   categoryContainers:
   - {fileID: 2730896348365300646}
   - {fileID: 1145063493784804411}
+  - {fileID: 1269985409629920879}
 --- !u!1 &2730896348365300646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,7 +1159,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
+    m_NormalColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 0.78431374}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1636,7 +1638,7 @@ GameObject:
   - component: {fileID: 6011216217170193986}
   - component: {fileID: 4013728078689959900}
   m_Layer: 5
-  m_Name: BuildingCategoryButton (1)
+  m_Name: DecorationCategoryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1854,7 +1856,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.79607844, g: 0.79607844, b: 0.79607844, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.78431374}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}

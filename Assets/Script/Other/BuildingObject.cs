@@ -10,7 +10,7 @@ using static UnityEditor.ShaderKeywordFilter.FilterAttribute;
 public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartData>
 {
     GameManager gameManager;
-    [SerializeField] public Building building;
+    [SerializeField] public Building baseData;
 
     private InhabitantInstance inhabitantUsing;
     private GameObject canvasBuilding;
@@ -122,7 +122,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         if (waitingCoroutine == null && _inhabitant.isInActivity == false)
         {
             isUsed = true;
-            timeRemaining = building.EffectDuration;
+            timeRemaining = baseData.EffectDuration;
             inhabitantUsing = _inhabitant;
             waitingCoroutine = StartCoroutine(WaitingCoroutine());
 
@@ -145,7 +145,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
         if (inhabitantUsing != null)
         {
-            inhabitantUsing.FinishActivity(building.AttributeEffects, building.Energy, building.Mood, building.Serenity);
+            inhabitantUsing.FinishActivity(baseData.AttributeEffects, baseData.Energy, baseData.Mood, baseData.Serenity);
             inhabitantUsing = null;
         }
 
@@ -161,15 +161,15 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         TextMeshProUGUI timeText = GM.BM.timeInCanvas.GetComponent<TextMeshProUGUI>();
         GameObject preferencesContainer = GM.BM.preferenceContainer;
 
-        name.text = building.Name;
-        timeText.text = building.EffectDuration.ToString() + "s";
+        name.text = baseData.Name;
+        timeText.text = baseData.EffectDuration.ToString() + "s";
 
         foreach (Transform child in preferencesContainer.transform)
         {
             Destroy(child.gameObject);
         }
 
-        foreach (var attributeEffect in building.AttributeEffects)
+        foreach (var attributeEffect in baseData.AttributeEffects)
         {
             GameObject iconGO = new GameObject("AttributeIcon");
             iconGO.transform.SetParent(preferencesContainer.transform, false);
@@ -247,7 +247,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     public SavePartData Serialize()
     {
         SavePartData data = new SavePartData();
-        data.baseBuildingName = building.Name;
+        data.baseBuildingName = baseData.Name;
         data.inhabitantUsingName = (inhabitantUsing != null) ? inhabitantUsing.Name : null;
 
         data.isUsed = isUsed;
