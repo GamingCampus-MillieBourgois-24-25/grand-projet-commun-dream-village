@@ -2,8 +2,6 @@ using LitMotion;
 using LitMotion.Extensions;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Build.Pipeline.Utilities;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.UI;
 
