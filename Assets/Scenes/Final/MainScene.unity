@@ -287,6 +287,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -150
       objectReference: {fileID: 0}
+    - target: {fileID: 2157216763243338282, guid: e8db015efc51ef842965717a72dd6060,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157216763243338282, guid: e8db015efc51ef842965717a72dd6060,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1391697717}
+    - target: {fileID: 2157216763243338282, guid: e8db015efc51ef842965717a72dd6060,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseJournal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157216763243338282, guid: e8db015efc51ef842965717a72dd6060,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CharacterJournalManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2410853323122089809, guid: e8db015efc51ef842965717a72dd6060,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -10459,28 +10479,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 951110880230405612, guid: 9bec3195043d1214db1a10fe7222fefa,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 951110880230405612, guid: 9bec3195043d1214db1a10fe7222fefa,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1932537810}
+      objectReference: {fileID: 1391697717}
+    - target: {fileID: 951110880230405612, guid: 9bec3195043d1214db1a10fe7222fefa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenJournal
+      objectReference: {fileID: 0}
+    - target: {fileID: 951110880230405612, guid: 9bec3195043d1214db1a10fe7222fefa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CharacterJournalManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 970814968489814052, guid: 9bec3195043d1214db1a10fe7222fefa,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 970814968489814052, guid: 9bec3195043d1214db1a10fe7222fefa,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 970814968489814052, guid: 9bec3195043d1214db1a10fe7222fefa,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 970814968489814052, guid: 9bec3195043d1214db1a10fe7222fefa,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 1020719783311974511, guid: 9bec3195043d1214db1a10fe7222fefa,
         type: 3}
@@ -10630,6 +10665,11 @@ PrefabInstance:
     - target: {fileID: 2162764895244036047, guid: 9bec3195043d1214db1a10fe7222fefa,
         type: 3}
       propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981206637790905166, guid: 9bec3195043d1214db1a10fe7222fefa,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3178132243099256937, guid: 9bec3195043d1214db1a10fe7222fefa,
@@ -18133,6 +18173,11 @@ PrefabInstance:
       objectReference: {fileID: 1910757771}
     - target: {fileID: 8293250436908638852, guid: 1db27110019430948829919a2ee837de,
         type: 3}
+      propertyPath: journalCanvas
+      value: 
+      objectReference: {fileID: 1932537810}
+    - target: {fileID: 8293250436908638852, guid: 1db27110019430948829919a2ee837de,
+        type: 3}
       propertyPath: likesContainer
       value: 
       objectReference: {fileID: 770276288}
@@ -18151,6 +18196,12 @@ PrefabInstance:
       propertyPath: heartFullSprite
       value: 
       objectReference: {fileID: 21300000, guid: 25c59858e42055f42ad366e95f7c0dd6,
+        type: 3}
+    - target: {fileID: 8293250436908638852, guid: 1db27110019430948829919a2ee837de,
+        type: 3}
+      propertyPath: heartGoldSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 43f100851c359c04aaf5dab9e6485790,
         type: 3}
     - target: {fileID: 8293250436908638852, guid: 1db27110019430948829919a2ee837de,
         type: 3}
