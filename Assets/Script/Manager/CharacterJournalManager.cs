@@ -9,7 +9,7 @@ using Unity.VisualScripting;
 public class CharacterJournalManager : MonoBehaviour
 {
     [Header("Canvas")]
-    [SerializeField] private GameObject journalCanvas;
+    [SerializeField] public GameObject journalCanvas;
 
     [Header("UI Elements")]
     public Image iconImage;

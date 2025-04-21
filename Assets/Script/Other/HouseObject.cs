@@ -3,7 +3,6 @@ using UnityEngine;
 public class HouseObject : MonoBehaviour
 {
     public InhabitantInstance inhabitantInstance;
-    [SerializeField] private GameObject canvasHabitant;
     private Transform spawnPoint;
 
     private GameObject instantiatedPrefab;
@@ -22,9 +21,9 @@ public class HouseObject : MonoBehaviour
     {
         if (!GM.IM.isEditMode)
         {
-            if (!canvasHabitant.activeSelf)
+            if (!GM.Cjm.journalCanvas.activeSelf)
             {
-                canvasHabitant.SetActive(true);
+                GM.Cjm.journalCanvas.SetActive(true);
             }
 
             if (GM.Cjm != null && inhabitantInstance != null)
