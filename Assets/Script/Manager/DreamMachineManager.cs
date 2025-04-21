@@ -16,6 +16,8 @@ public class DreamMachineManager : MonoBehaviour
     public Transform dreamsContainer;
     public Button validateButton;
 
+    [SerializeField] private RectTransform nameBackgroundRectTransform;
+
     public InterestDatabase interestDatabase;
 
     private int currentIndex = 0;
@@ -25,6 +27,11 @@ public class DreamMachineManager : MonoBehaviour
 
     private Vector2 startTouchPosition;
     private float swipeThreshold = 50f;
+
+    [SerializeField]
+    private int baseGoldPerDream = 200;
+    [SerializeField]
+    private int baseEXPPerDream = 150;
 
     private void Start()
     {
@@ -383,7 +390,12 @@ public class DreamMachineManager : MonoBehaviour
 
             // 🔄 Désélection
             dream.isSelected = false;
+
+            GM.Instance.player.AddGold(Mathf.Max(0,Mathf.FloorToInt((baseGoldPerDream + inhabitant.Mood + inhabitant.Serenity + inhabitant.Energy)*inhabitant.GoldMultiplier)));
+            GM.Instance.player.AddXP(Mathf.Max(0,Mathf.FloorToInt((baseEXPPerDream + inhabitant.Mood + inhabitant.Serenity + inhabitant.Energy)*inhabitant.GoldMultiplier)));
+
         }
+        Debug.Log("Player just gained " + GM.Instance.player.GetGold() + " gold and " + GM.Instance.player.CurrentXP+ " exp");
 
 
         // ♻️ Reset

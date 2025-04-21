@@ -7,7 +7,7 @@ using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 {
     public enum ItemCategory
     {
@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     // Currency
     private int gold = 100000;
     private int star = 100;
+    [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI starText;
 
     [Header("Progression")]
     public LevelProgression levelProgression;
@@ -59,10 +61,53 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    #region Save
+    public class SavePartData : ISaveData
+    {
+        public string playerName;
+        public string cityName;
+        public int level;
+        public int currentXP;
+        public int gold;
+        public int star;
+    }
+
+    public SavePartData Serialize()
+    {
+        SavePartData data = new SavePartData();
+
+        data.playerName = PlayerName;
+        data.cityName = CityName;
+        data.level = Level;
+        data.currentXP = CurrentXP;
+        
+        data.star = star;
+        data.gold = star;
+
+        return data;
+    }
+
+    public void Deserialize(SavePartData data)
+    {
+        PlayerName = data.playerName;
+        CityName = data.cityName;
+        Level = data.level;
+        CurrentXP = data.currentXP;
+
+        playerNameText.text = PlayerName;
+        levelText.text = Level.ToString();
+        
+        star = data.star;
+        gold = data.gold;
+    }
+    #endregion
+
 
     private void Start()
     {
         expLevel = baseExpPerLevel;
+        UpdateGoldText();
+        UpdateStarText();
     }
 
     public void SetPlayerInfo()
@@ -82,38 +127,76 @@ public class Player : MonoBehaviour
         playerNameText.text = PlayerName;
         levelText.text = Level.ToString();
         Debug.Log($"Player created: {PlayerName}, City: {CityName}");
+
+        this.Save("PlayerData");
     }
 
     #region Currency
 
     // GOLD
     public int GetGold() => gold;
-    public void SetGold(int value) => gold = Mathf.Max(0, value); // ne jamais avoir un solde négatif
+    public void SetGold(int value) {
+        gold = Mathf.Max(0, value); // ne jamais avoir un solde nÃ©gatif
+        UpdateGoldText();
+    } 
 
-    public void AddGold(int amount) => gold += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
-    public bool SpendGold(int amount)
+    public void AddGold(int amount) {
+        gold += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
+        UpdateGoldText();
+    } 
+    public bool CanSpendGold(int amount)
     {
         if (gold >= amount)
         {
-            gold -= amount;
             return true;
         }
         return false;
     }
+    public void SpendGold(int amount)
+    {
+        if (CanSpendGold(amount))
+        {
+            gold -= amount;
+            UpdateGoldText();
+        }
+    }
+    private void UpdateGoldText()
+    {
+        goldText.text = GetGold().ToString();
+    }
 
     // STAR
     public int GetStar() => star;
-    public void SetStar(int value) => star = Mathf.Max(0, value);
+    public void SetStar(int value) {
+        star = Mathf.Max(0, value);
+        UpdateStarText();
+    } 
 
-    public void AddStar(int amount) => star += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
-    public bool SpendStar(int amount)
+    public void AddStar(int amount)
+    {
+        star += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
+        UpdateStarText();
+    }
+    public bool CanSpendStar(int amount)
     {
         if (star >= amount)
         {
-            star -= amount;
             return true;
         }
         return false;
+    }
+    public void SpendStar(int amount)
+    {
+        if (CanSpendStar(amount))
+        {
+            star -= amount;
+            UpdateStarText();
+        }
+    }
+
+    private void UpdateStarText()
+    {
+        starText.text = GetStar().ToString();
     }
 
     #endregion
@@ -123,6 +206,8 @@ public class Player : MonoBehaviour
     {
         CurrentXP += amount;
         CheckLevelUp();
+
+        this.Save("PlayerData");
     }
 
     private void CheckLevelUp()

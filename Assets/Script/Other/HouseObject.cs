@@ -29,6 +29,14 @@ public class HouseObject : MonoBehaviour
 
             if (GM.Cjm != null && inhabitantInstance != null)
             {
+                GM.JournalPanel.SetActive(false);
+                GM.ShopPanel.SetActive(false);
+                GM.InventoryPanel.SetActive(false);
+                GM.DayNightPanel.SetActive(false);
+                
+                GM.Cjm.nextButton.gameObject.SetActive(false);
+                GM.Cjm.previousButton.gameObject.SetActive(false);
+
                 GM.Cjm.ShowInhabitantByData(inhabitantInstance);
             }
 

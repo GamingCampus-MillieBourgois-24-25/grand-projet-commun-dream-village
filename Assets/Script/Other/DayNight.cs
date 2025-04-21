@@ -45,11 +45,43 @@ public class DayNight : MonoBehaviour
                 var rect = transform.rect;
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
-        if (isDay)
+        if(isDay)
         {
             GM.Cjm.CheckStatsAndHandleDeparture();
             GM.Cjm.CheckForHeartBonus();
             Debug.Log("Daytime: Checking stats and handling departure.");
+
+            LMotion.Create(0, target.x, animationDuration)
+                .WithEase(Ease.OutCubic)
+                .WithOnComplete(() =>
+                {
+                    GM.DreamPanel.SetActive(false);
+                    GM.JournalPanel.SetActive(true);
+                    GM.ShopPanel.SetActive(true);
+                    GM.InventoryPanel.SetActive(true);
+                })
+                .Bind(x =>
+                {
+                    var rect = transform.rect;
+                    transform.sizeDelta = new Vector2(x, rect.height);
+                });
+        }
+        else
+        {
+            LMotion.Create(0, target.x, animationDuration)
+                .WithEase(Ease.OutCubic)
+                .WithOnComplete(() =>
+                {
+                    GM.DreamPanel.SetActive(true);
+                    GM.JournalPanel.SetActive(false);
+                    GM.ShopPanel.SetActive(false);
+                    GM.InventoryPanel.SetActive(false);
+                })
+                .Bind(x =>
+                {
+                    var rect = transform.rect;
+                    transform.sizeDelta = new Vector2(x, rect.height);
+                });
         }
     }
 

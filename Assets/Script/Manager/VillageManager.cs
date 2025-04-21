@@ -15,6 +15,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         public List<InhabitantInstance.SavePartData> inhabitants = new List<InhabitantInstance.SavePartData>();
     }
 
+
     public void CreateInstanceofScriptable<T>(T _item, GameObject _obj) where T : IScriptableElement
     {
         switch (_item)

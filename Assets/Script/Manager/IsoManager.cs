@@ -346,6 +346,7 @@ public class IsoManager : MonoBehaviour
 
     public bool HasSelectedObject()
     {
+        Debug.Log(isEditMode + "" + selectedObject);
         if (isEditMode && selectedObject != null)
         {
             return true;
@@ -508,10 +509,12 @@ public class IsoManager : MonoBehaviour
 
         if (isEditMode) {
             HideMainUI(true);
+            GM.JournalPanel.SetActive(false);
         }
         else
         {
             HideMainUI(false);
+            GM.JournalPanel.SetActive(true);
         }
 
         tileRenderer.enabled = isEditMode;
