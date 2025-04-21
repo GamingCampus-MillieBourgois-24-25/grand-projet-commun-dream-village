@@ -25,4 +25,10 @@ public class DevTest
     {
         GM.Instance.player.AddToInventory(GM.Instance.inhabitants[0], 1);
     }
+
+    [MenuItem("Tools/DevTest/RemoveItemInventory")]
+    public static void RemoveItemInventory()
+    {
+        GM.Instance.player.RemoveFromInventory(GM.Instance.inhabitants[0], 1);
+    }
 }

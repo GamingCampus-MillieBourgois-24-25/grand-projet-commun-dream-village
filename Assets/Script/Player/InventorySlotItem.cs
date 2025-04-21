@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    
+
     private IScriptableElement inventoryItem;
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI itemName;
@@ -18,6 +18,7 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
     private float initialHeight;
     private RectTransform rectTransform;
     bool isInside = true;
+    bool canDrag = true;
 
     public void SetItemContent<T>(T _item, int _quantity) where T : IScriptableElement
     {
@@ -46,10 +47,13 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
         if (isInside)
         {
-            isInside = RectTransformUtility.RectangleContainsScreenPoint(
-            gameObject.GetComponentInParent<RectTransform>(),
-            eventData.position,
-            eventData.pressEventCamera);
+            if (canDrag)
+            {
+                isInside = RectTransformUtility.RectangleContainsScreenPoint(
+                gameObject.GetComponentInParent<RectTransform>(),
+                eventData.position,
+                eventData.pressEventCamera);
+            }
         }
         else
         {
@@ -59,17 +63,25 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Destroy(layoutElement);
+        canDrag = true;
+        if (layoutElement != null)
+        {
+            Destroy(layoutElement);
+        }
         rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, initialHeight);
     }
 
     private void SpawnPrefab(Vector2 _mousePos)
     {
+        Destroy(layoutElement);
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, initialHeight);
+        isInside = true;
+        canDrag = false;
         Ray ray = Camera.main.ScreenPointToRay(_mousePos);
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            GM.IM.BS_TakeInventoryItem(inventoryItem, hit.point);
+            GM.IM.SpawnInventoryItem(inventoryItem, hit.point);
         }
         else
         {
@@ -80,15 +92,13 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
             {
                 Vector3 projectedPoint = ray.GetPoint(distance);
                 Vector3Int cell = tilemap.WorldToCell(projectedPoint);
-
-                Debug.Log("Spawn position: " + cell);
                 BoundsInt bounds = tilemap.cellBounds;
 
-                if(cell.x < bounds.min.x)
+                if (cell.x < bounds.min.x)
                 {
                     cell.x = bounds.min.x;
                 }
-                else if(cell.x > bounds.max.x)
+                else if (cell.x > bounds.max.x)
                 {
                     cell.x = bounds.max.x;
                 }
@@ -104,16 +114,13 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
                 Vector3 spawnPos = tilemap.GetCellCenterWorld(cell);
 
-                GM.IM.BS_TakeInventoryItem(inventoryItem, spawnPos);
+                GameObject obj = GM.IM.SpawnInventoryItem(inventoryItem, spawnPos);
+                GM.VM.CreateInstanceofScriptable(inventoryItem, obj);
             }
             else
             {
                 Debug.LogWarning("Impossible de projeter la souris sur la grille.");
             }
         }
-
-        Destroy(gameObject);
     }
-
 }
-

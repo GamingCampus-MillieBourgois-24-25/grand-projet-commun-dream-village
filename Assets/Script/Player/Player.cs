@@ -2,13 +2,12 @@ using LitMotion;
 using LitMotion.Extensions;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 {
-    public enum InventoryCategory
+    public enum ItemCategory
     {
         InhabitantCategory,
         BuildingCategory,
@@ -32,7 +31,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     private int expLevel;
 
     // Currency
-    private int gold = 100;
+    private int gold = 100000;
     private int star = 100;
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private TextMeshProUGUI starText;
@@ -52,7 +51,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     [SerializeField] private GameObject unlockedItemPrefab;
 
     [Header("Inventory Menu UI")]
-    [SerializeField] private InventoryCategory inventoryCategory = InventoryCategory.InhabitantCategory;
+    [SerializeField] private ItemCategory inventoryCategory = ItemCategory.InhabitantCategory;
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private ScrollRect scrollView;
     [SerializeField] private List<Button> categoryButtons;
@@ -260,23 +259,6 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 
     #region Inventory
 
-    public Dictionary<T, InventoryItem> GetInventory<T>(T item)
-    {
-        if (item is Inhabitant inhabitant)
-        {
-            return inhabitantsInventory as Dictionary<T, InventoryItem>;
-        }
-        else if (item is Building building)
-        {
-            return buildingsInventory as Dictionary<T, InventoryItem>;
-        }
-        else if (item is Decoration decoration)
-        {
-            return decorationsInventory as Dictionary<T, InventoryItem>;
-        }
-        return null;
-    }
-
     public bool GetItemInInventory<T>(T item, out InventoryItem inventoryItem)
     {
         switch (item)
@@ -307,37 +289,54 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         return false;
     }
 
+    public int GetItemQuantity<T>(T item) where T : IScriptableElement
+    {
+        if (GetItemInInventory(item, out var inventoryItem))
+        {
+            return inventoryItem.quantity;
+        }
+        return 0;
+    }
+
     public void AddToInventory<T>(T item, int amount) where T : IScriptableElement
     {
-        Dictionary<T, InventoryItem> inventory = GetInventory(item);
-        if (inventory.TryGetValue(item, out var existing))
+        if (GetItemInInventory(item, out var existing))
         {
             existing.quantity += amount;
             existing.inventorySlotItem.UpdateItemContent(existing.quantity);
         }
         else
         {
-            inventory[item] = new InventoryItem(amount);
             GameObject inventorySlot = null;
             switch (item)
             {
                 case Inhabitant inhabitant:
+                    inhabitantsInventory[inhabitant] = new InventoryItem(amount);
                     inventorySlot = Instantiate(itemPrefab, categoryContainers[0].transform);
+                    CreateInventorySlot(inventorySlot, inhabitantsInventory[inhabitant], inhabitant, amount);
                     break;
                 case Building building:
+                    buildingsInventory[building] = new InventoryItem(amount);
                     inventorySlot = Instantiate(itemPrefab, categoryContainers[1].transform);
+                    CreateInventorySlot(inventorySlot, buildingsInventory[building], building, amount);
                     break;
                 case Decoration decoration:
+                    decorationsInventory[decoration] = new InventoryItem(amount);
                     inventorySlot = Instantiate(itemPrefab, categoryContainers[2].transform);
+                    CreateInventorySlot(inventorySlot, decorationsInventory[decoration], decoration, amount);
                     break;
             }
             Debug.Log($"Added {amount} of {item} to inventory.");
-            if (inventorySlot != null)
-            {
-                InventorySlotItem slotComponent = inventorySlot.GetComponent<InventorySlotItem>();
-                inventory[item].SetInventorySlotItem(slotComponent);
-                slotComponent.SetItemContent(item, amount);
-            }
+        }
+    }
+
+    public void CreateInventorySlot<T>(GameObject inventorySlot, InventoryItem inventory_item, T item, int amount) where T : IScriptableElement
+    {
+        if (inventorySlot != null)
+        {
+            InventorySlotItem slotComponent = inventorySlot.GetComponent<InventorySlotItem>();
+            inventory_item.SetInventorySlotItem(slotComponent);
+            slotComponent.SetItemContent(item, amount);
         }
     }
 
@@ -362,6 +361,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
                             decorationsInventory.Remove(decoration);
                             break;
                     }
+                    Destroy(existing.inventorySlotItem.gameObject);
                 }
                 Debug.Log($"Removed {amount} of {item.name} from inventory.");
                 return true;
@@ -381,7 +381,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         categoryButtons[(int)inventoryCategory].interactable = true;
         categoryContainers[(int)inventoryCategory].SetActive(false);
 
-        inventoryCategory = (InventoryCategory)_category;
+        inventoryCategory = (ItemCategory)_category;
 
         categoryButtons[_category].interactable = false;
         categoryContainers[_category].SetActive(true);

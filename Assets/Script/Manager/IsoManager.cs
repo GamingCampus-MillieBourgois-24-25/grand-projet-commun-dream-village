@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 public class IsoManager : MonoBehaviour
 {
@@ -535,34 +536,62 @@ public class IsoManager : MonoBehaviour
     }
     public void BS_StockSelectedObject()
     {
+        if(selectedObject.TryGetComponent<BuildingObject>(out BuildingObject buildingObj))
+        {
+            GM.VM.RemoveInstance(buildingObj.gameObject);
+            GM.Instance.player.AddToInventory(buildingObj.baseData, 1);
+        }
+        else if (selectedObject.TryGetComponent<HouseObject>(out HouseObject houseObj))
+        {
+            GM.VM.RemoveInstance(houseObj.gameObject);
+            GM.Instance.player.AddToInventory(houseObj.inhabitantInstance.baseData, 1);
+        }
+        else
+        {
+            Debug.LogWarning("Selected object is not a BuildingObject or HouseObject.");
+            return;
+        }
+
+        GameObject objToDestroy = selectedObject.gameObject;
+
         tilemapObjects.ClearAllTiles();
         UnSelectObject();
+        stockCanvas.transform.parent = null;
+        GM.BM.canvasBuilding.transform.parent = null;
+        Destroy(objToDestroy);
+
+        ToggleInventorySmooth(true);
     }
 
-    public void BS_TakeInventoryItem<T>(T item, Vector3 _spawnPoint) where T : IScriptableElement
+    #endregion
+
+    #region SpawnInventoryItem
+
+    public GameObject SpawnInventoryItem<T>(T item, Vector3 _spawnPoint) where T : IScriptableElement
     {
-        Dictionary<T, InventoryItem> inventory = GM.Instance.player.GetInventory(item);
         if (!GM.Instance.player.GetItemInInventory(item, out var entry))
         {
             Debug.LogWarning("Item not in inventory or prefab is missing.");
-            return;
+            return null;
         }
 
         Vector3 centerPos = tilemapBase.WorldToCell(_spawnPoint);
         centerPos.y += yMovingObject;
 
-        GameObject newObj = Instantiate(item.InstantiatePrefab, centerPos, Quaternion.identity);
+        GameObject newObj = Instantiate(item.InstantiatePrefab, centerPos, item.InstantiatePrefab.transform.rotation);
         PlaceableObject placeable = newObj.GetComponent<PlaceableObject>();
 
         if (placeable != null)
         {
             OnObjectSelected(placeable);
             GM.Instance.player.RemoveFromInventory(item, 1);
+            return newObj;
         }
         else
         {
             Debug.LogError("Prefab does not contain a PlaceableObject.");
         }
+        return null;
     }
 
     #endregion
