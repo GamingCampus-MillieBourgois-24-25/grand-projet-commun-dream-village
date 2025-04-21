@@ -18,7 +18,7 @@ MonoBehaviour:
   <InitialPrice>k__BackingField: 0
   <InstantiatePrefab>k__BackingField: {fileID: 0}
   FirstName: Willith
-  LastName: 
+  LastName: Warm
   <Pronouns>k__BackingField: 0
   <MBTI>k__BackingField: 6
   <Personnality>k__BackingField: 000000000100000002000000030000000400000005000000
@@ -40,6 +40,6 @@ MonoBehaviour:
   <GoldMultiplier>k__BackingField: 1
   <CanLeave>k__BackingField: 0
   <HeartsBeforeLeaving>k__BackingField: 0
-  <InhabitantPrefab>k__BackingField: {fileID: 919132149155446097, guid: 6f9d44ad242913e459730feb1dd29acd,
+  <InhabitantPrefab>k__BackingField: {fileID: 919132149155446097, guid: 472562410776d3f4e810da89bfd9e3f3,
     type: 3}
   <InhabitantHouse>k__BackingField: {fileID: 0}

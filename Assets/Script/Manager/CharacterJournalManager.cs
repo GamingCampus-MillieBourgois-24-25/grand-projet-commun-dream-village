@@ -142,14 +142,15 @@ public class CharacterJournalManager : MonoBehaviour
                 //GameObject heartGO = new GameObject("Heart", typeof(RectTransform), typeof(Image));
                 GameObject heartGO = Instantiate(heartPrefab);
                 heartGO.transform.SetParent(heartsContainer, false);
-
+                
                 Image img = heartGO.GetComponent<Image>();
                 img.sprite = i < currentHearts ? heartFullSprite : heartEmptySprite;
 
+                //img.preserveAspect = true;
 
-                RectTransform rt = heartGO.GetComponent<RectTransform>();
-                rt.sizeDelta = new Vector2(100, 100);
-            }
+                //RectTransform rt = heartGO.GetComponent<RectTransform>();
+                //rt.sizeDelta = new Vector2(100, 100);
+             }
         }
     }
 

@@ -104,6 +104,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             GameObject buildingInstanciate = Instantiate(GM.Instance.GetBuildingByName("CoffeeShop").InstantiatePrefab, Vector3.zero, Quaternion.identity);
             BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
             buildingInstanciate.GetComponent<PlaceableObject>().OriginalPosition = new Vector3Int(0, 6, 0);
+            buildingInstanciate.GetComponent<PlaceableObject>().ResetPosition();
             buildings.Add(loadedBuilding);
             baseBuildings.Add(loadedBuilding.building);
         }

@@ -4,6 +4,8 @@ using UnityEngine;
 public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
 {
     public Inhabitant baseData;
+    public bool isInActivity = false;
+
     private int mood;
     private int serenity;
     private int energy;
