@@ -84,6 +84,7 @@ public class Player : MonoBehaviour
         GM.Dm.UpdateLocalizedArguments("VILLAGE_NAME", CityName);
         
         GM.Tm.holdDialogues = false;
+        GM.Tm.skipDialogue = true;
         
         GM.Instance.isPlayerCreated = true;
         

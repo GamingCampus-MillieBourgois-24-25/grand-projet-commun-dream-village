@@ -22,6 +22,7 @@ public class HouseObject : MonoBehaviour
             {
                 GM.Instance.OnHouseTuto?.Invoke();
                 Debug.Log("House Clicked");
+                GM.Instance.tutorialsManager.skipDialogue = true;
             }
             
             if (!canvasHabitant.activeSelf)

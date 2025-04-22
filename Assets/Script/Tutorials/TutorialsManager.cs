@@ -15,6 +15,7 @@ public class TutorialsManager : MonoBehaviour
     [SerializeField] private GameObject playerFormCanvas;
     
     [Header("Tutorials variables")]
+    public bool skipDialogue = false;
     public float dialoguesTargetDisplayTime;
     public float dialoguesDisplayTime;
     public bool isPlayerCreated = false;
@@ -51,6 +52,10 @@ public class TutorialsManager : MonoBehaviour
     {
         foreach (Dialogues dialogue in dialogues)
         {
+            dialoguesManager.DisplayDialogue(dialogue);
+            float dif = dialoguesTargetDisplayTime - dialoguesDisplayTime - GM.Ao.CurrentTextSpeedStruct.TextSpeed;
+            float textSpeed = dialoguesDisplayTime + GM.Ao.CurrentTextSpeedStruct.TextSpeed + dif;
+            
             if (dialogue.ShouldHoldDialogues())
             {
                 holdDialogues = true;
@@ -68,11 +73,13 @@ public class TutorialsManager : MonoBehaviour
                 
                 yield return new WaitUntil(() => !holdDialogues);
             }
+
+            if (!skipDialogue)
+            {
+                yield return new WaitForSeconds(textSpeed);
+            }
             
-            dialoguesManager.DisplayDialogue(dialogue);
-            float dif = dialoguesTargetDisplayTime - dialoguesDisplayTime - GM.Ao.CurrentTextSpeedStruct.TextSpeed;
-            float textSpeed = dialoguesDisplayTime + GM.Ao.CurrentTextSpeedStruct.TextSpeed + dif;
-            yield return new WaitForSeconds(textSpeed);
+            skipDialogue = false;
         }
         
         dialoguesManager.HideDialogue();
