@@ -5,6 +5,9 @@ using TMPro;
 
 public class DreamMachineManager : MonoBehaviour
 {
+    [Header("Canvas")]
+    [SerializeField] public GameObject dreamMachineCanvas;
+    
     [Header("UI Elements")]
     public Image characterImage;
     public TextMeshProUGUI characterNameText;
@@ -16,8 +19,17 @@ public class DreamMachineManager : MonoBehaviour
     public Transform dreamsContainer;
     public Button validateButton;
 
-    [SerializeField] private RectTransform nameBackgroundRectTransform;
-
+    [Header("Selection")] 
+    [SerializeField] public Canvas selectInhabitant;
+    [SerializeField] public GameObject inhabitantsContainer;
+    [SerializeField] public GameObject selectInhabitantPrefab;
+    [SerializeField] private TextMeshProUGUI selectionCountText;
+    [SerializeField] private TextMeshProUGUI goldPreviewText;
+    [SerializeField] private TextMeshProUGUI expPreviewText;
+    [SerializeField] private TextMeshProUGUI timePreviewText;
+    private List<InhabitantInstance> selectedInhabitants = new();
+    private GameObject selectedButton;
+    
     public InterestDatabase interestDatabase;
 
     private int currentIndex = 0;
@@ -35,9 +47,11 @@ public class DreamMachineManager : MonoBehaviour
 
     private void Start()
     {
-        if (GM.VM.inhabitants.Count > 0)
+        UpdateSelectionCanvas();
+        
+        if (selectedInhabitants.Count > 0)
         {
-            var current = GM.VM.inhabitants[currentIndex];
+            var current = selectedInhabitants[currentIndex];
 
             if (!dreamsByInhabitant.ContainsKey(current))
             {
@@ -91,7 +105,7 @@ public class DreamMachineManager : MonoBehaviour
 
     private void DisplayCurrentInhabitant()
     {
-        InhabitantInstance currentInhabitant = GM.VM.inhabitants[currentIndex];
+        InhabitantInstance currentInhabitant = selectedInhabitants[currentIndex];
 
         characterImage.sprite = currentInhabitant.Icon;
         characterNameText.text = $"{currentInhabitant.Name}";
@@ -100,7 +114,7 @@ public class DreamMachineManager : MonoBehaviour
         serenitySlider.value = currentInhabitant.Serenity;
         energySlider.value = currentInhabitant.Energy;
 
-        index.text = $"{currentIndex + 1}/{GM.VM.inhabitants.Count}";
+        index.text = $"{currentIndex + 1}/{selectedInhabitants.Count}";
 
         // Reset slider colors to default (white)
         ResetSliderColors();
@@ -130,7 +144,7 @@ public class DreamMachineManager : MonoBehaviour
             Destroy(child.gameObject);
 
         List<Button> buttons = new();
-        InhabitantInstance currentInhabitant = GM.VM.inhabitants[currentIndex];
+        InhabitantInstance currentInhabitant = selectedInhabitants[currentIndex];
 
         for (int i = 0; i < dreams.Count; i++)
         {
@@ -190,10 +204,10 @@ public class DreamMachineManager : MonoBehaviour
     
     public void NextInhabitant()
     {
-        currentIndex = (currentIndex + 1) % GM.VM.inhabitants.Count;
+        currentIndex = (currentIndex + 1) % selectedInhabitants.Count;
         DisplayCurrentInhabitant();
 
-        var current = GM.VM.inhabitants[currentIndex];
+        var current = selectedInhabitants[currentIndex];
 
         if (!dreamsByInhabitant.ContainsKey(current))
         {
@@ -211,10 +225,10 @@ public class DreamMachineManager : MonoBehaviour
 
     public void PreviousInhabitant()
     {
-        currentIndex = (currentIndex - 1 + GM.VM.inhabitants.Count) % GM.VM.inhabitants.Count;
+        currentIndex = (currentIndex - 1 + selectedInhabitants.Count) % selectedInhabitants.Count;
         DisplayCurrentInhabitant();
 
-        var current = GM.VM.inhabitants[currentIndex];
+        var current = selectedInhabitants[currentIndex];
 
         if (!dreamsByInhabitant.ContainsKey(current))
         {
@@ -301,7 +315,7 @@ public class DreamMachineManager : MonoBehaviour
     
     private void PreviewStats(DisplayableDream displayable)
     {
-        var currentInhabitant = GM.VM.inhabitants[currentIndex];
+        var currentInhabitant = selectedInhabitants[currentIndex];
 
         // Calculer les changements
         int moodChange = GetStatChange(displayable.orderedElements[0], currentInhabitant);
@@ -318,22 +332,6 @@ public class DreamMachineManager : MonoBehaviour
         //UpdateSliderColor(serenitySlider, serenityChange);
         //UpdateSliderColor(energySlider, energyChange);
     }
-
-    private void UpdateSliderColor(Slider slider, int change)
-    {
-        if (change > 0)
-        {
-            slider.fillRect.GetComponent<Image>().color = Color.green;  // Couleur verte pour positif
-        }
-        else if (change < 0)
-        {
-            slider.fillRect.GetComponent<Image>().color = Color.red;  // Couleur rouge pour négatif
-        }
-        else
-        {
-            slider.fillRect.GetComponent<Image>().color = Color.white;  // Couleur neutre pour aucun changement
-        }
-    }
     
     private void ResetSliderColors()
     {
@@ -346,7 +344,7 @@ public class DreamMachineManager : MonoBehaviour
     {
         bool allSelected = true;
 
-        foreach (var inhabitant in GM.VM.inhabitants)
+        foreach (var inhabitant in selectedInhabitants)
         {
             if (!selectedDreamByInhabitant.ContainsKey(inhabitant))
             {
@@ -401,12 +399,144 @@ public class DreamMachineManager : MonoBehaviour
         // ♻️ Reset
         selectedDreamByInhabitant.Clear();
         validateButton.interactable = false;
+        
+        dreamsByInhabitant.Clear();
+        foreach (var inhabitant in selectedInhabitants)
+        {
+            dreamsByInhabitant[inhabitant] = GenerateDreamOptions(inhabitant);
+        }
 
         // 🔁 Rafraîchissement UI
         DisplayCurrentInhabitant();
-        DisplayDreams(dreamsByInhabitant[GM.VM.inhabitants[currentIndex]]);
-
+        DisplayDreams(dreamsByInhabitant[selectedInhabitants[currentIndex]]);
+        
         GM.Cjm.DisplayInhabitant();
+        GM.DreamPanel.SetActive(false);
+        selectedInhabitants.Clear();
+    }
+    
+    public void UpdateSelectionCanvas()
+    {
+        foreach (Transform child in inhabitantsContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var inhabitant in GM.VM.inhabitants)
+        {
+            GameObject go = Instantiate(selectInhabitantPrefab, inhabitantsContainer.transform);
+
+            Image image = go.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+            image.sprite = inhabitant.Icon;
+
+            GameObject statsContainer = go.transform.GetChild(1).gameObject;
+
+            Slider mood = statsContainer.transform.GetChild(0).GetComponent<Slider>();
+            Slider serenity = statsContainer.transform.GetChild(1).GetComponent<Slider>();
+            Slider energy = statsContainer.transform.GetChild(2).GetComponent<Slider>();
+
+            mood.value = inhabitant.Mood;
+            serenity.value = inhabitant.Serenity;
+            energy.value = inhabitant.Energy;
+
+            Button btn = go.GetComponent<Button>();
+            if (btn != null)
+            {
+                InhabitantInstance capturedInhabitant = inhabitant;
+                btn.onClick.AddListener(() => BS_SelectInhabitant(btn, capturedInhabitant));
+            }
+        }
+        
+        UpdateInformationsSelectionCanvas();
+    }
+
+    public void UpdateInformationsSelectionCanvas()
+    {
+        int selectedCount = selectedInhabitants.Count;
+        int totalCount = GM.VM.inhabitants.Count;
+
+        selectionCountText.text = $"{selectedCount} / {totalCount}";
+
+        int totalGold = 0;
+        int totalXP = 0;
+        float totalTimeMinutes = 0f;
+
+        foreach (var inhabitant in selectedInhabitants)
+        {
+            float multiplier = inhabitant.GoldMultiplier;
+            int mood = inhabitant.Mood;
+            int serenity = inhabitant.Serenity;
+            int energy = inhabitant.Energy;
+
+            int gold = Mathf.Max(0, Mathf.FloorToInt((baseGoldPerDream + mood + serenity + energy) * multiplier));
+            int xp = Mathf.Max(0, Mathf.FloorToInt((baseEXPPerDream + mood + serenity + energy) * multiplier));
+
+            totalGold += gold;
+            totalXP += xp;
+            totalTimeMinutes += 30f;
+        }
+
+        goldPreviewText.text = $"{totalGold} gold";
+        expPreviewText.text = $"{totalXP} XP";
+        timePreviewText.text = $"{(int)(totalTimeMinutes / 60)}h {((int)totalTimeMinutes % 60)}min";
+    }
+
+    
+    public void BS_OpenSelectionCanvas()
+    {
+        UpdateSelectionCanvas();
+        DisableButton(selectedButton, true);
+        selectInhabitant.gameObject.SetActive(true);
+    }
+    
+    public void BS_SelectInhabitant(Button button, InhabitantInstance inhabitant)
+    {
+        if (selectedInhabitants.Contains(inhabitant))
+        {
+            selectedInhabitants.Remove(inhabitant);
+            DisableButton(button.gameObject, true);
+        }
+        else
+        {
+            selectedInhabitants.Add(inhabitant);
+            DisableButton(button.gameObject, false);
+        }
+        
+        UpdateInformationsSelectionCanvas();
+    }
+
+    public void BS_CloseSelectionCanvas()
+    {
+        selectedInhabitants.Clear();
+        selectInhabitant.gameObject.SetActive(false);
+    }
+    
+    public void BS_SendSelectedInhabitant()
+    {
+        if (selectedInhabitants.Count > 0)
+        {
+            currentIndex = 0;
+            var current = selectedInhabitants[currentIndex];
+            
+            selectInhabitant.gameObject.SetActive(false);
+            
+            if (!dreamsByInhabitant.ContainsKey(current))
+            {
+                dreamsByInhabitant[current] = GenerateDreamOptions(current);
+            }
+            
+            DisplayCurrentInhabitant();
+            DisplayDreams(dreamsByInhabitant[current]);
+            CheckIfAllDreamsSelected();
+            
+            dreamMachineCanvas.SetActive(true);
+            UpdateSelectionCanvas();
+        }
+    }
+    
+    private void DisableButton(GameObject button, bool disable)
+    {
+        if (button != null) button.transform.GetChild(3).gameObject.SetActive(disable);
     }
 }
 
