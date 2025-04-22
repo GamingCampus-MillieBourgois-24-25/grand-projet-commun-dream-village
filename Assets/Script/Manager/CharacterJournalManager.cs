@@ -158,7 +158,7 @@ public class CharacterJournalManager : MonoBehaviour
     public void ShowInhabitantByData(InhabitantInstance target)
     {
         int index = inhabitants.FindIndex(i => i == target);
-        Debug.Log(currentIndex);
+        //Debug.Log(currentIndex);
         if (index != -1)
         {
             currentIndex = index;
