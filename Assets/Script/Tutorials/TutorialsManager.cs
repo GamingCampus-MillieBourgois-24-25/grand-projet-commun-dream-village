@@ -99,10 +99,10 @@ public class TutorialsManager : MonoBehaviour
         playerFormCanvas.SetActive(false);
     }
 
-    public void HouseTutorial()
+    public void GetTutoDialogues(Dialogues.TutorialType type)
     {
         List<Dialogues> introDialogues = dialoguesManager.GetDialogues()
-            .Where(dialogue => dialogue.GetTutorialType() == Dialogues.TutorialType.House)
+            .Where(dialogue => dialogue.GetTutorialType() == type)
             .ToList();
         
         introDialogues.Sort((x, y) => string.Compare(x.GetID(), y.GetID(), StringComparison.Ordinal));
@@ -110,13 +110,94 @@ public class TutorialsManager : MonoBehaviour
         StartCoroutine(DisplayTutorialDialogues(introDialogues));
     }
     
-    [MenuItem("Tools/PlayHouseTuto")]
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    [MenuItem("Tools/Tutorials/PlayHouseTuto")]
     public static void PlayHouseTuto()
     {
         TutorialsManager tutorialsManager = FindObjectOfType<TutorialsManager>();
         if (tutorialsManager != null)
         {
-            tutorialsManager.HouseTutorial();
+            tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.House);
+        }
+        else
+        {
+            Debug.LogError("TutorialsManager not found in the scene.");
+        }
+    }
+    
+    [MenuItem("Tools/Tutorials/PlayActivityTuto")]
+    public static void PlayActivityTuto()
+    {
+        TutorialsManager tutorialsManager = FindObjectOfType<TutorialsManager>();
+        if (tutorialsManager != null)
+        {
+            tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.Activity);
+        }
+        else
+        {
+            Debug.LogError("TutorialsManager not found in the scene.");
+        }
+    }
+    
+    [MenuItem("Tools/Tutorials/DreamTuto")]
+    public static void PlayDreamTuto()
+    {
+        TutorialsManager tutorialsManager = FindObjectOfType<TutorialsManager>();
+        if (tutorialsManager != null)
+        {
+            tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.Dream);
+        }
+        else
+        {
+            Debug.LogError("TutorialsManager not found in the scene.");
+        }
+    }
+    
+    [MenuItem("Tools/Tutorials/PlayShopTuto")]
+    public static void PlayShopTuto()
+    {
+        TutorialsManager tutorialsManager = FindObjectOfType<TutorialsManager>();
+        if (tutorialsManager != null)
+        {
+            tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.Shop);
+        }
+        else
+        {
+            Debug.LogError("TutorialsManager not found in the scene.");
+        }
+    }
+    
+    [MenuItem("Tools/Tutorials/PlayEditTuto")]
+    public static void PlayEditTuto()
+    {
+        TutorialsManager tutorialsManager = FindObjectOfType<TutorialsManager>();
+        if (tutorialsManager != null)
+        {
+            tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.Edit);
+        }
+        else
+        {
+            Debug.LogError("TutorialsManager not found in the scene.");
+        }
+    }
+    
+    [MenuItem("Tools/Tutorials/PlayHeartTuto")]
+    public static void PlayHeartTuto()
+    {
+        TutorialsManager tutorialsManager = FindObjectOfType<TutorialsManager>();
+        if (tutorialsManager != null)
+        {
+            tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.Heart);
         }
         else
         {
