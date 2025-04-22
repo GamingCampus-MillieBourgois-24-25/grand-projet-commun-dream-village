@@ -45,6 +45,9 @@ public class CharacterJournalManager : MonoBehaviour
 
     private List<InhabitantInstance> inhabitants;
     private int currentIndex = 0;
+    
+    private Vector2 startTouchPosition;
+    private float swipeThreshold = 50f;
 
     private void Start()
     {
@@ -54,6 +57,39 @@ public class CharacterJournalManager : MonoBehaviour
         //previousButton.onClick.AddListener(ShowPrevious);
 
         DisplayInhabitant();
+    }
+    
+    private void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    startTouchPosition = touch.position;
+                    break;
+
+                case TouchPhase.Ended:
+                    float swipeDistance = touch.position.x - startTouchPosition.x;
+
+                    if (Mathf.Abs(swipeDistance) > swipeThreshold)
+                    {
+                        if (swipeDistance > 0)
+                        {
+                            // Swipe � droite -> personnage pr�c�dentt
+                            BS_ShowPrevious();
+                        }
+                        else
+                        {
+                            // Swipe � gauche -> personnage suivant
+                            BS_ShowNext();
+                        }
+                    }
+                    break;
+            }
+        }
     }
 
     public void DisplayInhabitant()
