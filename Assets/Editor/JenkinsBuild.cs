@@ -8,7 +8,6 @@ public class JenkinsBuild
     public static void BuildAndroid()
     {
         string buildPath = "Builds/Android";
-        string[] scenes = { "Assets/Scenes/Final/MainScene.unity" };
 
         string[] scenes = EditorBuildSettings.scenes
             .Where(scene => scene.enabled)
