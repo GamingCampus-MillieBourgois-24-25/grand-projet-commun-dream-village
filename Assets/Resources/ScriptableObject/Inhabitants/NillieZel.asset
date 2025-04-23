@@ -17,6 +17,8 @@ MonoBehaviour:
     type: 3}
   <InitialPrice>k__BackingField: 5000
   <InstantiatePrefab>k__BackingField: {fileID: 0}
+  <MaxOwned>k__BackingField: 0
+  <UnlockedAtLvl>k__BackingField: 4
   FirstName: Nillie
   LastName: Zel
   <Pronouns>k__BackingField: 1

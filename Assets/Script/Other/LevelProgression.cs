@@ -21,4 +21,17 @@ public class LevelProgression : MonoBehaviour
         }
         return levels[level];
     }
+
+    public void AddItemOnLevel(int level, IScriptableElement item)
+    {
+        level -= 1; // Convert to 0-based index
+        if (level < 0 || level >= levels.Count)
+        {
+            for (int i = levels.Count; i <= level; i++)
+            {
+                levels.Add(new Level());
+            }
+        }
+        levels[level].unlockable.Add(item);
+    }
 }
