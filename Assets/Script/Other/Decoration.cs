@@ -17,6 +17,7 @@ public class Decoration : IScriptableElement
     [field: Header("Progression & Economy")]
     [field: SerializeField] public override int InitialPrice => base.InitialPrice;
     [field: SerializeField] public override int MaxOwned => base.MaxOwned;
+    [field: SerializeField] public override int UnlockedAtLvl => base.UnlockedAtLvl;
     #endregion
 
     #region Visuals
