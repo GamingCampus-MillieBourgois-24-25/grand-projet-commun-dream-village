@@ -203,7 +203,7 @@ public class CameraDeplacement : MonoBehaviour
             Debug.Log("HasItem");
             while (touch1Action.action.IsPressed())
             {
-                Debug.Log("while");
+                //Debug.Log("while");
                 Vector2 movement = Vector2.zero;
                 Vector2 posTouch = zoom1Action.action.ReadValue<Vector2>();
 
