@@ -21,6 +21,14 @@ public class TutorialsManager : MonoBehaviour
     public bool isPlayerCreated = false;
     public bool holdDialogues = false;
     public bool isHouseTutorialAlreadyPlayed = false;
+    
+    [Header("Tutorials State")]
+    public bool inActivityTutorial = false;
+    public bool inDreamTutorial = false;
+    public bool inShopTutorial = false;
+    public bool inEditTutorial = false;
+    public bool inHeartTutorial = false;
+    public bool inHouseTutorial = false;
 
 
     private void Start()
@@ -28,7 +36,7 @@ public class TutorialsManager : MonoBehaviour
         player = GM.Instance.player;
         dialoguesManager = GM.Dm;
         player.OnPlayerInfoAssigned += PlayerFormCompleted;
-        GM.Instance.OnHouseTuto += UnHoldDialogues;
+        GM.Instance.OnHouseTuto += UnHoldHouseTuto;
         IntroductionTutorial();
     }
 
@@ -52,10 +60,12 @@ public class TutorialsManager : MonoBehaviour
     {
         foreach (Dialogues dialogue in dialogues)
         {
+            skipDialogue = false;
+            
             dialoguesManager.DisplayDialogue(dialogue);
             float dif = dialoguesTargetDisplayTime - dialoguesDisplayTime - GM.Ao.CurrentTextSpeedStruct.TextSpeed;
             float textSpeed = dialoguesDisplayTime + GM.Ao.CurrentTextSpeedStruct.TextSpeed + dif;
-            
+
             if (dialogue.ShouldHoldDialogues())
             {
                 holdDialogues = true;
@@ -68,31 +78,34 @@ public class TutorialsManager : MonoBehaviour
                     case Dialogues.TutorialType.House:
                         Debug.Log(dialogue.GetID());
                         break;
+                    case Dialogues.TutorialType.Dream:
+                        
+                        break;
                 }
-                
-                
+
                 yield return new WaitUntil(() => !holdDialogues);
             }
 
-            if (!skipDialogue)
+            float elapsedTime = 0f;
+            while (elapsedTime < textSpeed && (!skipDialogue && !dialogue.ShouldHoldDialogues()))
             {
-                yield return new WaitForSeconds(textSpeed);
+                elapsedTime += Time.deltaTime;
+                yield return null;
             }
+
             
-            skipDialogue = false;
         }
-        
+
         dialoguesManager.HideDialogue();
         GM.Instance.mainUiCanvas.SetActive(true);
     }
 
-    private void UnHoldDialogues()
+    public void UnHoldDialogues()
     {
         Debug.Log("Unhold dialogues");
         holdDialogues = false;
-        isHouseTutorialAlreadyPlayed = true;
     }
-
+    
     public void PlayerFormCompleted()
     {
         isPlayerCreated = true;
@@ -109,7 +122,26 @@ public class TutorialsManager : MonoBehaviour
         
         StartCoroutine(DisplayTutorialDialogues(introDialogues));
     }
+
+    public void SkipDialogue()
+    {
+        if (GM.Dm.isTextAnimationActive)
+        {
+            return;
+        }
+        
+        skipDialogue = true;
+    }
+
+    public void UnHoldHouseTuto()
+    {
+        UnHoldDialogues();
+    }
     
+    public void UnHaldDreamTuto()
+    {
+        UnHoldDialogues();
+    }
     
     
     
@@ -149,7 +181,7 @@ public class TutorialsManager : MonoBehaviour
         }
     }
     
-    [MenuItem("Tools/Tutorials/DreamTuto")]
+    [MenuItem("Tools/Tutorials/PlayDreamTuto")]
     public static void PlayDreamTuto()
     {
         TutorialsManager tutorialsManager = FindObjectOfType<TutorialsManager>();

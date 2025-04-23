@@ -25,8 +25,8 @@ MonoBehaviour:
       m_Items:
       - rid: 6238822977345945608
   - m_Id: 361795121152
-    m_Localized: "La premi\xE8re option affecte {0}, la deuxi\xE8me affecte {1} et
-      la troisi\xE8me affecte {2}."
+    m_Localized: "La premi\xE8re option affecte l'{0}, la deuxi\xE8me affecte la
+      {1} et la troisi\xE8me affecte l'{2}."
     m_Metadata:
       m_Items:
       - rid: 6238822977345945608

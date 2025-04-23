@@ -49,6 +49,7 @@ public class Dialogues : ScriptableObject
     [SerializeField] private TutorialType tutorialType;
     
     [SerializeField] private bool shouldHoldDialogues = false;
+    [SerializeField] private bool shouldGiveRareMoney = false;
     
     
     public string GetID()
@@ -89,5 +90,10 @@ public class Dialogues : ScriptableObject
     public bool ShouldHoldDialogues()
     {
         return shouldHoldDialogues;
+    }
+    
+    public bool ShouldGiveRareMoney()
+    {
+        return shouldGiveRareMoney;
     }
 }

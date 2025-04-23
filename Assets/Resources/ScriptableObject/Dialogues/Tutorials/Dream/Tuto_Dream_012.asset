@@ -26,6 +26,8 @@ MonoBehaviour:
   dialogueType: 5
   dialogueCondition: 7
   tutorialType: 2
+  shouldHoldDialogues: 0
+  shouldGiveRareMoney: 0
   references:
     version: 2
     RefIds: []

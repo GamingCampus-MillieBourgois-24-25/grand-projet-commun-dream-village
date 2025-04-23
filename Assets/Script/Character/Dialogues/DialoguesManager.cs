@@ -20,13 +20,14 @@ public class DialoguesManager : MonoBehaviour
     {
         public string name;
         public string value;
+        public LocalizedString localizedValue;
     }
 
     [SerializeField] private List<DictStrings> localizedArguments;
     
     [Header("Text Animation")]
     private MotionHandle textAnimationHandle;
-    private bool isTextAnimationActive;
+    public bool isTextAnimationActive;
     [SerializeField] private SerializableMotionSettings<FixedString512Bytes, StringOptions> textAnimationSettings;
 
     [Header("UI Elements")] public GameObject dialogueCanvas;
@@ -52,7 +53,12 @@ public class DialoguesManager : MonoBehaviour
 
     private string GetVariable(string key)
     {
-        return localizedArguments.FirstOrDefault(x => x.name.ToLower() == key.ToLower()).value ?? "ERROR";
+        var dictString = localizedArguments.FirstOrDefault(x => x.name.ToLower() == key.ToLower());
+        if (dictString.value == "" && dictString.localizedValue != null)
+        {
+            return dictString.localizedValue.GetLocalizedString();
+        }
+        return dictString.value ?? "ERROR";
     }
 
     [ContextMenu("ShowIntroDialogue")]
@@ -62,17 +68,6 @@ public class DialoguesManager : MonoBehaviour
         if (introDialogue != null)
         {
             DisplayDialogue(introDialogue);
-        }
-    }
-
-    public Dialogues debugDialogue;
-    
-    [ContextMenu("DebugShowDialogue")]
-    public void DebugShowDialogue()
-    {
-        if (debugDialogue != null)
-        {
-            DisplayDialogue(debugDialogue);
         }
     }
     
@@ -138,6 +133,7 @@ public class DialoguesManager : MonoBehaviour
             
             var temp = localizedArguments[i];
             temp.name = variableName;
+            
             temp.value = variableValue;
             localizedArguments[i] = temp;
             break;
