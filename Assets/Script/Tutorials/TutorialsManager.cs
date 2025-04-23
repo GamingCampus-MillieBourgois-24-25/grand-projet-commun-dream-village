@@ -76,10 +76,24 @@ public class TutorialsManager : MonoBehaviour
                         playerFormCanvas.SetActive(true);
                         break;
                     case Dialogues.TutorialType.House:
-                        Debug.Log(dialogue.GetID());
+                        inHouseTutorial = true;
                         break;
                     case Dialogues.TutorialType.Dream:
-                        
+                        inDreamTutorial = true;
+                        break;
+                    case Dialogues.TutorialType.Activity:
+                        inActivityTutorial = true;
+                        break;
+                    case Dialogues.TutorialType.Shop:
+                        inShopTutorial = true;
+                        break;
+                    case Dialogues.TutorialType.Edit:
+                        inEditTutorial = true;
+                        break;
+                    case Dialogues.TutorialType.Heart:
+                        inHeartTutorial = true;
+                        break;
+                    default:
                         break;
                 }
 
@@ -135,11 +149,43 @@ public class TutorialsManager : MonoBehaviour
 
     public void UnHoldHouseTuto()
     {
+        if (!inHouseTutorial) return;
+        
         UnHoldDialogues();
     }
     
-    public void UnHaldDreamTuto()
+    public void UnHoldDreamTuto()
     {
+        if (!inDreamTutorial) return;
+        
+        UnHoldDialogues();
+    }
+    
+    public void UnHoldActivityTuto()
+    {
+        if (!inActivityTutorial) return;
+        
+        UnHoldDialogues();
+    }
+    
+    public void UnHoldShopTuto()
+    {
+        if (!inShopTutorial) return;
+        
+        UnHoldDialogues();
+    }
+    
+    public void UnHoldEditTuto()
+    {
+        if (!inEditTutorial) return;
+        
+        UnHoldDialogues();
+    }
+    
+    public void UnHoldHeartTuto()
+    {
+        if (!inHeartTutorial) return;
+        
         UnHoldDialogues();
     }
     

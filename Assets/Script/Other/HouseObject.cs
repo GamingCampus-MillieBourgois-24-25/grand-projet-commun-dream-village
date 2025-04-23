@@ -28,6 +28,11 @@ public class HouseObject : MonoBehaviour
                 Debug.Log("House Clicked");
                 GM.Instance.tutorialsManager.skipDialogue = true;
             }
+
+            if (GM.Tm.inHeartTutorial)
+            {
+                GM.Tm.UnHoldHeartTuto();
+            }
             
             if (!GM.Cjm.journalCanvas.activeSelf)
             {
