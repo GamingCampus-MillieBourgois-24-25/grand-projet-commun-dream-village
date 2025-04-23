@@ -14,7 +14,7 @@ public class DreamMachineManager : MonoBehaviour
     public Slider moodSlider;
     public Slider serenitySlider;
     public Slider energySlider;
-    public TextMeshProUGUI index;
+    public TextMeshProUGUI indexUI;
     public GameObject dreamButtonPrefab;
     public Transform dreamsContainer;
     public Button validateButton;
@@ -33,6 +33,7 @@ public class DreamMachineManager : MonoBehaviour
     public InterestDatabase interestDatabase;
 
     private int currentIndex = 0;
+    private int numberDreamSelected = 0;
 
     private Dictionary<InhabitantInstance, List<DisplayableDream>> dreamsByInhabitant = new();
     private Dictionary<InhabitantInstance, DisplayableDream> selectedDreamByInhabitant = new();
@@ -114,7 +115,7 @@ public class DreamMachineManager : MonoBehaviour
         serenitySlider.value = currentInhabitant.Serenity;
         energySlider.value = currentInhabitant.Energy;
 
-        index.text = $"{currentIndex + 1}/{selectedInhabitants.Count}";
+        indexUI.text = $"{numberDreamSelected}/{selectedInhabitants.Count}";
 
         // Reset slider colors to default (white)
         ResetSliderColors();
@@ -182,6 +183,10 @@ public class DreamMachineManager : MonoBehaviour
 
                 // Select clicked one
                 displayable.isSelected = true;
+                if (!selectedDreamByInhabitant.ContainsKey(currentInhabitant))
+                {
+                    numberDreamSelected++;
+                }
                 UpdateDreamButtonVisual(button, true);
 
                 // Save the selection
@@ -190,6 +195,7 @@ public class DreamMachineManager : MonoBehaviour
                 PreviewStats(displayable);
                 
                 CheckIfAllDreamsSelected();
+                indexUI.text = $"{numberDreamSelected}/{selectedInhabitants.Count}";
             });
 
             Debug.Log($"Dream Order: {ordered[0].interestName}, {ordered[1].interestName}, {ordered[2].interestName}");
@@ -215,12 +221,6 @@ public class DreamMachineManager : MonoBehaviour
         }
 
         DisplayDreams(dreamsByInhabitant[current]);
-
-        /* Si un rêve est sélectionné, applique la prévisualisation
-        if (selectedDream != null)
-        {
-            PreviewStats(selectedDream);
-        }*/
     }
 
     public void PreviousInhabitant()
@@ -236,12 +236,6 @@ public class DreamMachineManager : MonoBehaviour
         }
 
         DisplayDreams(dreamsByInhabitant[current]);
-
-        /* Si un rêve est sélectionné, applique la prévisualisation
-        if (selectedDream != null)
-        {
-            PreviewStats(selectedDream);
-        }*/
     }
 
 
@@ -326,11 +320,6 @@ public class DreamMachineManager : MonoBehaviour
         moodSlider.value = currentInhabitant.Mood + moodChange;
         serenitySlider.value = currentInhabitant.Serenity + serenityChange;
         energySlider.value = currentInhabitant.Energy + energyChange;
-
-        // Appliquer la couleur selon les changements
-        //UpdateSliderColor(moodSlider, moodChange);
-        //UpdateSliderColor(serenitySlider, serenityChange);
-        //UpdateSliderColor(energySlider, energyChange);
     }
     
     private void ResetSliderColors()
@@ -383,8 +372,9 @@ public class DreamMachineManager : MonoBehaviour
                     inhabitant.DiscoveredDislikes.Add(element);
             }
 
-            // 📊 Stats après
-            Debug.Log($"[After] {inhabitant.Name}| Mood: {inhabitant.Mood}, Serenity: {inhabitant.Serenity}, Energy: {inhabitant.Energy}");
+            inhabitant.Mood = Mathf.FloorToInt(inhabitant.Mood / 2f);
+            inhabitant.Serenity = Mathf.FloorToInt(inhabitant.Serenity / 2f);
+            inhabitant.Energy = Mathf.FloorToInt(inhabitant.Energy / 2f);
 
             // 🔄 Désélection
             dream.isSelected = false;
@@ -468,8 +458,8 @@ public class DreamMachineManager : MonoBehaviour
             int serenity = inhabitant.Serenity;
             int energy = inhabitant.Energy;
 
-            int gold = Mathf.Max(0, Mathf.FloorToInt((baseGoldPerDream + mood + serenity + energy) * multiplier));
-            int xp = Mathf.Max(0, Mathf.FloorToInt((baseEXPPerDream + mood + serenity + energy) * multiplier));
+            int gold = Mathf.Max(0, Mathf.FloorToInt((baseGoldPerDream) * multiplier));
+            int xp = Mathf.Max(0, Mathf.FloorToInt((baseEXPPerDream) * multiplier));
 
             totalGold += gold;
             totalXP += xp;

@@ -169,8 +169,6 @@ public class CharacterJournalManager : MonoBehaviour
             heartGold.transform.SetParent(heartsContainer, false);
             Image img = heartGold.GetComponent<Image>();
             img.sprite = heartGoldSprite;
-            RectTransform rt = heartGold.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(100, 100);
         }
         else
         {
@@ -182,11 +180,6 @@ public class CharacterJournalManager : MonoBehaviour
                 
                 Image img = heartGO.GetComponent<Image>();
                 img.sprite = i < currentHearts ? heartFullSprite : heartEmptySprite;
-
-                //img.preserveAspect = true;
-
-                //RectTransform rt = heartGO.GetComponent<RectTransform>();
-                //rt.sizeDelta = new Vector2(100, 100);
              }
         }
     }
