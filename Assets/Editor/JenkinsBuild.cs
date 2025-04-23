@@ -9,6 +9,13 @@ public class JenkinsBuild
         string buildPath = "Builds/Android";
         string[] scenes = { "Assets/Scenes/Final/MainScene.unity" };
 
+        string[] scenes = EditorBuildSettings.scenes
+            .Where(scene => scene.enabled)
+            .Select(scene => scene.path)
+            .ToArray();
+        
+        PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
+
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
         {
             scenes = scenes,
