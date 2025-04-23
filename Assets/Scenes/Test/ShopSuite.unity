@@ -13068,17 +13068,17 @@ PrefabInstance:
     - target: {fileID: 691484844297795610, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}
       propertyPath: levels.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 691484844297795610, guid: dfda028edd13ca148beb3305925a2081,
-        type: 3}
-      propertyPath: levels.Array.data[0].unlockable.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 691484844297795610, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}
+      propertyPath: levels.Array.data[0].unlockable.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691484844297795610, guid: dfda028edd13ca148beb3305925a2081,
+        type: 3}
       propertyPath: levels.Array.data[1].unlockable.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 691484844297795610, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}

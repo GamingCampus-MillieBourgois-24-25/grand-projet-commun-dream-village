@@ -1,3 +1,4 @@
+using LitMotion;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,10 +7,22 @@ public class ShopItem : MonoBehaviour
 {
     private Player.ItemCategory itemCategory;
     private int ownedQuantity = 0;
+    private bool isInfos = false;
+
+    [Header("Main UI")]
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI itemPrice;
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemOwnedQuantityText;
+    [SerializeField] private GameObject notBuildingInfos;
+    [SerializeField] private Button buyButton;
+
+    [Header("Building Option")]
+    [SerializeField] private GameObject rotatedCard;
+    [SerializeField] private GameObject buildingInfos;
+    [SerializeField] private Button infoButton;
+    [SerializeField] private GameObject buildingStatsPrefab;
+    [SerializeField] private GameObject buildingSpritePrefab;
 
     public void SetItemContent(Player.ItemCategory _category, Sprite _icon, string _name, int _price)
     {
@@ -18,6 +31,12 @@ public class ShopItem : MonoBehaviour
         itemName.text = _name;
         itemPrice.text = _price.ToString();
         UpdateOwnedQuantity();
+
+        if(itemCategory == Player.ItemCategory.BuildingCategory)
+        {
+            infoButton.gameObject.SetActive(true);
+
+        }
     }
 
     public void UpdateOwnedQuantity()
@@ -73,11 +92,6 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    public void BS_Buy()
-    {
-        BuyItem<IScriptableElement>();
-    }
-
     private void BuyItem<T>() where T : IScriptableElement
     {
         T item = GetItem<T>();
@@ -87,6 +101,48 @@ public class ShopItem : MonoBehaviour
             GM.Instance.player.AddToInventory(item, 1);
             ownedQuantity++;
             itemOwnedQuantityText.text = ownedQuantity.ToString() + " OWNED";
+        }
+    }
+
+    public void BS_Buy()
+    {
+        BuyItem<IScriptableElement>();
+    }
+
+    public void BS_Info()
+    {
+        isInfos = !isInfos;
+        if (isInfos) 
+        {
+            LMotion.Create(0.0f, 180.0f, 1.0f)
+                .WithEase(Ease.InOutSine)
+                .Bind((float rotation) =>
+                {
+                    rotatedCard.transform.rotation = Quaternion.Euler(0, rotation, 0);
+
+                    if (rotation >= 90)
+                    {
+                        notBuildingInfos.transform.SetAsFirstSibling();
+                    }
+                });   
+
+            buyButton.interactable = false;
+        }
+        else
+        {
+            LMotion.Create(180.0f, 0.0f, 1.0f)
+                .WithEase(Ease.InOutSine)
+                .Bind((float rotation) =>
+                {
+                    rotatedCard.transform.rotation = Quaternion.Euler(0, rotation, 0);
+
+                    if (rotation <= 90)
+                    {
+                        buildingInfos.transform.SetAsFirstSibling();
+                    }
+                });
+
+            buyButton.interactable = true;
         }
     }
 }
