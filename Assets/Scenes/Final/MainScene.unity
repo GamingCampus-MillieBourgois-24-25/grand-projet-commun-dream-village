@@ -16955,7 +16955,7 @@ PrefabInstance:
         type: 3}
       propertyPath: heartGoldSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 43f100851c359c04aaf5dab9e6485790,
+      objectReference: {fileID: 21300000, guid: 5a4ffdc6ddfbd9b488d8add3771e8dbe,
         type: 3}
     - target: {fileID: 8293250436908638852, guid: 1db27110019430948829919a2ee837de,
         type: 3}
