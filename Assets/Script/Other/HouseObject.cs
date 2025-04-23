@@ -29,7 +29,6 @@ public class HouseObject : MonoBehaviour
                 GM.Instance.tutorialsManager.skipDialogue = true;
             }
             
-            if (!canvasHabitant.activeSelf)
             if (!GM.Cjm.journalCanvas.activeSelf)
             {
                 GM.Cjm.journalCanvas.SetActive(true);
