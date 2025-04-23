@@ -1,14 +1,15 @@
 using UnityEngine;
 using LitMotion;
-using LitMotion.Extensions;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 public class DayNight : MonoBehaviour
 {
     [SerializeField] private bool isDay;
     
     [SerializeField] private TMP_Text timeText;
+    [SerializeField] private TMP_Text activityErrorText;
 
     [Header("Light Parameters")]
     [SerializeField] private Light sun;
@@ -25,6 +26,8 @@ public class DayNight : MonoBehaviour
     [SerializeField] private RawImage curtain;
     [SerializeField] private float animationDuration;
 
+    private Coroutine activityErrorCoroutine;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -32,9 +35,60 @@ public class DayNight : MonoBehaviour
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
     }
-    
+
+    private IEnumerator ShowActivityErrorText()
+    {
+        if (activityErrorText == null) yield break;
+
+        CanvasGroup canvasGroup = activityErrorText.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = activityErrorText.gameObject.AddComponent<CanvasGroup>();
+        }
+
+        activityErrorText.gameObject.SetActive(true);
+        canvasGroup.alpha = 1f;
+
+        yield return new WaitForSeconds(2f);
+
+        float duration = 0.5f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+            yield return null;
+        }
+
+        canvasGroup.alpha = 0f;
+        activityErrorText.gameObject.SetActive(false);
+    }
+
     public void ChangeTime()
     {
+        // Pour passer à la nuit
+        if (isDay)
+        {
+            foreach (InhabitantInstance inhabitant in GM.VM.inhabitants)
+            {
+                if (inhabitant.isInActivity) // Pas passer en mode nuit si un habitant est en activité
+                {
+                    if (activityErrorCoroutine != null)
+                    {
+                        StopCoroutine(activityErrorCoroutine);
+                    }
+                    activityErrorCoroutine = StartCoroutine(ShowActivityErrorText());
+                    return;
+                }
+            }
+        }
+        //Pour passer au jour
+        else
+        {
+            // attendre le temps de rêve
+        }
+        
         isDay = !isDay;
         RectTransform transform = curtain.GetComponent<RectTransform>();
         Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
