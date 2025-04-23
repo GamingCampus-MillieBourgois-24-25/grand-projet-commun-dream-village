@@ -346,7 +346,6 @@ public class IsoManager : MonoBehaviour
 
     public bool HasSelectedObject()
     {
-        Debug.Log(isEditMode + "" + selectedObject);
         if (isEditMode && selectedObject != null)
         {
             return true;
