@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -192,6 +193,15 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         else
         {
             return $"{seconds}s";
+        }
+    }
+
+    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject)
+    {
+        int timeStars = int.Parse(starText.text);
+        if (player.CanSpendStar(timeStars)) {
+            player.SpendStar(timeStars);
+            buildingObject.FinishActivity();
         }
     }
 

@@ -21,44 +21,41 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     private GameObject remainingTimeUI;
     Coroutine waitingCoroutine = null;
     TextMeshProUGUI timeText;
-
+    private TextMeshProUGUI starText;
 
 
     IEnumerator WaitingCoroutine()
     {
-        // S'assurer que l'UI est présente
-        Transform existing = transform.Find("remainingTime");
-        if (existing != null)
-        {
-            remainingTimeUI = existing.gameObject;
-            remainingTimeUI.SetActive(true);
-        }
-        else
-        {
-            remainingTimeUI = Instantiate(GM.BM.remainingTime.gameObject, transform); // GM.BM.remainingTime est le prefab
-            remainingTimeUI.name = "remainingTime";
-            remainingTimeUI.SetActive(true);
-        }
+        CheckAndInstanciateRemainingTime();
 
-        TextMeshProUGUI timeText = remainingTimeUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        canvasBuilding.SetActive(false);
+        int lastWholeMinutes = Mathf.CeilToInt(timeRemaining / 60f);
+        UpdateSkipText(lastWholeMinutes);
+        AddBSSkipFunction();
 
         while (isUsed)
-            {
-                timeRemaining -= Time.deltaTime;
-                if (timeRemaining <= 0f)
-                {
-                    isUsed = false;
-                    timeRemaining = 0f;
-                    isUsed = false;
-                }
-                timeText.text = GM.Instance.DisplayFormattedTime(timeRemaining);
+        {
+            timeRemaining -= Time.deltaTime;
 
-                yield return null;
+            int currentWholeMinutes = Mathf.CeilToInt(timeRemaining / 60f);
+            if (currentWholeMinutes != lastWholeMinutes)
+            {
+                lastWholeMinutes = currentWholeMinutes;
+                UpdateSkipText(currentWholeMinutes);
+            }
+
+            if (timeRemaining <= 0f)
+            {
+                isUsed = false;
+                timeRemaining = 0f;
+            }
+
+            timeText.text = GM.Instance.DisplayFormattedTime(timeRemaining);
+            yield return null;
         }
 
         FinishActivity();
     }
+
 
     IEnumerator RestartCoroutine()
     {
@@ -113,6 +110,52 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         }
     }
 
+    private void CheckAndInstanciateRemainingTime()
+    {
+        // S'assurer que l'UI est présente
+        Transform existing = transform.Find("remainingTime");
+        if (existing != null)
+        {
+            remainingTimeUI = existing.gameObject;
+            remainingTimeUI.SetActive(true);
+        }
+        else
+        {
+            remainingTimeUI = Instantiate(GM.BM.remainingTime.gameObject, transform); // GM.BM.remainingTime est le prefab
+            remainingTimeUI.name = "remainingTime";
+            remainingTimeUI.SetActive(true);
+        }
+
+        timeText = remainingTimeUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        canvasBuilding.SetActive(false);
+    }
+
+    private void UpdateSkipText(int remainingMinutes)
+    {
+        if (starText == null && remainingTimeUI != null)
+        {
+            Transform starTransform = remainingTimeUI.transform.GetChild(2).GetChild(2).GetChild(0);
+
+            if (starTransform == null) return;
+
+            starText = starTransform.GetComponent<TextMeshProUGUI>();
+
+        }
+        if (starText == null) return;
+
+        starText.text = remainingMinutes.ToString();
+    }
+    private void AddBSSkipFunction()
+    {
+        Button starButton = remainingTimeUI.transform.GetChild(2).GetComponent<Button>();
+
+        if (starText != null)
+        {
+            starButton.onClick.AddListener(() => {
+                GM.Instance.TrySkipActivityWithStars(starText, this);
+            });
+        }
+    }
 
     public void StartActivityInBuilding(InhabitantInstance _inhabitant)
     {
@@ -137,11 +180,17 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             timeRemaining = 0f;
         }
 
+        if (remainingTimeUI != null)
+        {
+            Destroy(remainingTimeUI.gameObject);
+        }
+
         isUsed = false;
         waitingCoroutine = null;
 
         if (inhabitantUsing != null)
         {
+            Debug.Log("inhabitant just finished an activity! "+ inhabitantUsing.baseData.Name);
             inhabitantUsing.FinishActivity(baseData.AttributeEffects, baseData.Energy, baseData.Mood, baseData.Serenity);
             inhabitantUsing = null;
         }
@@ -159,7 +208,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         GameObject preferencesContainer = GM.BM.preferenceContainer;
 
         name.text = baseData.Name;
-        timeText.text = baseData.EffectDuration.ToString() + "s";
+        timeText.text = GM.Instance.DisplayFormattedTime(baseData.EffectDuration);
 
         foreach (Transform child in preferencesContainer.transform)
         {
