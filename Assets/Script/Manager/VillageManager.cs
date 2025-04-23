@@ -92,7 +92,8 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
 
         foreach (var buildingData in data.buildings)
         {
-            GameObject buildingInstanciate = Instantiate(GM.Instance.GetBuildingByName(buildingData.baseBuildingName).InstantiatePrefab, Vector3.zero, Quaternion.identity);
+            Building building = GM.Instance.GetBuildingByName(buildingData.baseBuildingName);
+            GameObject buildingInstanciate = Instantiate(building.InstantiatePrefab, Vector3.zero, building.InstantiatePrefab.transform.rotation);
 
             BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
             loadedBuilding.Deserialize(buildingData);
@@ -104,15 +105,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             //loadedInhabitant.Deserialize(inhabitantData);
             //inhabitants.Add(loadedInhabitant);
             //baseInhabitants.Add(loadedInhabitant.baseData);
-        }
-
-        if (data.buildings.Count == 0)
-        {
-            GameObject buildingInstanciate = Instantiate(GM.Instance.GetBuildingByName("CoffeeShop").InstantiatePrefab, Vector3.zero, Quaternion.identity);
-            BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
-            buildingInstanciate.GetComponent<PlaceableObject>().OriginalPosition = new Vector3Int(0, 6, 0);
-            buildingInstanciate.GetComponent<PlaceableObject>().ResetPosition();
-            buildings.Add(loadedBuilding);
         }
     }
 }
