@@ -389,7 +389,7 @@ public class DreamMachineManager : MonoBehaviour
         // ♻️ Reset
         selectedDreamByInhabitant.Clear();
         validateButton.interactable = false;
-        
+        numberDreamSelected = 0;
         dreamsByInhabitant.Clear();
         foreach (var inhabitant in selectedInhabitants)
         {

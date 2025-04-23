@@ -39,6 +39,8 @@ public class DayNight : MonoBehaviour
         sun.color = isDay ? dayColor : nightColor;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
+        musicSource.clip = isDay ? dayMusic : nightMusic;
+        musicSource.Play();
     }
 
     private IEnumerator ShowActivityErrorText()
@@ -149,6 +151,7 @@ public class DayNight : MonoBehaviour
         sun.color = isDay ? dayColor : nightColor;
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
+        
         RectTransform transform = curtain.GetComponent<RectTransform>();
         Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
         LMotion.Create(target.x, 0, animationDuration)
@@ -160,9 +163,11 @@ public class DayNight : MonoBehaviour
             });
 
         timeText.text = isDay ? "Night" : "Day";
-
         musicSource.clip = isDay ? dayMusic : nightMusic;
         musicSource.Play();
-
     }
+
+    
+    public bool IsDay => isDay;
+
 }
