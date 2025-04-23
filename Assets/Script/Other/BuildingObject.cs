@@ -190,7 +190,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
         if (inhabitantUsing != null)
         {
-            Debug.Log("inhabitant just finished an activity! "+ inhabitantUsing);
+            Debug.Log("inhabitant just finished an activity! "+ inhabitantUsing.baseData.Name);
             inhabitantUsing.FinishActivity(baseData.AttributeEffects, baseData.Energy, baseData.Mood, baseData.Serenity);
             inhabitantUsing = null;
         }

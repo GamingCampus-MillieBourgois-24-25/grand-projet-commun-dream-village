@@ -74,6 +74,8 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
 
     public void FinishActivity(List<Building.AttributeEffect> _attributes, int _energy, int _mood, int _serenity)
     {
+        isInActivity = false;
+
         foreach (var attribute in _attributes)
         {
             InterestCategory category = attribute.attribute;
