@@ -25,6 +25,11 @@ public class DayNight : MonoBehaviour
     [SerializeField] private RawImage curtain;
     [SerializeField] private float animationDuration;
 
+    [Header("Music Settings")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip dayMusic;
+    [SerializeField] private AudioClip nightMusic;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -100,7 +105,10 @@ public class DayNight : MonoBehaviour
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
 
-        timeText.text = isDay ? "Day" : "Night";
+        timeText.text = isDay ? "Night" : "Day";
+
+        musicSource.clip = isDay ? dayMusic : nightMusic;
+        musicSource.Play();
 
     }
 }
