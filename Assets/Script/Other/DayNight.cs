@@ -26,6 +26,11 @@ public class DayNight : MonoBehaviour
     [SerializeField] private RawImage curtain;
     [SerializeField] private float animationDuration;
 
+    [Header("Music Settings")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip dayMusic;
+    [SerializeField] private AudioClip nightMusic;
+    
     private Coroutine activityErrorCoroutine;
 
     // Start is called before the first frame update
@@ -67,12 +72,12 @@ public class DayNight : MonoBehaviour
 
     public void ChangeTime()
     {
-        // Pour passer à la nuit
+        // Pour passer Ã  la nuit
         if (isDay)
         {
             foreach (InhabitantInstance inhabitant in GM.VM.inhabitants)
             {
-                if (inhabitant.isInActivity) // Pas passer en mode nuit si un habitant est en activité
+                if (inhabitant.isInActivity) // Pas passer en mode nuit si un habitant est en activitÃ©
                 {
                     if (activityErrorCoroutine != null)
                     {
@@ -86,7 +91,7 @@ public class DayNight : MonoBehaviour
         //Pour passer au jour
         else
         {
-            // attendre le temps de rêve
+            // attendre le temps de rÃªve
         }
         
         isDay = !isDay;
@@ -154,7 +159,10 @@ public class DayNight : MonoBehaviour
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
 
-        timeText.text = isDay ? "Day" : "Night";
+        timeText.text = isDay ? "Night" : "Day";
+
+        musicSource.clip = isDay ? dayMusic : nightMusic;
+        musicSource.Play();
 
     }
 }
