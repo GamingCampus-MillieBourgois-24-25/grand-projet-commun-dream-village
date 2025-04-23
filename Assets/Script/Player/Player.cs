@@ -5,9 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 {
-    private enum InventoryCategory
+    public enum ItemCategory
     {
         InhabitantCategory,
         BuildingCategory,
@@ -16,10 +16,10 @@ public class Player : MonoBehaviour
 
     #region Variables
 
-    public Dictionary<Inhabitant, InventoryItem<Inhabitant>> InhabitantInventory { get; private set; } = new();
-    public Dictionary<Building, InventoryItem<Building>> BuildingInventory { get; private set; } = new();
-    public Dictionary<Decoration, InventoryItem<Decoration>> DecorationInventory { get; private set; } = new();
-
+    private Dictionary<Inhabitant, InventoryItem> inhabitantsInventory = new();
+    private Dictionary<Building, InventoryItem> buildingsInventory = new();
+    private Dictionary<Decoration, InventoryItem> decorationsInventory = new();
+    
     public delegate void PlayerInfoAssignDelegate();
     public PlayerInfoAssignDelegate OnPlayerInfoAssigned;
 
@@ -29,9 +29,15 @@ public class Player : MonoBehaviour
     public int Level { get; private set; } = 1;
     public int CurrentXP { get; private set; } = 0;
 
-    private int baseExpPerLevel = 300;
-    private float multExp = 1.3f;
+    private int baseExpPerLevel = 100;
+    private float multExp = 1.9f;
     private int expLevel;
+
+    // Currency
+    private int gold = 100000;
+    private int star = 100;
+    [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI starText;
 
     [Header("Progression")]
     public LevelProgression levelProgression;
@@ -48,7 +54,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject unlockedItemPrefab;
 
     [Header("Inventory Menu UI")]
-    [SerializeField] private InventoryCategory inventoryCategory = InventoryCategory.InhabitantCategory;
+    [SerializeField] private ItemCategory inventoryCategory = ItemCategory.InhabitantCategory;
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private ScrollRect scrollView;
     [SerializeField] private List<Button> categoryButtons;
@@ -56,10 +62,53 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    #region Save
+    public class SavePartData : ISaveData
+    {
+        public string playerName;
+        public string cityName;
+        public int level;
+        public int currentXP;
+        public int gold;
+        public int star;
+    }
+
+    public SavePartData Serialize()
+    {
+        SavePartData data = new SavePartData();
+
+        data.playerName = PlayerName;
+        data.cityName = CityName;
+        data.level = Level;
+        data.currentXP = CurrentXP;
+        
+        data.star = star;
+        data.gold = star;
+
+        return data;
+    }
+
+    public void Deserialize(SavePartData data)
+    {
+        PlayerName = data.playerName;
+        CityName = data.cityName;
+        Level = data.level;
+        CurrentXP = data.currentXP;
+
+        playerNameText.text = PlayerName;
+        levelText.text = Level.ToString();
+        
+        star = data.star;
+        gold = data.gold;
+    }
+    #endregion
+
 
     private void Start()
     {
         expLevel = baseExpPerLevel;
+        UpdateGoldText();
+        UpdateStarText();
     }
 
     public void SetPlayerInfo()
@@ -89,14 +138,87 @@ public class Player : MonoBehaviour
         GM.Instance.isPlayerCreated = true;
         
         OnPlayerInfoAssigned?.Invoke();
+
+        this.Save("PlayerData");
     }
 
+    #region Currency
+
+    // GOLD
+    public int GetGold() => gold;
+    public void SetGold(int value) {
+        gold = Mathf.Max(0, value); // ne jamais avoir un solde négatif
+        UpdateGoldText();
+    } 
+
+    public void AddGold(int amount) {
+        gold += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
+        UpdateGoldText();
+    } 
+    public bool CanSpendGold(int amount)
+    {
+        if (gold >= amount)
+        {
+            return true;
+        }
+        return false;
+    }
+    public void SpendGold(int amount)
+    {
+        if (CanSpendGold(amount))
+        {
+            gold -= amount;
+            UpdateGoldText();
+        }
+    }
+    private void UpdateGoldText()
+    {
+        goldText.text = GetGold().ToString();
+    }
+
+    // STAR
+    public int GetStar() => star;
+    public void SetStar(int value) {
+        star = Mathf.Max(0, value);
+        UpdateStarText();
+    } 
+
+    public void AddStar(int amount)
+    {
+        star += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
+        UpdateStarText();
+    }
+    public bool CanSpendStar(int amount)
+    {
+        if (star >= amount)
+        {
+            return true;
+        }
+        return false;
+    }
+    public void SpendStar(int amount)
+    {
+        if (CanSpendStar(amount))
+        {
+            star -= amount;
+            UpdateStarText();
+        }
+    }
+
+    private void UpdateStarText()
+    {
+        starText.text = GetStar().ToString();
+    }
+
+    #endregion
 
     #region EXP
     public void AddXP(int amount)
     {
         CurrentXP += amount;
         CheckLevelUp();
+
+        this.Save("PlayerData");
     }
 
     private void CheckLevelUp()
@@ -150,49 +272,111 @@ public class Player : MonoBehaviour
 
     #region Inventory
 
-    public void AddToInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : IScriptableElement
+    public bool GetItemInInventory<T>(T item, out InventoryItem inventoryItem)
     {
-        if (inventory.TryGetValue(item, out var existing))
+        switch (item)
+        {
+            case Inhabitant inhabitant:
+                if (inhabitantsInventory.TryGetValue(inhabitant, out var existing))
+                {
+                    inventoryItem = existing;
+                    return true;
+                }
+                break;
+            case Building building:
+                if(buildingsInventory.TryGetValue(building, out var existing2))
+                {
+                    inventoryItem = existing2;
+                    return true;
+                }
+                break;
+            case Decoration decoration:
+                if (decorationsInventory.TryGetValue(decoration, out var existing3))
+                {
+                    inventoryItem = existing3;
+                    return true;
+                }
+                break;
+        }
+        inventoryItem = null;
+        return false;
+    }
+
+    public int GetItemQuantity<T>(T item) where T : IScriptableElement
+    {
+        if (GetItemInInventory(item, out var inventoryItem))
+        {
+            return inventoryItem.quantity;
+        }
+        return 0;
+    }
+
+    public void AddToInventory<T>(T item, int amount) where T : IScriptableElement
+    {
+        if (GetItemInInventory(item, out var existing))
         {
             existing.quantity += amount;
             existing.inventorySlotItem.UpdateItemContent(existing.quantity);
         }
         else
         {
-            inventory[item] = new InventoryItem<T>(item, amount);
             GameObject inventorySlot = null;
             switch (item)
             {
                 case Inhabitant inhabitant:
+                    inhabitantsInventory[inhabitant] = new InventoryItem(amount);
                     inventorySlot = Instantiate(itemPrefab, categoryContainers[0].transform);
+                    CreateInventorySlot(inventorySlot, inhabitantsInventory[inhabitant], inhabitant, amount);
                     break;
                 case Building building:
+                    buildingsInventory[building] = new InventoryItem(amount);
                     inventorySlot = Instantiate(itemPrefab, categoryContainers[1].transform);
+                    CreateInventorySlot(inventorySlot, buildingsInventory[building], building, amount);
                     break;
                 case Decoration decoration:
+                    decorationsInventory[decoration] = new InventoryItem(amount);
                     inventorySlot = Instantiate(itemPrefab, categoryContainers[2].transform);
+                    CreateInventorySlot(inventorySlot, decorationsInventory[decoration], decoration, amount);
                     break;
             }
-            if (inventorySlot != null)
-            {
-                InventorySlotItem slotComponent = inventorySlot.GetComponent<InventorySlotItem>();
-                inventory[item].SetInventorySlotItem(slotComponent);
-                slotComponent.SetItemContent(item, amount);
-            }
+            Debug.Log($"Added {amount} of {item} to inventory.");
         }
     }
 
-    public bool RemoveFromInventory<T>(T item, int amount, Dictionary<T, InventoryItem<T>> inventory) where T : IScriptableElement
+    public void CreateInventorySlot<T>(GameObject inventorySlot, InventoryItem inventory_item, T item, int amount) where T : IScriptableElement
     {
-        if (inventory.TryGetValue(item, out var existing))
+        if (inventorySlot != null)
+        {
+            InventorySlotItem slotComponent = inventorySlot.GetComponent<InventorySlotItem>();
+            inventory_item.SetInventorySlotItem(slotComponent);
+            slotComponent.SetItemContent(item, amount);
+        }
+    }
+
+    public bool RemoveFromInventory<T>(T item, int amount) where T : IScriptableElement
+    {
+        if (GetItemInInventory(item, out var existing))
         {
             if (existing.quantity >= amount)
             {
                 existing.quantity -= amount;
                 if (existing.quantity == 0)
                 {
-                    inventory.Remove(item);
+                    switch (item)
+                    {
+                        case Inhabitant inhabitant:
+                            inhabitantsInventory.Remove(inhabitant);
+                            break;
+                        case Building building:
+                            buildingsInventory.Remove(building);
+                            break;
+                        case Decoration decoration:
+                            decorationsInventory.Remove(decoration);
+                            break;
+                    }
+                    Destroy(existing.inventorySlotItem.gameObject);
                 }
+                Debug.Log($"Removed {amount} of {item.name} from inventory.");
                 return true;
             }
         }
@@ -210,7 +394,7 @@ public class Player : MonoBehaviour
         categoryButtons[(int)inventoryCategory].interactable = true;
         categoryContainers[(int)inventoryCategory].SetActive(false);
 
-        inventoryCategory = (InventoryCategory)_category;
+        inventoryCategory = (ItemCategory)_category;
 
         categoryButtons[_category].interactable = false;
         categoryContainers[_category].SetActive(true);
@@ -218,10 +402,6 @@ public class Player : MonoBehaviour
     }
 
 
-    public interface IPlaceable
-    {
-        GameObject GetPrefab();
-    }
 
     #endregion
 }

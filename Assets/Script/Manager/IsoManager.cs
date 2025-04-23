@@ -5,12 +5,13 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 public class IsoManager : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputActions;
 
-    [SerializeField] private Tilemap tilemapBase;
+    [SerializeField] public Tilemap tilemapBase;
     [SerializeField] public Tilemap tilemapObjects;
     [SerializeField] private TileBase whiteTile;
     [SerializeField] private TileBase greenTile;
@@ -22,7 +23,7 @@ public class IsoManager : MonoBehaviour
     [SerializeField] private Canvas editModeCanvas;
     [SerializeField] private Canvas stockCanvas;
     [SerializeField] private float yStockCanvas;
-    [SerializeField] private Button placeBtn;
+    //[SerializeField] private Button placeBtn;
 
     private GameObject canvasBottomLeft;
     private GameObject canvasBottomRight;
@@ -92,7 +93,7 @@ public class IsoManager : MonoBehaviour
         isClicking = true;
 
         //Debug.Log("OnClickPerformed");
-        Vector2 pointerPos = GetPointerPosition(context);
+        Vector2 pointerPos = GM.Instance.GetPointerPosition(context);
         CheckUnderPointerTouch(pointerPos);
     }
 
@@ -115,12 +116,17 @@ public class IsoManager : MonoBehaviour
         {
             scaleAnimationCoroutine = StartCoroutine(AnimateScalePop(selectedObject.transform));
 
+            ChangeTileUnderObject(selectedObject, null);
             if (CanPlaceObjectOnTilemap(selectedObject))
             {
-                ChangeTileUnderObject(selectedObject, null);
                 PlacePlaceableObject(selectedObject);
-                UnSelectObject();
+            } 
+            else
+            {
+                selectedObject.ResetPosition();
+                ToggleInventorySmooth(true);
             }
+            UnSelectObject();
         }
 
         isClicking = false;
@@ -129,30 +135,30 @@ public class IsoManager : MonoBehaviour
     #endregion
 
     #region Touch/Move
-    private Vector2 GetPointerPosition(InputAction.CallbackContext context)
-    {
-        // Si besoin de récupérer la position à partir du device
-        if (Pointer.current != null)
-            return Pointer.current.position.ReadValue();
-        return Vector2.zero;
-    }
-    private bool IsPointerOverUIElement(Vector2 screenPosition)
-    {
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
-        {
-            position = screenPosition
-        };
+    //private Vector2 GetPointerPosition(InputAction.CallbackContext context)
+    //{
+    //    // Si besoin de récupérer la position à partir du device
+    //    if (Pointer.current != null)
+    //        return Pointer.current.position.ReadValue();
+    //    return Vector2.zero;
+    //}
+    //private bool IsPointerOverUIElement(Vector2 screenPosition)
+    //{
+    //    PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
+    //    {
+    //        position = screenPosition
+    //    };
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, results);
+    //    List<RaycastResult> results = new List<RaycastResult>();
+    //    EventSystem.current.RaycastAll(pointerEventData, results);
 
-        return results.Count > 0; // If there's any UI element under the pointer, return true
-    }
+    //    return results.Count > 0; // If there's any UI element under the pointer, return true
+    //}
 
     private void CheckUnderPointerTouch(Vector2 screenPosition)
     {
         // Cancel si click sur un bouton de l'UI
-        if (IsPointerOverUIElement(screenPosition))
+        if (GM.Instance.IsPointerOverUIElement(screenPosition))
         {
             return;
         }
@@ -162,9 +168,13 @@ public class IsoManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             PlaceableObject obj = hit.collider.GetComponent<PlaceableObject>();
+            BuildingObject bat = hit.collider.GetComponent<BuildingObject>();
             if (obj != null && obj != selectedObject)
             {
-                OnObjectSelected(obj);
+                if (!(bat && bat.IsUsed))
+                {
+                    OnObjectSelected(obj);
+                }
             }
             else if (selectedObject != null)
             {
@@ -176,7 +186,7 @@ public class IsoManager : MonoBehaviour
     private void CheckUnderPointerMove(Vector2 screenPosition)
     {
         // Cancel si click sur un bouton de l'UI
-        if (IsPointerOverUIElement(screenPosition))
+        if (GM.Instance.IsPointerOverUIElement(screenPosition))
         {
             return;
         }
@@ -320,7 +330,7 @@ public class IsoManager : MonoBehaviour
         }
 
         selectedObject.transform.position = new Vector3(selectedObject.transform.position.x, transform.position.y + yMovingObject, selectedObject.transform.position.z);
-        if (placeBtn) placeBtn.interactable = true;
+        //if (placeBtn) placeBtn.interactable = true;
         CheckObjectOnTilemap(selectedObject);
 
         Debug.Log("Objet sélectionné : " + obj.name);
@@ -336,6 +346,7 @@ public class IsoManager : MonoBehaviour
 
     public bool HasSelectedObject()
     {
+        Debug.Log(isEditMode + "" + selectedObject);
         if (isEditMode && selectedObject != null)
         {
             return true;
@@ -351,12 +362,12 @@ public class IsoManager : MonoBehaviour
 
         if (canPlace)
         {
-            if (placeBtn) placeBtn.interactable = true;
+            //if (placeBtn) placeBtn.interactable = true;
             ChangeTileUnderObject(obj, greenTile);
         }
         else
         {
-            if (placeBtn) placeBtn.interactable = false;
+            //if (placeBtn) placeBtn.interactable = false;
             ChangeTileUnderObject(obj, redTile); 
         }
     }
@@ -399,7 +410,7 @@ public class IsoManager : MonoBehaviour
         // Réinitialiser
         ChangeTileUnderObject(selectedObject, null);
         UnSelectObject();
-        if (placeBtn) placeBtn.interactable = false;
+        //if (placeBtn) placeBtn.interactable = false;
     }
     #endregion
 
@@ -494,51 +505,93 @@ public class IsoManager : MonoBehaviour
     {
         isEditMode = !isEditMode;
 
+        GM.BM.canvasBuilding.gameObject.SetActive(false);
+
         if (isEditMode) {
             HideMainUI(true);
+            GM.JournalPanel.SetActive(false);
         }
         else
         {
             HideMainUI(false);
+            GM.JournalPanel.SetActive(true);
         }
 
-            tileRenderer.enabled = isEditMode;
+        tileRenderer.enabled = isEditMode;
 
         editModeCanvas.gameObject.SetActive(isEditMode);
         tilemapObjects.ClearAllTiles();
         //if (selectedObject != null) selectedObject.ResetPosition();
-        if (selectedObject != null) PlacePlaceableObject(selectedObject);
+        if (selectedObject != null)
+        {
+            if (CanPlaceObjectOnTilemap(selectedObject)) {
+                PlacePlaceableObject(selectedObject);
+            }
+            else
+            {
+                selectedObject.ResetPosition();
+            }
+        }
         UnSelectObject();
     }
     public void BS_StockSelectedObject()
     {
-        tilemapObjects.ClearAllTiles();
-        UnSelectObject();
-    }
-
-    public void BS_TakeInventoryItem<T>(T item, Dictionary<T, InventoryItem<T>> inventory, IsoManager isoManager) where T : IScriptableElement
-    {
-        if (!inventory.TryGetValue(item, out var entry))
+        if(selectedObject.TryGetComponent<BuildingObject>(out BuildingObject buildingObj))
         {
-            Debug.LogWarning("Item not in inventory or prefab is missing.");
+            GM.VM.RemoveInstance(buildingObj.gameObject);
+            GM.Instance.player.AddToInventory(buildingObj.baseData, 1);
+        }
+        else if (selectedObject.TryGetComponent<HouseObject>(out HouseObject houseObj))
+        {
+            GM.VM.RemoveInstance(houseObj.gameObject);
+            GM.Instance.player.AddToInventory(houseObj.inhabitantInstance.baseData, 1);
+        }
+        else
+        {
+            Debug.LogWarning("Selected object is not a BuildingObject or HouseObject.");
             return;
         }
 
-        Vector3 centerPos = tilemapBase.CellToWorld(Vector3Int.zero);
+        GameObject objToDestroy = selectedObject.gameObject;
+
+        tilemapObjects.ClearAllTiles();
+        UnSelectObject();
+        stockCanvas.transform.parent = null;
+        GM.BM.canvasBuilding.transform.parent = null;
+        Destroy(objToDestroy);
+
+        ToggleInventorySmooth(true);
+    }
+
+    #endregion
+
+    #region SpawnInventoryItem
+
+    public GameObject SpawnInventoryItem<T>(T item, Vector3 _spawnPoint) where T : IScriptableElement
+    {
+        if (!GM.Instance.player.GetItemInInventory(item, out var entry))
+        {
+            Debug.LogWarning("Item not in inventory or prefab is missing.");
+            return null;
+        }
+
+        Vector3 centerPos = tilemapBase.WorldToCell(_spawnPoint);
         centerPos.y += yMovingObject;
 
-        GameObject newObj = Instantiate(entry.item.InstantiatePrefab, centerPos, Quaternion.identity);
+        GameObject newObj = Instantiate(item.InstantiatePrefab, centerPos, item.InstantiatePrefab.transform.rotation);
         PlaceableObject placeable = newObj.GetComponent<PlaceableObject>();
 
         if (placeable != null)
         {
             OnObjectSelected(placeable);
-            // + le retirer de l'inventaire
+            GM.Instance.player.RemoveFromInventory(item, 1);
+            return newObj;
         }
         else
         {
             Debug.LogError("Prefab does not contain a PlaceableObject.");
         }
+        return null;
     }
 
     #endregion

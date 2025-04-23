@@ -10,6 +10,7 @@ public class Building : IScriptableElement
     #region Variable Serialized
     #region Basic Information
     [field: Header("Basic Information")]
+    public override Player.ItemCategory Category => Player.ItemCategory.BuildingCategory;
     [field: SerializeField] public override string Name => base.Name;
     [field: SerializeField] public string Description { get; private set; }
     #endregion

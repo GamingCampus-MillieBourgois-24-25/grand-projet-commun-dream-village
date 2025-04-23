@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class HouseObject : MonoBehaviour
 {
-    [SerializeField] private Inhabitant inhabitant;
-    [SerializeField] private GameObject canvasHabitant;
+    public InhabitantInstance inhabitantInstance;
     private Transform spawnPoint;
 
     private GameObject instantiatedPrefab;
@@ -13,7 +12,12 @@ public class HouseObject : MonoBehaviour
         spawnPoint = transform.Find("SpawnPoint");
     }
 
-    private void OnMouseDown()
+    //private void OnMouseDown()
+    //{
+    //    OpenInhabitantJournal();
+    //}
+
+    public void OpenInhabitantJournal()
     {
         if (!GM.IM.isEditMode)
         {
@@ -26,26 +30,34 @@ public class HouseObject : MonoBehaviour
             }
             
             if (!canvasHabitant.activeSelf)
+            if (!GM.Cjm.journalCanvas.activeSelf)
             {
-                canvasHabitant.SetActive(true);
+                GM.Cjm.journalCanvas.SetActive(true);
             }
 
-            CharacterJournalManager journalManager = FindObjectOfType<CharacterJournalManager>();
-            if (journalManager != null && inhabitant != null)
+            if (GM.Cjm != null && inhabitantInstance != null)
             {
-                journalManager.ShowInhabitantByData(inhabitant);
+                GM.JournalPanel.SetActive(false);
+                GM.ShopPanel.SetActive(false);
+                GM.InventoryPanel.SetActive(false);
+                GM.DayNightPanel.SetActive(false);
+                
+                GM.Cjm.nextButton.gameObject.SetActive(false);
+                GM.Cjm.previousButton.gameObject.SetActive(false);
+
+                GM.Cjm.ShowInhabitantByData(inhabitantInstance);
             }
 
-            if (inhabitant != null && inhabitant.InhabitantPrefab != null && instantiatedPrefab == null)
+            if (inhabitantInstance != null && inhabitantInstance.baseData.InhabitantPrefab != null && instantiatedPrefab == null)
             {
                 if (spawnPoint != null)
                 {
-                    instantiatedPrefab = Instantiate(
-                        inhabitant.InhabitantPrefab,
-                        spawnPoint.position,
-                        spawnPoint.rotation,
-                        spawnPoint
-                    );
+                    //instantiatedPrefab = Instantiate(
+                    //    inhabitant.InhabitantPrefab,
+                    //    spawnPoint.position,
+                    //    spawnPoint.rotation,
+                    //    spawnPoint
+                    //);
                     Debug.Log("Hi I just spawned!");
                 }
                 else

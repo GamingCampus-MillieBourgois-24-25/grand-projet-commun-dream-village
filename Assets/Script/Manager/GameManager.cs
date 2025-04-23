@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 {
@@ -16,9 +18,11 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public DialoguesManager dialoguesManager;
     public TutorialsManager tutorialsManager;
     public AccessibilityOptions accessibilityOptions;
+    public BuildingManager buildingManager;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
+    public List<Decoration> decorations = new List<Decoration>();
 
     [Header("Player")]
     public bool isPlayerCreated = false;
@@ -29,6 +33,13 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     
     public delegate void HouseTutoDelegate();
     public HouseTutoDelegate OnHouseTuto;
+    [Header("UI Buttons")]
+    public GameObject dreamPanel;
+    public GameObject dayNightPanel;
+    public GameObject journalPanel;
+    public GameObject inventoryPanel;
+    public GameObject shopPanel;
+
 
     DateTime lastTimeSaved;
 
@@ -42,10 +53,6 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     #endregion
 
     #endregion
-
-
-
-
 
     private void Awake()
     {
@@ -87,12 +94,17 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         {
             buildings.Add(building);
         }
+        // Load all decorations
+        Decoration[] allDecorations = Resources.LoadAll<Decoration>("ScriptableObject/Decorations");
+        foreach (Decoration decoration in allDecorations)
+        {
+            decorations.Add(decoration);
+        }
 
 
         villageManager.Load("VillageManager");
+        player.Load("PlayerData");
     }
-
-
 
     public Inhabitant GetInhabitantByName(string name)
     {
@@ -119,6 +131,19 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         Debug.LogError("Building not found: " + name);
         return null;
     }
+    public Decoration GetDecorationByName(string name)
+    {
+        foreach (Decoration decoration in decorations)
+        {
+            if (decoration.Name == name)
+            {
+                return decoration;
+            }
+        }
+        Debug.LogError("Decoration not found: " + name);
+        return null;
+    }
+
 
 
     public void SetActualTime()
@@ -131,8 +156,69 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         return lastTimeSaved;
     }
 
+    private List<int> FormatTimeFromSeconds(float totalSeconds)
+    {
+        int seconds = Mathf.FloorToInt(totalSeconds);
 
+        int days = seconds / 86400;
+        seconds %= 86400;
 
+        int hours = seconds / 3600;
+        seconds %= 3600;
+
+        int minutes = seconds / 60;
+        seconds %= 60;
+
+        return new List<int> { days, hours, minutes, seconds };
+    }
+
+    public string DisplayFormattedTime(float totalSeconds)
+    {
+        List<int> timeList = FormatTimeFromSeconds(totalSeconds);
+
+        int days = timeList[0];
+        int hours = timeList[1];
+        int minutes = timeList[2];
+        int seconds = timeList[3];
+
+        if (days > 0)
+        {
+            return $"{days}d {hours}h";
+        }
+        else if (hours > 0)
+        {
+            return $"{hours}h {minutes}m";
+        }
+        else if (minutes > 0)
+        {
+            return $"{minutes}m {seconds}s";
+        }
+        else
+        {
+            return $"{seconds}s";
+        }
+    }
+
+    public bool IsPointerOverUIElement(Vector2 screenPosition)
+    {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
+        {
+            position = screenPosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, results);
+        Debug.Log("results count ui: " + results.Count);
+
+        return results.Count > 0; // If there's any UI element under the pointer, return true
+    }
+
+    public Vector2 GetPointerPosition(InputAction.CallbackContext context)
+    {
+        if (Pointer.current != null)
+            return Pointer.current.position.ReadValue();
+        return Vector2.zero;
+    }
 
     #region Check Game closed
     private void OnApplicationFocus(bool focus)
@@ -185,7 +271,6 @@ public static class GM
     public static GameManager Instance => GameManager.instance;
     public static IsoManager IM => GameManager.instance.isoManager;
     public static VillageManager VM => GameManager.instance.villageManager;
-
     public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
     
     public static DialoguesManager Dm => GameManager.instance.dialoguesManager;
@@ -194,4 +279,12 @@ public static class GM
     
     
     public static AccessibilityOptions Ao => GameManager.instance.accessibilityOptions;
+  
+    public static GameObject DreamPanel => Instance.dreamPanel;
+    public static GameObject DayNightPanel => Instance.dayNightPanel;
+    public static GameObject JournalPanel => Instance.journalPanel;
+    public static GameObject InventoryPanel => Instance.inventoryPanel;
+    public static GameObject ShopPanel => Instance.shopPanel;
+
+    public static BuildingManager BM => GameManager.instance.buildingManager;
 }

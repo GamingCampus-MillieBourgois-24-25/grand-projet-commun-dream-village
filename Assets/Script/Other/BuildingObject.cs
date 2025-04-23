@@ -1,25 +1,24 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartData>
 {
     GameManager gameManager;
-    [SerializeField] public Building building;
+    [SerializeField] public Building baseData;
+
     private InhabitantInstance inhabitantUsing;
-
-    public GameObject canvasBuilding;
-
+    private GameObject canvasBuilding;
 
     #region Waiting
-    bool isUsed = false;
+    private bool isUsed = false;
+    public bool IsUsed => isUsed;
 
     float timeRemaining = 0f;
 
+    private GameObject remainingTimeUI;
     Coroutine waitingCoroutine = null;
     TextMeshProUGUI timeText;
 
@@ -27,7 +26,24 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
     IEnumerator WaitingCoroutine()
     {
-            while (isUsed)
+        // S'assurer que l'UI est présente
+        Transform existing = transform.Find("remainingTime");
+        if (existing != null)
+        {
+            remainingTimeUI = existing.gameObject;
+            remainingTimeUI.SetActive(true);
+        }
+        else
+        {
+            remainingTimeUI = Instantiate(GM.BM.remainingTime.gameObject, transform); // GM.BM.remainingTime est le prefab
+            remainingTimeUI.name = "remainingTime";
+            remainingTimeUI.SetActive(true);
+        }
+
+        TextMeshProUGUI timeText = remainingTimeUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        canvasBuilding.SetActive(false);
+
+        while (isUsed)
             {
                 timeRemaining -= Time.deltaTime;
                 if (timeRemaining <= 0f)
@@ -36,10 +52,12 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
                     timeRemaining = 0f;
                     isUsed = false;
                 }
-                timeText.text = timeRemaining.ToString() + "s";
+                timeText.text = GM.Instance.DisplayFormattedTime(timeRemaining);
 
                 yield return null;
-            }
+        }
+
+        FinishActivity();
     }
 
     IEnumerator RestartCoroutine()
@@ -61,7 +79,9 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     {
         gameManager = GameManager.instance;
 
-        if(isUsed && waitingCoroutine == null)
+        canvasBuilding = GM.BM.canvasBuilding.gameObject;
+
+        if (isUsed && waitingCoroutine == null)
         {
             TimeSpan elapsedTime = System.DateTime.Now - gameManager.GetLastTimeSaved();
             timeRemaining -= (float)elapsedTime.TotalSeconds;
@@ -70,32 +90,40 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         }
     }
 
-    private void Awake()
-    {
-        SetupCanvas();
-    }
+    //private void Awake()
+    //{
+    //    SetupCanvas();
+    //}
 
-    private void OnMouseDown()
+    //private void OnMouseDown()
+    //{
+    //    ClickOnBuiding();
+    //}
+
+    public void ClickOnBuiding()
     {
+        //Debug.Log("JE CLICK SUR LE BUILDING");
         if (!GM.IM.isEditMode)
         {
-            if (!canvasBuilding.activeSelf)
+            if ((!canvasBuilding.transform.IsChildOf(transform) || !canvasBuilding.activeSelf) && !isUsed)
             {
+                SetupCanvas();
                 canvasBuilding.SetActive(true);
             }
         }
     }
 
 
-
-    public void StartActivity(InhabitantInstance _inhabitant)
+    public void StartActivityInBuilding(InhabitantInstance _inhabitant)
     {
-        if (waitingCoroutine == null)
+        if (waitingCoroutine == null && _inhabitant.isInActivity == false)
         {
             isUsed = true;
-            timeRemaining = building.EffectDuration;
+            timeRemaining = baseData.EffectDuration;
             inhabitantUsing = _inhabitant;
             waitingCoroutine = StartCoroutine(WaitingCoroutine());
+
+            _inhabitant.isInActivity = true;
 
             gameManager.SaveGame();
         }
@@ -114,31 +142,46 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
         if (inhabitantUsing != null)
         {
-            inhabitantUsing.FinishActivity(building.AttributeEffects, building.Energy, building.Mood, building.Serenity);
+            inhabitantUsing.FinishActivity(baseData.AttributeEffects, baseData.Energy, baseData.Mood, baseData.Serenity);
             inhabitantUsing = null;
         }
+
+        // TODO : changer l'exp en fonction du building
+        GM.Instance.player.AddXP(100);
+        Destroy(remainingTimeUI);
     }
 
 
     private void SetupCanvas()
     {
-        TextMeshProUGUI name = canvasBuilding.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI description = canvasBuilding.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        timeText = canvasBuilding.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI name = GM.BM.nameInCanvas.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI timeText = GM.BM.timeInCanvas.GetComponent<TextMeshProUGUI>();
+        GameObject preferencesContainer = GM.BM.preferenceContainer;
 
-        name.text = building.Name;
-        description.text = building.Description;
-        timeText.text = building.EffectDuration.ToString() + "s";
+        name.text = baseData.Name;
+        timeText.text = baseData.EffectDuration.ToString() + "s";
 
+        foreach (Transform child in preferencesContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
 
+        foreach (var attributeEffect in baseData.AttributeEffects)
+        {
+            GameObject iconGO = new GameObject("AttributeIcon");
+            iconGO.transform.SetParent(preferencesContainer.transform, false);
 
-        Button button = canvasBuilding.transform.GetChild(3).GetComponent<Button>();
-        button.onClick.RemoveAllListeners();
-        button.onClick.AddListener(() => { DebugSetFirstInhabitant(); });
-    }
-    private void DebugSetFirstInhabitant()
-    {
-        StartActivity(GM.VM.inhabitants[0]);
+            Image image = iconGO.AddComponent<Image>();
+            image.sprite = attributeEffect.attribute.icon;
+        }
+
+        //Button button = canvasBuilding.transform.GetChild(3).GetComponent<Button>();
+        //button.onClick.RemoveAllListeners();
+        //button.onClick.AddListener(() => { DebugSetFirstInhabitant(); });
+
+        canvasBuilding.transform.SetParent(transform, true);
+        canvasBuilding.transform.position = this.transform.position + new Vector3(0, canvasBuilding.transform.position.y, 0);
+
     }
 
     #region Check Game closed
@@ -191,6 +234,9 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         isUsed = data.isUsed;
         timeRemaining = data.timeRemaining;
 
+        if(inhabitantUsing != null) 
+            inhabitantUsing.isInActivity = true;
+
         GetComponent<PlaceableObject>().OriginalPosition = data.originalPosition;
         GetComponent<PlaceableObject>().ResetPosition();
     }
@@ -198,7 +244,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     public SavePartData Serialize()
     {
         SavePartData data = new SavePartData();
-        data.baseBuildingName = building.Name;
+        data.baseBuildingName = baseData.Name;
         data.inhabitantUsingName = (inhabitantUsing != null) ? inhabitantUsing.Name : null;
 
         data.isUsed = isUsed;

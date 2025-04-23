@@ -4,6 +4,9 @@ using UnityEngine;
 public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
 {
     public Inhabitant baseData;
+    public HouseObject houseObject;
+    public bool isInActivity = false;
+
     private int mood;
     private int serenity;
     private int energy;
@@ -36,13 +39,15 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
         set => hearts = Mathf.Clamp(value, 0, baseData.HeartsBeforeLeaving);
     }
 
-    public InhabitantInstance(Inhabitant data)
+    public InhabitantInstance(Inhabitant data, HouseObject _houseObject)
     {
         baseData = data;
         Mood = data.Mood;
         Serenity = data.Serenity;
         Energy = data.Energy;
         Hearts = data.Hearts;
+        houseObject = _houseObject;
+        _houseObject.inhabitantInstance = this;
     }
 
     public InhabitantInstance() { }
