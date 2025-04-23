@@ -208,7 +208,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         GameObject preferencesContainer = GM.BM.preferenceContainer;
 
         name.text = baseData.Name;
-        timeText.text = baseData.EffectDuration.ToString() + "s";
+        timeText.text = GM.Instance.DisplayFormattedTime(baseData.EffectDuration);
 
         foreach (Transform child in preferencesContainer.transform)
         {

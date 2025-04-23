@@ -87,8 +87,6 @@ public class BuildingManager : MonoBehaviour
             {
                 //InhabitantInstance capturedInhabitant = inhabitant;
                 btn.onClick.AddListener(() => BS_SelectInhabitant(btn, inhabitant));
-                Debug.Log("inhabitant: " + inhabitant.Name);
-                Debug.Log("inhabitant activity: " + inhabitant.isInActivity);
                 WorkingButton(btn.gameObject, inhabitant.isInActivity);
             }
         }
