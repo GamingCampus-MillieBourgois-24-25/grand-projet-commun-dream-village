@@ -22,10 +22,13 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  requiredArguments: []
+  requiredArguments:
+  - FIRST_VILLAGER_NAME
   dialogueType: 5
   dialogueCondition: 7
   tutorialType: 4
+  shouldHoldDialogues: 0
+  shouldGiveRareMoney: 0
   references:
     version: 2
     RefIds: []
