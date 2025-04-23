@@ -3,12 +3,15 @@ using LitMotion;
 using LitMotion.Extensions;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
+using System;
 
 public class DayNight : MonoBehaviour
 {
-    [SerializeField] private bool isDay;
+    [SerializeField] public bool isDay;
     
     [SerializeField] private TMP_Text timeText;
+    public float TimeRemaining = 0f;
 
     [Header("Light Parameters")]
     [SerializeField] private Light sun;
@@ -26,16 +29,25 @@ public class DayNight : MonoBehaviour
     [SerializeField] private float animationDuration;
 
     // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
         sun.color = isDay ? dayColor : nightColor;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
+
+        if (!isDay)
+        {
+            TimeSpan elapsedTime = System.DateTime.Now - GameManager.instance.GetLastTimeSaved();
+            TimeRemaining -= (float)elapsedTime.TotalSeconds;
+
+            StartCoroutine(StartWaitingTime());
+        }
     }
     
     public void ChangeTime()
     {
         isDay = !isDay;
+        TimeRemaining = 0f;
         RectTransform transform = curtain.GetComponent<RectTransform>();
         Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
         LMotion.Create(0, target.x, animationDuration)
@@ -102,5 +114,17 @@ public class DayNight : MonoBehaviour
 
         timeText.text = isDay ? "Day" : "Night";
 
+    }
+
+
+    IEnumerator StartWaitingTime()
+    {
+        TimeRemaining = 1500f;
+        while (TimeRemaining > 0)
+        {
+            TimeRemaining -= Time.deltaTime;
+            yield return null;
+        }
+        ChangeTime();
     }
 }
