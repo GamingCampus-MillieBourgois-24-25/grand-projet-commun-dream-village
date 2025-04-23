@@ -106,6 +106,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         expLevel = baseExpPerLevel;
         UpdateGoldText();
         UpdateStarText();
+        UpdateLevelText();
     }
 
     public void SetPlayerInfo()
@@ -123,7 +124,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
             return;
         }
         playerNameText.text = PlayerName;
-        levelText.text = Level.ToString();
+        UpdateLevelText();
         Debug.Log($"Player created: {PlayerName}, City: {CityName}");
 
         this.Save("PlayerData");
@@ -220,11 +221,17 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         }
     }
 
+    private void UpdateLevelText()
+    {
+        levelText.text = Level.ToString();
+    }
+
     private void CheckUnlockedItem()
     {
         LevelProgression.Level levelUnlockItem = levelProgression.GetLevel(Level);
-        if(levelUnlockItem.unlockable.Count != 0)
+        if(levelUnlockItem != null && levelUnlockItem.unlockable.Count != 0)
         {
+            levelUpItemContainer.gameObject.SetActive(true);
             Vector2 size = levelUpItemContainer.sizeDelta;
             size.x = levelUnlockItem.unlockable.Count * unlockedItemPrefab.gameObject.GetComponent<RectTransform>().rect.width +
                 levelUpItemContainer.gameObject.GetComponent<HorizontalLayoutGroup>().spacing * (levelUnlockItem.unlockable.Count - 1);
@@ -235,8 +242,11 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
                 GameObject unlockedItem = Instantiate(unlockedItemPrefab, levelUpItemContainer.transform);
                 unlockedItem.GetComponent<UnlockedItem>().SetItemContent(levelUnlockItem.unlockable[i].Icon, levelUnlockItem.unlockable[i].Name);
             }
+        } else
+        {
+            levelUpItemContainer.gameObject.SetActive(false);
         }
-        levelUpCanvas.SetActive(true);
+            levelUpCanvas.SetActive(true);
         RectTransform target = levelUpCanvas.transform.GetChild(0).GetComponent<RectTransform>();
         target.localScale = Vector3.zero;
 
