@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public GameObject inventoryPanel;
     public GameObject shopPanel;
 
-
     DateTime lastTimeSaved;
 
 

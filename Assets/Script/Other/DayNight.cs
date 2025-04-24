@@ -30,6 +30,8 @@ public class DayNight : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip dayMusic;
     [SerializeField] private AudioClip nightMusic;
+    [SerializeField] private AudioClip dayTransitionMusic;
+    [SerializeField] private AudioClip nightTransitionMusic;
     
     private Coroutine activityErrorCoroutine;
 
@@ -108,6 +110,8 @@ public class DayNight : MonoBehaviour
             });
         if(isDay)
         {
+            musicSource.clip = dayTransitionMusic;
+            musicSource.Play();
             GM.Cjm.CheckStatsAndHandleDeparture();
             GM.Cjm.CheckForHeartBonus();
             Debug.Log("Daytime: Checking stats and handling departure.");
@@ -129,6 +133,8 @@ public class DayNight : MonoBehaviour
         }
         else
         {
+            musicSource.clip = nightTransitionMusic;
+            musicSource.Play();
             LMotion.Create(0, target.x, animationDuration)
                 .WithEase(Ease.OutCubic)
                 .WithOnComplete(() =>
@@ -163,6 +169,7 @@ public class DayNight : MonoBehaviour
             });
 
         timeText.text = isDay ? "Night" : "Day";
+
         musicSource.clip = isDay ? dayMusic : nightMusic;
         musicSource.Play();
     }
