@@ -6,7 +6,6 @@ using TMPro;
 using Unity.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using UnityEngine.InputSystem;
 
 public class DialoguesInhabitant : MonoBehaviour
 {

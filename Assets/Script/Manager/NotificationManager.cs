@@ -86,16 +86,23 @@ public class NotificationManager
         launched = false; // Réinitialiser le flag de lancement
 
         CancelNotification(inactivityNotificationID); // Annuler la notification d'inactivité si elle existe
+        inactivityNotificationID = -1; // Réinitialiser l'ID de la notification d'inactivité
     }
 
 
     
     public static void CreateInactivityNotification()
     {
-        /*string title = "Where are you?";
+        if(inactivityNotificationID != -1)
+        {
+            CancelNotification(inactivityNotificationID); // Annuler la notification d'inactivité existante
+        }
+
+
+        string title = "Where are you?";
         string text = "Your residents miss you! Come back to make them dream!";
         float days = 15;
-        inactivityNotificationID = CreateNotification(title, text, days);*/
+        inactivityNotificationID = CreateNotification(title, text, days);
     }
     public static void LaunchNotifications()
     {
