@@ -14,12 +14,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         public List<InhabitantInstance.SavePartData> inhabitants = new List<InhabitantInstance.SavePartData>();
     }
 
-    public void Awake()
-    {
-        CreateInstanceofScriptable(GM.Instance.inhabitants[2], GameObject.Find("House1"));
-        CreateInstanceofScriptable(GM.Instance.inhabitants[0], GameObject.Find("House2"));
-    }
-
 
     public void CreateInstanceofScriptable<T>(T _item, GameObject _obj) where T : IScriptableElement
     {
@@ -89,29 +83,24 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
 
     public void Deserialize(SavePartData data)
     {
+        foreach (var inhabitantData in data.inhabitants)
+        {
+            GameObject house = GM.Instance.GetInhabitantByName(inhabitantData.baseInhabitantName).InstantiatePrefab;
+            GameObject houseInstanciate = Instantiate(house, Vector3.zero, house.transform.rotation);
 
+            InhabitantInstance loadedInhabitant = new InhabitantInstance();
+            loadedInhabitant.houseObject = houseInstanciate.GetComponent<HouseObject>();
+            loadedInhabitant.Deserialize(inhabitantData);
+
+            inhabitants.Add(loadedInhabitant);
+        }
         foreach (var buildingData in data.buildings)
         {
-            GameObject buildingInstanciate = Instantiate(GM.Instance.GetBuildingByName(buildingData.baseBuildingName).InstantiatePrefab, Vector3.zero, Quaternion.identity);
+            GameObject building = GM.Instance.GetBuildingByName(buildingData.baseBuildingName).InstantiatePrefab;
+            GameObject buildingInstanciate = Instantiate(building, Vector3.zero, building.transform.rotation);
 
             BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
             loadedBuilding.Deserialize(buildingData);
-            buildings.Add(loadedBuilding);
-        }
-        foreach (var inhabitantData in data.inhabitants)
-        {
-            //InhabitantInstance loadedInhabitant = new InhabitantInstance();
-            //loadedInhabitant.Deserialize(inhabitantData);
-            //inhabitants.Add(loadedInhabitant);
-            //baseInhabitants.Add(loadedInhabitant.baseData);
-        }
-
-        if (data.buildings.Count == 0)
-        {
-            GameObject buildingInstanciate = Instantiate(GM.Instance.GetBuildingByName("CoffeeShop").InstantiatePrefab, Vector3.zero, Quaternion.identity);
-            BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
-            buildingInstanciate.GetComponent<PlaceableObject>().OriginalPosition = new Vector3Int(0, 6, 0);
-            buildingInstanciate.GetComponent<PlaceableObject>().ResetPosition();
             buildings.Add(loadedBuilding);
         }
     }

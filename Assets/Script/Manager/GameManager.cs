@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public IsoManager isoManager;
     public CharacterJournalManager characterJournalManager;
     public BuildingManager buildingManager;
+    public DayNight dayNight;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -43,6 +44,9 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public class SavePartData : ISaveData
     {
         public DateTime lastTimeConnected;
+
+        public bool isDay;
+        public float timeRemainingNight;
     }
     #endregion
 
@@ -251,12 +255,18 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     {
         SavePartData data = new SavePartData();
         data.lastTimeConnected = lastTimeSaved;
+
+        data.isDay = dayNight.isDay;
+        data.timeRemainingNight = dayNight.TimeRemaining;
         return data;
     }
 
     public void Deserialize(SavePartData data)
     {
         lastTimeSaved = data.lastTimeConnected;
+
+        dayNight.isDay = data.isDay;
+        dayNight.TimeRemaining = data.timeRemainingNight;
     }
 
 
@@ -265,6 +275,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         SetActualTime();
         this.Save("GameManager");
         villageManager.Save("VillageManager");
+        player.Save("PlayerData");
     }
     #endregion
 }
@@ -274,6 +285,7 @@ public static class GM
     public static GameManager Instance => GameManager.instance;
     public static IsoManager IM => GameManager.instance.isoManager;
     public static VillageManager VM => GameManager.instance.villageManager;
+    public static DayNight DN => GameManager.instance.dayNight;
     public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
   
     public static GameObject DreamPanel => Instance.dreamPanel;
