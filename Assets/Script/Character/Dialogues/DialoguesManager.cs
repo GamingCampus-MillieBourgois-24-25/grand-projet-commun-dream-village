@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.Localization;
 using LitMotion.Extensions;
 using Unity.Collections;
+using UnityEngine.UI;
 
 public enum NosphyPosition
 {
@@ -46,6 +47,8 @@ public class DialoguesManager : MonoBehaviour
     public NosphyPosition nosphyPosition;
     [SerializeField] private GameObject nosphy;
     public bool isTop = false;
+    [SerializeField] private Sprite nosphySprite1;
+    [SerializeField] private Sprite nosphySprite2;
 
     private void Awake()
     {
@@ -99,9 +102,11 @@ public class DialoguesManager : MonoBehaviour
         {
             case NosphyPosition.Position1:
                 nosphy.gameObject.SetActive(true);
+                nosphy.GetComponent<Image>().sprite = nosphySprite1;
                 break;
             case NosphyPosition.Position2:
                 nosphy.gameObject.SetActive(true);
+                nosphy.GetComponent<Image>().sprite = nosphySprite2;
                 break;
             case NosphyPosition.Position3:
                 nosphy.gameObject.SetActive(false);

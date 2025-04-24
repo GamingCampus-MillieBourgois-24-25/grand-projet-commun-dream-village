@@ -29,6 +29,8 @@ MonoBehaviour:
   tutorialType: 0
   shouldHoldDialogues: 0
   shouldGiveRareMoney: 0
+  isDialogueBoxTop: 0
+  nosphyPosition: 2
   references:
     version: 2
     RefIds: []
