@@ -102,6 +102,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         villageManager.Load("VillageManager");
         player.Load("PlayerData");
+
+        NotificationManager.SetupNotifications();
     }
 
     public Inhabitant GetInhabitantByName(string name)
@@ -233,7 +235,10 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         if (!focus)
         {
             SaveGame();
+            NotificationManager.LaunchNotifications();
         }
+        else 
+            NotificationManager.CancelAllNotifications();
     }
 
     private void OnApplicationPause(bool pause)
@@ -241,12 +246,16 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         if(pause)
         {
             SaveGame();
+            NotificationManager.LaunchNotifications();
         }
+        else
+            NotificationManager.CancelAllNotifications();
     }
 
     private void OnApplicationQuit()
     {
         SaveGame();
+        NotificationManager.LaunchNotifications();
     }
     #endregion
 
