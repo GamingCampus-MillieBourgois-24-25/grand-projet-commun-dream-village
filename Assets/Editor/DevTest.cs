@@ -32,9 +32,9 @@ public class DevTest
         GM.Instance.player.RemoveFromInventory(GM.Instance.inhabitants[0], 1);
     }
 
-    [MenuItem("Tools/DevTest/SimFlouz")]
+    [MenuItem("Tools/DevTest/AddStars")]
     public static void AddSimflouz()
     {
-        GM.Instance.player.AddStar(1000);
+        GM.Instance.player.AddStar(2000);
     }
 }

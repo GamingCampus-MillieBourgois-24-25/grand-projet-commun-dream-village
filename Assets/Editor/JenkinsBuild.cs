@@ -8,11 +8,12 @@ public class JenkinsBuild
     public static void BuildAndroid()
     {
         string buildPath = "Builds/Android";
+
         string[] scenes = EditorBuildSettings.scenes
             .Where(scene => scene.enabled)
             .Select(scene => scene.path)
             .ToArray();
-
+      
         PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
 
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
