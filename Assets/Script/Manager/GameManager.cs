@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -196,6 +197,15 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         }
     }
 
+    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject)
+    {
+        int timeStars = int.Parse(starText.text);
+        if (player.CanSpendStar(timeStars)) {
+            player.SpendStar(timeStars);
+            buildingObject.FinishActivity();
+        }
+    }
+
     public bool IsPointerOverUIElement(Vector2 screenPosition)
     {
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
@@ -265,6 +275,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         SetActualTime();
         this.Save("GameManager");
         villageManager.Save("VillageManager");
+        player.Save("PlayerData");
     }
     #endregion
 }

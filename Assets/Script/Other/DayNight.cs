@@ -1,6 +1,5 @@
 using UnityEngine;
 using LitMotion;
-using LitMotion.Extensions;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
@@ -12,6 +11,12 @@ public class DayNight : MonoBehaviour
     
     [SerializeField] private TMP_Text timeText;
     public float TimeRemaining = 0f;
+    //[SerializeField] private TMP_Text timeText;
+    [SerializeField] private Image dayNightButton;
+    [SerializeField] private TMP_Text activityErrorText;
+
+    [SerializeField] private Sprite daySprite;
+    [SerializeField] private Sprite nightSprite;
 
     [Header("Light Parameters")]
     [SerializeField] private Light sun;
@@ -28,13 +33,19 @@ public class DayNight : MonoBehaviour
     [SerializeField] private RawImage curtain;
     [SerializeField] private float animationDuration;
 
+    [Header("Music Settings")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip dayMusic;
+    [SerializeField] private AudioClip nightMusic;
+    
+    private Coroutine activityErrorCoroutine;
+
     // Start is called before the first frame update
     private void Start()
     {
         sun.color = isDay ? dayColor : nightColor;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
-
         if (!isDay)
         {
             TimeSpan elapsedTime = System.DateTime.Now - GameManager.instance.GetLastTimeSaved();
@@ -42,10 +53,62 @@ public class DayNight : MonoBehaviour
 
             StartCoroutine(StartWaitingTime());
         }
+        dayNightButton.sprite = isDay ? nightSprite : daySprite;
     }
-    
+
+    private IEnumerator ShowActivityErrorText()
+    {
+        if (activityErrorText == null) yield break;
+
+        CanvasGroup canvasGroup = activityErrorText.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = activityErrorText.gameObject.AddComponent<CanvasGroup>();
+        }
+
+        activityErrorText.gameObject.SetActive(true);
+        canvasGroup.alpha = 1f;
+
+        yield return new WaitForSeconds(2f);
+
+        float duration = 0.5f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+            yield return null;
+        }
+
+        canvasGroup.alpha = 0f;
+        activityErrorText.gameObject.SetActive(false);
+    }
+
     public void ChangeTime()
     {
+        // Pour passer à la nuit
+        if (isDay)
+        {
+            foreach (InhabitantInstance inhabitant in GM.VM.inhabitants)
+            {
+                if (inhabitant.isInActivity) // Pas passer en mode nuit si un habitant est en activité
+                {
+                    if (activityErrorCoroutine != null)
+                    {
+                        StopCoroutine(activityErrorCoroutine);
+                    }
+                    activityErrorCoroutine = StartCoroutine(ShowActivityErrorText());
+                    return;
+                }
+            }
+        }
+        //Pour passer au jour
+        else
+        {
+            // attendre le temps de rêve
+        }
+        
         isDay = !isDay;
         TimeRemaining = 0f;
         RectTransform transform = curtain.GetComponent<RectTransform>();
@@ -57,6 +120,7 @@ public class DayNight : MonoBehaviour
                 var rect = transform.rect;
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
+
         if(isDay)
         {
             GM.Cjm.CheckStatsAndHandleDeparture();
@@ -112,7 +176,11 @@ public class DayNight : MonoBehaviour
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
 
-        timeText.text = isDay ? "Day" : "Night";
+        dayNightButton.sprite = isDay ? nightSprite : daySprite;
+        //timeText.text = isDay ? "Night" : "Day";
+
+        musicSource.clip = isDay ? dayMusic : nightMusic;
+        musicSource.Play();
 
     }
 
