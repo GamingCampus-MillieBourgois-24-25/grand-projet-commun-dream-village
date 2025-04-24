@@ -474,7 +474,7 @@ public class DreamMachineManager : MonoBehaviour
 
             totalGold += gold;
             totalXP += xp;
-            totalDreamMinute += 4f; // TODO : A changer 30 min
+            totalDreamMinute += 0.1f; // TODO : A changer 30 min
         }
 
         goldPreviewText.text = $"{totalGold} gold";
