@@ -265,6 +265,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         SetActualTime();
         this.Save("GameManager");
         villageManager.Save("VillageManager");
+        player.Save("PlayerData");
     }
     #endregion
 }

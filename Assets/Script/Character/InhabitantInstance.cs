@@ -125,6 +125,8 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
         public int hearts;
         public HashSet<InterestCategory> discoveredLikes = new();
         public HashSet<InterestCategory> discoveredDislikes = new();
+
+        public Vector3Int housePos;
     }
 
     public SavePartData Serialize()
@@ -141,6 +143,8 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
         data.discoveredLikes = DiscoveredLikes;
         data.discoveredDislikes = DiscoveredDislikes;
 
+        data.housePos = houseObject.GetComponent<PlaceableObject>().OriginalPosition;
+
         return data;
     }
 
@@ -153,5 +157,10 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
         Hearts = data.hearts;
         DiscoveredLikes = data.discoveredLikes;
         DiscoveredDislikes = data.discoveredDislikes;
+
+        houseObject.inhabitantInstance = this;
+
+        houseObject.GetComponent<PlaceableObject>().OriginalPosition = data.housePos;
+        houseObject.GetComponent<PlaceableObject>().ResetPosition();
     }
 }

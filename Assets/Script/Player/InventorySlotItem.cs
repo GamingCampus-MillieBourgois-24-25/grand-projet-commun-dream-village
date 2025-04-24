@@ -81,7 +81,8 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            GM.IM.SpawnInventoryItem(inventoryItem, hit.point);
+            GameObject obj = GM.IM.SpawnInventoryItem(inventoryItem, hit.point);
+            GM.VM.CreateInstanceofScriptable(inventoryItem, obj);
         }
         else
         {

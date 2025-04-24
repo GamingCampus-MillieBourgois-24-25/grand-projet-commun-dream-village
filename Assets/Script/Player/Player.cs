@@ -80,7 +80,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         data.currentXP = CurrentXP;
         
         data.star = star;
-        data.gold = star;
+        data.gold = gold;
 
         return data;
     }
@@ -104,6 +104,11 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     private void Start()
     {
         expLevel = baseExpPerLevel;
+        for(int i = 1; i < Level; i++)
+        {
+            expLevel = Mathf.RoundToInt(expLevel * multExp);
+        }
+
         UpdateGoldText();
         UpdateStarText();
         UpdateLevelText();
@@ -137,11 +142,15 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     public void SetGold(int value) {
         gold = Mathf.Max(0, value); // ne jamais avoir un solde négatif
         UpdateGoldText();
+
+        this.Save("PlayerData");
     } 
 
     public void AddGold(int amount) {
         gold += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
         UpdateGoldText();
+
+        this.Save("PlayerData");
     } 
     public bool CanSpendGold(int amount)
     {
@@ -157,6 +166,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         {
             gold -= amount;
             UpdateGoldText();
+
+            this.Save("PlayerData");
         }
     }
     private void UpdateGoldText()
@@ -169,12 +180,16 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     public void SetStar(int value) {
         star = Mathf.Max(0, value);
         UpdateStarText();
+
+        this.Save("PlayerData");
     } 
 
     public void AddStar(int amount)
     {
         star += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
         UpdateStarText();
+
+        this.Save("PlayerData");
     }
     public bool CanSpendStar(int amount)
     {
@@ -190,6 +205,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         {
             star -= amount;
             UpdateStarText();
+
+            this.Save("PlayerData");
         }
     }
 
