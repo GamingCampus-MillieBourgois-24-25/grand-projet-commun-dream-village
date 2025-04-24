@@ -3,11 +3,14 @@ using LitMotion;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class DayNight : MonoBehaviour
 {
-    [SerializeField] private bool isDay;
+    [SerializeField] public bool isDay;
     
+    [SerializeField] private TMP_Text timeText;
+    public float TimeRemaining = 0f;
     //[SerializeField] private TMP_Text timeText;
     [SerializeField] private Image dayNightButton;
     [SerializeField] private TMP_Text activityErrorText;
@@ -38,11 +41,18 @@ public class DayNight : MonoBehaviour
     private Coroutine activityErrorCoroutine;
 
     // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
         sun.color = isDay ? dayColor : nightColor;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
+        if (!isDay)
+        {
+            TimeSpan elapsedTime = System.DateTime.Now - GameManager.instance.GetLastTimeSaved();
+            TimeRemaining -= (float)elapsedTime.TotalSeconds;
+
+            StartCoroutine(StartWaitingTime());
+        }
         dayNightButton.sprite = isDay ? nightSprite : daySprite;
     }
 
@@ -100,6 +110,7 @@ public class DayNight : MonoBehaviour
         }
         
         isDay = !isDay;
+        TimeRemaining = 0f;
         RectTransform transform = curtain.GetComponent<RectTransform>();
         Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
         LMotion.Create(0, target.x, animationDuration)
@@ -171,5 +182,17 @@ public class DayNight : MonoBehaviour
         musicSource.clip = isDay ? dayMusic : nightMusic;
         musicSource.Play();
 
+    }
+
+
+    IEnumerator StartWaitingTime()
+    {
+        TimeRemaining = 1500f;
+        while (TimeRemaining > 0)
+        {
+            TimeRemaining -= Time.deltaTime;
+            yield return null;
+        }
+        ChangeTime();
     }
 }

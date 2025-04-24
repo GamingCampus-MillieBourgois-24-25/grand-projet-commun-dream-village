@@ -87,16 +87,6 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         }
     }
 
-    //private void Awake()
-    //{
-    //    SetupCanvas();
-    //}
-
-    //private void OnMouseDown()
-    //{
-    //    ClickOnBuiding();
-    //}
-
     public void ClickOnBuiding()
     {
         //Debug.Log("JE CLICK SUR LE BUILDING");
@@ -198,6 +188,8 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         // TODO : changer l'exp en fonction du building
         GM.Instance.player.AddXP(100);
         Destroy(remainingTimeUI);
+
+        GM.VM.Save("VillageManager");
     }
 
 
