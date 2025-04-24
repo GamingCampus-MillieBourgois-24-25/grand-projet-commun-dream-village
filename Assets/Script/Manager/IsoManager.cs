@@ -323,7 +323,7 @@ public class IsoManager : MonoBehaviour
         if (stockCanvas != null)
         {
             stockCanvas.transform.position = new Vector3(obj.transform.position.x, (obj.cachedRenderer.bounds.size.y ) + yStockCanvas, obj.transform.position.z);
-            Debug.Log(obj.cachedRenderer.bounds.size.y + " " + obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y + " " + ((obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y) + yStockCanvas));
+            //Debug.Log(obj.cachedRenderer.bounds.size.y + " " + obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y + " " + ((obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y) + yStockCanvas));
             stockCanvas.transform.SetParent(selectedObject.transform, worldPositionStays: true);
             stockCanvas.transform.rotation = Quaternion.Euler(0f, 45f, 0f);
             stockCanvas.gameObject.SetActive(true);
@@ -346,7 +346,6 @@ public class IsoManager : MonoBehaviour
 
     public bool HasSelectedObject()
     {
-        Debug.Log(isEditMode + "" + selectedObject);
         if (isEditMode && selectedObject != null)
         {
             return true;

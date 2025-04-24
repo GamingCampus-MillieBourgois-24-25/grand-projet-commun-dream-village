@@ -85,9 +85,8 @@ public class BuildingManager : MonoBehaviour
             Button btn = go.GetComponent<Button>();
             if (btn != null)
             {
-                InhabitantInstance capturedInhabitant = inhabitant;
-                btn.onClick.AddListener(() => BS_SelectInhabitant(btn, capturedInhabitant));
-
+                //InhabitantInstance capturedInhabitant = inhabitant;
+                btn.onClick.AddListener(() => BS_SelectInhabitant(btn, inhabitant));
                 WorkingButton(btn.gameObject, inhabitant.isInActivity);
             }
         }
