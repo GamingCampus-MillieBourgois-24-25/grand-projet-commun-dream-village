@@ -16,6 +16,7 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private ShopCategory shopCategory = ShopCategory.InhabitantCategory;
     [SerializeField] private GameObject itemPrefab;
+    private LevelProgression levelProgression;
 
 
     [Header("UI")]
@@ -28,6 +29,8 @@ public class Shop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelProgression = GM.Instance.gameObject.GetComponent<LevelProgression>();
+
         InitCategory(categoryContainers[0], GameManager.instance.inhabitants);
         InitCategory(categoryContainers[1], GameManager.instance.buildings);
         InitCategory(categoryContainers[2], GameManager.instance.decorations);

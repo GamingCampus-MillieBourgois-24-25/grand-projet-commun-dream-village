@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public TutorialsManager tutorialsManager;
     public AccessibilityOptions accessibilityOptions;
     public BuildingManager buildingManager;
+    public DayNight dayNight;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -49,6 +50,9 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public class SavePartData : ISaveData
     {
         public DateTime lastTimeConnected;
+
+        public bool isDay;
+        public float timeRemainingNight;
     }
     #endregion
 
@@ -104,6 +108,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         villageManager.Load("VillageManager");
         player.Load("PlayerData");
+
+        NotificationManager.SetupNotifications();
     }
 
     public Inhabitant GetInhabitantByName(string name)
@@ -199,6 +205,15 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         }
     }
 
+    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject)
+    {
+        int timeStars = int.Parse(starText.text);
+        if (player.CanSpendStar(timeStars)) {
+            player.SpendStar(timeStars);
+            buildingObject.FinishActivity();
+        }
+    }
+
     public bool IsPointerOverUIElement(Vector2 screenPosition)
     {
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
@@ -226,7 +241,10 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         if (!focus)
         {
             SaveGame();
+            NotificationManager.LaunchNotifications();
         }
+        else 
+            NotificationManager.CancelAllNotifications();
     }
 
     private void OnApplicationPause(bool pause)
@@ -234,12 +252,16 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         if(pause)
         {
             SaveGame();
+            NotificationManager.LaunchNotifications();
         }
+        else
+            NotificationManager.CancelAllNotifications();
     }
 
     private void OnApplicationQuit()
     {
         SaveGame();
+        NotificationManager.LaunchNotifications();
     }
     #endregion
 
@@ -248,12 +270,18 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     {
         SavePartData data = new SavePartData();
         data.lastTimeConnected = lastTimeSaved;
+
+        data.isDay = dayNight.isDay;
+        data.timeRemainingNight = dayNight.TimeRemaining;
         return data;
     }
 
     public void Deserialize(SavePartData data)
     {
         lastTimeSaved = data.lastTimeConnected;
+
+        dayNight.isDay = data.isDay;
+        dayNight.TimeRemaining = data.timeRemainingNight;
     }
 
 
@@ -262,6 +290,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         SetActualTime();
         this.Save("GameManager");
         villageManager.Save("VillageManager");
+        player.Save("PlayerData");
     }
     #endregion
 }
@@ -271,6 +300,7 @@ public static class GM
     public static GameManager Instance => GameManager.instance;
     public static IsoManager IM => GameManager.instance.isoManager;
     public static VillageManager VM => GameManager.instance.villageManager;
+    public static DayNight DN => GameManager.instance.dayNight;
     public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
     
     public static DialoguesManager Dm => GameManager.instance.dialoguesManager;
