@@ -13794,6 +13794,11 @@ PrefabInstance:
       objectReference: {fileID: 1705861469}
     - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}
+      propertyPath: dayNight
+      value: 
+      objectReference: {fileID: 1021904003}
+    - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
+        type: 3}
       propertyPath: shopPanel
       value: 
       objectReference: {fileID: 1576997161}
