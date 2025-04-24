@@ -17,6 +17,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     public bool IsUsed => isUsed;
 
     float timeRemaining = 0f;
+    int notificationID = -1;
 
     private GameObject remainingTimeUI;
     Coroutine waitingCoroutine = null;
@@ -31,6 +32,13 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         int lastWholeMinutes = Mathf.CeilToInt(timeRemaining / 60f);
         UpdateSkipText(lastWholeMinutes);
         AddBSSkipFunction();
+
+        if(notificationID == -1)
+        {
+            string title = baseData.Name + " is finished !";
+            string text = "Your " + baseData.Name + " is finished ! Come back !";
+            notificationID = NotificationManager.CreateNotification(title, text, timeRemaining);
+        }
 
         while (isUsed)
         {
@@ -190,6 +198,12 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         Destroy(remainingTimeUI);
 
         GM.VM.Save("VillageManager");
+
+        if (notificationID != -1)
+        {
+            NotificationManager.CancelNotification(notificationID);
+            notificationID = -1;
+        }
     }
 
 

@@ -17,14 +17,16 @@ MonoBehaviour:
   <InitialPrice>k__BackingField: 1500
   <InstantiatePrefab>k__BackingField: {fileID: 669072585116683299, guid: f9660f1ca0498a54e8ae7606dd8d657c,
     type: 3}
+  <MaxOwned>k__BackingField: 0
+  <UnlockedAtLvl>k__BackingField: 0
   <Description>k__BackingField: 
-  <EffectDuration>k__BackingField: 1800
+  <EffectDuration>k__BackingField: 30
   <AttributeEffects>k__BackingField:
   - <attribute>k__BackingField: {fileID: 11400000, guid: 7557c9e9f1dc06c498ae86fc236b1391,
       type: 2}
     <bonus>k__BackingField: 20
     <bonusType>k__BackingField: 1
+  <Experience>k__BackingField: 0
   <Mood>k__BackingField: 10
   <Serenity>k__BackingField: -5
   <Energy>k__BackingField: 10
-  <MaximumInInv>k__BackingField: 4
