@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartData>
 {
+    [SerializeField]
+    private Vector3 willithDefaultHousePosition = Vector3.zero;
     public List<InhabitantInstance> inhabitants { get; private set; } = new List<InhabitantInstance>();
     public List<BuildingObject> buildings { get; private set; } = new List<BuildingObject>();
 
@@ -98,7 +100,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         if(inhabitants.Count == 0)
         {
             GameObject house = GM.Instance.GetInhabitantByName("Willith Warm").InstantiatePrefab;
-            GameObject houseInstanciate = Instantiate(house, Vector3.zero, house.transform.rotation);
+            GameObject houseInstanciate = Instantiate(house, willithDefaultHousePosition, house.transform.rotation);
 
             CreateInstanceofScriptable(GM.Instance.GetInhabitantByName("Willith Warm"), houseInstanciate);
         }

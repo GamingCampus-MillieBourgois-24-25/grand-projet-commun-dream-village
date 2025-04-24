@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         public bool isDay;
         public float timeRemainingNight;
+
+        public Dictionary<InhabitantInstance, DisplayableDream> selectedDreamByInhabitant;
+        public Coroutine nightDreamTimeCoroutine;
     }
     #endregion
 
@@ -273,6 +276,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         data.isDay = dayNight.isDay;
         data.timeRemainingNight = dayNight.TimeRemaining;
+        data.selectedDreamByInhabitant = dreamMachineManager.selectedDreamByInhabitant;
+        data.nightDreamTimeCoroutine = dayNight.nightDreamTimeCoroutine;
         return data;
     }
 
@@ -282,6 +287,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         dayNight.isDay = data.isDay;
         dayNight.TimeRemaining = data.timeRemainingNight;
+        dreamMachineManager.selectedDreamByInhabitant = data.selectedDreamByInhabitant;
+        dayNight.nightDreamTimeCoroutine = data.nightDreamTimeCoroutine;
     }
 
 

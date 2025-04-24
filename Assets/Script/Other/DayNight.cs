@@ -48,7 +48,7 @@ public class DayNight : MonoBehaviour
         sun.color = isDay ? dayColor : nightColor;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
-        if (!isDay && TimeRemaining != 0f)
+        if (TimeRemaining != 0f)
         {
             TimeSpan elapsedTime = System.DateTime.Now - GameManager.instance.GetLastTimeSaved();
             TimeRemaining -= (float)elapsedTime.TotalSeconds;
@@ -199,15 +199,19 @@ public class DayNight : MonoBehaviour
         if (nightDreamTimeCoroutine == null)
         {
             timeContainer.SetActive(true);
-            while (TimeRemaining >= 0)
+            while (TimeRemaining > 1f)
             {
                 TimeRemaining -= Time.deltaTime;
                 timeText.text = GM.Instance.DisplayFormattedTime(TimeRemaining);
                 yield return null;
             }
-            GM.DMM.ApplySelectedDreams();
+
             nightDreamTimeCoroutine = null;
+            timeText.text = GM.Instance.DisplayFormattedTime(0f); // Assure l'affichage à 00:00
             ChangeTime(); // Day automatique
+
+            yield return new WaitForSeconds(1f);
+            GM.DMM.ApplySelectedDreams();
             timeContainer.SetActive(false);
         }
     }
