@@ -8,8 +8,12 @@ public class DayNight : MonoBehaviour
 {
     [SerializeField] private bool isDay;
     
-    [SerializeField] private TMP_Text timeText;
+    //[SerializeField] private TMP_Text timeText;
+    [SerializeField] private Image dayNightButton;
     [SerializeField] private TMP_Text activityErrorText;
+
+    [SerializeField] private Sprite daySprite;
+    [SerializeField] private Sprite nightSprite;
 
     [Header("Light Parameters")]
     [SerializeField] private Light sun;
@@ -39,6 +43,7 @@ public class DayNight : MonoBehaviour
         sun.color = isDay ? dayColor : nightColor;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
+        dayNightButton.sprite = isDay ? nightSprite : daySprite;
     }
 
     private IEnumerator ShowActivityErrorText()
@@ -104,6 +109,7 @@ public class DayNight : MonoBehaviour
                 var rect = transform.rect;
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
+
         if(isDay)
         {
             GM.Cjm.CheckStatsAndHandleDeparture();
@@ -159,7 +165,8 @@ public class DayNight : MonoBehaviour
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
 
-        timeText.text = isDay ? "Night" : "Day";
+        dayNightButton.sprite = isDay ? nightSprite : daySprite;
+        //timeText.text = isDay ? "Night" : "Day";
 
         musicSource.clip = isDay ? dayMusic : nightMusic;
         musicSource.Play();
