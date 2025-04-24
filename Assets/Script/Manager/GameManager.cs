@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public CharacterJournalManager characterJournalManager;
     public BuildingManager buildingManager;
     public DayNight dayNight;
+    public DreamMachineManager dreamMachineManager;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -287,7 +288,8 @@ public static class GM
     public static VillageManager VM => GameManager.instance.villageManager;
     public static DayNight DN => GameManager.instance.dayNight;
     public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
-  
+    public static DreamMachineManager DMM => GameManager.instance.dreamMachineManager;
+
     public static GameObject DreamPanel => Instance.dreamPanel;
     public static GameObject DayNightPanel => Instance.dayNightPanel;
     public static GameObject JournalPanel => Instance.journalPanel;

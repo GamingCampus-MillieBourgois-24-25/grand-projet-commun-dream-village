@@ -8,15 +8,16 @@ using System;
 public class DayNight : MonoBehaviour
 {
     [SerializeField] public bool isDay;
-    
-    [SerializeField] private TMP_Text timeText;
-    public float TimeRemaining = 0f;
-    //[SerializeField] private TMP_Text timeText;
-    [SerializeField] private Image dayNightButton;
-    [SerializeField] private TMP_Text activityErrorText;
 
     [SerializeField] private Sprite daySprite;
     [SerializeField] private Sprite nightSprite;
+    [SerializeField] private TMP_Text activityErrorText;
+
+    [Header("NightTimer")]
+    [SerializeField] private TMP_Text timeText;
+    [SerializeField] private GameObject timeContainer;
+    [SerializeField] private Image dayNightButton;
+    public float TimeRemaining = 0f;
 
     [Header("Light Parameters")]
     [SerializeField] private Light sun;
@@ -107,7 +108,11 @@ public class DayNight : MonoBehaviour
         //Pour passer au jour
         else
         {
-            // attendre le temps de rêve
+            if (nightDreamTimeCoroutine != null) // attendre le temps de rêve
+            {
+                return;
+            }
+            
         }
         
         isDay = !isDay;
@@ -121,8 +126,11 @@ public class DayNight : MonoBehaviour
                 var rect = transform.rect;
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
-
-        if(isDay)
+        if (timeContainer.activeSelf)
+        {
+            timeContainer.SetActive(false);
+        }
+        if (isDay)
         {
             GM.Cjm.CheckStatsAndHandleDeparture();
             GM.Cjm.CheckForHeartBonus();
@@ -188,11 +196,19 @@ public class DayNight : MonoBehaviour
 
     public IEnumerator StartWaitingTime()
     {
-        while (TimeRemaining > 0)
+        if (nightDreamTimeCoroutine == null)
         {
-            TimeRemaining -= Time.deltaTime;
-            yield return null;
+            timeContainer.SetActive(true);
+            while (TimeRemaining >= 0)
+            {
+                TimeRemaining -= Time.deltaTime;
+                timeText.text = GM.Instance.DisplayFormattedTime(TimeRemaining);
+                yield return null;
+            }
+            GM.DMM.ApplySelectedDreams();
+            nightDreamTimeCoroutine = null;
+            ChangeTime(); // Day automatique
+            timeContainer.SetActive(false);
         }
-        ChangeTime(); // Day automatique
     }
 }

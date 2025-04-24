@@ -347,6 +347,13 @@ public class DreamMachineManager : MonoBehaviour
         validateButton.interactable = allSelected;
     }
 
+    public void BS_ValidateSelectedDream()
+    {
+        GM.DreamPanel.SetActive(false);
+
+        GM.DN.TimeRemaining = totalDreamMinute * 60; //minutes to seconds
+        GM.DN.nightDreamTimeCoroutine = GM.DN.StartCoroutine(GM.DN.StartWaitingTime());
+    }
 
     public void ApplySelectedDreams()
     {
@@ -403,10 +410,6 @@ public class DreamMachineManager : MonoBehaviour
         DisplayDreams(dreamsByInhabitant[selectedInhabitants[currentIndex]]);
         
         GM.Cjm.DisplayInhabitant();
-        GM.DreamPanel.SetActive(false);
-
-        GM.DN.TimeRemaining = totalDreamMinute * 60; //minutes to seconds
-        GM.DN.StartWaitingTime();
 
         selectedInhabitants.Clear();
     }
@@ -469,7 +472,7 @@ public class DreamMachineManager : MonoBehaviour
 
             totalGold += gold;
             totalXP += xp;
-            totalDreamMinute += 30f;
+            totalDreamMinute += 0.1f; // TODO : A changer 30 min
         }
 
         goldPreviewText.text = $"{totalGold} gold";
