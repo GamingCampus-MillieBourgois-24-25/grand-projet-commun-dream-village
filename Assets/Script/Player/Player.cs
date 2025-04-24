@@ -68,6 +68,10 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         public int currentXP;
         public int gold;
         public int star;
+
+        public Dictionary<string, int> inhabitantsInventory = new();
+        public Dictionary<string, int> buildingsInventory = new();
+        public Dictionary<string, int> decorationsInventory = new();
     }
 
     public SavePartData Serialize()
@@ -81,6 +85,15 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         
         data.star = star;
         data.gold = gold;
+
+        foreach (var item in inhabitantsInventory)
+            data.inhabitantsInventory[item.Key.Name] = item.Value.quantity;
+
+        foreach (var item in buildingsInventory)
+            data.buildingsInventory[item.Key.Name] = item.Value.quantity;
+
+        foreach (var item in decorationsInventory)
+            data.decorationsInventory[item.Key.Name] = item.Value.quantity;
 
         return data;
     }
@@ -97,6 +110,33 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         
         star = data.star;
         gold = data.gold;
+
+        foreach (var inhabitantDic in data.inhabitantsInventory)
+        {
+            Inhabitant inhabitant = GM.Instance.GetInhabitantByName(inhabitantDic.Key);
+            if (inhabitant != null)
+            {
+                AddToInventory(inhabitant, inhabitantDic.Value);
+            }
+        }
+
+        foreach (var buildingDic in data.buildingsInventory)
+        {
+            Building building = GM.Instance.GetBuildingByName(buildingDic.Key);
+            if (building != null)
+            {
+                AddToInventory(building, buildingDic.Value);
+            }
+        }
+
+        foreach (var decorationDic in data.decorationsInventory)
+        {
+            Decoration decoration = GM.Instance.GetDecorationByName(decorationDic.Key);
+            if (decoration != null)
+            {
+                AddToInventory(decoration, decorationDic.Value);
+            }
+        }
     }
     #endregion
 
@@ -354,6 +394,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
                     break;
             }
             Debug.Log($"Added {amount} of {item} to inventory.");
+            this.Save("PlayerData");
         }
     }
 
@@ -392,6 +433,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
                 }
                 Debug.Log($"Removed {amount} of {item.name} from inventory.");
                 return true;
+                this.Save("PlayerData");
             }
         }
         return false;
