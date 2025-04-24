@@ -94,6 +94,17 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
 
             inhabitants.Add(loadedInhabitant);
         }
+
+        if(inhabitants.Count == 0)
+        {
+            GameObject house = GM.Instance.GetInhabitantByName("Willith Warm").InstantiatePrefab;
+            GameObject houseInstanciate = Instantiate(house, Vector3.zero, house.transform.rotation);
+
+            CreateInstanceofScriptable(GM.Instance.GetInhabitantByName("Willith Warm"), houseInstanciate);
+        }
+
+
+
         foreach (var buildingData in data.buildings)
         {
             GameObject building = GM.Instance.GetBuildingByName(buildingData.baseBuildingName).InstantiatePrefab;

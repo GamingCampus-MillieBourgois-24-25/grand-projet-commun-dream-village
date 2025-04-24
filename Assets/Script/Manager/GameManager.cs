@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -87,22 +86,27 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         {
             inhabitants.Add(inhabitant);
         }
+        inhabitants.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort inhabitants by name
         // Load all buildings
         Building[] allBuildings = Resources.LoadAll<Building>("ScriptableObject/Buildings");
         foreach (Building building in allBuildings)
         {
             buildings.Add(building);
         }
+        buildings.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort buildings by name
         // Load all decorations
         Decoration[] allDecorations = Resources.LoadAll<Decoration>("ScriptableObject/Decorations");
         foreach (Decoration decoration in allDecorations)
         {
             decorations.Add(decoration);
         }
+        decorations.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort decorations by name
 
 
         villageManager.Load("VillageManager");
         player.Load("PlayerData");
+
+        NotificationManager.SetupNotifications();
     }
 
     public Inhabitant GetInhabitantByName(string name)
@@ -234,7 +238,11 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         if (!focus)
         {
             SaveGame();
+            NotificationManager.CreateInactivityNotification();
+            NotificationManager.LaunchNotifications();
         }
+        else 
+            NotificationManager.CancelAllNotifications();
     }
 
     private void OnApplicationPause(bool pause)
@@ -242,12 +250,18 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         if(pause)
         {
             SaveGame();
+            NotificationManager.CreateInactivityNotification();
+            NotificationManager.LaunchNotifications();
         }
+        else
+            NotificationManager.CancelAllNotifications();
     }
 
     private void OnApplicationQuit()
     {
         SaveGame();
+        NotificationManager.CreateInactivityNotification();
+        NotificationManager.LaunchNotifications();
     }
     #endregion
 
