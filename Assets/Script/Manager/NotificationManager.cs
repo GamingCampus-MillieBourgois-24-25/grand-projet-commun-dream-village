@@ -21,6 +21,8 @@ public class NotificationManager
         EnableVibration = true,
     };
 
+    static bool launched = false;
+
 
 
 
@@ -77,10 +79,15 @@ public class NotificationManager
     {
         AndroidNotificationCenter.CancelAllDisplayedNotifications();
         AndroidNotificationCenter.CancelAllScheduledNotifications();
+        launched = false; // Réinitialiser le flag de lancement
     }
 
     public static void LaunchNotifications()
     {
+        if (launched)
+            return;
+
+        launched = true; // Indiquer que les notifications ont été lancées
         foreach (var kvp in androidNotifications)
         {
             AndroidNotification notification = kvp.Value; // Récupérer la notification
