@@ -96,10 +96,10 @@ public class NotificationManager
     
     public static void CreateInactivityNotification()
     {
-        string title = "Where are you?";
+        /*string title = "Where are you?";
         string text = "Your residents miss you! Come back to make them dream!";
-        int days = 3;
-        inactivityNotificationID = CreateNotification(title, text, days);
+        float days = 15;
+        inactivityNotificationID = CreateNotification(title, text, days);*/
     }
     public static void LaunchNotifications()
     {
