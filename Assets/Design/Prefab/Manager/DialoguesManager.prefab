@@ -48,10 +48,82 @@ MonoBehaviour:
   localizedArguments:
   - name: PLAYER_NAME
     value: 
+    localizedValue:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   - name: VILLAGE_NAME
     value: 
+    localizedValue:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   - name: FIRST_VILLAGER_NAME
     value: Willith Warm
+    localizedValue:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - name: FIRST_STAT
+    value: 
+    localizedValue:
+      m_TableReference:
+        m_TableCollectionName: GUID:237bcc55320b2ff4a872398eb2b6a9bc
+      m_TableEntryReference:
+        m_KeyId: 4587220992
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - name: SECOND_STAT
+    value: 
+    localizedValue:
+      m_TableReference:
+        m_TableCollectionName: GUID:237bcc55320b2ff4a872398eb2b6a9bc
+      m_TableEntryReference:
+        m_KeyId: 6801813504
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - name: THIRD_STAT
+    value: 
+    localizedValue:
+      m_TableReference:
+        m_TableCollectionName: GUID:237bcc55320b2ff4a872398eb2b6a9bc
+      m_TableEntryReference:
+        m_KeyId: 9721049088
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - name: STAT_LEAVING
+    value: 0
+    localizedValue:
+      m_TableReference:
+        m_TableCollectionName: GUID:237bcc55320b2ff4a872398eb2b6a9bc
+      m_TableEntryReference:
+        m_KeyId: 9721049088
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  isTextAnimationActive: 0
   textAnimationSettings:
     startValue:
       utf8LengthInBytes: 0
@@ -1251,4 +1323,6 @@ MonoBehaviour:
   dialogueCanvas: {fileID: 0}
   dialogueBox: {fileID: 0}
   dialogueText: {fileID: 0}
-  debugDialogue: {fileID: 11400000, guid: 99a53ab7b83e7d741bfa82352b651904, type: 2}
+  references:
+    version: 2
+    RefIds: []

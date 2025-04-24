@@ -23,8 +23,10 @@ public class TutorialsManager : MonoBehaviour
     public bool isPlayerCreated = false;
     public bool holdDialogues = false;
     public bool isHouseTutorialAlreadyPlayed = false;
+    public int nosphyPosition = 0;
     
     [Header("Tutorials State")]
+    public bool inIntroductionTutorial = false;
     public bool inActivityTutorial = false;
     public bool inDreamTutorial = false;
     public bool inShopTutorial = false;
@@ -66,27 +68,13 @@ public class TutorialsManager : MonoBehaviour
         
         StartCoroutine(DisplayTutorialDialogues(dialogues));
     }
-
-    private void IntroductionTutorial()
-    {
-        if (GM.Instance.isPlayerCreated) return;
-        
-        GM.Instance.mainUiCanvas.SetActive(false);
-        playerFormCanvas.SetActive(false);
-        
-        List<Dialogues> introDialogues = dialoguesManager.GetDialogues()
-            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Introduction)
-            .ToList();
-        
-        introDialogues.Sort((x, y) => string.Compare(x.GetID(), y.GetID(), StringComparison.Ordinal));
-        
-        StartCoroutine(DisplayTutorialDialogues(introDialogues));
-    }
     
     private IEnumerator DisplayTutorialDialogues(List<Dialogues> dialogues)
     {
         foreach (Dialogues dialogue in dialogues)
         {
+            SetCurrentTutorial(dialogue.GetTutorialType());
+            
             skipDialogue = false;
             
             dialoguesManager.DisplayDialogue(dialogue);
@@ -99,32 +87,9 @@ public class TutorialsManager : MonoBehaviour
             {
                 holdDialogues = true;
 
-                switch (dialogue.GetTutorialType())
+                if (dialogue.GetTutorialType() == Dialogues.TutorialType.None)
                 {
-                    case Dialogues.TutorialType.None:
-                        playerFormCanvas.SetActive(true);
-                        break;
-                    case Dialogues.TutorialType.House:
-                        inHouseTutorial = true;
-                        break;
-                    case Dialogues.TutorialType.Dream:
-                        inDreamTutorial = true;
-                        break;
-                    case Dialogues.TutorialType.Activity:
-                        inActivityTutorial = true;
-                        break;
-                    case Dialogues.TutorialType.Shop:
-                        inShopTutorial = true;
-                        break;
-                    case Dialogues.TutorialType.Edit:
-                        inEditTutorial = true;
-                        break;
-                    case Dialogues.TutorialType.Heart:
-                        inHeartTutorial = true;
-                        break;
-                    default:
-                        
-                        break;
+                    playerFormCanvas.SetActive(true);
                 }
                 
                 if (dialogue.GetTutorialType() != Dialogues.TutorialType.None) mainUi.SetActive(true);
@@ -138,12 +103,49 @@ public class TutorialsManager : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
-
             
         }
 
         dialoguesManager.HideDialogue();
         GM.Instance.mainUiCanvas.SetActive(true);
+    }
+
+    private void SetCurrentTutorial(Dialogues.TutorialType type)
+    {
+        inIntroductionTutorial = false;
+        inHouseTutorial = false;
+        inDreamTutorial = false;
+        inActivityTutorial = false;
+        inShopTutorial = false;
+        inEditTutorial = false;
+        inHeartTutorial = false;
+
+        switch (type)
+        {
+            case Dialogues.TutorialType.None:
+                inIntroductionTutorial = true;
+                break;
+            case Dialogues.TutorialType.House:
+                inHouseTutorial = true;
+                break;
+            case Dialogues.TutorialType.Dream:
+                inDreamTutorial = true;
+                break;
+            case Dialogues.TutorialType.Activity:
+                inActivityTutorial = true;
+                break;
+            case Dialogues.TutorialType.Shop:
+                inShopTutorial = true;
+                break;
+            case Dialogues.TutorialType.Edit:
+                inEditTutorial = true;
+                break;
+            case Dialogues.TutorialType.Heart:
+                inHeartTutorial = true;
+                break;
+            default:
+                break;
+        }
     }
 
     public void UnHold(int value)
@@ -155,7 +157,6 @@ public class TutorialsManager : MonoBehaviour
 
     public void UnHoldDialogues()
     {
-        Debug.Log("Unhold dialogues");
         holdDialogues = false;
     }
     
@@ -163,17 +164,6 @@ public class TutorialsManager : MonoBehaviour
     {
         isPlayerCreated = true;
         playerFormCanvas.SetActive(false);
-    }
-
-    public void GetTutoDialogues(Dialogues.TutorialType type)
-    {
-        List<Dialogues> introDialogues = dialoguesManager.GetDialogues()
-            .Where(dialogue => dialogue.GetTutorialType() == type)
-            .ToList();
-        
-        introDialogues.Sort((x, y) => string.Compare(x.GetID(), y.GetID(), StringComparison.Ordinal));
-        
-        StartCoroutine(DisplayTutorialDialogues(introDialogues));
     }
 
     public void SkipDialogue()
@@ -185,56 +175,34 @@ public class TutorialsManager : MonoBehaviour
         
         skipDialogue = true;
     }
-
-    public void UnHoldHouseTuto(int value)
+    
+    public void SkipTutorial()
     {
-        if (!inHouseTutorial && value != currentTutorialID) return;
+        if (inIntroductionTutorial) return;
         
-        UnHoldDialogues();
+        dialoguesManager.HideDialogue();
+        StopCoroutine(DisplayTutorialDialogues(null));
+        
+        inActivityTutorial = false;
+        inDreamTutorial = false;
+        inShopTutorial = false;
+        inEditTutorial = false;
+        inHeartTutorial = false;
+        inHouseTutorial = false;
     }
     
-    public void UnHoldDreamTuto(int value)
+    // ------------------------------------------ DEBUG ------------------------------------------
+    
+    public void GetTutoDialogues(Dialogues.TutorialType type)
     {
-        if (!inDreamTutorial && value != currentTutorialID) return;
+        List<Dialogues> introDialogues = dialoguesManager.GetDialogues()
+            .Where(dialogue => dialogue.GetTutorialType() == type)
+            .ToList();
         
-        UnHoldDialogues();
-    }
-    
-    public void UnHoldActivityTuto(int value)
-    {
-        if (!inActivityTutorial && value != currentTutorialID) return;
+        introDialogues.Sort((x, y) => string.Compare(x.GetID(), y.GetID(), StringComparison.Ordinal));
         
-        UnHoldDialogues();
+        StartCoroutine(DisplayTutorialDialogues(introDialogues));
     }
-    
-    public void UnHoldShopTuto(int value)
-    {
-        if (!inShopTutorial && value != currentTutorialID) return;
-        
-        UnHoldDialogues();
-    }
-    
-    public void UnHoldEditTuto(int value)
-    {
-        if (!inEditTutorial && value != currentTutorialID) return;
-        
-        UnHoldDialogues();
-    }
-    
-    public void UnHoldHeartTuto(int value)
-    {
-        if (!inHeartTutorial && value != currentTutorialID) return;
-        
-        UnHoldDialogues();
-    }
-    
-    
-    
-    
-    
-    
-    
-    
     
     [MenuItem("Tools/Tutorials/PlayAllTuto")]
     public static void PlayAllTuto()
