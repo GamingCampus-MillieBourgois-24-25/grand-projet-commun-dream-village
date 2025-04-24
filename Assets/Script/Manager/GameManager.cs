@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
 
     DateTime lastTimeSaved;
-
+    Dictionary<string, DisplayableDream> selectedDreamByInhabitantTemp;
 
     #region save Data
     [System.Serializable]
@@ -48,8 +48,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         public bool isDay;
         public float timeRemainingNight;
 
-        public Dictionary<InhabitantInstance, DisplayableDream> selectedDreamByInhabitant;
-        public Coroutine nightDreamTimeCoroutine;
+        public Dictionary<string, DisplayableDream> selectedDreamByInhabitant;
     }
     #endregion
 
@@ -108,6 +107,18 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         villageManager.Load("VillageManager");
         player.Load("PlayerData");
+
+        // Load all dream
+        dreamMachineManager.selectedDreamByInhabitant = new Dictionary<InhabitantInstance, DisplayableDream>();
+        foreach (var kvp in selectedDreamByInhabitantTemp)
+        {
+            InhabitantInstance inhabitant = villageManager.GetInhabitant(GetInhabitantByName(kvp.Key));
+            if (inhabitant != null)
+            {
+                DisplayableDream displayableDream = kvp.Value;
+                dreamMachineManager.selectedDreamByInhabitant.Add(inhabitant, displayableDream);
+            }
+        }
 
         NotificationManager.SetupNotifications();
     }
@@ -276,8 +287,15 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         data.isDay = dayNight.isDay;
         data.timeRemainingNight = dayNight.TimeRemaining;
-        data.selectedDreamByInhabitant = dreamMachineManager.selectedDreamByInhabitant;
-        data.nightDreamTimeCoroutine = dayNight.nightDreamTimeCoroutine;
+
+
+        data.selectedDreamByInhabitant = new ();
+        foreach (var kpd in dreamMachineManager.selectedDreamByInhabitant)
+        {
+            data.selectedDreamByInhabitant.Add(kpd.Key.Name, kpd.Value);
+        }
+
+
         return data;
     }
 
@@ -287,8 +305,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         dayNight.isDay = data.isDay;
         dayNight.TimeRemaining = data.timeRemainingNight;
-        dreamMachineManager.selectedDreamByInhabitant = data.selectedDreamByInhabitant;
-        dayNight.nightDreamTimeCoroutine = data.nightDreamTimeCoroutine;
+
+        selectedDreamByInhabitantTemp = data.selectedDreamByInhabitant;
     }
 
 
