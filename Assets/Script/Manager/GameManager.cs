@@ -237,6 +237,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         if (!focus)
         {
             SaveGame();
+            NotificationManager.CreateInactivityNotification();
             NotificationManager.LaunchNotifications();
         }
         else 
@@ -248,6 +249,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         if(pause)
         {
             SaveGame();
+            NotificationManager.CreateInactivityNotification();
             NotificationManager.LaunchNotifications();
         }
         else
@@ -257,6 +259,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     private void OnApplicationQuit()
     {
         SaveGame();
+        NotificationManager.CreateInactivityNotification();
         NotificationManager.LaunchNotifications();
     }
     #endregion
