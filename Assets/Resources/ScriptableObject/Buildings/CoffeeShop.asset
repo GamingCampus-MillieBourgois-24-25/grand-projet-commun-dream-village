@@ -17,8 +17,8 @@ MonoBehaviour:
   <InitialPrice>k__BackingField: 1500
   <InstantiatePrefab>k__BackingField: {fileID: 669072585116683299, guid: f9660f1ca0498a54e8ae7606dd8d657c,
     type: 3}
-  <MaxOwned>k__BackingField: 0
-  <UnlockedAtLvl>k__BackingField: 0
+  <MaxOwned>k__BackingField: 4
+  <UnlockedAtLvl>k__BackingField: 3
   <Description>k__BackingField: 
   <EffectDuration>k__BackingField: 30
   <AttributeEffects>k__BackingField:

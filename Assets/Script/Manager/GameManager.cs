@@ -85,18 +85,21 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         {
             inhabitants.Add(inhabitant);
         }
+        inhabitants.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort inhabitants by name
         // Load all buildings
         Building[] allBuildings = Resources.LoadAll<Building>("ScriptableObject/Buildings");
         foreach (Building building in allBuildings)
         {
             buildings.Add(building);
         }
+        buildings.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort buildings by name
         // Load all decorations
         Decoration[] allDecorations = Resources.LoadAll<Decoration>("ScriptableObject/Decorations");
         foreach (Decoration decoration in allDecorations)
         {
             decorations.Add(decoration);
         }
+        decorations.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort decorations by name
 
 
         villageManager.Load("VillageManager");
