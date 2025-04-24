@@ -52,8 +52,8 @@ public class Dialogues : ScriptableObject
     
     [SerializeField] private bool shouldHoldDialogues = false;
     [SerializeField] private bool shouldGiveRareMoney = false;
-    [SerializeField] private bool hideNosphy = false;
-    
+    [SerializeField] private bool isDialogueBoxTop = false;
+    [SerializeField] private NosphyPosition nosphyPosition;
     
     public string GetID()
     {
@@ -105,8 +105,13 @@ public class Dialogues : ScriptableObject
         return shouldGiveRareMoney;
     }
     
-    public bool ShouldHideNosphy()
+    public bool IsDialogueBoxTop()
     {
-        return hideNosphy;
+        return isDialogueBoxTop;
+    }
+    
+    public NosphyPosition GetNosphyPosition()
+    {
+        return nosphyPosition;
     }
 }

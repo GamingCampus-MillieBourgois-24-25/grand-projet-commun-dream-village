@@ -5,15 +5,22 @@ using LitMotion;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Localization;
-using UnityEngine.Serialization;
-using LitMotion;
 using LitMotion.Extensions;
 using Unity.Collections;
+
+public enum NosphyPosition
+{
+    Position1,
+    Position2,
+    Position3,
+}
 
 public class DialoguesManager : MonoBehaviour
 {
 
     [SerializeField] private List<Dialogues> dialogues = new();
+    
+
     
     [Serializable]
     public struct DictStrings
@@ -32,7 +39,13 @@ public class DialoguesManager : MonoBehaviour
 
     [Header("UI Elements")] public GameObject dialogueCanvas;
     public GameObject dialogueBox;
+    public GameObject dialogueSkip;
+    public GameObject topDialogueBoxPosition;
+    public GameObject bottomDialogueBoxPosition;
     public TMP_Text dialogueText;
+    public NosphyPosition nosphyPosition;
+    [SerializeField] private GameObject nosphy;
+    public bool isTop = false;
 
     private void Awake()
     {
@@ -80,6 +93,24 @@ public class DialoguesManager : MonoBehaviour
 
     public void DisplayDialogue(Dialogues dialogue)
     {
+        isTop = dialogue.IsDialogueBoxTop();
+
+        switch (dialogue.GetNosphyPosition())
+        {
+            case NosphyPosition.Position1:
+                nosphy.gameObject.SetActive(true);
+                break;
+            case NosphyPosition.Position2:
+                nosphy.gameObject.SetActive(true);
+                break;
+            case NosphyPosition.Position3:
+                nosphy.gameObject.SetActive(false);
+                break;
+            default:
+                nosphy.gameObject.SetActive(true);
+                break;
+        }
+        
         LocalizedString localized = dialogue.GetLocalizedString();
         localized.Arguments = null;
 
@@ -98,6 +129,8 @@ public class DialoguesManager : MonoBehaviour
     {
         dialogueCanvas.SetActive(true);
         dialogueBox.SetActive(true);
+        dialogueBox.transform.localPosition = isTop ? topDialogueBoxPosition.transform.localPosition : bottomDialogueBoxPosition.transform.localPosition;
+        dialogueSkip.transform.localPosition = isTop ? new Vector3(525, -200, 0) : new Vector3(525, 200, 0);
         
         float textSpeed = GM.Ao.CurrentTextSpeedStruct.TextSpeed;
         

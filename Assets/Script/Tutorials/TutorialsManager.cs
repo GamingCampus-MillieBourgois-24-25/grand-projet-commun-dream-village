@@ -8,29 +8,21 @@ using UnityEngine;
 
 public class TutorialsManager : MonoBehaviour
 {
-    public enum NosphyPosition
-    {
-        Position1,
-        Position2,
-        Position3,
-    }
-    
     private Player player;
     private DialoguesManager dialoguesManager;
     
     [Header("Tutorials UI")]
     [SerializeField] private GameObject playerFormCanvas;
     [SerializeField] private GameObject mainUi;
-    [SerializeField] private GameObject nosphy;
+
+    [Header("Tutorials variables")] 
     
-    [Header("Tutorials variables")]
     public bool skipDialogue = false;
     public float dialoguesTargetDisplayTime;
     public float dialoguesDisplayTime;
     public bool isPlayerCreated = false;
     public bool holdDialogues = false;
     public bool isHouseTutorialAlreadyPlayed = false;
-    public NosphyPosition nosphyPosition;
     
     [Header("Tutorials State")]
     public bool inIntroductionTutorial = false;
@@ -88,15 +80,6 @@ public class TutorialsManager : MonoBehaviour
             float textSpeed = dialoguesDisplayTime + GM.Ao.CurrentTextSpeedStruct.TextSpeed + dif;
             
             currentTutorialID = dialogue.GetTutorialID();
-
-            if (dialogue.ShouldHideNosphy())
-            {
-                nosphy.SetActive(false);
-            }
-            else
-            {
-                nosphy.SetActive(true);
-            }
 
             if (dialogue.ShouldHoldDialogues())
             {

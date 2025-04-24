@@ -1457,6 +1457,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 790240316}
+    - target: {fileID: 2586697576037922455, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586697576037922455, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586697576037922455, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 5613725209329420874, guid: 86c2440593a799147abfe91ada691d3e,
         type: 3}
       propertyPath: m_Name
@@ -1467,6 +1482,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1843310449}
+    - target: {fileID: 7891484329248695394, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7891484329248695394, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7891484329248695394, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1531,6 +1561,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6045927367610473379, guid: 347949cc3269f6547a4740123c16bc69,
     type: 3}
   m_PrefabInstance: {fileID: 1424004724}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &173631062 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 323321165396049674, guid: 86c2440593a799147abfe91ada691d3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 147700994}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &201704219 stripped
 GameObject:
@@ -7754,9 +7790,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
         type: 3}
+      propertyPath: nosphy
+      value: 
+      objectReference: {fileID: 173631062}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
       propertyPath: dialogueBox
       value: 
       objectReference: {fileID: 147700997}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: dialogueSkip
+      value: 
+      objectReference: {fileID: 1029867492}
     - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
         type: 3}
       propertyPath: dialogueText
@@ -7767,6 +7813,26 @@ PrefabInstance:
       propertyPath: dialogueCanvas
       value: 
       objectReference: {fileID: 147700998}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: topDialogueBoxPosition
+      value: 
+      objectReference: {fileID: 985024403}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: topDialogueBoxPosition.y
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: bottomDialogueBoxPosition
+      value: 
+      objectReference: {fileID: 1347878657}
+    - target: {fileID: 7520578777432815672, guid: 2eb96c2eef63f0647a4f93221f7d3349,
+        type: 3}
+      propertyPath: bottomDialogueBoxPosition.y
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 7773874029115950907, guid: 2eb96c2eef63f0647a4f93221f7d3349,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8184,6 +8250,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1401959904}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &985024403 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7498529769195791016, guid: 86c2440593a799147abfe91ada691d3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 147700994}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1006139104 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2745071312370223761, guid: 721dba7f516ffdd41af74044c52f92de,
@@ -8514,6 +8586,12 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.029000001, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &1029867492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4969411820507032139, guid: 86c2440593a799147abfe91ada691d3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 147700994}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1073567450 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3635166444764419341, guid: 721dba7f516ffdd41af74044c52f92de,
@@ -9779,6 +9857,12 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.029000001, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &1347878657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3071391133110397999, guid: 86c2440593a799147abfe91ada691d3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 147700994}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1362413580 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2668893877198285744, guid: 721dba7f516ffdd41af74044c52f92de,
