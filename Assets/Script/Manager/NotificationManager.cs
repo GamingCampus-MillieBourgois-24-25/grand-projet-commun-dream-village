@@ -85,11 +85,7 @@ public class NotificationManager
         AndroidNotificationCenter.CancelAllScheduledNotifications();
         launched = false; // Réinitialiser le flag de lancement
 
-        if (inactivityNotificationID != -1 && androidNotifications.ContainsKey(inactivityNotificationID))
-        {
-            androidNotifications.Remove(inactivityNotificationID);
-            inactivityNotificationID = -1; // Réinitialiser l'ID de la notification d'inactivité
-        }
+        CancelNotification(inactivityNotificationID); // Annuler la notification d'inactivité si elle existe
     }
 
 
