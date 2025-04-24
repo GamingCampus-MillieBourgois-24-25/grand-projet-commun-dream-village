@@ -8041,6 +8041,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3832973176699877064, guid: 2804beddd0a55024aadb6f1a04a8dece,
         type: 3}
+      propertyPath: dayNightButton
+      value: 
+      objectReference: {fileID: 1401959908}
+    - target: {fileID: 3832973176699877064, guid: 2804beddd0a55024aadb6f1a04a8dece,
+        type: 3}
       propertyPath: nightRotation.y
       value: 75
       objectReference: {fileID: 0}
@@ -11792,6 +11797,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1401959908 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4851111533028828330, guid: 9bec3195043d1214db1a10fe7222fefa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401959904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272313839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1409547330 stripped
