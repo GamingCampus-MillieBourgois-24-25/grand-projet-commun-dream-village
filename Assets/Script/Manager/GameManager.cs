@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         public bool isDay;
         public float timeRemainingNight;
 
-        public Dictionary<string, DisplayableDream> selectedDreamByInhabitant;
+        public Dictionary<string, DisplayableDream.SavePartData> selectedDreamByInhabitant;
     }
     #endregion
 
@@ -292,7 +292,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         data.selectedDreamByInhabitant = new ();
         foreach (var kpd in dreamMachineManager.selectedDreamByInhabitant)
         {
-            data.selectedDreamByInhabitant.Add(kpd.Key.Name, kpd.Value);
+            data.selectedDreamByInhabitant.Add(kpd.Key.Name, kpd.Value.Serialize());
         }
 
 
@@ -306,7 +306,13 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         dayNight.isDay = data.isDay;
         dayNight.TimeRemaining = data.timeRemainingNight;
 
-        selectedDreamByInhabitantTemp = data.selectedDreamByInhabitant;
+        selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
+        foreach (var kvp in data.selectedDreamByInhabitant)
+        {
+            DisplayableDream displayableDream = new DisplayableDream();
+            displayableDream.Deserialize(kvp.Value);
+            selectedDreamByInhabitantTemp.Add(kvp.Key, displayableDream);
+        }
     }
 
 

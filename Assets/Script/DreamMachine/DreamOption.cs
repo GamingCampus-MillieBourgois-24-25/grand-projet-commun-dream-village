@@ -1,5 +1,13 @@
-public class DreamOption
+public class DreamOption : ISaveable<DreamOption.SavePartData>
 {
+    public class SavePartData : ISaveData
+    {
+        public string positiveElement;
+        public string negativeElement;
+        public string randomElement;
+    }
+
+
     public InterestCategory positiveElement;
     public InterestCategory negativeElement;
     public InterestCategory randomElement;
@@ -11,4 +19,16 @@ public class DreamOption
         randomElement = random;
     }
 
+    public SavePartData Serialize()
+    {
+        SavePartData data = new SavePartData();
+        data.positiveElement = positiveElement.interestName;
+        data.negativeElement = negativeElement.interestName;
+        data.randomElement = randomElement.interestName;
+        return data;
+    }
+
+    public void Deserialize(SavePartData data)
+    {
+    }
 }

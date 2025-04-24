@@ -5,4 +5,17 @@ using UnityEngine;
 public class InterestDatabase : ScriptableObject
 {
     public List<InterestCategory> allInterests;
+
+    public InterestCategory GetInterestByName(string name)
+    {
+        foreach (InterestCategory interest in allInterests)
+        {
+            if (interest.interestName == name)
+            {
+                return interest;
+            }
+        }
+        Debug.LogError("Interest not found: " + name);
+        return null;
+    }
 }
