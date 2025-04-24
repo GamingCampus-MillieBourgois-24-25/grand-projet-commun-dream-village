@@ -17,7 +17,7 @@ MonoBehaviour:
     type: 3}
   <InitialPrice>k__BackingField: 100
   <InstantiatePrefab>k__BackingField: {fileID: 0}
-  <MaxOwned>k__BackingField: 0
+  <MaxOwned>k__BackingField: 3
   <UnlockedAtLvl>k__BackingField: 5
   FirstName: Festia
   LastName: Hest

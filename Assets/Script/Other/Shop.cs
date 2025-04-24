@@ -42,12 +42,11 @@ public class Shop : MonoBehaviour
     {
         foreach (IScriptableElement item in _contents)
         {
-            GameObject obj = Instantiate(itemPrefab, _container.transform);
-            obj.GetComponent<ShopItem>().SetItemContent(item.Category, item.Icon, item.Name, item.InitialPrice);
-            levelProgression.AddItemOnLevel(item.UnlockedAtLvl, item);
-            if(item.UnlockedAtLvl > GM.Instance.player.Level)
+            if (item.InitialPrice > 0)
             {
-                obj.GetComponent<Button>().interactable = false;
+                GameObject obj = Instantiate(itemPrefab, _container.transform);
+                obj.GetComponent<ShopItem>().SetItemContent(item.Category, item.Icon, item.Name, item.InitialPrice);
+                levelProgression.AddItemOnLevel(item.UnlockedAtLvl, item);
             }
         }
     }
@@ -70,27 +69,27 @@ public class Shop : MonoBehaviour
         scrollView.content = categoryContainers[_category].GetComponent<RectTransform>();
     }
 
-    public void BS_UpdateOwnedQuantityItem()
+    public void BS_RefreshShop()
     {
         foreach (Transform item in categoryContainers[0].transform)
         {
             if (item.TryGetComponent<ShopItem>(out ShopItem shopItem))
             {
-                shopItem.UpdateOwnedQuantity();
+                shopItem.RefreshInfo();
             }
         }
         foreach (Transform item in categoryContainers[1].transform)
         {
             if (item.TryGetComponent<ShopItem>(out ShopItem shopItem))
             {
-                shopItem.UpdateOwnedQuantity();
+                shopItem.RefreshInfo();
             }
         }
         foreach (Transform item in categoryContainers[2].transform)
         {
             if (item.TryGetComponent<ShopItem>(out ShopItem shopItem))
             {
-                shopItem.UpdateOwnedQuantity();
+                shopItem.RefreshInfo();
             }
         }
     }
