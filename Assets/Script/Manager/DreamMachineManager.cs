@@ -46,6 +46,8 @@ public class DreamMachineManager : MonoBehaviour
     [SerializeField]
     private int baseEXPPerDream = 150;
 
+    private float totalDreamMinute;
+
     private void Start()
     {
         UpdateSelectionCanvas();
@@ -402,6 +404,10 @@ public class DreamMachineManager : MonoBehaviour
         
         GM.Cjm.DisplayInhabitant();
         GM.DreamPanel.SetActive(false);
+
+        GM.DN.TimeRemaining = totalDreamMinute * 60; //minutes to seconds
+        GM.DN.StartWaitingTime();
+
         selectedInhabitants.Clear();
     }
     
@@ -449,7 +455,7 @@ public class DreamMachineManager : MonoBehaviour
 
         int totalGold = 0;
         int totalXP = 0;
-        float totalTimeMinutes = 0f;
+        totalDreamMinute = 0f;
 
         foreach (var inhabitant in selectedInhabitants)
         {
@@ -463,12 +469,12 @@ public class DreamMachineManager : MonoBehaviour
 
             totalGold += gold;
             totalXP += xp;
-            totalTimeMinutes += 30f;
+            totalDreamMinute += 30f;
         }
 
         goldPreviewText.text = $"{totalGold} gold";
         expPreviewText.text = $"{totalXP} XP";
-        timePreviewText.text = $"{(int)(totalTimeMinutes / 60)}h {((int)totalTimeMinutes % 60)}min";
+        timePreviewText.text = $"{(int)(totalDreamMinute / 60)}h {((int)totalDreamMinute % 60)}min";
     }
 
     

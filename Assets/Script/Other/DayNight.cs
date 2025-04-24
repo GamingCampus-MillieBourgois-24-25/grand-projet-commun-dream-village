@@ -39,6 +39,7 @@ public class DayNight : MonoBehaviour
     [SerializeField] private AudioClip nightMusic;
     
     private Coroutine activityErrorCoroutine;
+    public Coroutine nightDreamTimeCoroutine;
 
     // Start is called before the first frame update
     private void Start()
@@ -46,12 +47,12 @@ public class DayNight : MonoBehaviour
         sun.color = isDay ? dayColor : nightColor;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
-        if (!isDay)
+        if (!isDay && TimeRemaining != 0f)
         {
             TimeSpan elapsedTime = System.DateTime.Now - GameManager.instance.GetLastTimeSaved();
             TimeRemaining -= (float)elapsedTime.TotalSeconds;
 
-            StartCoroutine(StartWaitingTime());
+            nightDreamTimeCoroutine = StartCoroutine(StartWaitingTime());
         }
         dayNightButton.sprite = isDay ? nightSprite : daySprite;
     }
@@ -185,14 +186,13 @@ public class DayNight : MonoBehaviour
     }
 
 
-    IEnumerator StartWaitingTime()
+    public IEnumerator StartWaitingTime()
     {
-        TimeRemaining = 1500f;
         while (TimeRemaining > 0)
         {
             TimeRemaining -= Time.deltaTime;
             yield return null;
         }
-        ChangeTime();
+        ChangeTime(); // Day automatique
     }
 }
