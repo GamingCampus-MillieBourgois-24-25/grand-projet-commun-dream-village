@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tuto_Activity_004
   m_EditorClassIdentifier: 
   ID: Tuto_Activity_004
+  tutorialID: 29
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:87a78c4e8df18794faeedb1045c7c26b

@@ -13,6 +13,8 @@ public class TutorialsManager : MonoBehaviour
     
     [Header("Tutorials UI")]
     [SerializeField] private GameObject playerFormCanvas;
+
+    [SerializeField] private GameObject mainUi;
     
     [Header("Tutorials variables")]
     public bool skipDialogue = false;
@@ -29,6 +31,7 @@ public class TutorialsManager : MonoBehaviour
     public bool inEditTutorial = false;
     public bool inHeartTutorial = false;
     public bool inHouseTutorial = false;
+    private int currentTutorialID = 0;
 
 
     private void Start()
@@ -36,8 +39,32 @@ public class TutorialsManager : MonoBehaviour
         player = GM.Instance.player;
         dialoguesManager = GM.Dm;
         player.OnPlayerInfoAssigned += PlayerFormCompleted;
-        GM.Instance.OnHouseTuto += UnHoldHouseTuto;
-        IntroductionTutorial();
+        GM.Instance.OnHouseTuto += UnHoldDialogues;
+        PlayAllTutorials();
+    }
+
+    private void PlayAllTutorials()
+    {
+        if (GM.Instance.isPlayerCreated) return;
+        
+        GM.Instance.mainUiCanvas.SetActive(false);
+        playerFormCanvas.SetActive(false);
+
+        List<Dialogues> introDialogues = dialoguesManager.GetDialogues()
+            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Introduction)
+            .ToList();
+        
+        List<Dialogues> tutoDialogues = dialoguesManager.GetDialogues()
+            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Tutorial)
+            .ToList();
+
+        List<Dialogues> dialogues = introDialogues.ToList();
+
+        dialogues.AddRange(tutoDialogues);
+
+        dialogues.Sort((x, y) => x.GetTutorialID().CompareTo(y.GetTutorialID()));
+        
+        StartCoroutine(DisplayTutorialDialogues(dialogues));
     }
 
     private void IntroductionTutorial()
@@ -65,6 +92,8 @@ public class TutorialsManager : MonoBehaviour
             dialoguesManager.DisplayDialogue(dialogue);
             float dif = dialoguesTargetDisplayTime - dialoguesDisplayTime - GM.Ao.CurrentTextSpeedStruct.TextSpeed;
             float textSpeed = dialoguesDisplayTime + GM.Ao.CurrentTextSpeedStruct.TextSpeed + dif;
+            
+            currentTutorialID = dialogue.GetTutorialID();
 
             if (dialogue.ShouldHoldDialogues())
             {
@@ -94,8 +123,11 @@ public class TutorialsManager : MonoBehaviour
                         inHeartTutorial = true;
                         break;
                     default:
+                        
                         break;
                 }
+                
+                if (dialogue.GetTutorialType() != Dialogues.TutorialType.None) mainUi.SetActive(true);
 
                 yield return new WaitUntil(() => !holdDialogues);
             }
@@ -112,6 +144,13 @@ public class TutorialsManager : MonoBehaviour
 
         dialoguesManager.HideDialogue();
         GM.Instance.mainUiCanvas.SetActive(true);
+    }
+
+    public void UnHold(int value)
+    {
+        if (value != currentTutorialID) return;
+
+        holdDialogues = false;
     }
 
     public void UnHoldDialogues()
@@ -147,44 +186,44 @@ public class TutorialsManager : MonoBehaviour
         skipDialogue = true;
     }
 
-    public void UnHoldHouseTuto()
+    public void UnHoldHouseTuto(int value)
     {
-        if (!inHouseTutorial) return;
+        if (!inHouseTutorial && value != currentTutorialID) return;
         
         UnHoldDialogues();
     }
     
-    public void UnHoldDreamTuto()
+    public void UnHoldDreamTuto(int value)
     {
-        if (!inDreamTutorial) return;
+        if (!inDreamTutorial && value != currentTutorialID) return;
         
         UnHoldDialogues();
     }
     
-    public void UnHoldActivityTuto()
+    public void UnHoldActivityTuto(int value)
     {
-        if (!inActivityTutorial) return;
+        if (!inActivityTutorial && value != currentTutorialID) return;
         
         UnHoldDialogues();
     }
     
-    public void UnHoldShopTuto()
+    public void UnHoldShopTuto(int value)
     {
-        if (!inShopTutorial) return;
+        if (!inShopTutorial && value != currentTutorialID) return;
         
         UnHoldDialogues();
     }
     
-    public void UnHoldEditTuto()
+    public void UnHoldEditTuto(int value)
     {
-        if (!inEditTutorial) return;
+        if (!inEditTutorial && value != currentTutorialID) return;
         
         UnHoldDialogues();
     }
     
-    public void UnHoldHeartTuto()
+    public void UnHoldHeartTuto(int value)
     {
-        if (!inHeartTutorial) return;
+        if (!inHeartTutorial && value != currentTutorialID) return;
         
         UnHoldDialogues();
     }
@@ -197,7 +236,19 @@ public class TutorialsManager : MonoBehaviour
     
     
     
-    
+    [MenuItem("Tools/Tutorials/PlayAllTuto")]
+    public static void PlayAllTuto()
+    {
+        TutorialsManager tutorialsManager = FindObjectOfType<TutorialsManager>();
+        if (tutorialsManager != null)
+        {
+            tutorialsManager.PlayAllTutorials();
+        }
+        else
+        {
+            Debug.LogError("TutorialsManager not found in the scene.");
+        }
+    }
     
     [MenuItem("Tools/Tutorials/PlayHouseTuto")]
     public static void PlayHouseTuto()

@@ -76,6 +76,8 @@ public class ShopItem : MonoBehaviour
     public void BS_Buy()
     {
         BuyItem<IScriptableElement>();
+        
+        GM.Tm.UnHold(49);
     }
 
     private void BuyItem<T>() where T : IScriptableElement

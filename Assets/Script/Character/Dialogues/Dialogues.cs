@@ -15,6 +15,7 @@ public class Dialogues : ScriptableObject
         Introduction,
         Reaction,
         Tutorial,
+        NotUsed,
     }
     
     public enum DialogueCondition
@@ -37,10 +38,11 @@ public class Dialogues : ScriptableObject
         Edit,
         Heart,
         House,
-        Shop
+        Shop,
     }
     
     [SerializeField] private string ID;
+    [SerializeField] private int tutorialID;
     [SerializeField] private LocalizedString dialogueText;
     [SerializeField] private string[] requiredArguments;
     
@@ -55,6 +57,11 @@ public class Dialogues : ScriptableObject
     public string GetID()
     {
         return ID;
+    }
+    
+    public int GetTutorialID()
+    {
+        return tutorialID;
     }
     
     public DialogueType GetDialogueType()

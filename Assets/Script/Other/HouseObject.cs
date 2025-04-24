@@ -31,7 +31,7 @@ public class HouseObject : MonoBehaviour
 
             if (GM.Tm.inHeartTutorial)
             {
-                GM.Tm.UnHoldHeartTuto();
+                GM.Tm.UnHold(55);
             }
             
             if (!GM.Cjm.journalCanvas.activeSelf)

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tuto_Dream_006
   m_EditorClassIdentifier: 
   ID: Tuto_Dream_006
+  tutorialID: 38
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:85753728e70574449a9548b06cefa37a
