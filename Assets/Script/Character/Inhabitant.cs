@@ -76,4 +76,21 @@ public class Inhabitant : IScriptableElement
 
         return 0;
     }
+
+    public List<string> GetPronouns()
+    {
+        List<string> pronouns = new();
+
+        string[] tempPronouns = Pronouns.ToString().Split('_');
+        foreach (string pronoun in tempPronouns)
+        {
+            pronouns.Add(pronoun);
+        }
+        return pronouns;
+    }
+
+    public bool isPlural()
+    {
+        return Pronouns == Pronouns.They_Them;
+    }
 }
