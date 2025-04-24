@@ -8,15 +8,16 @@ using System;
 public class DayNight : MonoBehaviour
 {
     [SerializeField] public bool isDay;
-    
-    [SerializeField] private TMP_Text timeText;
-    public float TimeRemaining = 0f;
-    //[SerializeField] private TMP_Text timeText;
-    [SerializeField] private Image dayNightButton;
-    [SerializeField] private TMP_Text activityErrorText;
 
     [SerializeField] private Sprite daySprite;
     [SerializeField] private Sprite nightSprite;
+    [SerializeField] private TMP_Text activityErrorText;
+
+    [Header("NightTimer")]
+    [SerializeField] private TMP_Text timeText;
+    [SerializeField] private GameObject timeContainer;
+    [SerializeField] private Image dayNightButton;
+    public float TimeRemaining = 0f;
 
     [Header("Light Parameters")]
     [SerializeField] private Light sun;
@@ -39,6 +40,7 @@ public class DayNight : MonoBehaviour
     [SerializeField] private AudioClip nightMusic;
     
     private Coroutine activityErrorCoroutine;
+    public Coroutine nightDreamTimeCoroutine;
 
     // Start is called before the first frame update
     private void Start()
@@ -46,12 +48,12 @@ public class DayNight : MonoBehaviour
         sun.color = isDay ? dayColor : nightColor;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
-        if (!isDay)
+        if (TimeRemaining != 0f)
         {
             TimeSpan elapsedTime = System.DateTime.Now - GameManager.instance.GetLastTimeSaved();
             TimeRemaining -= (float)elapsedTime.TotalSeconds;
 
-            StartCoroutine(StartWaitingTime());
+            nightDreamTimeCoroutine = StartCoroutine(StartWaitingTime());
         }
         dayNightButton.sprite = isDay ? nightSprite : daySprite;
     }
@@ -106,7 +108,11 @@ public class DayNight : MonoBehaviour
         //Pour passer au jour
         else
         {
-            // attendre le temps de rêve
+            if (nightDreamTimeCoroutine != null) // attendre le temps de rêve
+            {
+                return;
+            }
+            
         }
         
         isDay = !isDay;
@@ -120,8 +126,11 @@ public class DayNight : MonoBehaviour
                 var rect = transform.rect;
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
-
-        if(isDay)
+        if (timeContainer.activeSelf)
+        {
+            timeContainer.SetActive(false);
+        }
+        if (isDay)
         {
             GM.Cjm.CheckStatsAndHandleDeparture();
             GM.Cjm.CheckForHeartBonus();
@@ -185,14 +194,25 @@ public class DayNight : MonoBehaviour
     }
 
 
-    IEnumerator StartWaitingTime()
+    public IEnumerator StartWaitingTime()
     {
-        TimeRemaining = 1500f;
-        while (TimeRemaining > 0)
+        if (nightDreamTimeCoroutine == null)
         {
-            TimeRemaining -= Time.deltaTime;
-            yield return null;
+            timeContainer.SetActive(true);
+            while (TimeRemaining > 1f)
+            {
+                TimeRemaining -= Time.deltaTime;
+                timeText.text = GM.Instance.DisplayFormattedTime(TimeRemaining);
+                yield return null;
+            }
+
+            nightDreamTimeCoroutine = null;
+            timeText.text = GM.Instance.DisplayFormattedTime(0f); // Assure l'affichage à 00:00
+            ChangeTime(); // Day automatique
+
+            yield return new WaitForSeconds(1f);
+            GM.DMM.ApplySelectedDreams();
+            timeContainer.SetActive(false);
         }
-        ChangeTime();
     }
 }
