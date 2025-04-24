@@ -19,6 +19,7 @@ public class ShopItem : MonoBehaviour
     [SerializeField] private Button buyButton;
     [SerializeField] private GameObject disabledObj;
     [SerializeField] private GameObject lockedImage;
+    [SerializeField] private TextMeshProUGUI unlockedLvlText;  
 
     [Header("Building Option")]
     [SerializeField] private GameObject rotatedCard;
@@ -127,6 +128,11 @@ public class ShopItem : MonoBehaviour
             {
                 itemIcon.color = Color.black;
                 lockedImage.SetActive(true);
+                unlockedLvlText.text = "LVL " + _item.UnlockedAtLvl.ToString();
+            }
+            if(itemCategory == Player.ItemCategory.BuildingCategory && isInfos)
+            {
+                BS_Info();
             }
         }
     }
