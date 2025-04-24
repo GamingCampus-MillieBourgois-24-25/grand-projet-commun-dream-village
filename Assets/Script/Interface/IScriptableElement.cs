@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IScriptableElement : ScriptableObject
@@ -14,6 +11,8 @@ public class IScriptableElement : ScriptableObject
     [field: SerializeField] public virtual Sprite Icon { get; private set; }
     [field: SerializeField] public virtual int InitialPrice { get; private set; }
     [field: SerializeField] public virtual GameObject InstantiatePrefab { get; set; }
+    [field: SerializeField] public virtual int MaxOwned { get; private set; }
+    [field: SerializeField] public virtual int UnlockedAtLvl { get; private set; }
 
     #endregion
 }

@@ -103,6 +103,5 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             loadedBuilding.Deserialize(buildingData);
             buildings.Add(loadedBuilding);
         }
-        
     }
 }

@@ -40,6 +40,8 @@ public class Inhabitant : IScriptableElement
     [field: SerializeField] public override int InitialPrice => base.InitialPrice;
     [field: SerializeField] public bool CanLeave { get; private set; }
     [field: SerializeField] public int HeartsBeforeLeaving { get; private set; }
+    [field: SerializeField] public override int UnlockedAtLvl => base.UnlockedAtLvl;
+    [field: SerializeField] public override int MaxOwned => base.MaxOwned;
     #endregion
 
     #region Visuals
