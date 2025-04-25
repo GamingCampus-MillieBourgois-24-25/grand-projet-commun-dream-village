@@ -33,7 +33,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         UpdateSkipText(lastWholeMinutes);
         AddBSSkipFunction();
 
-        if(notificationID == -1)
+        if(notificationID == -1 && inhabitantUsing != null && inhabitantUsing.baseData.Name != null)
         {
             string title = inhabitantUsing.baseData.Name + "has finished " + inhabitantUsing.baseData.GetPronouns()[1] + "activity!";
             string text = "Come back to see what " + inhabitantUsing.baseData.GetPronouns()[0] + (inhabitantUsing.baseData.isPlural() ? " are" : " is") + " doing!";
@@ -124,7 +124,8 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             remainingTimeUI.SetActive(true);
         }
 
-        timeText = remainingTimeUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        timeText = remainingTimeUI.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+        Debug.Log(timeText);
         canvasBuilding.SetActive(false);
     }
 
@@ -132,7 +133,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     {
         if (starText == null && remainingTimeUI != null)
         {
-            Transform starTransform = remainingTimeUI.transform.GetChild(2).GetChild(2).GetChild(0);
+            Transform starTransform = remainingTimeUI.transform.GetChild(0).GetChild(2).GetChild(2).GetChild(0);
 
             if (starTransform == null) return;
 
@@ -145,7 +146,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     }
     private void AddBSSkipFunction()
     {
-        Button starButton = remainingTimeUI.transform.GetChild(2).GetComponent<Button>();
+        Button starButton = remainingTimeUI.transform.GetChild(0).GetChild(2).GetComponent<Button>();
 
         if (starText != null)
         {
@@ -289,7 +290,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     #region Save
     public void Deserialize(SavePartData data)
     {
-        inhabitantUsing = GM.VM.GetInhabitant(GM.Instance.GetInhabitantByName(data.inhabitantUsingName));
+        if (data.inhabitantUsingName != null) inhabitantUsing = GM.VM.GetInhabitant(GM.Instance.GetInhabitantByName(data.inhabitantUsingName));
         isUsed = data.isUsed;
         timeRemaining = data.timeRemaining;
 
