@@ -20,7 +20,7 @@ MonoBehaviour:
     - rid: 4777453162711744531
   m_TableData:
   - m_Id: 22442373120
-    m_Localized: Here look! A bench! Click on it!
+    m_Localized: Here look! A bench! Click on it and press GO!
     m_Metadata:
       m_Items: []
   - m_Id: 25126727680

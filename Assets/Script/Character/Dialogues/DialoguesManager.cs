@@ -1,39 +1,58 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LitMotion;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Localization;
+using LitMotion.Extensions;
+using Unity.Collections;
+using UnityEngine.UI;
+
+public enum NosphyPosition
+{
+    Position1,
+    Position2,
+    Position3,
+}
 
 public class DialoguesManager : MonoBehaviour
 {
-    private GameManager gameManager;
 
     [SerializeField] private List<Dialogues> dialogues = new();
+    
+
     
     [Serializable]
     public struct DictStrings
     {
         public string name;
         public string value;
+        public LocalizedString localizedValue;
     }
 
-    [SerializeField] private List<DictStrings> localizedStrings;
+    [SerializeField] private List<DictStrings> localizedArguments;
+    
+    [Header("Text Animation")]
+    private MotionHandle textAnimationHandle;
+    public bool isTextAnimationActive;
+    [SerializeField] private SerializableMotionSettings<FixedString512Bytes, StringOptions> textAnimationSettings;
 
     [Header("UI Elements")] public GameObject dialogueCanvas;
     public GameObject dialogueBox;
+    public GameObject dialogueSkip;
+    public GameObject topDialogueBoxPosition;
+    public GameObject bottomDialogueBoxPosition;
     public TMP_Text dialogueText;
+    public NosphyPosition nosphyPosition;
+    [SerializeField] private GameObject nosphy;
+    public bool isTop = false;
+    [SerializeField] private Sprite nosphySprite1;
+    [SerializeField] private Sprite nosphySprite2;
 
     private void Awake()
     {
-        gameManager = GameManager.instance;
-
         LoadAllDialogues();
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void LoadAllDialogues()
@@ -50,7 +69,12 @@ public class DialoguesManager : MonoBehaviour
 
     private string GetVariable(string key)
     {
-        return localizedStrings.FirstOrDefault(x => x.name.ToLower() == key.ToLower()).value ?? "ERROR";
+        var dictString = localizedArguments.FirstOrDefault(x => x.name.ToLower() == key.ToLower());
+        if (dictString.value == "" && dictString.localizedValue != null)
+        {
+            return dictString.localizedValue.GetLocalizedString();
+        }
+        return dictString.value ?? "ERROR";
     }
 
     [ContextMenu("ShowIntroDialogue")]
@@ -62,20 +86,36 @@ public class DialoguesManager : MonoBehaviour
             DisplayDialogue(introDialogue);
         }
     }
-
-    public Dialogues debugDialogue;
     
-    [ContextMenu("DebugShowDialogue")]
-    public void DebugShowDialogue()
+    public void HideDialogue()
     {
-        if (debugDialogue != null)
-        {
-            DisplayDialogue(debugDialogue);
-        }
+        dialogueCanvas.SetActive(false);
+        dialogueBox.SetActive(false);
+        textAnimationHandle.TryComplete();
     }
 
-    private void DisplayDialogue(Dialogues dialogue)
+    public void DisplayDialogue(Dialogues dialogue)
     {
+        isTop = dialogue.IsDialogueBoxTop();
+
+        switch (dialogue.GetNosphyPosition())
+        {
+            case NosphyPosition.Position1:
+                nosphy.gameObject.SetActive(true);
+                nosphy.GetComponent<Image>().sprite = nosphySprite1;
+                break;
+            case NosphyPosition.Position2:
+                nosphy.gameObject.SetActive(true);
+                nosphy.GetComponent<Image>().sprite = nosphySprite2;
+                break;
+            case NosphyPosition.Position3:
+                nosphy.gameObject.SetActive(false);
+                break;
+            default:
+                nosphy.gameObject.SetActive(true);
+                break;
+        }
+        
         LocalizedString localized = dialogue.GetLocalizedString();
         localized.Arguments = null;
 
@@ -94,27 +134,53 @@ public class DialoguesManager : MonoBehaviour
     {
         dialogueCanvas.SetActive(true);
         dialogueBox.SetActive(true);
-        dialogueText.text = text;
-    }
-
-    public string debugVariable;
-    
-    [ContextMenu("DebugUpdateArguments")]
-    public void DebugUpdateArguments()
-    {
-        UpdateArgument("PLAYER_NAME", debugVariable);
-    }
-
-    public void UpdateArgument(string variableName, string variableValue)
-    {
-        for (int i = 0; i < localizedStrings.Count; i++)
+        dialogueBox.transform.localPosition = isTop ? topDialogueBoxPosition.transform.localPosition : bottomDialogueBoxPosition.transform.localPosition;
+        dialogueSkip.transform.localPosition = isTop ? new Vector3(525, -200, 0) : new Vector3(525, 200, 0);
+        
+        float textSpeed = GM.Ao.CurrentTextSpeedStruct.TextSpeed;
+        
+        textAnimationSettings = textAnimationSettings with
         {
-            if (!string.Equals(localizedStrings[i].name, variableName, StringComparison.OrdinalIgnoreCase)) continue;
+            StartValue = "",
+            EndValue = text,
+            Duration = textSpeed,
+        };
+        isTextAnimationActive = true;
+        textAnimationHandle = LMotion.String.Create512Bytes(textAnimationSettings.StartValue, textAnimationSettings.EndValue, textAnimationSettings.Duration)
+            .BindToText(dialogueText);
+    }
+
+    public void UpdateArgument(Dialogues dialogues, string variableName, string variableValue)
+    {
+        for (int i = 0; i < dialogues.GetLocalizedString().Count; i++)
+        {
+            if (!string.Equals(localizedArguments[i].name, variableName, StringComparison.OrdinalIgnoreCase)) continue;
             
-            var temp = localizedStrings[i];
+            var temp = localizedArguments[i];
             temp.value = variableValue;
-            localizedStrings[i] = temp;
+            localizedArguments[i] = temp;
             break;
         }
+    }
+
+    public void UpdateLocalizedArguments(string variableName, string variableValue)
+    {
+        for (int i = 0; i < localizedArguments.Count; i++)
+        {
+            if (!string.Equals(localizedArguments[i].name, variableName, StringComparison.OrdinalIgnoreCase)) continue;
+            
+            var temp = localizedArguments[i];
+            temp.name = variableName;
+            
+            temp.value = variableValue;
+            localizedArguments[i] = temp;
+            break;
+        }
+    }
+    
+    public void StopTextAnimation()
+    {
+        textAnimationHandle.TryComplete();
+        isTextAnimationActive = false;
     }
 }

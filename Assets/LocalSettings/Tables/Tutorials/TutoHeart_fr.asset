@@ -16,8 +16,39 @@ MonoBehaviour:
     m_Code: fr
   m_SharedData: {fileID: 11400000, guid: 812b64478f6af3c46a979775b764189c, type: 2}
   m_Metadata:
-    m_Items: []
-  m_TableData: []
+    m_Items:
+    - rid: 6238822977345945609
+  m_TableData:
+  - m_Id: 20714319872
+    m_Localized: "Rendons rapidement visite \xE0 votre nouvel habitant."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23147016192
+    m_Localized: "Comme vous pouvez le voir, ils ont quelque chose de plus dans leur
+      journal : le nombre de c\u0153urs avant de partir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25500020736
+    m_Localized: "Si toutes les statistiques du r\xE9sident passent en dessous de
+      {0} apr\xE8s un r\xEAve, le r\xE9sident perdra un c\u0153ur."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945609
+  - m_Id: 28427644928
+    m_Localized: "Une fois \xE0 z\xE9ro\u2026 ils disparaissent\_! Et m\xEAme si
+      vous pouvez les acheter \xE0 nouveau en magasin, soyez prudent."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32055717888
+    m_Localized: "Mais ne vous inqui\xE9tez pas, {0} sera toujours l\xE0. Quoi qu'il
+      arrive, {0} restera toujours. Ce village est sa maison."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945609
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6238822977345945609
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070ab76070000000070ebef05000000

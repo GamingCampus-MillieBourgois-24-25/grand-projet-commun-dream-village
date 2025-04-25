@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Introduction_013
   m_EditorClassIdentifier: 
   ID: Intro_013
-  relatedElementID: 
+  tutorialID: 13
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:3575041cfccaf4e4884f5987c04b8901
@@ -25,12 +25,10 @@ MonoBehaviour:
     m_LocalVariables: []
   requiredArguments: []
   dialogueType: 3
-  subDialogueType: 0
-  stats:
-    Mood: 0
-    Serenity: 0
-    Energy: 0
-    Hearts: 0
+  dialogueCondition: 0
+  tutorialType: 0
+  shouldHoldDialogues: 0
+  shouldGiveRareMoney: 0
   references:
     version: 2
     RefIds: []

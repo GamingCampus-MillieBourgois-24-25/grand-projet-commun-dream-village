@@ -6,7 +6,6 @@ using TMPro;
 using Unity.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using UnityEngine.InputSystem;
 
 public class DialoguesInhabitant : MonoBehaviour
 {
@@ -32,8 +31,8 @@ public class DialoguesInhabitant : MonoBehaviour
     
     private void Start()
     {
-        accessibilityOptions = AccessibilityOptions.Instance;
-
+        accessibilityOptions = GM.Ao;
+        
         if (dialoguesManager)
         {
             GetUIElements();
@@ -94,6 +93,8 @@ public class DialoguesInhabitant : MonoBehaviour
         
         ShowDialogue(dial);
     }
+    
+    
     
     private void ShowDialogue(Dialogues dialogue)
     {

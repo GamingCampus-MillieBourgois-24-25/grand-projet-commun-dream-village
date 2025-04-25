@@ -16,12 +16,84 @@ MonoBehaviour:
     m_Code: fr
   m_SharedData: {fileID: 11400000, guid: 3575041cfccaf4e4884f5987c04b8901, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 6238822977345945605
   m_TableData:
   - m_Id: 2689851944960
-    m_Localized: 
+    m_Localized: "Oh... {0}... \xE7a te va bien, je suppose."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945605
+  - m_Id: 1881123024896
+    m_Localized: "Oh l\xE0 l\xE0 ! Le nouveau porteur de r\xEAves est enfin arriv\xE9
+      !"
     m_Metadata:
       m_Items: []
+  - m_Id: 2101403676672
+    m_Localized: "Enchant\xE9 de vous rencontrer, porteur de r\xEAves. Je suis Nosphy."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2124610760704
+    m_Localized: "J'\xE9tais le porteur de r\xEAve de cette humble petite \xEEle...
+      Jusqu'\xE0 ce que vous apparaissiez."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2165018685440
+    m_Localized: "Cela fait si longtemps que je n\u2019ai pas eu de temps pour moi,
+      et gr\xE2ce \xE0 vous, je peux enfin prendre ma retraite !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2205321752576
+    m_Localized: Bonne Chance !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2396745592832
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2400906342400
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2491968876544
+    m_Localized: "Oh, je suis d\xE9sol\xE9 ! C'est vrai que tu es nouveau ! Je dois
+      t'apprendre quelques trucs avant de partir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530514530304
+    m_Localized: "Mais avant tout, comment t'appelles tu, porteur de r\xEAves ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2845431263232
+    m_Localized: "Vous devez savoir qu\u2019en tant que porteurs de r\xEAves, nous
+      ne pouvons pas r\xE9v\xE9ler nos pouvoirs aux mortels."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903954386944
+    m_Localized: "C'est pourquoi vous, {0}, \xEAtes \xE9galement promu maire de ce
+      village ! Cela vous aidera \xE0 dissimuler votre identit\xE9."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945605
+  - m_Id: 2947906498560
+    m_Localized: "Maire le jour, porteur de r\xEAves la nuit."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2989052620800
+    m_Localized: "Alors\u2026 *maire* {0}... comment devriez-vous nommer votre village
+      ?"
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945605
+  - m_Id: 3147442122752
+    m_Localized: "Regardons de plus pr\xE8s {0} !"
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945605
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6238822977345945605
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070ab477202000000702b21a402000000706bf1b702000000702bd2dc020000

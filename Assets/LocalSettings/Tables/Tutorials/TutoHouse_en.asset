@@ -20,7 +20,7 @@ MonoBehaviour:
     - rid: 4777453162711744525
   m_TableData:
   - m_Id: 20999532544
-    m_Localized: 'Here is the first inhabitant of your village: {0}'
+    m_Localized: 'Here is the first inhabitant of your village: {0}.'
     m_Metadata:
       m_Items:
       - rid: 4777453162711744525
