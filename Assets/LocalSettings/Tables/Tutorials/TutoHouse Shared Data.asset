@@ -47,6 +47,10 @@ MonoBehaviour:
     m_Key: Tuto_House_010
     m_Metadata:
       m_Items: []
+  - m_Id: 3213609877073920
+    m_Key: Tuto_House_006
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

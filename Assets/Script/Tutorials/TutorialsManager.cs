@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using LitMotion;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -10,19 +11,19 @@ public class TutorialsManager : MonoBehaviour
 {
     private Player player;
     private DialoguesManager dialoguesManager;
+    private TutorialsUI tutorialsUI;
+    public List<Dialogues> dialogues55;
     
-    [Header("Tutorials UI")]
-    [SerializeField] private GameObject playerFormCanvas;
-    [SerializeField] private GameObject mainUi;
 
     [Header("Tutorials variables")] 
-    
     public bool skipDialogue = false;
     public float dialoguesTargetDisplayTime;
     public float dialoguesDisplayTime;
     public bool isPlayerCreated = false;
     public bool holdDialogues = false;
     public bool isHouseTutorialAlreadyPlayed = false;
+    
+    private MotionHandle highlightAnimationHandle;
     
     [Header("Tutorials State")]
     public bool inIntroductionTutorial = false;
@@ -36,6 +37,7 @@ public class TutorialsManager : MonoBehaviour
 
     private void Start()
     {
+        tutorialsUI = GetComponent<TutorialsUI>();
         player = GM.Instance.player;
         dialoguesManager = GM.Dm;
         player.OnPlayerInfoAssigned += PlayerFormCompleted;
@@ -48,14 +50,14 @@ public class TutorialsManager : MonoBehaviour
         if (GM.Instance.isPlayerCreated) return;
         
         GM.Instance.mainUiCanvas.SetActive(false);
-        playerFormCanvas.SetActive(false);
+        tutorialsUI.playerFormCanvas.SetActive(false);
 
         List<Dialogues> introDialogues = dialoguesManager.GetDialogues()
             .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Introduction)
             .ToList();
         
         List<Dialogues> tutoDialogues = dialoguesManager.GetDialogues()
-            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Tutorial)
+            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Tutorial && dialogue.ShouldBePlayed())
             .ToList();
 
         List<Dialogues> dialogues = introDialogues.ToList();
@@ -63,6 +65,8 @@ public class TutorialsManager : MonoBehaviour
         dialogues.AddRange(tutoDialogues);
 
         dialogues.Sort((x, y) => x.GetTutorialID().CompareTo(y.GetTutorialID()));
+        
+        dialogues55 = dialogues;
         
         StartCoroutine(DisplayTutorialDialogues(dialogues));
     }
@@ -73,11 +77,20 @@ public class TutorialsManager : MonoBehaviour
         {
             SetCurrentTutorial(dialogue.GetTutorialType());
             
+            if (highlightAnimationHandle.IsPlaying())
+            {
+                highlightAnimationHandle.TryComplete();
+                highlightAnimationHandle.Cancel();
+            }
+            
+            
             skipDialogue = false;
             
             dialoguesManager.DisplayDialogue(dialogue);
             float dif = dialoguesTargetDisplayTime - dialoguesDisplayTime - GM.Ao.CurrentTextSpeedStruct.TextSpeed;
             float textSpeed = dialoguesDisplayTime + GM.Ao.CurrentTextSpeedStruct.TextSpeed + dif;
+
+            CheckDialoguesParameters(dialogue);
             
             currentTutorialID = dialogue.GetTutorialID();
 
@@ -87,10 +100,10 @@ public class TutorialsManager : MonoBehaviour
 
                 if (dialogue.GetTutorialType() == Dialogues.TutorialType.None)
                 {
-                    playerFormCanvas.SetActive(true);
+                    tutorialsUI.playerFormCanvas.SetActive(true);
                 }
                 
-                if (dialogue.GetTutorialType() != Dialogues.TutorialType.None) mainUi.SetActive(true);
+                if (dialogue.GetTutorialType() != Dialogues.TutorialType.None) tutorialsUI.mainUi.SetActive(true);
 
                 yield return new WaitUntil(() => !holdDialogues);
             }
@@ -146,6 +159,71 @@ public class TutorialsManager : MonoBehaviour
         }
     }
 
+    private void CheckDialoguesParameters(Dialogues dialogue)
+    {
+        Action ResetScale(GameObject obj)
+        {
+            obj.transform.localScale = new Vector3(1, 1, 1);
+            return null;
+        }
+
+        if (dialogue.highlightJournalRightPage)
+        {
+            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
+                .WithOnCancel(ResetScale(tutorialsUI.journalRightPage)).Bind(x =>
+                    tutorialsUI.journalRightPage.transform.localScale = new Vector3(x, x, 1));
+        }
+
+        if (dialogue.highlightQuitJournalButton)
+        {
+            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
+                .WithOnCancel(ResetScale(tutorialsUI.quitJournalButton)).Bind(x =>
+                    tutorialsUI.quitJournalButton.transform.localScale = new Vector3(x, x, 1));
+        }
+
+        if (dialogue.highlightNightButton)
+        {
+            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
+                .WithOnCancel(ResetScale(tutorialsUI.nightButton)).Bind(x =>
+                    tutorialsUI.nightButton.transform.localScale = new Vector3(x, x, 1));
+        }
+
+        if (dialogue.highlightDreamButton)
+        {
+            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
+                .WithOnCancel(ResetScale(tutorialsUI.dreamButton)).Bind(x =>
+                    tutorialsUI.dreamButton.transform.localScale = new Vector3(x, x, 1));
+        }
+        
+        if (dialogue.highlightShopButton)
+        {
+            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
+                .WithOnCancel(ResetScale(tutorialsUI.shopButton)).Bind(x =>
+                    tutorialsUI.shopButton.transform.localScale = new Vector3(x, x, 1));
+        }
+        
+        if (dialogue.highlightQuitShopButton)
+        {
+            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
+                .WithOnCancel(ResetScale(tutorialsUI.quitShopButton)).Bind(x =>
+                    tutorialsUI.quitShopButton.transform.localScale = new Vector3(x, x, 1));
+        }
+        
+        if (dialogue.highlightEditButton)
+        {
+            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
+                .WithOnCancel(ResetScale(tutorialsUI.editButton)).Bind(x =>
+                    tutorialsUI.editButton.transform.localScale = new Vector3(x, x, 1));
+        }
+        
+        if (dialogue.highlightQuitEditButton)
+        {
+            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
+                .WithOnCancel(ResetScale(tutorialsUI.quitEditButton)).Bind(x =>
+                    tutorialsUI.quitEditButton.transform.localScale = new Vector3(x, x, 1));
+        }
+    }
+
     public void UnHold(int value)
     {
         if (value != currentTutorialID) return;
@@ -161,7 +239,7 @@ public class TutorialsManager : MonoBehaviour
     public void PlayerFormCompleted()
     {
         isPlayerCreated = true;
-        playerFormCanvas.SetActive(false);
+        tutorialsUI.playerFormCanvas.SetActive(false);
     }
 
     public void SkipDialogue()

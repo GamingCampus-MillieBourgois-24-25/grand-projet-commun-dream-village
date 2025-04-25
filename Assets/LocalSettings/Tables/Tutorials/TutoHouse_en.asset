@@ -56,6 +56,10 @@ MonoBehaviour:
     m_Localized: "Let\u2019s improve them now!"
     m_Metadata:
       m_Items: []
+  - m_Id: 3213609877073920
+    m_Localized: On the right page, you can find its preferences.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

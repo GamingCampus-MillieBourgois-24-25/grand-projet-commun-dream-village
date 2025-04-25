@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e13e6beaa89ee5d418d873cd6e279228, type: 3}
-  m_Name: Tuto_Dream_004
+  m_Name: Tuto_House_006
   m_EditorClassIdentifier: 
-  ID: Tuto_Dream_004
-  tutorialID: 36
-  shouldBePlayed: 1
+  ID: Tuto_House_006
+  tutorialID: 20
   dialogueText:
     m_TableReference:
-      m_TableCollectionName: GUID:85753728e70574449a9548b06cefa37a
+      m_TableCollectionName: GUID:72d91b9481dd09147846ac20901bda6a
     m_TableEntryReference:
-      m_KeyId: 354111156224
+      m_KeyId: 3213609877073920
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -27,15 +26,12 @@ MonoBehaviour:
   requiredArguments: []
   dialogueType: 5
   dialogueCondition: 7
-  tutorialType: 2
-  shouldHoldDialogues: 1
+  tutorialType: 5
+  shouldHoldDialogues: 0
   shouldGiveRareMoney: 0
   isDialogueBoxTop: 0
   nosphyPosition: 0
-  highlightJournalRightPage: 0
-  highlightQuitJournalButton: 0
-  highlightNightButton: 0
-  highlightDreamButton: 1
+  highlightJournalRightPage: 1
   references:
     version: 2
     RefIds: []

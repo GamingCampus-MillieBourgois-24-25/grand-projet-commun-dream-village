@@ -56,6 +56,10 @@ MonoBehaviour:
     m_Localized: "Allons les am\xE9liorer maintenant !"
     m_Metadata:
       m_Items: []
+  - m_Id: 3213609877073920
+    m_Localized: "Sur la page de droite, tu peux y trouver ses pr\xE9f\xE9rences."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
