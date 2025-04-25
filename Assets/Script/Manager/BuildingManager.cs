@@ -40,6 +40,11 @@ public class BuildingManager : MonoBehaviour
     {
         UpdateSelectionCanvas();
     }
+
+    private void Update()
+    {
+        CupTurnCoffee.RotateCup();
+    }
     #endregion
 
     public void StartActivity(InhabitantInstance _inhabitant)

@@ -236,7 +236,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 
     public void AddStar(int amount)
     {
-        SetStar(gold + amount);
+        SetStar(star + amount);
     }
     public bool CanSpendStar(int amount)
     {
@@ -250,7 +250,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     {
         if (CanSpendStar(amount))
         {
-            SetStar(gold - amount);
+            SetStar(star - amount);
         }
     }
 
