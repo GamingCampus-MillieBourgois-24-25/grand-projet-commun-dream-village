@@ -33,7 +33,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         UpdateSkipText(lastWholeMinutes);
         AddBSSkipFunction();
 
-        if(notificationID == -1 && inhabitantUsing != null && inhabitantUsing.baseData.Name != null)
+        if (notificationID == -1 && inhabitantUsing != null && inhabitantUsing.baseData.Name != null)
         {
             string title = inhabitantUsing.baseData.Name + "has finished " + inhabitantUsing.baseData.GetPronouns()[1] + "activity!";
             string text = "Come back to see what " + inhabitantUsing.baseData.GetPronouns()[0] + (inhabitantUsing.baseData.isPlural() ? " are" : " is") + " doing!";
@@ -45,10 +45,13 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             timeRemaining -= Time.deltaTime;
 
             int currentWholeMinutes = Mathf.CeilToInt(timeRemaining / 60f);
-            if (currentWholeMinutes != lastWholeMinutes)
+            if (GM.Instance.skipWithStarButton.gameObject.activeSelf)
             {
-                lastWholeMinutes = currentWholeMinutes;
-                UpdateSkipText(currentWholeMinutes);
+                if (currentWholeMinutes != lastWholeMinutes)
+                {
+                    lastWholeMinutes = currentWholeMinutes;
+                    UpdateSkipText(currentWholeMinutes);
+                }
             }
 
             if (timeRemaining <= 0f)
@@ -131,26 +134,40 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
     private void UpdateSkipText(int remainingMinutes)
     {
-        if (starText == null && remainingTimeUI != null)
+        if (starText == null)
         {
-            Transform starTransform = remainingTimeUI.transform.GetChild(0).GetChild(2).GetChild(2).GetChild(0);
-
-            if (starTransform == null) return;
-
-            starText = starTransform.GetComponent<TextMeshProUGUI>();
+            starText = GM.Instance.skipWithStarButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         }
         if (starText == null) return;
 
         starText.text = remainingMinutes.ToString();
     }
+
+    //private void UpdateSkipText(int remainingMinutes)
+    //{
+    //    if (starText == null && remainingTimeUI != null)
+    //    {
+    //        Transform starTransform = remainingTimeUI.transform.GetChild(0).GetChild(2).GetChild(2).GetChild(0);
+
+    //        if (starTransform == null) return;
+
+    //        starText = starTransform.GetComponent<TextMeshProUGUI>();
+
+    //    }
+    //    if (starText == null) return;
+
+    //    starText.text = remainingMinutes.ToString();
+    //}
     private void AddBSSkipFunction()
     {
-        Button starButton = remainingTimeUI.transform.GetChild(0).GetChild(2).GetComponent<Button>();
+        Button starButton = GM.Instance.skipWithStarButton;
 
         if (starText != null)
         {
-            starButton.onClick.AddListener(() => {
+            starButton.onClick.RemoveAllListeners();
+            starButton.onClick.AddListener(() =>
+            {
                 GM.Instance.TrySkipActivityWithStars(starText, this);
             });
         }

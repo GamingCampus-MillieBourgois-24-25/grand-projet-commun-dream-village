@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 {
@@ -44,6 +45,10 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public GameObject journalPanel;
     public GameObject inventoryPanel;
     public GameObject shopPanel;
+    public Button skipWithStarButton;
+
+    [Header("UI Canvas")]
+    public Canvas chooseSkipCanvas;
 
     DateTime lastTimeSaved;
     Dictionary<string, DisplayableDream> selectedDreamByInhabitantTemp;
@@ -232,8 +237,14 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         int timeStars = int.Parse(starText.text);
         if (player.CanSpendStar(timeStars)) {
             player.SpendStar(timeStars);
+            chooseSkipCanvas.gameObject.SetActive(false);
             buildingObject.FinishActivity();
         }
+    }
+
+    public void SkipActivityWithADS(BuildingObject buildingObject)
+    {
+        buildingObject.FinishActivity();
     }
 
     public bool IsPointerOverUIElement(Vector2 screenPosition)
