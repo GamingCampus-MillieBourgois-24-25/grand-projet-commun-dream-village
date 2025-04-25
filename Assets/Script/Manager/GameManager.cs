@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -120,7 +121,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         decorations.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort decorations by name
 
 
-        villageManager.Load("VillageManager");
+        bool hasWillith = villageManager.Load("VillageManager");
         player.Load("PlayerData");
 
         // Load all dream
@@ -135,6 +136,11 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
                 DisplayableDream displayableDream = kvp.Value;
                 dreamMachineManager.selectedDreamByInhabitant.Add(inhabitant, displayableDream);
             }
+        }
+
+        if(!hasWillith)
+        {
+            villageManager.SpawnWillith();
         }
 
         NotificationManager.SetupNotifications();
