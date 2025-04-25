@@ -21,7 +21,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     }
 
 
-    private void Start()
+    public void SpawnWillith()
     {
         if (inhabitants.Count == 0)
         {
@@ -30,8 +30,13 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             GameObject houseInstanciate = Instantiate(house, willithDefaultHousePosition, house.transform.rotation, playerIslandObject);
 
             CreateInstanceofScriptable(GM.Instance.GetInhabitantByName("Willith Warm"), houseInstanciate);
+
+            GM.Instance.SaveGame();
         }
     }
+
+
+
 
     public void CreateInstanceofScriptable<T>(T _item, GameObject _obj) where T : IScriptableElement
     {
@@ -54,6 +59,8 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
                 Debug.LogError("Unknown type");
                 break;
         }
+
+        GM.Instance.SaveGame();
     }
 
     public void RemoveInstance(GameObject _obj)
@@ -72,6 +79,8 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         {
             Debug.LogError("Unknown object type");
         }
+
+        GM.Instance.SaveGame();
     }
 
     public InhabitantInstance GetInhabitant(Inhabitant inhabitant)

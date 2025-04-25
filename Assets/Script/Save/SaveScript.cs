@@ -149,7 +149,7 @@ static public class SaveScript
         SaveFile(json, fileName);
     }
 
-    public static void Load<Data>(this ISaveable<Data> saveable, string fileName) where Data : ISaveData
+    public static bool Load<Data>(this ISaveable<Data> saveable, string fileName) where Data : ISaveData
     {
         string json = LoadFile(fileName);
         if (!string.IsNullOrEmpty(json))
@@ -157,7 +157,9 @@ static public class SaveScript
             // Désérialisation avec Newtonsoft.Json
             Data saveData = JsonConvert.DeserializeObject<Data>(json);
             saveable.Deserialize(saveData);
+            return true;
         }
+        return false;
     }
 
 }
