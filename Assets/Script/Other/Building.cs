@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using static Dialogues;
 
 
 
@@ -19,6 +18,7 @@ public class Building : IScriptableElement
     [field: Header("Effects")]
     [field: SerializeField] public int EffectDuration { get; private set; }
     [field: SerializeField] public List<AttributeEffect> AttributeEffects { get; private set; }
+    [field: SerializeField] public int Experience { get; private set; }
     #endregion
 
     #region Stats
@@ -31,7 +31,8 @@ public class Building : IScriptableElement
     #region Economy
     [field: Header("Progression & Economy")]
     [field: SerializeField] public override int InitialPrice => base.InitialPrice;
-    [field: SerializeField] public int MaximumInInv { get; private set; }
+    [field: SerializeField] public override int MaxOwned => base.MaxOwned;
+    [field: SerializeField] public override int UnlockedAtLvl => base.UnlockedAtLvl;
     #endregion
 
     #region Visuals

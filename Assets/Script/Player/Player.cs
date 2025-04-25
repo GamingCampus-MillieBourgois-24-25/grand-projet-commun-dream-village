@@ -19,6 +19,9 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     private Dictionary<Inhabitant, InventoryItem> inhabitantsInventory = new();
     private Dictionary<Building, InventoryItem> buildingsInventory = new();
     private Dictionary<Decoration, InventoryItem> decorationsInventory = new();
+    
+    public delegate void PlayerInfoAssignDelegate();
+    public PlayerInfoAssignDelegate OnPlayerInfoAssigned;
 
     public string PlayerName { get; private set; }
     public string CityName { get; private set; }
@@ -70,6 +73,10 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         public int currentXP;
         public int gold;
         public int star;
+
+        public Dictionary<string, int> inhabitantsInventory = new();
+        public Dictionary<string, int> buildingsInventory = new();
+        public Dictionary<string, int> decorationsInventory = new();
     }
 
     public SavePartData Serialize()
@@ -82,7 +89,16 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         data.currentXP = CurrentXP;
         
         data.star = star;
-        data.gold = star;
+        data.gold = gold;
+
+        foreach (var item in inhabitantsInventory)
+            data.inhabitantsInventory[item.Key.Name] = item.Value.quantity;
+
+        foreach (var item in buildingsInventory)
+            data.buildingsInventory[item.Key.Name] = item.Value.quantity;
+
+        foreach (var item in decorationsInventory)
+            data.decorationsInventory[item.Key.Name] = item.Value.quantity;
 
         return data;
     }
@@ -99,6 +115,33 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         
         star = data.star;
         gold = data.gold;
+
+        foreach (var inhabitantDic in data.inhabitantsInventory)
+        {
+            Inhabitant inhabitant = GM.Instance.GetInhabitantByName(inhabitantDic.Key);
+            if (inhabitant != null)
+            {
+                AddToInventory(inhabitant, inhabitantDic.Value);
+            }
+        }
+
+        foreach (var buildingDic in data.buildingsInventory)
+        {
+            Building building = GM.Instance.GetBuildingByName(buildingDic.Key);
+            if (building != null)
+            {
+                AddToInventory(building, buildingDic.Value);
+            }
+        }
+
+        foreach (var decorationDic in data.decorationsInventory)
+        {
+            Decoration decoration = GM.Instance.GetDecorationByName(decorationDic.Key);
+            if (decoration != null)
+            {
+                AddToInventory(decoration, decorationDic.Value);
+            }
+        }
     }
     #endregion
 
@@ -106,6 +149,11 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     private void Start()
     {
         expLevel = baseExpPerLevel;
+        for(int i = 1; i < Level; i++)
+        {
+            expLevel = Mathf.RoundToInt(expLevel * multExp);
+        }
+
         UpdateGoldText();
         UpdateStarText();
         UpdateLevelText();
@@ -128,6 +176,16 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         playerNameText.text = PlayerName;
         UpdateLevelText();
         Debug.Log($"Player created: {PlayerName}, City: {CityName}");
+        
+        GM.Dm.UpdateLocalizedArguments("PLAYER_NAME", PlayerName);
+        GM.Dm.UpdateLocalizedArguments("VILLAGE_NAME", CityName);
+        
+        GM.Tm.holdDialogues = false;
+        GM.Tm.skipDialogue = true;
+        
+        GM.Instance.isPlayerCreated = true;
+        
+        OnPlayerInfoAssigned?.Invoke();
 
         this.Save("PlayerData");
     }
@@ -139,11 +197,15 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     public void SetGold(int value) {
         gold = Mathf.Max(0, value); // ne jamais avoir un solde négatif
         UpdateGoldText();
+
+        this.Save("PlayerData");
     } 
 
     public void AddGold(int amount) {
         gold += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
         UpdateGoldText();
+
+        this.Save("PlayerData");
     } 
     public bool CanSpendGold(int amount)
     {
@@ -159,6 +221,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         {
             gold -= amount;
             UpdateGoldText();
+
+            this.Save("PlayerData");
         }
     }
     private void UpdateGoldText()
@@ -171,12 +235,16 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     public void SetStar(int value) {
         star = Mathf.Max(0, value);
         UpdateStarText();
+
+        this.Save("PlayerData");
     } 
 
     public void AddStar(int amount)
     {
         star += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
         UpdateStarText();
+
+        this.Save("PlayerData");
     }
     public bool CanSpendStar(int amount)
     {
@@ -192,6 +260,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         {
             star -= amount;
             UpdateStarText();
+
+            this.Save("PlayerData");
         }
     }
 
@@ -340,6 +410,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
                     break;
             }
             Debug.Log($"Added {amount} of {item} to inventory.");
+            this.Save("PlayerData");
         }
     }
 
@@ -378,6 +449,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
                 }
                 Debug.Log($"Removed {amount} of {item.name} from inventory.");
                 return true;
+                this.Save("PlayerData");
             }
         }
         return false;

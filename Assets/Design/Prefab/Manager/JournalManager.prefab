@@ -62,3 +62,5 @@ MonoBehaviour:
   heartFullSprite: {fileID: 21300000, guid: 4dbd818a7fa38ed45aa450cbcc878f6c, type: 3}
   heartEmptySprite: {fileID: 21300000, guid: 74c73f7a6f38bd240ae2a270209ee176, type: 3}
   unknownIcon: {fileID: 21300000, guid: 5d68098dcafd4fe438dc177a3ed3422d, type: 3}
+  heartPrefab: {fileID: 0}
+  preferencePrefab: {fileID: 0}

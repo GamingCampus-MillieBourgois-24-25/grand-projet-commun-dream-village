@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: CoffeeShop
   m_EditorClassIdentifier: 
   <Name>k__BackingField: CoffeeShop
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 37396956628b61c4f8190af07830937b,
+    type: 3}
   <InitialPrice>k__BackingField: 1500
   <InstantiatePrefab>k__BackingField: {fileID: 669072585116683299, guid: f9660f1ca0498a54e8ae7606dd8d657c,
     type: 3}
+  <MaxOwned>k__BackingField: 4
+  <UnlockedAtLvl>k__BackingField: 5
   <Description>k__BackingField: 
   <EffectDuration>k__BackingField: 1800
   <AttributeEffects>k__BackingField:
@@ -24,7 +27,7 @@ MonoBehaviour:
       type: 2}
     <bonus>k__BackingField: 20
     <bonusType>k__BackingField: 1
+  <Experience>k__BackingField: 125
   <Mood>k__BackingField: 10
   <Serenity>k__BackingField: -5
   <Energy>k__BackingField: 10
-  <MaximumInInv>k__BackingField: 4

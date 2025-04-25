@@ -146,7 +146,7 @@ public class CharacterJournalManager : MonoBehaviour
 
         iconImage.sprite = currentInhabitant.Icon;
         nameText.text = currentInhabitant.Name;
-        pronounsText.text = currentInhabitant.baseData.Pronouns.ToString();
+        pronounsText.text = currentInhabitant.baseData.GetPronouns()[0] + "/" + currentInhabitant.baseData.GetPronouns()[1] ;
         mbtiText.text = currentInhabitant.baseData.MBTI.ToString();
         personalitiesText.text = string.Join(" / ", currentInhabitant.baseData.Personnality);
         GoldMultiplierText.text = $"x{currentInhabitant.baseData.GoldMultiplier:F2}";

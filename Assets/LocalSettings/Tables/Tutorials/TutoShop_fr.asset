@@ -17,7 +17,33 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: f38f8bf1e031cb148a0bfd0ba4690bfb, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 20986949632
+    m_Localized: "Maintenant que vous avez gagn\xE9 un niveau, vous avez d\xE9bloqu\xE9
+      quelque chose de nouveau dans la boutique. Voyons ce que c'est."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25479049216
+    m_Localized: Il y a plusieurs sections dans la boutique.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29044207616
+    m_Localized: Regardez ! Vous pouvez acheter ce nouvel habitant dans la section
+      Habitants.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32408039424
+    m_Localized: Envoyez-leur une invitation dans votre village !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39097954304
+    m_Localized: Leur maison est maintenant dans votre inventaire.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45867560960
+    m_Localized: Quittez la boutique.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

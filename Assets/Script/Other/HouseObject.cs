@@ -21,6 +21,19 @@ public class HouseObject : MonoBehaviour
     {
         if (!GM.IM.isEditMode)
         {
+
+            if (!GM.Tm.isHouseTutorialAlreadyPlayed)
+            {
+                GM.Instance.OnHouseTuto?.Invoke();
+                Debug.Log("House Clicked");
+                GM.Instance.tutorialsManager.skipDialogue = true;
+            }
+
+            if (GM.Tm.inHeartTutorial)
+            {
+                GM.Tm.UnHold(55);
+            }
+            
             if (!GM.Cjm.journalCanvas.activeSelf)
             {
                 GM.Cjm.journalCanvas.SetActive(true);

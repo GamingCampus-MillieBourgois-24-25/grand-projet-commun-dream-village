@@ -13,7 +13,7 @@ public class JenkinsBuild
             .Where(scene => scene.enabled)
             .Select(scene => scene.path)
             .ToArray();
-        
+      
         PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
 
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions

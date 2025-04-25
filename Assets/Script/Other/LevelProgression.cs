@@ -8,7 +8,7 @@ public class LevelProgression : MonoBehaviour
     [System.Serializable]
     public class Level
     {
-        public List<IScriptableElement> unlockable;
+        public List<IScriptableElement> unlockable = new List<IScriptableElement>();
     }
 
     public Level GetLevel(int level)
@@ -20,5 +20,21 @@ public class LevelProgression : MonoBehaviour
             return null;
         }
         return levels[level];
+    }
+
+    public void AddItemOnLevel(int level, IScriptableElement item)
+    {
+        if (level > 0)
+        {
+            level -= 1; // Convert to 0-based index
+            if (level < 0 || level >= levels.Count)
+            {
+                for (int i = levels.Count; i <= level; i++)
+                {
+                    levels.Add(new Level());
+                }
+            }
+            levels[level].unlockable.Add(item);
+        }
     }
 }

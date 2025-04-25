@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private ShopCategory shopCategory = ShopCategory.InhabitantCategory;
     [SerializeField] private GameObject itemPrefab;
+    private LevelProgression levelProgression;
 
 
     [Header("UI")]
@@ -28,9 +30,11 @@ public class Shop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitCategory(categoryContainers[0], GameManager.instance.inhabitants);
-        InitCategory(categoryContainers[1], GameManager.instance.buildings);
-        InitCategory(categoryContainers[2], GameManager.instance.decorations);
+        levelProgression = GM.Instance.gameObject.GetComponent<LevelProgression>();
+
+        InitCategory(categoryContainers[0], GameManager.instance.inhabitants.OrderBy(x => x.InitialPrice).ToList());
+        InitCategory(categoryContainers[1], GameManager.instance.buildings.OrderBy(x => x.InitialPrice).ToList());
+        InitCategory(categoryContainers[2], GameManager.instance.decorations.OrderBy(x => x.InitialPrice).ToList());
     }
 
 
@@ -38,8 +42,12 @@ public class Shop : MonoBehaviour
     {
         foreach (IScriptableElement item in _contents)
         {
-            GameObject obj = Instantiate(itemPrefab, _container.transform);
-            obj.GetComponent<ShopItem>().SetItemContent(item.Category, item.Icon, item.Name, item.InitialPrice);
+            if (item.InitialPrice > 0)
+            {
+                GameObject obj = Instantiate(itemPrefab, _container.transform);
+                obj.GetComponent<ShopItem>().SetItemContent(item.Category, item.Icon, item.Name, item.InitialPrice);
+                levelProgression.AddItemOnLevel(item.UnlockedAtLvl, item);
+            }
         }
     }
 
@@ -61,27 +69,27 @@ public class Shop : MonoBehaviour
         scrollView.content = categoryContainers[_category].GetComponent<RectTransform>();
     }
 
-    public void BS_UpdateOwnedQuantityItem()
+    public void BS_RefreshShop()
     {
         foreach (Transform item in categoryContainers[0].transform)
         {
             if (item.TryGetComponent<ShopItem>(out ShopItem shopItem))
             {
-                shopItem.UpdateOwnedQuantity();
+                shopItem.RefreshInfo();
             }
         }
         foreach (Transform item in categoryContainers[1].transform)
         {
             if (item.TryGetComponent<ShopItem>(out ShopItem shopItem))
             {
-                shopItem.UpdateOwnedQuantity();
+                shopItem.RefreshInfo();
             }
         }
         foreach (Transform item in categoryContainers[2].transform)
         {
             if (item.TryGetComponent<ShopItem>(out ShopItem shopItem))
             {
-                shopItem.UpdateOwnedQuantity();
+                shopItem.RefreshInfo();
             }
         }
     }

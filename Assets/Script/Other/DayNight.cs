@@ -3,13 +3,21 @@ using LitMotion;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class DayNight : MonoBehaviour
 {
-    [SerializeField] private bool isDay;
-    
-    [SerializeField] private TMP_Text timeText;
+    [SerializeField] public bool isDay;
+
+    [SerializeField] private Sprite daySprite;
+    [SerializeField] private Sprite nightSprite;
     [SerializeField] private TMP_Text activityErrorText;
+
+    [Header("NightTimer")]
+    [SerializeField] private TMP_Text timeText;
+    [SerializeField] private GameObject timeContainer;
+    [SerializeField] private Image dayNightButton;
+    public float TimeRemaining = 0f;
 
     [Header("Light Parameters")]
     [SerializeField] private Light sun;
@@ -34,13 +42,26 @@ public class DayNight : MonoBehaviour
     [SerializeField] private AudioClip noneButtonSFX;
     
     private Coroutine activityErrorCoroutine;
+    public Coroutine nightDreamTimeCoroutine;
 
     // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
         sun.color = isDay ? dayColor : nightColor;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
+        if (TimeRemaining > 0f)
+        {
+            TimeSpan elapsedTime = System.DateTime.Now - GameManager.instance.GetLastTimeSaved();
+            TimeRemaining -= (float)elapsedTime.TotalSeconds;
+
+            nightDreamTimeCoroutine = StartCoroutine(StartWaitingTime());
+        }
+        else
+        {
+            timeContainer.SetActive(false);
+        }
+        dayNightButton.sprite = isDay ? nightSprite : daySprite;
         if (isDay)
         {
             GM.SM.PlayMusic(dayMusic, true);
@@ -102,10 +123,15 @@ public class DayNight : MonoBehaviour
         //Pour passer au jour
         else
         {
-            // attendre le temps de rêve
+            if (nightDreamTimeCoroutine != null) // attendre le temps de rêve
+            {
+                return;
+            }
+            
         }
         
         isDay = !isDay;
+        TimeRemaining = 0f;
         RectTransform transform = curtain.GetComponent<RectTransform>();
         Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
         LMotion.Create(0, target.x, animationDuration)
@@ -115,7 +141,11 @@ public class DayNight : MonoBehaviour
                 var rect = transform.rect;
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
-        if(isDay)
+        if (timeContainer.activeSelf)
+        {
+            timeContainer.SetActive(false);
+        }
+        if (isDay)
         {
             GM.SM.PlayMusic(dayTransitionMusic, false, () =>
             {
@@ -179,7 +209,8 @@ public class DayNight : MonoBehaviour
                 transform.sizeDelta = new Vector2(x, rect.height);
             });
 
-        timeText.text = isDay ? "Night" : "Day";
+        dayNightButton.sprite = isDay ? nightSprite : daySprite;
+        //timeText.text = isDay ? "Night" : "Day";
 
         /*if (isDay)
         {
@@ -191,6 +222,27 @@ public class DayNight : MonoBehaviour
         }*/
     }
 
+    public IEnumerator StartWaitingTime()
+    {
+        if (nightDreamTimeCoroutine == null)
+        {
+            timeContainer.SetActive(true);
+            while (TimeRemaining > 1f)
+            {
+                TimeRemaining -= Time.deltaTime;
+                timeText.text = GM.Instance.DisplayFormattedTime(TimeRemaining);
+                yield return null;
+            }
+
+            nightDreamTimeCoroutine = null;
+            timeText.text = GM.Instance.DisplayFormattedTime(0f); // Assure l'affichage à 00:00
+            ChangeTime(); // Day automatique
+
+            yield return new WaitForSeconds(1f);
+            GM.DMM.ApplySelectedDreams();
+            timeContainer.SetActive(false);
+        }
+    }
     
     public bool IsDay => isDay;
 
