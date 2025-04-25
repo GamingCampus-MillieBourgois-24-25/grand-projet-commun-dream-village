@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -140,10 +141,10 @@ static public class SaveScript
     }
 
 
-    public static void Save<Data>(this ISaveable<Data> saveable, string fileName) where Data : ISaveData
+    public static async Task Save<Data>(this ISaveable<Data> saveable, string fileName) where Data : ISaveData
     {
         Data data = saveable.Serialize();
-
+        await SerializeDataToFile(data, fileName);
         // Sérialisation avec Newtonsoft.Json
     }
 
@@ -162,13 +163,18 @@ static public class SaveScript
 
 
 
-    static private void SerializeDataToFile<Data>(Data data, string fileName) where Data : ISaveData
+    static private Task SerializeDataToFile<Data>(Data data, string fileName) where Data : ISaveData
     {
         // Sérialisation avec Newtonsoft.Json
-        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+        Task task = Task.Run(() =>
+        {
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+            Debug.Log("Serialized : " + json);
+            SaveFile(json, fileName);
+            Debug.Log("Saved : " + fileName);
+        });
 
-        SaveFile(json, fileName);
-        Debug.Log("Saved : " + fileName);
+        return task;
     }
 
 }
