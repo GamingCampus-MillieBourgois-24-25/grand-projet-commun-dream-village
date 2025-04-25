@@ -33,7 +33,7 @@ public class DevTest
     }
 
     [MenuItem("Tools/DevTest/AddStars")]
-    public static void AddSimflouz()
+    public static void AddStars()
     {
         GM.Instance.player.AddStar(2000);
     }
