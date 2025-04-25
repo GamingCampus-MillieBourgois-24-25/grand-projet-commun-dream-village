@@ -28,11 +28,6 @@ MonoBehaviour:
     m_Localized: Click on his house to see him from up close!
     m_Metadata:
       m_Items: []
-  - m_Id: 25567129600
-    m_Localized: "Don\u2019t worry - he can\u2019t see or hear us in our dream-bringer
-      form. We can talk freely."
-    m_Metadata:
-      m_Items: []
   - m_Id: 28062740480
     m_Localized: This is your journal.
     m_Metadata:
@@ -43,10 +38,6 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 4777453162711744525
-  - m_Id: 46970662912
-    m_Localized: Here are its preferences.
-    m_Metadata:
-      m_Items: []
   - m_Id: 50372243456
     m_Localized: "By default, their preferences are locked. Each inhabitant has their
       own likes and dislikes. It\u2019s up to you to discover them!"

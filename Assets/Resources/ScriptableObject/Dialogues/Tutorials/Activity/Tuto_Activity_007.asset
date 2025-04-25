@@ -23,13 +23,14 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  requiredArguments:
-  - BENCH_NAME
+  requiredArguments: []
   dialogueType: 5
   dialogueCondition: 7
   tutorialType: 1
   shouldHoldDialogues: 0
   shouldGiveRareMoney: 0
+  isDialogueBoxTop: 0
+  nosphyPosition: 0
   references:
     version: 2
     RefIds: []

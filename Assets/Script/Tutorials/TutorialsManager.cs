@@ -179,7 +179,7 @@ public class TutorialsManager : MonoBehaviour
         if (inIntroductionTutorial) return;
         
         dialoguesManager.HideDialogue();
-        StopCoroutine(DisplayTutorialDialogues(null));
+        StopAllCoroutines();
         
         inActivityTutorial = false;
         inDreamTutorial = false;

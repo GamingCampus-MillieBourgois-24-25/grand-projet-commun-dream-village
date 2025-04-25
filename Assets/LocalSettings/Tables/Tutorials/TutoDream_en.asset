@@ -72,11 +72,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 364387201024
-    m_Localized: "The night\u2019s over! Head to your journal to see what happened."
-    m_Metadata:
-      m_Items: []
-  - m_Id: 365498691584
-    m_Localized: Hey, you got money and exp congratulations!
+    m_Localized: "The night\u2019s over! Look. You got money and exp. Congratulations!"
     m_Metadata:
       m_Items: []
   references:
