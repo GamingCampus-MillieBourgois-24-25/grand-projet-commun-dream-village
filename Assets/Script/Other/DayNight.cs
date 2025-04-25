@@ -35,9 +35,11 @@ public class DayNight : MonoBehaviour
     [SerializeField] private float animationDuration;
 
     [Header("Music Settings")]
-    [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip dayMusic;
     [SerializeField] private AudioClip nightMusic;
+    [SerializeField] private AudioClip dayTransitionMusic;
+    [SerializeField] private AudioClip nightTransitionMusic;
+    [SerializeField] private AudioClip noneButtonSFX;
     
     private Coroutine activityErrorCoroutine;
     public Coroutine nightDreamTimeCoroutine;
@@ -60,6 +62,14 @@ public class DayNight : MonoBehaviour
             timeContainer.SetActive(false);
         }
         dayNightButton.sprite = isDay ? nightSprite : daySprite;
+        if (isDay)
+        {
+            GM.SM.PlayMusic(dayMusic, true);
+        }
+        else
+        {
+            GM.SM.PlayMusic(nightMusic, true);
+        }
     }
 
     private IEnumerator ShowActivityErrorText()
@@ -100,6 +110,7 @@ public class DayNight : MonoBehaviour
             {
                 if (inhabitant.isInActivity) // Pas passer en mode nuit si un habitant est en activité
                 {
+                    GM.SM.PlaySFX(noneButtonSFX);
                     if (activityErrorCoroutine != null)
                     {
                         StopCoroutine(activityErrorCoroutine);
@@ -136,6 +147,10 @@ public class DayNight : MonoBehaviour
         }
         if (isDay)
         {
+            GM.SM.PlayMusic(dayTransitionMusic, false, () =>
+            {
+                GM.SM.PlayMusic(dayMusic, true);
+            });
             GM.Cjm.CheckStatsAndHandleDeparture();
             GM.Cjm.CheckForHeartBonus();
             Debug.Log("Daytime: Checking stats and handling departure.");
@@ -157,6 +172,10 @@ public class DayNight : MonoBehaviour
         }
         else
         {
+            GM.SM.PlayMusic(nightTransitionMusic, false, () =>
+            {
+                GM.SM.PlayMusic(nightMusic, true);
+            });
             LMotion.Create(0, target.x, animationDuration)
                 .WithEase(Ease.OutCubic)
                 .WithOnComplete(() =>
@@ -179,6 +198,7 @@ public class DayNight : MonoBehaviour
         sun.color = isDay ? dayColor : nightColor;
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
+        
         RectTransform transform = curtain.GetComponent<RectTransform>();
         Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
         LMotion.Create(target.x, 0, animationDuration)
@@ -192,11 +212,15 @@ public class DayNight : MonoBehaviour
         dayNightButton.sprite = isDay ? nightSprite : daySprite;
         //timeText.text = isDay ? "Night" : "Day";
 
-        musicSource.clip = isDay ? dayMusic : nightMusic;
-        musicSource.Play();
-
+        /*if (isDay)
+        {
+            GM.SM.PlayMusic(dayMusic, true);
+        }
+        else
+        {
+            GM.SM.PlayMusic(nightMusic, true);
+        }*/
     }
-
 
     public IEnumerator StartWaitingTime()
     {
@@ -219,4 +243,7 @@ public class DayNight : MonoBehaviour
             timeContainer.SetActive(false);
         }
     }
+    
+    public bool IsDay => isDay;
+
 }

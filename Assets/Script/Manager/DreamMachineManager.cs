@@ -28,6 +28,10 @@ public class DreamMachineManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goldPreviewText;
     [SerializeField] private TextMeshProUGUI expPreviewText;
     [SerializeField] private TextMeshProUGUI timePreviewText;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip applyDreamsSFX;
+
     private List<InhabitantInstance> selectedInhabitants = new();
     private GameObject selectedButton;
     
@@ -52,7 +56,7 @@ public class DreamMachineManager : MonoBehaviour
     private void Start()
     {
         UpdateSelectionCanvas();
-        
+
         if (selectedInhabitants.Count > 0)
         {
             var current = selectedInhabitants[currentIndex];
@@ -75,34 +79,37 @@ public class DreamMachineManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0)
+        if (dreamMachineCanvas.activeSelf)
         {
-            Touch touch = Input.GetTouch(0);
-
-            switch (touch.phase)
+            if (Input.touchCount > 0)
             {
-                case TouchPhase.Began:
-                    // Enregistrer la position de d�part du swipe
-                    startTouchPosition = touch.position;
-                    break;
+                Touch touch = Input.GetTouch(0);
 
-                case TouchPhase.Ended:
-                    float swipeDistance = touch.position.x - startTouchPosition.x;
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        // Enregistrer la position de d�part du swipe
+                        startTouchPosition = touch.position;
+                        break;
 
-                    if (Mathf.Abs(swipeDistance) > swipeThreshold)
-                    {
-                        if (swipeDistance > 0)
+                    case TouchPhase.Ended:
+                        float swipeDistance = touch.position.x - startTouchPosition.x;
+
+                        if (Mathf.Abs(swipeDistance) > swipeThreshold)
                         {
-                            // Swipe � droite -> personnage pr�c�dentt
-                            PreviousInhabitant();
+                            if (swipeDistance > 0)
+                            {
+                                // Swipe � droite -> personnage pr�c�dentt
+                                PreviousInhabitant();
+                            }
+                            else
+                            {
+                                // Swipe � gauche -> personnage suivant
+                                NextInhabitant();
+                            }
                         }
-                        else
-                        {
-                            // Swipe � gauche -> personnage suivant
-                            NextInhabitant();
-                        }
-                    }
-                    break;
+                        break;
+                }
             }
         }
     }
@@ -400,7 +407,7 @@ public class DreamMachineManager : MonoBehaviour
         // ♻️ Reset
         selectedDreamByInhabitant.Clear();
         validateButton.interactable = false;
-        
+        numberDreamSelected = 0;
         dreamsByInhabitant.Clear();
         foreach (var inhabitant in selectedInhabitants)
         {
