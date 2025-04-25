@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 34589077504
-    m_Localized: Bonjour {0}
+    m_Localized: Bonjour {0}.
     m_Metadata:
       m_Items:
       - rid: 6238822977345945602

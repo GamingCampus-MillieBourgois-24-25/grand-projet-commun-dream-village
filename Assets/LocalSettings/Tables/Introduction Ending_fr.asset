@@ -24,13 +24,13 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9813323776
-    m_Localized: "Si vous oubliez quelque chose, ouvrez simplement le menu OPTIONS.
-      Vous y trouverez un bouton \xAB\_REVOIR LE TUTORIEL\_\xBB\_!"
+    m_Localized: Si jamais tu oublies quelque chose, juste ouvre le menu des OPTIONS.
+      Tu y trouveras le bouton pour rejouer le TUTORIEL.
     m_Metadata:
       m_Items: []
   - m_Id: 17547620352
-    m_Localized: "Adieu, {0}. Soyez le meilleur maire \u2013 et le plus grand porteur
-      de r\xEAves \u2013 que {1} ait jamais connu."
+    m_Localized: "Au revoir, {0}. Soit le meilleur maire - et le meilleur porte-r\xEAve
+      - que {1} ait jamais vu."
     m_Metadata:
       m_Items:
       - rid: 6238822977345945606

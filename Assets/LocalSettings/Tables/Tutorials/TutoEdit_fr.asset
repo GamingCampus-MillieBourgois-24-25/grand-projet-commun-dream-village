@@ -19,17 +19,17 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 4058738688
-    m_Localized: "Vous pouvez acc\xE9der \xE0 votre inventaire via le mode \xE9dition
+    m_Localized: "Tu peux acc\xE9der \xE0 l'inventaire via le mode \xE9dition juste
       ici."
     m_Metadata:
       m_Items: []
   - m_Id: 6227193856
-    m_Localized: Choisissez la maison de votre nouvel habitant et placez-la sur la
-      carte !
+    m_Localized: "Choisis la maison de ton nouvel habitant et place la sur l'\xEEle
+      !"
     m_Metadata:
       m_Items: []
   - m_Id: 9364533248
-    m_Localized: "Tr\xE8s bien, vous pouvez confirmer les modifications."
+    m_Localized: "Super. Tu peux quitter le mode \xE9dition."
     m_Metadata:
       m_Items: []
   references:

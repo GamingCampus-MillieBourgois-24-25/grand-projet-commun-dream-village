@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Tuto_House_006
   m_EditorClassIdentifier: 
   ID: Tuto_House_006
-  tutorialID: 21
+  tutorialID: 20
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:72d91b9481dd09147846ac20901bda6a
     m_TableEntryReference:
-      m_KeyId: 46970662912
+      m_KeyId: 3213609877073920
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -29,6 +29,9 @@ MonoBehaviour:
   tutorialType: 5
   shouldHoldDialogues: 0
   shouldGiveRareMoney: 0
+  isDialogueBoxTop: 0
+  nosphyPosition: 0
+  highlightJournalRightPage: 1
   references:
     version: 2
     RefIds: []

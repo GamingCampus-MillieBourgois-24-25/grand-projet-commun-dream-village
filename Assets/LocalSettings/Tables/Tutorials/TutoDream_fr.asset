@@ -20,7 +20,7 @@ MonoBehaviour:
     - rid: 6238822977345945608
   m_TableData:
   - m_Id: 345529610240
-    m_Localized: "Maintenant que {0} va mieux, faisons-le r\xEAver !"
+    m_Localized: "Maintenant que {0} se sent mieux, faisons-le r\xEAver !"
     m_Metadata:
       m_Items:
       - rid: 6238822977345945608
@@ -31,54 +31,48 @@ MonoBehaviour:
       m_Items:
       - rid: 6238822977345945608
   - m_Id: 348230742016
-    m_Localized: "Cliquez d'abord sur le bouton Nuit. Attention\_! Vous ne pouvez
-      pas cliquer sur le bouton Nuit si l'un de vos villageois est en pleine activit\xE9."
+    m_Localized: "Tout d'abord, clique sur le bouton nuit. Mais attention ! Tu ne
+      peux pas cliquer dessus si un de tes villageois est au milieu d'une activit\xE9."
     m_Metadata:
       m_Items: []
   - m_Id: 351351304192
-    m_Localized: "Maintenant qu\u2019il fait nuit, vous pouvez faire votre travail
-      de porteur de r\xEAves."
+    m_Localized: "Maintenant qu'il fait nuit, tu peux faire ton travail de porte-r\xEAve."
     m_Metadata:
       m_Items: []
   - m_Id: 354111156224
-    m_Localized: "Cliquez sur le bouton r\xEAve."
+    m_Localized: "Clique sur le bouton r\xEAve."
     m_Metadata:
       m_Items: []
   - m_Id: 357995081728
-    m_Localized: "Ici, vous pouvez choisir qui r\xEAvera ce soir."
+    m_Localized: "Ici tu peux choisir qui peut r\xEAver ce soir."
     m_Metadata:
       m_Items: []
   - m_Id: 360339697664
-    m_Localized: "Plus les villageois r\xEAvent, plus vous gagnerez, mais plus cela
-      prendra du temps."
+    m_Localized: "Plus de villageois r\xEAvent, plus tu gagnes de l'argent, mais
+      c'est aussi plus long."
     m_Metadata:
       m_Items: []
   - m_Id: 361094672384
-    m_Localized: "Pour chaque habitant, trois options al\xE9atoires vous seront propos\xE9es
-      qui influenceront leurs statistiques une derni\xE8re fois."
+    m_Localized: "Pour chaque habitant, il y aura trois options al\xE9atoires qui
+      vont influencer chacune de leurs statistiques une derni\xE8re fois."
     m_Metadata:
       m_Items: []
   - m_Id: 362424266752
-    m_Localized: "Et dans chaque option, il y aura au moins un j'aime et un je n'aime
-      pas, mais dans un ordre diff\xE9rent."
+    m_Localized: "Et, pour chaque option il y aura toujours au minimum un int\xE9r\xEAt
+      et une haine, mais dans un ordre diff\xE9rent."
     m_Metadata:
       m_Items: []
   - m_Id: 363011469312
-    m_Localized: "Choisissez-en un\_!"
+    m_Localized: Choisis-en une !
     m_Metadata:
       m_Items: []
   - m_Id: 363615449088
-    m_Localized: "Bien. Mais voyez-vous, donner forme \xE0 un r\xEAve prend du temps.
-      Alors, une fois de plus, je vous ai eu."
+    m_Localized: "Super. Mais comme tu peux le voir, cr\xE9er des r\xEAves prend
+      du temps. Donc, encore une derni\xE8re fois, je te couvre les frais."
     m_Metadata:
       m_Items: []
   - m_Id: 364387201024
-    m_Localized: "La nuit est finie\_! Consultez votre journal pour voir ce qui s'est
-      pass\xE9."
-    m_Metadata:
-      m_Items: []
-  - m_Id: 365498691584
-    m_Localized: "H\xE9, tu as de l'argent et de l'exp\xE9rience, f\xE9licitations
+    m_Localized: "La nuit est termin\xE9e ! Tu as re\xE7u des sous et de l'exp. Bravo
       !"
     m_Metadata:
       m_Items: []
