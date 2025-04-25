@@ -94,9 +94,7 @@ public class NotificationManager
     public static void CreateInactivityNotification()
     {
         if(inactivityNotificationID != -1)
-        {
-            CancelNotification(inactivityNotificationID); // Annuler la notification d'inactivité existante
-        }
+            return;
 
 
         string title = "Where are you?";
