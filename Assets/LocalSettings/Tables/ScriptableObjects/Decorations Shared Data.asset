@@ -10,40 +10,56 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Stats Shared Data
+  m_Name: Decorations Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Stats
-  m_TableCollectionNameGuidString: 237bcc55320b2ff4a872398eb2b6a9bc
+  m_TableCollectionName: Decorations
+  m_TableCollectionNameGuidString: 85ab25c21abf4e84189cac0113679919
   m_Entries:
-  - m_Id: 4587220992
-    m_Key: Mood
+  - m_Id: 18148925440
+    m_Key: Bush
     m_Metadata:
       m_Items: []
-  - m_Id: 6801813504
-    m_Key: Serenity
+  - m_Id: 21030412288
+    m_Key: Fence1
     m_Metadata:
       m_Items: []
-  - m_Id: 9721049088
-    m_Key: Energy
+  - m_Id: 24075476992
+    m_Key: Fence2
     m_Metadata:
       m_Items: []
-  - m_Id: 759150019780608
-    m_Key: Pronouns_Male
+  - m_Id: 26927603712
+    m_Key: Flower
     m_Metadata:
       m_Items: []
-  - m_Id: 759292756140032
-    m_Key: Pronouns_Female
+  - m_Id: 81705213952
+    m_Key: Rock1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 133030912000
+    m_Key: Rock2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 143030132736
+    m_Key: Rock3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 154707075072
+    m_Key: Tree1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 169940787200
+    m_Key: Tree2
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 4777453321741402114
+    rid: 6238823068864086034
   references:
     version: 2
     RefIds:
-    - rid: 4777453321741402114
+    - rid: 6238823068864086034
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
         asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1745416066544
+        m_CustomEpoch: 1745597285657

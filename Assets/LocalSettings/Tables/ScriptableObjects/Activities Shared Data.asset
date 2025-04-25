@@ -10,40 +10,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Stats Shared Data
+  m_Name: Activities Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Stats
-  m_TableCollectionNameGuidString: 237bcc55320b2ff4a872398eb2b6a9bc
+  m_TableCollectionName: Activities
+  m_TableCollectionNameGuidString: 7adf37f9dcac6834195d42044c6bafe5
   m_Entries:
-  - m_Id: 4587220992
-    m_Key: Mood
+  - m_Id: 5599567872
+    m_Key: Bench
     m_Metadata:
       m_Items: []
-  - m_Id: 6801813504
-    m_Key: Serenity
+  - m_Id: 40953356288
+    m_Key: Cinema
     m_Metadata:
       m_Items: []
-  - m_Id: 9721049088
-    m_Key: Energy
+  - m_Id: 57990619136
+    m_Key: CoffeShop
     m_Metadata:
       m_Items: []
-  - m_Id: 759150019780608
-    m_Key: Pronouns_Male
+  - m_Id: 94384594944
+    m_Key: Fountain
     m_Metadata:
       m_Items: []
-  - m_Id: 759292756140032
-    m_Key: Pronouns_Female
+  - m_Id: 115393863680
+    m_Key: Gym
+    m_Metadata:
+      m_Items: []
+  - m_Id: 134171762688
+    m_Key: Librairy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 160059006976
+    m_Key: Pool
+    m_Metadata:
+      m_Items: []
+  - m_Id: 182808911872
+    m_Key: Well
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 4777453321741402114
+    rid: 6238823068864086033
   references:
     version: 2
     RefIds:
-    - rid: 4777453321741402114
+    - rid: 6238823068864086033
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
         asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1745416066544
+        m_CustomEpoch: 1745597174389
