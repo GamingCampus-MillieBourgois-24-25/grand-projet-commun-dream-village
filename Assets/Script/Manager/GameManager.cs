@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 {
@@ -45,6 +46,11 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public GameObject journalPanel;
     public GameObject inventoryPanel;
     public GameObject shopPanel;
+    public Button skipWithStarButton;
+    public Button skipWithAdButton;
+
+    [Header("UI Canvas")]
+    public Canvas chooseSkipCanvas;
 
     DateTime lastTimeSaved;
     Dictionary<string, DisplayableDream> selectedDreamByInhabitantTemp;
@@ -233,11 +239,22 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         }
     }
 
-    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject)
+    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject, bool isActivity)
     {
         int timeStars = int.Parse(starText.text);
         if (player.CanSpendStar(timeStars)) {
             player.SpendStar(timeStars);
+            chooseSkipCanvas.gameObject.SetActive(false);
+            if (isActivity) {
+                buildingObject.FinishActivity();
+            }
+        }
+    }
+
+    public void SkipActivityWithADS(BuildingObject buildingObject, bool isActivity)
+    {
+        if (isActivity)
+        {
             buildingObject.FinishActivity();
         }
     }
@@ -323,6 +340,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         //dayNight.isDay = data.isDay;
 
 
+        dayNight.TimeRemaining = data.timeRemainingNight;
         if (dayNight.TimeRemaining > 0f)
         {
             dayNight.isDay = false;
@@ -332,7 +350,6 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
             dayNight.isDay = true;
         }
 
-        dayNight.TimeRemaining = data.timeRemainingNight;
 
         selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
         foreach (var kvp in data.selectedDreamByInhabitant)

@@ -23,12 +23,8 @@ MonoBehaviour:
       shop. Let\u2019s see what it is."
     m_Metadata:
       m_Items: []
-  - m_Id: 25479049216
-    m_Localized: There are multiple sections in the shop.
-    m_Metadata:
-      m_Items: []
   - m_Id: 29044207616
-    m_Localized: Look! You can buy this new inhabitant in the inhabitant section.
+    m_Localized: You can buy this new inhabitant in the inhabitant section.
     m_Metadata:
       m_Items: []
   - m_Id: 32408039424
@@ -40,7 +36,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 45867560960
-    m_Localized: Quit the shop.
+    m_Localized: You can now quit the shop.
     m_Metadata:
       m_Items: []
   references:

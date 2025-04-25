@@ -45,8 +45,8 @@ public class CharacterJournalManager : MonoBehaviour
     [SerializeField] private GameObject preferencePrefab;
 
     [Header("Audio Settings")]
-    [SerializeField] private AudioSource navAudioSource;
-    [SerializeField] private AudioClip switchSound;
+    [SerializeField] private AudioClip switchPageSFX;
+    [SerializeField] private AudioClip noneButtonSFX;
 
     [SerializeField] private InputActionReference swipeAction;
 
@@ -308,20 +308,30 @@ public class CharacterJournalManager : MonoBehaviour
 
     public void BS_ShowNext()
     {
-        if (navAudioSource != null && switchSound != null)
+        if (inhabitants.Count > 1)
         {
-            navAudioSource.PlayOneShot(switchSound);
+            GM.SM.PlaySFX(switchPageSFX);
+        } 
+        else
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
         }
+
         currentIndex = (currentIndex + 1) % inhabitants.Count;
         DisplayInhabitant();
     }
 
     public void BS_ShowPrevious()
     {
-        if (navAudioSource != null && switchSound != null)
+        if (inhabitants.Count > 1)
         {
-            navAudioSource.PlayOneShot(switchSound);
+            GM.SM.PlaySFX(switchPageSFX);
         }
+        else
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+        }
+
         currentIndex = (currentIndex - 1 + inhabitants.Count) % inhabitants.Count;
         DisplayInhabitant();
     }

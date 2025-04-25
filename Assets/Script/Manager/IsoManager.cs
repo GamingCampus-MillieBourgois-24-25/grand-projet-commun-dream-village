@@ -522,6 +522,7 @@ public class IsoManager : MonoBehaviour
         {
             HideMainUI(false);
             GM.JournalPanel.SetActive(true);
+            stockCanvas.gameObject.SetActive(false);
         }
 
         tileRenderer.enabled = isEditMode;

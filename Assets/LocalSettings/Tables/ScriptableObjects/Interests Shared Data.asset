@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Interests Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Interests
+  m_TableCollectionNameGuidString: 2f48478efc80c5047b91d5b74f4300f1
+  m_Entries:
+  - m_Id: 20615176192
+    m_Key: Alone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33504272384
+    m_Key: Beach
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49547485184
+    m_Key: Birds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64806363136
+    m_Key: Books
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81503887360
+    m_Key: Candies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 103138107392
+    m_Key: Cats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 146234580992
+    m_Key: Cosplay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167331930112
+    m_Key: Day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 181621923840
+    m_Key: Dogs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 197283454976
+    m_Key: Draw
+    m_Metadata:
+      m_Items: []
+  - m_Id: 213930647552
+    m_Key: Fast_Food
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240925188096
+    m_Key: Flowers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258788728832
+    m_Key: Ice_Cream
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319979429888
+    m_Key: Maths
+    m_Metadata:
+      m_Items: []
+  - m_Id: 336261718016
+    m_Key: Movies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357191294976
+    m_Key: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377621749760
+    m_Key: Night
+    m_Metadata:
+      m_Items: []
+  - m_Id: 392268259328
+    m_Key: People
+    m_Metadata:
+      m_Items: []
+  - m_Id: 427441692672
+    m_Key: Photo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 460593471488
+    m_Key: Rain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 475562942464
+    m_Key: Sleep
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496882589696
+    m_Key: Social_Medias
+    m_Metadata:
+      m_Items: []
+  - m_Id: 525366108160
+    m_Key: Space
+    m_Metadata:
+      m_Items: []
+  - m_Id: 554063536128
+    m_Key: Travel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 572271009792
+    m_Key: Video_Games
+    m_Metadata:
+      m_Items: []
+  - m_Id: 620442591232
+    m_Key: Workout
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6238823068864086035
+  references:
+    version: 2
+    RefIds:
+    - rid: 6238823068864086035
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1745597480089

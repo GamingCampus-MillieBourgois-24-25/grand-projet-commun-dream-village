@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private bool allowSFX = true;
 
     [Header("Sounds Generics")]
-    [SerializeField] AudioClip defaultClickSound;
+    [SerializeField] public AudioClip defaultClickSound;
 
     private Action onMusicEndCallback;
     private bool waitingForMusicToEnd;
