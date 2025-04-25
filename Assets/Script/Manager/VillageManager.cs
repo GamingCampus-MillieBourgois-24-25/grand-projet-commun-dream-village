@@ -17,6 +17,18 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     }
 
 
+    private void Start()
+    {
+        if (inhabitants.Count == 0)
+        {
+            Transform playerIslandObject = GM.Instance.playerIslandObject;
+            GameObject house = GM.Instance.GetInhabitantByName("Willith Warm").InstantiatePrefab;
+            GameObject houseInstanciate = Instantiate(house, willithDefaultHousePosition, house.transform.rotation, playerIslandObject);
+
+            CreateInstanceofScriptable(GM.Instance.GetInhabitantByName("Willith Warm"), houseInstanciate);
+        }
+    }
+
     public void CreateInstanceofScriptable<T>(T _item, GameObject _obj) where T : IScriptableElement
     {
         switch (_item)
@@ -98,15 +110,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
 
             inhabitants.Add(loadedInhabitant);
         }
-
-        if(inhabitants.Count == 0)
-        {
-            GameObject house = GM.Instance.GetInhabitantByName("Willith Warm").InstantiatePrefab;
-            GameObject houseInstanciate = Instantiate(house, willithDefaultHousePosition, house.transform.rotation, playerIslandObject);
-
-            CreateInstanceofScriptable(GM.Instance.GetInhabitantByName("Willith Warm"), houseInstanciate);
-        }
-
 
 
         foreach (var buildingData in data.buildings)

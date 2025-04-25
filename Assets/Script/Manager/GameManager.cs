@@ -119,6 +119,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         // Load all dream
         dreamMachineManager.selectedDreamByInhabitant = new Dictionary<InhabitantInstance, DisplayableDream>();
+        if(selectedDreamByInhabitantTemp == null)
+            selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
         foreach (var kvp in selectedDreamByInhabitantTemp)
         {
             InhabitantInstance inhabitant = villageManager.GetInhabitant(GetInhabitantByName(kvp.Key));
