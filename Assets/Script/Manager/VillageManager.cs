@@ -8,8 +8,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     public List<InhabitantInstance> inhabitants { get; private set; } = new List<InhabitantInstance>();
     public List<BuildingObject> buildings { get; private set; } = new List<BuildingObject>();
 
-    List<PlaceableObject> decorations = new List<PlaceableObject>();
-    List<string> decorationNames = new List<string>();
+    List<DecorationObject> decorations = new List<DecorationObject>();
 
 
     [System.Serializable]
@@ -17,9 +16,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     {
         public List<BuildingObject.SavePartData> buildings = new List<BuildingObject.SavePartData>();
         public List<InhabitantInstance.SavePartData> inhabitants = new List<InhabitantInstance.SavePartData>();
-
-        public List<string> decorations = new List<string>();
-        public List<Vector3Int> decorationPositions = new List<Vector3Int>();
+        public List<DecorationObject.SavePartData> decorations = new List<DecorationObject.SavePartData>();
     }
 
 
@@ -54,8 +51,8 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
                 Debug.Log($"New building added: {building.Name}");
                 break;
             case Decoration decoration:
-                decorations.Add(_obj.GetComponent<PlaceableObject>());
-                decorationNames.Add(decoration.Name);
+                DecorationObject loadedDecoration = _obj.GetComponent<DecorationObject>();
+                decorations.Add(loadedDecoration);
                 Debug.Log($"New decoration added: {decoration.Name}");
                 break;
             default:
@@ -109,11 +106,9 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         {
             data.inhabitants.Add(inhabitant.Serialize());
         }
-
-        for (int i = 0; i < decorations.Count; i++)
+        foreach (var decoration in decorations)
         {
-            data.decorations.Add(decorationNames[i]);
-            data.decorationPositions.Add(decorations[i].OriginalPosition);
+            data.decorations.Add(decoration.Serialize());
         }
 
         return data;
@@ -139,22 +134,20 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         foreach (var buildingData in data.buildings)
         {
             GameObject building = GM.Instance.GetBuildingByName(buildingData.baseBuildingName).InstantiatePrefab;
-            GameObject buildingInstanciate = Instantiate(building, Vector3.zero, building.transform.rotation,playerIslandObject);
+            GameObject buildingInstanciate = Instantiate(building, Vector3.zero, building.transform.rotation, playerIslandObject);
 
             BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
             loadedBuilding.Deserialize(buildingData);
             buildings.Add(loadedBuilding);
         }
 
-        for (int i = 0; i < data.decorations.Count; i++)
+        foreach (var decorationData in data.decorations)
         {
-            GameObject decoration = GM.Instance.GetDecorationByName(data.decorations[i]).InstantiatePrefab;
+            GameObject decoration = GM.Instance.GetDecorationByName(decorationData.baseDecorationName).InstantiatePrefab;
             GameObject decorationInstanciate = Instantiate(decoration, Vector3.zero, decoration.transform.rotation, playerIslandObject);
-            PlaceableObject loadedDecoration = decorationInstanciate.GetComponent<PlaceableObject>();
 
-            loadedDecoration.OriginalPosition = data.decorationPositions[i];
-            loadedDecoration.ResetPosition();
-
+            DecorationObject loadedDecoration = decorationInstanciate.GetComponent<DecorationObject>();
+            loadedDecoration.Deserialize(decorationData);
             decorations.Add(loadedDecoration);
         }
 

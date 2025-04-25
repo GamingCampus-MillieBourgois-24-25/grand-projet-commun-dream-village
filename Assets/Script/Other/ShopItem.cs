@@ -167,7 +167,7 @@ public class ShopItem : MonoBehaviour
             itemOwnedQuantityText.text = ownedQuantity.ToString() + " OWNED";
             CanBuyItem(item);
 
-            Task.Run(() => GM.Instance.player.Save("PlayerData"));
+            GM.Instance.player.Save("PlayerData");
         }
     }
 

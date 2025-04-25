@@ -364,9 +364,9 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public void SaveGame()
     {
         SetActualTime();
-        Task.Run(() => this.Save("GameManager"));
-        Task.Run(() => villageManager.Save("VillageManager"));
-        Task.Run(() => player.Save("PlayerData"));
+        this.Save("GameManager");
+        villageManager.Save("VillageManager");
+        player.Save("PlayerData");
     }
     #endregion
 }

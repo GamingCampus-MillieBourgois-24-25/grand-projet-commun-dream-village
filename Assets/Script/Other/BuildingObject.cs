@@ -243,7 +243,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         GM.Instance.player.AddXP(100);
         Destroy(remainingTimeUI);
 
-        Task.Run(() => GM.VM.Save("VillageManager"));
+        GM.VM.Save("VillageManager");
 
         if (notificationID != -1)
         {

@@ -141,10 +141,10 @@ static public class SaveScript
     }
 
 
-    public static async Task Save<Data>(this ISaveable<Data> saveable, string fileName) where Data : ISaveData
+    public static void Save<Data>(this ISaveable<Data> saveable, string fileName) where Data : ISaveData
     {
         Data data = saveable.Serialize();
-        await SerializeDataToFile(data, fileName);
+        SerializeDataToFile(data, fileName).GetAwaiter().GetResult();
         // Sérialisation avec Newtonsoft.Json
     }
 

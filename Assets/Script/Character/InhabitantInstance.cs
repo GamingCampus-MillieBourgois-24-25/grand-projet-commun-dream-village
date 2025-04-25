@@ -151,7 +151,7 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
             data.discoveredDislikes.Add(dislike.interestName);
         }
 
-        data.housePos = houseObject.GetComponent<PlaceableObject>().OriginalPosition;
+        data.housePos = houseObject.gameObject.GetComponent<PlaceableObject>().OriginalPosition;
 
         return data;
     }
