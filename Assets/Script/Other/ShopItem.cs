@@ -66,7 +66,10 @@ public class ShopItem : MonoBehaviour
             foreach (var bonus in building.AttributeEffects)
             {
                 GameObject bonusObj = Instantiate(buildingBonusPrefab, buildingBonusContainer.transform);
-                bonusObj.GetComponent<Image>().sprite = bonus.attribute.icon;
+                if(bonus.attribute != null && bonus.attribute.icon != null)
+                {
+                    bonusObj.GetComponent<Image>().sprite = bonus.attribute.icon;
+                }
             }
         }
     }

@@ -426,7 +426,7 @@ MonoBehaviour:
   buyButton: {fileID: 7409716571653689823}
   disabledObj: {fileID: 2132341495342276423}
   lockedImage: {fileID: 3287963467750218392}
-  unlockedLvlText: {fileID: 0}
+  unlockedLvlText: {fileID: 6825344247158712974}
   rotatedCard: {fileID: 4804895474226293227}
   buildingInfos: {fileID: 8227346085760738319}
   infoButton: {fileID: 1073564125174434076}
