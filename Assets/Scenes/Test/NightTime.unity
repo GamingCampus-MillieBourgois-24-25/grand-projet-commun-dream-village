@@ -13806,6 +13806,11 @@ PrefabInstance:
       objectReference: {fileID: 686716016}
     - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}
+      propertyPath: playerIslandObject
+      value: 
+      objectReference: {fileID: 1474735224}
+    - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
+        type: 3}
       propertyPath: dreamMachineManager
       value: 
       objectReference: {fileID: 2125034435}

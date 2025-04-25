@@ -85,10 +85,12 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
 
     public void Deserialize(SavePartData data)
     {
+        Transform playerIslandObject = GM.Instance.playerIslandObject;
+
         foreach (var inhabitantData in data.inhabitants)
         {
             GameObject house = GM.Instance.GetInhabitantByName(inhabitantData.baseInhabitantName).InstantiatePrefab;
-            GameObject houseInstanciate = Instantiate(house, Vector3.zero, house.transform.rotation);
+            GameObject houseInstanciate = Instantiate(house, Vector3.zero, house.transform.rotation, playerIslandObject);
 
             InhabitantInstance loadedInhabitant = new InhabitantInstance();
             loadedInhabitant.houseObject = houseInstanciate.GetComponent<HouseObject>();
@@ -100,7 +102,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         if(inhabitants.Count == 0)
         {
             GameObject house = GM.Instance.GetInhabitantByName("Willith Warm").InstantiatePrefab;
-            GameObject houseInstanciate = Instantiate(house, willithDefaultHousePosition, house.transform.rotation);
+            GameObject houseInstanciate = Instantiate(house, willithDefaultHousePosition, house.transform.rotation, playerIslandObject);
 
             CreateInstanceofScriptable(GM.Instance.GetInhabitantByName("Willith Warm"), houseInstanciate);
         }
@@ -110,7 +112,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         foreach (var buildingData in data.buildings)
         {
             GameObject building = GM.Instance.GetBuildingByName(buildingData.baseBuildingName).InstantiatePrefab;
-            GameObject buildingInstanciate = Instantiate(building, Vector3.zero, building.transform.rotation);
+            GameObject buildingInstanciate = Instantiate(building, Vector3.zero, building.transform.rotation,playerIslandObject);
 
             BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
             loadedBuilding.Deserialize(buildingData);
