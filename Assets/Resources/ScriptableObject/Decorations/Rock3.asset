@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rock3
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Rock3
-  <Icon>k__BackingField: {fileID: 21300000, guid: 37396956628b61c4f8190af07830937b,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 1d9adf9d49c03ef40ba4a29c53cac7fa,
     type: 3}
   <InitialPrice>k__BackingField: 600
   <InstantiatePrefab>k__BackingField: {fileID: 3563223737624877808, guid: ec44551d9b83cd8428e05fb24188ca1d,

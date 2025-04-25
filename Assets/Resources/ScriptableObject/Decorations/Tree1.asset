@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tree1
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Tree1
-  <Icon>k__BackingField: {fileID: 21300000, guid: 37396956628b61c4f8190af07830937b,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 336388224de6d9a4fb3da815df67f042,
     type: 3}
   <InitialPrice>k__BackingField: 500
   <InstantiatePrefab>k__BackingField: {fileID: 3831955123217533689, guid: 2b61195a433a62b419f0a33a5cd9c74c,
