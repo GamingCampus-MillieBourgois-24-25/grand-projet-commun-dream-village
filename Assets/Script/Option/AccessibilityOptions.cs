@@ -48,7 +48,7 @@ public class AccessibilityOptions : MonoBehaviour
     public TextSpeedStruct CurrentTextSpeedStruct;
     
     #endregion
-
+    
     private void Awake()
     {
         InitLanguageDropdown();
@@ -106,7 +106,14 @@ public class AccessibilityOptions : MonoBehaviour
     {
         for (int i = 0; i < textSpeedButtons.Count; i++)
         {
-            textSpeedButtons[i].GetComponent<Image>().sprite = i == value ? selectedButtonSpeed : unselectedButtonSpeed;
+            if (i == value)
+            {
+                textSpeedButtons[i].GetComponent<Image>().sprite = selectedButtonSpeed;
+            }
+            else
+            {
+                textSpeedButtons[i].GetComponent<Image>().sprite = unselectedButtonSpeed;
+            }
         }
     }
     

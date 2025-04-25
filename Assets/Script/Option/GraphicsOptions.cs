@@ -1,6 +1,7 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GraphicsOptions : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class GraphicsOptions : MonoBehaviour
     public Vector2Int fpsLimitRange = new Vector2Int(30, 60);
     public string[] qualitySettings;
     public string currentQualitySettings;
+    public GameObject[] fpsLimitButton;
+    public Sprite textSpeedBG1;
+    public Sprite textSpeedBG2;
 
     [Header("Interface")] 
     public TMP_Text fpsText;
@@ -49,10 +53,31 @@ public class GraphicsOptions : MonoBehaviour
         QualitySettings.SetQualityLevel(qualitySettings.ToList().IndexOf(currentQualitySettings), false);
     }
     
-    public void SetTargetFrameRate(float frameRate)
+    public void SetTargetFrameRate(int frameRate)
     {
-        targetFrameRate = (int) Mathf.Lerp(fpsLimitRange.x, fpsLimitRange.y, frameRate);
-        Application.targetFrameRate = targetFrameRate;
-        fpsText.text = targetFrameRate.ToString();
+        switch (frameRate)
+        {
+            case 0:
+                Application.targetFrameRate = 30;
+                break;
+            case 1:
+                Application.targetFrameRate = 60;
+                break;
+            case 2:
+                Application.targetFrameRate = 120;
+                break;
+        }
+
+        for (int i = 0; i < fpsLimitButton.Length; i++)
+        {
+            if (i == frameRate)
+            {
+                fpsLimitButton[i].GetComponent<Image>().sprite = textSpeedBG1;
+            }
+            else
+            {
+                fpsLimitButton[i].GetComponent<Image>().sprite = textSpeedBG2;
+            }
+        }
     }
 }
