@@ -25,6 +25,9 @@ public class IsoManager : MonoBehaviour
     [SerializeField] private float yStockCanvas;
     //[SerializeField] private Button placeBtn;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip placeBuildingSFX;
+
     private GameObject canvasBottomLeft;
     private GameObject canvasBottomRight;
 
@@ -393,6 +396,8 @@ public class IsoManager : MonoBehaviour
     {
         if (obj == null || !CanPlaceObjectOnTilemap(obj)) return; // Sécurité
 
+        GM.SM.PlaySFX(placeBuildingSFX);
+
         float objectHeight = obj.GetComponent<Renderer>().bounds.size.y;
         // TODO: à changer plus tard si toutes les origines des batiments sont en bas !
         //float newYPosition = GM.IM.transform.position.y + (objectHeight / 2f);
@@ -577,7 +582,7 @@ public class IsoManager : MonoBehaviour
         Vector3 centerPos = tilemapBase.WorldToCell(_spawnPoint);
         centerPos.y += yMovingObject;
 
-        GameObject newObj = Instantiate(item.InstantiatePrefab, centerPos, item.InstantiatePrefab.transform.rotation);
+        GameObject newObj = Instantiate(item.InstantiatePrefab, centerPos, item.InstantiatePrefab.transform.rotation, GM.Instance.playerIslandObject);
         PlaceableObject placeable = newObj.GetComponent<PlaceableObject>();
 
         if (placeable != null)

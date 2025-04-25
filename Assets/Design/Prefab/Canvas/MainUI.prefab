@@ -653,7 +653,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 970814968489814052}
   - {fileID: 4494161222837160285}
   m_Father: {fileID: 2092376482516431829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -679,7 +678,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 7
+  m_ChildAlignment: 6
   m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -879,12 +878,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5830132024272549305}
-  m_Father: {fileID: 1020719783311974511}
+  m_Father: {fileID: 4031395759400396967}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 75, y: -75}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2884109786630706924
 CanvasRenderer:
@@ -3208,6 +3207,7 @@ RectTransform:
   m_Children:
   - {fileID: 6466705870912181547}
   - {fileID: 4632385012829620529}
+  - {fileID: 970814968489814052}
   m_Father: {fileID: 2092376482516431829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
@@ -3686,6 +3686,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TimeContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2628717218343375332, guid: a23d650dd155d3b489b87681ff0bc057,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4159930897163640737, guid: a23d650dd155d3b489b87681ff0bc057,
         type: 3}

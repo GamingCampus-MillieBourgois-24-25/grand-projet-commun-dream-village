@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 
 public class CharacterJournalManager : MonoBehaviour
 {
@@ -43,25 +44,70 @@ public class CharacterJournalManager : MonoBehaviour
     [SerializeField] private GameObject heartPrefab;
     [SerializeField] private GameObject preferencePrefab;
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip switchPageSFX;
+    [SerializeField] private AudioClip noneButtonSFX;
+
+    [SerializeField] private InputActionReference swipeAction;
+
     private List<InhabitantInstance> inhabitants;
     private int currentIndex = 0;
     
     private Vector2 startTouchPosition;
     private float swipeThreshold = 50f;
 
+
     private void Start()
     {
         inhabitants = GM.VM.inhabitants;
 
-        //nextButton.onClick.AddListener(ShowNext);
-        //previousButton.onClick.AddListener(ShowPrevious);
-
         DisplayInhabitant();
+
+        swipeAction.action.Enable();
+        swipeAction.action.started += OnSwipeStarted;
+        swipeAction.action.canceled += OnSwipeEnded;
     }
-    
-    private void Update()
+
+    private void OnEnable()
     {
-        if (Input.touchCount > 0)
+        swipeAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        swipeAction.action.Disable();
+    }
+
+    private void OnSwipeStarted(InputAction.CallbackContext context)
+    {
+        startTouchPosition = context.ReadValue<Vector2>();
+    }
+
+    private void OnSwipeEnded(InputAction.CallbackContext context)
+    {
+        if (journalCanvas.activeSelf)
+        {
+            Vector2 endTouchPosition = context.ReadValue<Vector2>();
+
+            Vector2 swipeDelta = endTouchPosition - startTouchPosition;
+
+            if (Mathf.Abs(swipeDelta.x) > swipeThreshold)
+            {
+                if (swipeDelta.x > 0)
+                {
+                    BS_ShowPrevious();
+                }
+                else
+                {
+                    BS_ShowNext();
+                }
+            }
+        }
+    }
+
+    /*private void Update()
+    {
+        if (Input.touchCount > 0) 
         {
             Touch touch = Input.GetTouch(0);
 
@@ -90,7 +136,7 @@ public class CharacterJournalManager : MonoBehaviour
                     break;
             }
         }
-    }
+    }*/
 
     public void DisplayInhabitant()
     {
@@ -100,7 +146,7 @@ public class CharacterJournalManager : MonoBehaviour
 
         iconImage.sprite = currentInhabitant.Icon;
         nameText.text = currentInhabitant.Name;
-        pronounsText.text = currentInhabitant.baseData.Pronouns.ToString();
+        pronounsText.text = currentInhabitant.baseData.GetPronouns()[0] + "/" + currentInhabitant.baseData.GetPronouns()[1] ;
         mbtiText.text = currentInhabitant.baseData.MBTI.ToString();
         personalitiesText.text = string.Join(" / ", currentInhabitant.baseData.Personnality);
         GoldMultiplierText.text = $"x{currentInhabitant.baseData.GoldMultiplier:F2}";
@@ -262,12 +308,30 @@ public class CharacterJournalManager : MonoBehaviour
 
     public void BS_ShowNext()
     {
+        if (inhabitants.Count > 1)
+        {
+            GM.SM.PlaySFX(switchPageSFX);
+        } 
+        else
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+        }
+
         currentIndex = (currentIndex + 1) % inhabitants.Count;
         DisplayInhabitant();
     }
 
     public void BS_ShowPrevious()
     {
+        if (inhabitants.Count > 1)
+        {
+            GM.SM.PlaySFX(switchPageSFX);
+        }
+        else
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+        }
+
         currentIndex = (currentIndex - 1 + inhabitants.Count) % inhabitants.Count;
         DisplayInhabitant();
     }

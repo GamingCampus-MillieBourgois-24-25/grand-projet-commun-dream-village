@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
     public static GameManager instance { get; private set; } //Singleton 
 
+    public Transform playerIslandObject;
+
     [Header("Managers")]
     public VillageManager villageManager;
     public IsoManager isoManager;
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public BuildingManager buildingManager;
     public DayNight dayNight;
     public DreamMachineManager dreamMachineManager;
+    public SoundManager soundManager;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -41,7 +44,6 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public GameObject journalPanel;
     public GameObject inventoryPanel;
     public GameObject shopPanel;
-
 
     DateTime lastTimeSaved;
     Dictionary<string, DisplayableDream> selectedDreamByInhabitantTemp;
@@ -117,6 +119,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         // Load all dream
         dreamMachineManager.selectedDreamByInhabitant = new Dictionary<InhabitantInstance, DisplayableDream>();
+        if(selectedDreamByInhabitantTemp == null)
+            selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
         foreach (var kvp in selectedDreamByInhabitantTemp)
         {
             InhabitantInstance inhabitant = villageManager.GetInhabitant(GetInhabitantByName(kvp.Key));
@@ -241,7 +245,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerEventData, results);
-        Debug.Log("results count ui: " + results.Count);
+        //Debug.Log("results count ui: " + results.Count);
 
         return results.Count > 0; // If there's any UI element under the pointer, return true
     }
@@ -310,7 +314,18 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     {
         lastTimeSaved = data.lastTimeConnected;
 
-        dayNight.isDay = data.isDay;
+        //dayNight.isDay = data.isDay;
+
+
+        if (dayNight.TimeRemaining > 0f)
+        {
+            dayNight.isDay = false;
+        }
+        else
+        {
+            dayNight.isDay = true;
+        }
+
         dayNight.TimeRemaining = data.timeRemainingNight;
 
         selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
@@ -340,15 +355,12 @@ public static class GM
     public static VillageManager VM => GameManager.instance.villageManager;
     public static DayNight DN => GameManager.instance.dayNight;
     public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
-    
     public static DialoguesManager Dm => GameManager.instance.dialoguesManager;
-    
     public static TutorialsManager Tm => GameManager.instance.tutorialsManager;
-    
-    
     public static AccessibilityOptions Ao => GameManager.instance.accessibilityOptions;
-  
     public static DreamMachineManager DMM => GameManager.instance.dreamMachineManager;
+    public static BuildingManager BM => GameManager.instance.buildingManager;
+    public static SoundManager SM => GameManager.instance.soundManager;
 
     public static GameObject DreamPanel => Instance.dreamPanel;
     public static GameObject DayNightPanel => Instance.dayNightPanel;
@@ -356,5 +368,4 @@ public static class GM
     public static GameObject InventoryPanel => Instance.inventoryPanel;
     public static GameObject ShopPanel => Instance.shopPanel;
 
-    public static BuildingManager BM => GameManager.instance.buildingManager;
 }
