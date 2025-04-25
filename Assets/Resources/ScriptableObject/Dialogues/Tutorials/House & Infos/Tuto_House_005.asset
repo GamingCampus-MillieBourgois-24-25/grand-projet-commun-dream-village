@@ -30,6 +30,9 @@ MonoBehaviour:
   tutorialType: 5
   shouldHoldDialogues: 0
   shouldGiveRareMoney: 0
+  isDialogueBoxTop: 0
+  nosphyPosition: 0
+  highlightJournalRightPage: 0
   references:
     version: 2
     RefIds: []

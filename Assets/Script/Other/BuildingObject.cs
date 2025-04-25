@@ -31,9 +31,10 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
         int lastWholeMinutes = Mathf.CeilToInt(timeRemaining / 60f);
         UpdateSkipText(lastWholeMinutes);
-        AddBSSkipFunction();
+        AddBSSkipFunctions();
 
-        if(notificationID == -1)
+
+        if (notificationID == -1 && inhabitantUsing != null && inhabitantUsing.baseData.Name != null)
         {
             string title = inhabitantUsing.baseData.Name + "has finished " + inhabitantUsing.baseData.GetPronouns()[1] + "activity!";
             string text = "Come back to see what " + inhabitantUsing.baseData.GetPronouns()[0] + (inhabitantUsing.baseData.isPlural() ? " are" : " is") + " doing!";
@@ -45,10 +46,13 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             timeRemaining -= Time.deltaTime;
 
             int currentWholeMinutes = Mathf.CeilToInt(timeRemaining / 60f);
-            if (currentWholeMinutes != lastWholeMinutes)
+            if (GM.Instance.skipWithStarButton.gameObject.activeSelf)
             {
-                lastWholeMinutes = currentWholeMinutes;
-                UpdateSkipText(currentWholeMinutes);
+                if (currentWholeMinutes != lastWholeMinutes)
+                {
+                    lastWholeMinutes = currentWholeMinutes;
+                    UpdateSkipText(currentWholeMinutes);
+                }
             }
 
             if (timeRemaining <= 0f)
@@ -110,7 +114,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
     private void CheckAndInstanciateRemainingTime()
     {
-        // S'assurer que l'UI est prï¿½sente
+        // S'assurer que l'UI est présente
         Transform existing = transform.Find("remainingTime");
         if (existing != null)
         {
@@ -124,33 +128,74 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             remainingTimeUI.SetActive(true);
         }
 
-        timeText = remainingTimeUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        timeText = remainingTimeUI.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+        Debug.Log(timeText);
         canvasBuilding.SetActive(false);
     }
 
     private void UpdateSkipText(int remainingMinutes)
     {
-        if (starText == null && remainingTimeUI != null)
+        if (starText == null)
         {
-            Transform starTransform = remainingTimeUI.transform.GetChild(2).GetChild(2).GetChild(0);
-
-            if (starTransform == null) return;
-
-            starText = starTransform.GetComponent<TextMeshProUGUI>();
+            starText = GM.Instance.skipWithStarButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         }
         if (starText == null) return;
 
         starText.text = remainingMinutes.ToString();
-    }
-    private void AddBSSkipFunction()
-    {
-        Button starButton = remainingTimeUI.transform.GetChild(2).GetComponent<Button>();
 
-        if (starText != null)
+        UpdateStarBTNInteractable(remainingMinutes);
+    }
+
+    private void UpdateStarBTNInteractable(int stars)
+    {
+        Button starButton = GM.Instance.skipWithStarButton;
+        if (GM.Instance.player.CanSpendStar(stars))
         {
-            starButton.onClick.AddListener(() => {
-                GM.Instance.TrySkipActivityWithStars(starText, this);
+            starButton.interactable = true;
+        }
+        else
+        {
+            starButton.interactable = false;
+        }
+    }
+
+    //private void UpdateSkipText(int remainingMinutes)
+    //{
+    //    if (starText == null && remainingTimeUI != null)
+    //    {
+    //        Transform starTransform = remainingTimeUI.transform.GetChild(0).GetChild(2).GetChild(2).GetChild(0);
+
+    //        if (starTransform == null) return;
+
+    //        starText = starTransform.GetComponent<TextMeshProUGUI>();
+
+    //    }
+    //    if (starText == null) return;
+
+    //    starText.text = remainingMinutes.ToString();
+    //}
+    private void AddBSSkipFunctions()
+    {
+        Button starButton = GM.Instance.skipWithStarButton;
+
+        if (starButton != null && starText != null)
+        {
+            starButton.onClick.RemoveAllListeners();
+            starButton.onClick.AddListener(() =>
+            {
+                GM.Instance.TrySkipActivityWithStars(starText, this, true);
+            });
+        }
+
+        Button adButton = GM.Instance.skipWithAdButton;
+
+        if (adButton != null)
+        {
+            adButton.onClick.RemoveAllListeners();
+            adButton.onClick.AddListener(() =>
+            {
+                GM.Instance.SkipActivityWithADS(this, true);
             });
         }
     }
@@ -230,13 +275,9 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             image.sprite = attributeEffect.attribute.icon;
         }
 
-        Button button = canvasBuilding.transform.GetChild(4).GetComponent<Button>();
-        button.onClick.AddListener(() => {                 
-            if (GM.Tm.inActivityTutorial)
-            {
-                GM.Tm.UnHold(26);
-            }
-        });
+        //Button button = canvasBuilding.transform.GetChild(3).GetComponent<Button>();
+        //button.onClick.RemoveAllListeners();
+        //button.onClick.AddListener(() => { DebugSetFirstInhabitant(); });
 
         canvasBuilding.transform.SetParent(transform, true);
         canvasBuilding.transform.position = this.transform.position + new Vector3(0, canvasBuilding.transform.position.y, 0);
@@ -289,7 +330,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     #region Save
     public void Deserialize(SavePartData data)
     {
-        inhabitantUsing = GM.VM.GetInhabitant(GM.Instance.GetInhabitantByName(data.inhabitantUsingName));
+        if (data.inhabitantUsingName != null) inhabitantUsing = GM.VM.GetInhabitant(GM.Instance.GetInhabitantByName(data.inhabitantUsingName));
         isUsed = data.isUsed;
         timeRemaining = data.timeRemaining;
 

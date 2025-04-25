@@ -105,8 +105,8 @@ public class PlaceableObject : MonoBehaviour
         int tilesZ = sizeInTiles.y;
 
         // Calcul de l'offset pour centrer correctement
-        float offsetX = (tilesX % 2 == 0) ? 0.5f * tilemap.cellSize.x : 0f; // 0.5 si pair, 0 si impair
-        float offsetZ = (tilesZ % 2 == 0) ? 0.5f * tilemap.cellSize.y : 0f;
+        float offsetX = (tilesX % 2 == 0) ? 0.5f * tilemap.cellSize.x : 1f; // 0.5 si pair, 0 si impair
+        float offsetZ = (tilesZ % 2 == 0) ? 0.5f * tilemap.cellSize.y : 1f;
 
         //Debug.Log($"Object centered on tile: Cell {cell}, WorldPos {cellCenterWorld}");
 

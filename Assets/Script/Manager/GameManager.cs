@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 {
@@ -44,6 +45,11 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public GameObject journalPanel;
     public GameObject inventoryPanel;
     public GameObject shopPanel;
+    public Button skipWithStarButton;
+    public Button skipWithAdButton;
+
+    [Header("UI Canvas")]
+    public Canvas chooseSkipCanvas;
 
     DateTime lastTimeSaved;
     Dictionary<string, DisplayableDream> selectedDreamByInhabitantTemp;
@@ -119,6 +125,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         // Load all dream
         dreamMachineManager.selectedDreamByInhabitant = new Dictionary<InhabitantInstance, DisplayableDream>();
+        if(selectedDreamByInhabitantTemp == null)
+            selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
         foreach (var kvp in selectedDreamByInhabitantTemp)
         {
             InhabitantInstance inhabitant = villageManager.GetInhabitant(GetInhabitantByName(kvp.Key));
@@ -225,11 +233,22 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         }
     }
 
-    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject)
+    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject, bool isActivity)
     {
         int timeStars = int.Parse(starText.text);
         if (player.CanSpendStar(timeStars)) {
             player.SpendStar(timeStars);
+            chooseSkipCanvas.gameObject.SetActive(false);
+            if (isActivity) {
+                buildingObject.FinishActivity();
+            }
+        }
+    }
+
+    public void SkipActivityWithADS(BuildingObject buildingObject, bool isActivity)
+    {
+        if (isActivity)
+        {
             buildingObject.FinishActivity();
         }
     }
@@ -243,7 +262,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerEventData, results);
-        Debug.Log("results count ui: " + results.Count);
+        //Debug.Log("results count ui: " + results.Count);
 
         return results.Count > 0; // If there's any UI element under the pointer, return true
     }
@@ -315,6 +334,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         //dayNight.isDay = data.isDay;
 
 
+        dayNight.TimeRemaining = data.timeRemainingNight;
         if (dayNight.TimeRemaining > 0f)
         {
             dayNight.isDay = false;
@@ -324,7 +344,6 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
             dayNight.isDay = true;
         }
 
-        dayNight.TimeRemaining = data.timeRemainingNight;
 
         selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
         foreach (var kvp in data.selectedDreamByInhabitant)
