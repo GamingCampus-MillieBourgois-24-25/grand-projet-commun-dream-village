@@ -1,6 +1,7 @@
 using LitMotion;
 using LitMotion.Extensions;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -202,10 +203,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     } 
 
     public void AddGold(int amount) {
-        gold += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
-        UpdateGoldText();
-
-        this.Save("PlayerData");
+        SetGold(gold + amount);
     } 
     public bool CanSpendGold(int amount)
     {
@@ -219,10 +217,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     {
         if (CanSpendGold(amount))
         {
-            gold -= amount;
-            UpdateGoldText();
-
-            this.Save("PlayerData");
+            SetGold(gold - amount);
         }
     }
     private void UpdateGoldText()
@@ -241,10 +236,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 
     public void AddStar(int amount)
     {
-        star += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
-        UpdateStarText();
-
-        this.Save("PlayerData");
+        SetStar(gold + amount);
     }
     public bool CanSpendStar(int amount)
     {
@@ -258,10 +250,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     {
         if (CanSpendStar(amount))
         {
-            star -= amount;
-            UpdateStarText();
-
-            this.Save("PlayerData");
+            SetStar(gold - amount);
         }
     }
 
@@ -448,8 +437,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
                     Destroy(existing.inventorySlotItem.gameObject);
                 }
                 Debug.Log($"Removed {amount} of {item.name} from inventory.");
-                return true;
                 this.Save("PlayerData");
+                return true;
             }
         }
         return false;

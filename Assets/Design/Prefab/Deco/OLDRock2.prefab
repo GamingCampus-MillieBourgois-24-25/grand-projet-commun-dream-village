@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3362593496228184802}
   - component: {fileID: 8810436116185343370}
   - component: {fileID: 2173729908622898609}
+  - component: {fileID: -7744970084146656854}
   m_Layer: 0
   m_Name: OLDRock2
   m_TagString: Untagged
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fcb961e62672942939249e73bd7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeInTiles: {x: 0, y: 0}
+  canBeStocked: 1
   cachedRenderer: {fileID: 0}
 --- !u!65 &2173729908622898609
 BoxCollider:
@@ -120,3 +121,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.021718923, y: 0.029435406, z: 0.026119228}
   m_Center: {x: -0.0013232105, y: -0.0010449374, z: -0.0020282073}
+--- !u!114 &-7744970084146656854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451558464077778945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feccf5141630d4843a5b85ec813fd8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseData: {fileID: 11400000, guid: 7c40e267a2fa5dd4ba2f94974fd96283, type: 2}

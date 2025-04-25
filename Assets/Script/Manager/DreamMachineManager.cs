@@ -31,6 +31,8 @@ public class DreamMachineManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip applyDreamsSFX;
+    [SerializeField] private AudioClip clickSFX;
+    [SerializeField] private AudioClip noneButtonSFX;
 
     private List<InhabitantInstance> selectedInhabitants = new();
     private GameObject selectedButton;
@@ -77,7 +79,7 @@ public class DreamMachineManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (dreamMachineCanvas.activeSelf)
         {
@@ -112,7 +114,7 @@ public class DreamMachineManager : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     private void DisplayCurrentInhabitant()
     {
@@ -220,6 +222,15 @@ public class DreamMachineManager : MonoBehaviour
     
     public void NextInhabitant()
     {
+        if (selectedInhabitants.Count > 1)
+        {
+            GM.SM.PlaySFX(clickSFX);
+        } 
+        else
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+        }
+        
         currentIndex = (currentIndex + 1) % selectedInhabitants.Count;
         DisplayCurrentInhabitant();
 
@@ -235,6 +246,15 @@ public class DreamMachineManager : MonoBehaviour
 
     public void PreviousInhabitant()
     {
+        if (selectedInhabitants.Count > 1)
+        {
+            GM.SM.PlaySFX(clickSFX);
+        } 
+        else
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+        }
+        
         currentIndex = (currentIndex - 1 + selectedInhabitants.Count) % selectedInhabitants.Count;
         DisplayCurrentInhabitant();
 
