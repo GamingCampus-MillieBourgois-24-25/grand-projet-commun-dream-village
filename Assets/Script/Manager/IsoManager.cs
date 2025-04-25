@@ -341,6 +341,7 @@ public class IsoManager : MonoBehaviour
 
     private void UnSelectObject()
     {
+        Debug.Log("Unselect "+ selectedObject);
         if (selectedObject == null) return; // Sécurité
 
         stockCanvas.gameObject.SetActive(false);
@@ -396,7 +397,7 @@ public class IsoManager : MonoBehaviour
     {
         if (obj == null || !CanPlaceObjectOnTilemap(obj)) return; // Sécurité
 
-        GM.SM.PlaySFX(placeBuildingSFX);
+        //GM.SM.PlaySFX(placeBuildingSFX);
 
         float objectHeight = obj.GetComponent<Renderer>().bounds.size.y;
         // TODO: à changer plus tard si toutes les origines des batiments sont en bas !
@@ -415,6 +416,8 @@ public class IsoManager : MonoBehaviour
         ChangeTileUnderObject(selectedObject, null);
         UnSelectObject();
         //if (placeBtn) placeBtn.interactable = false;
+
+        GM.Instance.SaveGame();
     }
     #endregion
 

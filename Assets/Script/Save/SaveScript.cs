@@ -147,6 +147,7 @@ static public class SaveScript
         string json = JsonConvert.SerializeObject(data, Formatting.Indented);
 
         SaveFile(json, fileName);
+        Debug.Log("Saved : " + fileName);
     }
 
     public static bool Load<Data>(this ISaveable<Data> saveable, string fileName) where Data : ISaveData

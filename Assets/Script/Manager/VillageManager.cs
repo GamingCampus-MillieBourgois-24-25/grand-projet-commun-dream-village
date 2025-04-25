@@ -7,7 +7,9 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     private Vector3 willithDefaultHousePosition = Vector3.zero;
     public List<InhabitantInstance> inhabitants { get; private set; } = new List<InhabitantInstance>();
     public List<BuildingObject> buildings { get; private set; } = new List<BuildingObject>();
-    public List<PlaceableObject> decorations { get; private set; } = new List<PlaceableObject>();
+
+    List<PlaceableObject> decorations = new List<PlaceableObject>();
+    List<string> decorationNames = new List<string>();
 
 
     [System.Serializable]
@@ -53,14 +55,13 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
                 break;
             case Decoration decoration:
                 decorations.Add(_obj.GetComponent<PlaceableObject>());
+                decorationNames.Add(decoration.Name);
                 Debug.Log($"New decoration added: {decoration.Name}");
                 break;
             default:
                 Debug.LogError("Unknown type");
                 break;
         }
-
-        GM.Instance.SaveGame();
     }
 
     public void RemoveInstance(GameObject _obj)
@@ -108,10 +109,11 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         {
             data.inhabitants.Add(inhabitant.Serialize());
         }
-        foreach (var deco in decorations)
+
+        for (int i = 0; i < decorations.Count; i++)
         {
-            data.decorations.Add(deco.GetComponent<Decoration>().Name);
-            data.decorationPositions.Add(deco.OriginalPosition);
+            data.decorations.Add(decorationNames[i]);
+            data.decorationPositions.Add(decorations[i].OriginalPosition);
         }
 
         return data;
