@@ -308,7 +308,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         {
             levelUpItemContainer.gameObject.SetActive(false);
         }
-            levelUpCanvas.SetActive(true);
+        levelUpCanvas.SetActive(true);
         RectTransform target = levelUpCanvas.transform.GetChild(0).GetComponent<RectTransform>();
         target.localScale = Vector3.zero;
 
@@ -400,6 +400,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
             }
             Debug.Log($"Added {amount} of {item} to inventory.");
             this.Save("PlayerData");
+            
         }
     }
 
@@ -420,6 +421,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
             if (existing.quantity >= amount)
             {
                 existing.quantity -= amount;
+                existing.inventorySlotItem.UpdateItemContent(existing.quantity);
                 if (existing.quantity == 0)
                 {
                     switch (item)
