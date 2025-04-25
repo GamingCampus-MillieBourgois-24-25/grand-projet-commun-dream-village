@@ -39,7 +39,6 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     [Header("Progression")]
     public LevelProgression levelProgression;
 
-
     [Header("Player UI")]
     [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private TMP_InputField cityNameInputField;
@@ -56,6 +55,9 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     [SerializeField] private ScrollRect scrollView;
     [SerializeField] private List<Button> categoryButtons;
     [SerializeField] private List<GameObject> categoryContainers;
+
+    [Header("Inventory Menu UI")]
+    [SerializeField] private AudioClip levelUpSFX;
 
     #endregion
 
@@ -211,7 +213,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 
     private void CheckLevelUp()
     {
-        if (CurrentXP >= expLevel) { 
+        if (CurrentXP >= expLevel) {
+            GM.SM.PlaySFX(levelUpSFX);
             CurrentXP -= expLevel;
             Level++;
             expLevel = Mathf.RoundToInt(expLevel * multExp);

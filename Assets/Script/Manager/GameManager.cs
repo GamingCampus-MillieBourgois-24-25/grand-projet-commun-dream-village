@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public IsoManager isoManager;
     public CharacterJournalManager characterJournalManager;
     public BuildingManager buildingManager;
+    public SoundManager soundManager;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -274,12 +275,13 @@ public static class GM
     public static IsoManager IM => GameManager.instance.isoManager;
     public static VillageManager VM => GameManager.instance.villageManager;
     public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
-  
+    public static BuildingManager BM => GameManager.instance.buildingManager;
+    public static SoundManager SM => GameManager.instance.soundManager;
+
     public static GameObject DreamPanel => Instance.dreamPanel;
     public static GameObject DayNightPanel => Instance.dayNightPanel;
     public static GameObject JournalPanel => Instance.journalPanel;
     public static GameObject InventoryPanel => Instance.inventoryPanel;
     public static GameObject ShopPanel => Instance.shopPanel;
 
-    public static BuildingManager BM => GameManager.instance.buildingManager;
 }

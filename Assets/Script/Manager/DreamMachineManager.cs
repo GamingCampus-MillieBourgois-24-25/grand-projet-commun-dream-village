@@ -27,6 +27,10 @@ public class DreamMachineManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goldPreviewText;
     [SerializeField] private TextMeshProUGUI expPreviewText;
     [SerializeField] private TextMeshProUGUI timePreviewText;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip applyDreamsSFX;
+
     private List<InhabitantInstance> selectedInhabitants = new();
     private GameObject selectedButton;
     

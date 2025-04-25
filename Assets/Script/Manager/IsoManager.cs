@@ -25,6 +25,9 @@ public class IsoManager : MonoBehaviour
     [SerializeField] private float yStockCanvas;
     //[SerializeField] private Button placeBtn;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip placeBuildingSFX;
+
     private GameObject canvasBottomLeft;
     private GameObject canvasBottomRight;
 
@@ -392,6 +395,8 @@ public class IsoManager : MonoBehaviour
     private void PlacePlaceableObject(PlaceableObject obj)
     {
         if (obj == null || !CanPlaceObjectOnTilemap(obj)) return; // Sécurité
+
+        GM.SM.PlaySFX(placeBuildingSFX);
 
         float objectHeight = obj.GetComponent<Renderer>().bounds.size.y;
         // TODO: à changer plus tard si toutes les origines des batiments sont en bas !
