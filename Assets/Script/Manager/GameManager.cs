@@ -245,7 +245,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerEventData, results);
-        Debug.Log("results count ui: " + results.Count);
+        //Debug.Log("results count ui: " + results.Count);
 
         return results.Count > 0; // If there's any UI element under the pointer, return true
     }
