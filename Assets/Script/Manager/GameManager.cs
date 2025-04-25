@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -346,9 +347,9 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public void SaveGame()
     {
         SetActualTime();
-        this.Save("GameManager");
-        villageManager.Save("VillageManager");
-        player.Save("PlayerData");
+        Task.Run(() => this.Save("GameManager"));
+        Task.Run(() => villageManager.Save("VillageManager"));
+        Task.Run(() => player.Save("PlayerData"));
     }
     #endregion
 }

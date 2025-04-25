@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -144,10 +145,6 @@ static public class SaveScript
         Data data = saveable.Serialize();
 
         // Sérialisation avec Newtonsoft.Json
-        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-
-        SaveFile(json, fileName);
-        Debug.Log("Saved : " + fileName);
     }
 
     public static bool Load<Data>(this ISaveable<Data> saveable, string fileName) where Data : ISaveData
@@ -161,6 +158,17 @@ static public class SaveScript
             return true;
         }
         return false;
+    }
+
+
+
+    static private void SerializeDataToFile<Data>(Data data, string fileName) where Data : ISaveData
+    {
+        // Sérialisation avec Newtonsoft.Json
+        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+        SaveFile(json, fileName);
+        Debug.Log("Saved : " + fileName);
     }
 
 }

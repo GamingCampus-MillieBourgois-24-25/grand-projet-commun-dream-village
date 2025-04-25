@@ -132,6 +132,9 @@ public class DayNight : MonoBehaviour
         
         isDay = !isDay;
         TimeRemaining = 0f;
+
+        GM.Instance.SaveGame();
+
         RectTransform transform = curtain.GetComponent<RectTransform>();
         Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
         LMotion.Create(0, target.x, animationDuration)
@@ -224,6 +227,7 @@ public class DayNight : MonoBehaviour
 
     public IEnumerator StartWaitingTime()
     {
+        GM.Instance.SaveGame();
         if (nightDreamTimeCoroutine == null)
         {
             timeContainer.SetActive(true);

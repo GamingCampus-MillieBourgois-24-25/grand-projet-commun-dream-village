@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using LitMotion;
 using TMPro;
 using UnityEngine;
@@ -167,7 +168,7 @@ public class ShopItem : MonoBehaviour
             itemOwnedQuantityText.text = ownedQuantity.ToString() + " OWNED";
             CanBuyItem(item);
 
-            GM.Instance.player.Save("PlayerData");
+            Task.Run(() => GM.Instance.player.Save("PlayerData"));
         }
     }
 

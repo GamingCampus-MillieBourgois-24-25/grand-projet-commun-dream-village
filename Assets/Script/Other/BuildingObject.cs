@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -198,7 +199,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         GM.Instance.player.AddXP(100);
         Destroy(remainingTimeUI);
 
-        GM.VM.Save("VillageManager");
+        Task.Run(() => GM.VM.Save("VillageManager"));
 
         if (notificationID != -1)
         {
