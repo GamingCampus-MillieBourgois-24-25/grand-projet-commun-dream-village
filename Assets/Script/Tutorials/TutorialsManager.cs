@@ -90,7 +90,7 @@ public class TutorialsManager : MonoBehaviour
             float dif = dialoguesTargetDisplayTime - dialoguesDisplayTime - GM.Ao.CurrentTextSpeedStruct.TextSpeed;
             float textSpeed = dialoguesDisplayTime + GM.Ao.CurrentTextSpeedStruct.TextSpeed + dif;
 
-            CheckDialoguesParameters(dialogue);
+            TutorialsButtonFeedback(dialogue);
             
             currentTutorialID = dialogue.GetTutorialID();
 
@@ -159,69 +159,27 @@ public class TutorialsManager : MonoBehaviour
         }
     }
 
-    private void CheckDialoguesParameters(Dialogues dialogue)
+    private void TutorialsButtonFeedback(Dialogues dialogue)
     {
-        Action ResetScale(GameObject obj)
+        void HighlightButton(GameObject button, bool shouldHighlight)
         {
-            obj.transform.localScale = new Vector3(1, 1, 1);
-            return null;
+            if (shouldHighlight)
+            {
+                highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f)
+                    .WithLoops(-1, LoopType.Yoyo)
+                    .WithOnCancel(() => button.transform.localScale = Vector3.one)
+                    .Bind(x => button.transform.localScale = new Vector3(x, x, 1));
+            }
         }
 
-        if (dialogue.highlightJournalRightPage)
-        {
-            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
-                .WithOnCancel(ResetScale(tutorialsUI.journalRightPage)).Bind(x =>
-                    tutorialsUI.journalRightPage.transform.localScale = new Vector3(x, x, 1));
-        }
-
-        if (dialogue.highlightQuitJournalButton)
-        {
-            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
-                .WithOnCancel(ResetScale(tutorialsUI.quitJournalButton)).Bind(x =>
-                    tutorialsUI.quitJournalButton.transform.localScale = new Vector3(x, x, 1));
-        }
-
-        if (dialogue.highlightNightButton)
-        {
-            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
-                .WithOnCancel(ResetScale(tutorialsUI.nightButton)).Bind(x =>
-                    tutorialsUI.nightButton.transform.localScale = new Vector3(x, x, 1));
-        }
-
-        if (dialogue.highlightDreamButton)
-        {
-            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
-                .WithOnCancel(ResetScale(tutorialsUI.dreamButton)).Bind(x =>
-                    tutorialsUI.dreamButton.transform.localScale = new Vector3(x, x, 1));
-        }
-        
-        if (dialogue.highlightShopButton)
-        {
-            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
-                .WithOnCancel(ResetScale(tutorialsUI.shopButton)).Bind(x =>
-                    tutorialsUI.shopButton.transform.localScale = new Vector3(x, x, 1));
-        }
-        
-        if (dialogue.highlightQuitShopButton)
-        {
-            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
-                .WithOnCancel(ResetScale(tutorialsUI.quitShopButton)).Bind(x =>
-                    tutorialsUI.quitShopButton.transform.localScale = new Vector3(x, x, 1));
-        }
-        
-        if (dialogue.highlightEditButton)
-        {
-            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
-                .WithOnCancel(ResetScale(tutorialsUI.editButton)).Bind(x =>
-                    tutorialsUI.editButton.transform.localScale = new Vector3(x, x, 1));
-        }
-        
-        if (dialogue.highlightQuitEditButton)
-        {
-            highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f).WithLoops(-1, LoopType.Yoyo)
-                .WithOnCancel(ResetScale(tutorialsUI.quitEditButton)).Bind(x =>
-                    tutorialsUI.quitEditButton.transform.localScale = new Vector3(x, x, 1));
-        }
+        HighlightButton(tutorialsUI.journalRightPage, dialogue.highlightJournalRightPage);
+        HighlightButton(tutorialsUI.quitJournalButton, dialogue.highlightQuitJournalButton);
+        HighlightButton(tutorialsUI.nightButton, dialogue.highlightNightButton);
+        HighlightButton(tutorialsUI.dreamButton, dialogue.highlightDreamButton);
+        HighlightButton(tutorialsUI.shopButton, dialogue.highlightShopButton);
+        HighlightButton(tutorialsUI.quitShopButton, dialogue.highlightQuitShopButton);
+        HighlightButton(tutorialsUI.editButton, dialogue.highlightEditButton);
+        HighlightButton(tutorialsUI.quitEditButton, dialogue.highlightQuitEditButton);
     }
 
     public void UnHold(int value)
