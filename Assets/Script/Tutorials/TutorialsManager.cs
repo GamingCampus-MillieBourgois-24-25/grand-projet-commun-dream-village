@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
+using LitMotion;
 using UnityEngine;
 
 public class TutorialsManager : MonoBehaviour

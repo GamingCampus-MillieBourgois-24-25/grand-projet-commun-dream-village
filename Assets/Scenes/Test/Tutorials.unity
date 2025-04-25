@@ -8726,7 +8726,7 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultClickSound
       value: 
-      objectReference: {fileID: 8300000, guid: b23d7d858fe36954fabed047d7b973dc, type: 3}
+      objectReference: {fileID: 8300000, guid: c3a257339e6426c48935a5e992dd9bc6, type: 3}
     - target: {fileID: 7029000785420447571, guid: ee04742cccb83584fa1f5daf09aacc0a,
         type: 3}
       propertyPath: m_Name
