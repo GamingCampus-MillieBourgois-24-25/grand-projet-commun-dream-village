@@ -10,7 +10,6 @@ public class TutorialsManager : MonoBehaviour
     private Player player;
     private DialoguesManager dialoguesManager;
     private TutorialsUI tutorialsUI;
-    public List<Dialogues> dialogues55;
     
 
     [Header("Tutorials variables")] 
@@ -63,8 +62,6 @@ public class TutorialsManager : MonoBehaviour
         dialogues.AddRange(tutoDialogues);
 
         dialogues.Sort((x, y) => x.GetTutorialID().CompareTo(y.GetTutorialID()));
-        
-        dialogues55 = dialogues;
         
         StartCoroutine(DisplayTutorialDialogues(dialogues));
     }
