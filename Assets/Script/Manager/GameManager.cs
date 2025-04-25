@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public AccessibilityOptions accessibilityOptions;
     public BuildingManager buildingManager;
     public DayNight dayNight;
+    public DreamMachineManager dreamMachineManager;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
 
     DateTime lastTimeSaved;
-
+    Dictionary<string, DisplayableDream> selectedDreamByInhabitantTemp;
 
     #region save Data
     [System.Serializable]
@@ -53,6 +54,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         public bool isDay;
         public float timeRemainingNight;
+
+        public Dictionary<string, DisplayableDream.SavePartData> selectedDreamByInhabitant;
     }
     #endregion
 
@@ -92,22 +95,37 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         {
             inhabitants.Add(inhabitant);
         }
+        inhabitants.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort inhabitants by name
         // Load all buildings
         Building[] allBuildings = Resources.LoadAll<Building>("ScriptableObject/Buildings");
         foreach (Building building in allBuildings)
         {
             buildings.Add(building);
         }
+        buildings.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort buildings by name
         // Load all decorations
         Decoration[] allDecorations = Resources.LoadAll<Decoration>("ScriptableObject/Decorations");
         foreach (Decoration decoration in allDecorations)
         {
             decorations.Add(decoration);
         }
+        decorations.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort decorations by name
 
 
         villageManager.Load("VillageManager");
         player.Load("PlayerData");
+
+        // Load all dream
+        dreamMachineManager.selectedDreamByInhabitant = new Dictionary<InhabitantInstance, DisplayableDream>();
+        foreach (var kvp in selectedDreamByInhabitantTemp)
+        {
+            InhabitantInstance inhabitant = villageManager.GetInhabitant(GetInhabitantByName(kvp.Key));
+            if (inhabitant != null)
+            {
+                DisplayableDream displayableDream = kvp.Value;
+                dreamMachineManager.selectedDreamByInhabitant.Add(inhabitant, displayableDream);
+            }
+        }
 
         NotificationManager.SetupNotifications();
     }
@@ -241,6 +259,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         if (!focus)
         {
             SaveGame();
+            NotificationManager.CreateInactivityNotification();
             NotificationManager.LaunchNotifications();
         }
         else 
@@ -252,6 +271,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         if(pause)
         {
             SaveGame();
+            NotificationManager.CreateInactivityNotification();
             NotificationManager.LaunchNotifications();
         }
         else
@@ -261,6 +281,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     private void OnApplicationQuit()
     {
         SaveGame();
+        NotificationManager.CreateInactivityNotification();
         NotificationManager.LaunchNotifications();
     }
     #endregion
@@ -273,6 +294,15 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         data.isDay = dayNight.isDay;
         data.timeRemainingNight = dayNight.TimeRemaining;
+
+
+        data.selectedDreamByInhabitant = new ();
+        foreach (var kpd in dreamMachineManager.selectedDreamByInhabitant)
+        {
+            data.selectedDreamByInhabitant.Add(kpd.Key.Name, kpd.Value.Serialize());
+        }
+
+
         return data;
     }
 
@@ -282,6 +312,14 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         dayNight.isDay = data.isDay;
         dayNight.TimeRemaining = data.timeRemainingNight;
+
+        selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
+        foreach (var kvp in data.selectedDreamByInhabitant)
+        {
+            DisplayableDream displayableDream = new DisplayableDream();
+            displayableDream.Deserialize(kvp.Value);
+            selectedDreamByInhabitantTemp.Add(kvp.Key, displayableDream);
+        }
     }
 
 
@@ -310,6 +348,8 @@ public static class GM
     
     public static AccessibilityOptions Ao => GameManager.instance.accessibilityOptions;
   
+    public static DreamMachineManager DMM => GameManager.instance.dreamMachineManager;
+
     public static GameObject DreamPanel => Instance.dreamPanel;
     public static GameObject DayNightPanel => Instance.dayNightPanel;
     public static GameObject JournalPanel => Instance.journalPanel;

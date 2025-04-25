@@ -22,6 +22,7 @@ public class NotificationManager
     };
 
     static bool launched = false;
+    static int inactivityNotificationID = -1; // ID de la notification d'inactivité
 
 
 
@@ -33,8 +34,6 @@ public class NotificationManager
 
         CancelAllNotifications();
     }
-
-
     private static void AskNotificationPermission()
     {
         if (Application.platform == RuntimePlatform.Android)
@@ -47,6 +46,10 @@ public class NotificationManager
         }
     }
 
+
+
+
+
     public static int CreateNotification(string _title, string _text, DateTime _dateTime)
     {
         AndroidNotification notification = new AndroidNotification();
@@ -58,11 +61,16 @@ public class NotificationManager
         androidNotifications[id] = notification; // Stocker la notification avec un ID unique
         return id;
     }
-
     public static int CreateNotification(string _title, string _text, float _seconds)
     {
         return CreateNotification(_title, _text, DateTime.Now.AddSeconds(_seconds));
     }
+    public static int CreateNotification(string _title, string _text, int _days)
+    {
+        return CreateNotification(_title, _text, DateTime.Now.AddDays(_days));
+    }
+
+
 
     public static void CancelNotification(int id)
     {
@@ -71,17 +79,24 @@ public class NotificationManager
             androidNotifications.Remove(id); // Supprimer uniquement la notification avec l'ID donné
         }
     }
-
-
-
-
     public static void CancelAllNotifications()
     {
         AndroidNotificationCenter.CancelAllDisplayedNotifications();
         AndroidNotificationCenter.CancelAllScheduledNotifications();
         launched = false; // Réinitialiser le flag de lancement
+
+        CancelNotification(inactivityNotificationID); // Annuler la notification d'inactivité si elle existe
     }
 
+
+    
+    public static void CreateInactivityNotification()
+    {
+        /*string title = "Where are you?";
+        string text = "Your residents miss you! Come back to make them dream!";
+        float days = 15;
+        inactivityNotificationID = CreateNotification(title, text, days);*/
+    }
     public static void LaunchNotifications()
     {
         if (launched)
