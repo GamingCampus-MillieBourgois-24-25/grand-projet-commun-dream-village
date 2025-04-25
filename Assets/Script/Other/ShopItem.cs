@@ -169,6 +169,8 @@ public class ShopItem : MonoBehaviour
     public void BS_Buy()
     {
         BuyItem<IScriptableElement>();
+
+        GM.Tm.UnHold(49);
     }
 
     public void BS_Info()

@@ -15,6 +15,7 @@ public class Dialogues : ScriptableObject
         Introduction,
         Reaction,
         Tutorial,
+        NotUsed,
     }
     
     public enum DialogueCondition
@@ -37,10 +38,11 @@ public class Dialogues : ScriptableObject
         Edit,
         Heart,
         House,
-        Shop
+        Shop,
     }
     
     [SerializeField] private string ID;
+    [SerializeField] private int tutorialID;
     [SerializeField] private LocalizedString dialogueText;
     [SerializeField] private string[] requiredArguments;
     
@@ -48,10 +50,19 @@ public class Dialogues : ScriptableObject
     [SerializeField] private DialogueCondition dialogueCondition;
     [SerializeField] private TutorialType tutorialType;
     
+    [SerializeField] private bool shouldHoldDialogues = false;
+    [SerializeField] private bool shouldGiveRareMoney = false;
+    [SerializeField] private bool isDialogueBoxTop = false;
+    [SerializeField] private NosphyPosition nosphyPosition;
     
     public string GetID()
     {
         return ID;
+    }
+    
+    public int GetTutorialID()
+    {
+        return tutorialID;
     }
     
     public DialogueType GetDialogueType()
@@ -82,5 +93,25 @@ public class Dialogues : ScriptableObject
     public string[] GetRequiredArguments()
     {
         return requiredArguments;
+    }
+    
+    public bool ShouldHoldDialogues()
+    {
+        return shouldHoldDialogues;
+    }
+    
+    public bool ShouldGiveRareMoney()
+    {
+        return shouldGiveRareMoney;
+    }
+    
+    public bool IsDialogueBoxTop()
+    {
+        return isDialogueBoxTop;
+    }
+    
+    public NosphyPosition GetNosphyPosition()
+    {
+        return nosphyPosition;
     }
 }

@@ -19,6 +19,9 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     private Dictionary<Inhabitant, InventoryItem> inhabitantsInventory = new();
     private Dictionary<Building, InventoryItem> buildingsInventory = new();
     private Dictionary<Decoration, InventoryItem> decorationsInventory = new();
+    
+    public delegate void PlayerInfoAssignDelegate();
+    public PlayerInfoAssignDelegate OnPlayerInfoAssigned;
 
     public string PlayerName { get; private set; }
     public string CityName { get; private set; }
@@ -171,6 +174,16 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         playerNameText.text = PlayerName;
         UpdateLevelText();
         Debug.Log($"Player created: {PlayerName}, City: {CityName}");
+        
+        GM.Dm.UpdateLocalizedArguments("PLAYER_NAME", PlayerName);
+        GM.Dm.UpdateLocalizedArguments("VILLAGE_NAME", CityName);
+        
+        GM.Tm.holdDialogues = false;
+        GM.Tm.skipDialogue = true;
+        
+        GM.Instance.isPlayerCreated = true;
+        
+        OnPlayerInfoAssigned?.Invoke();
 
         this.Save("PlayerData");
     }

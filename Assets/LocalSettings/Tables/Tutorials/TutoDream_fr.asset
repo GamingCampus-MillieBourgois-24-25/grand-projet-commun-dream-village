@@ -16,8 +16,76 @@ MonoBehaviour:
     m_Code: fr
   m_SharedData: {fileID: 11400000, guid: 85753728e70574449a9548b06cefa37a, type: 2}
   m_Metadata:
-    m_Items: []
-  m_TableData: []
+    m_Items:
+    - rid: 6238822977345945608
+  m_TableData:
+  - m_Id: 345529610240
+    m_Localized: "Maintenant que {0} va mieux, faisons-le r\xEAver !"
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945608
+  - m_Id: 361795121152
+    m_Localized: "La premi\xE8re option affecte l'{0}, la deuxi\xE8me affecte la
+      {1} et la troisi\xE8me affecte l'{2}."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945608
+  - m_Id: 348230742016
+    m_Localized: "Cliquez d'abord sur le bouton Nuit. Attention\_! Vous ne pouvez
+      pas cliquer sur le bouton Nuit si l'un de vos villageois est en pleine activit\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 351351304192
+    m_Localized: "Maintenant qu\u2019il fait nuit, vous pouvez faire votre travail
+      de porteur de r\xEAves."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 354111156224
+    m_Localized: "Cliquez sur le bouton r\xEAve."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357995081728
+    m_Localized: "Ici, vous pouvez choisir qui r\xEAvera ce soir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 360339697664
+    m_Localized: "Plus les villageois r\xEAvent, plus vous gagnerez, mais plus cela
+      prendra du temps."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361094672384
+    m_Localized: "Pour chaque habitant, trois options al\xE9atoires vous seront propos\xE9es
+      qui influenceront leurs statistiques une derni\xE8re fois."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362424266752
+    m_Localized: "Et dans chaque option, il y aura au moins un j'aime et un je n'aime
+      pas, mais dans un ordre diff\xE9rent."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363011469312
+    m_Localized: "Choisissez-en un\_!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363615449088
+    m_Localized: "Bien. Mais voyez-vous, donner forme \xE0 un r\xEAve prend du temps.
+      Alors, une fois de plus, je vous ai eu."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364387201024
+    m_Localized: "La nuit est finie\_! Consultez votre journal pour voir ce qui s'est
+      pass\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365498691584
+    m_Localized: "H\xE9, tu as de l'argent et de l'exp\xE9rience, f\xE9licitations
+      !"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6238822977345945608
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00702b73500000000070ab3c54000000

@@ -22,21 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7780982e9b822044886529c7a682b1dc
-    m_Address: Assets/LocalSettings/Tables/Dialogue Dream Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 880108c781a23314faa294ca35dd2ae9
-    m_Address: Assets/LocalSettings/Tables/Dialogues Information Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6f36e9338e6be5e409d1d764ea6df474
-    m_Address: Assets/LocalSettings/Tables/Dialogues Reaction Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3575041cfccaf4e4884f5987c04b8901
     m_Address: Assets/LocalSettings/Tables/Introduction Shared Data.asset
     m_ReadOnly: 1
@@ -109,6 +94,11 @@ MonoBehaviour:
   - m_GUID: 5ddbcaa726fc0d349aac34691376c3bf
     m_Address: Assets/LocalSettings/Tables/Dialogues/CharacterSpecific/DialoguesNillieZel
       Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 237bcc55320b2ff4a872398eb2b6a9bc
+    m_Address: Assets/LocalSettings/Tables/Stats Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public VillageManager villageManager;
     public IsoManager isoManager;
     public CharacterJournalManager characterJournalManager;
+    public DialoguesManager dialoguesManager;
+    public TutorialsManager tutorialsManager;
+    public AccessibilityOptions accessibilityOptions;
     public BuildingManager buildingManager;
     public DayNight dayNight;
     public DreamMachineManager dreamMachineManager;
@@ -27,7 +30,11 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public bool isPlayerCreated = false;
     public Player player;   
     [SerializeField] private GameObject playerFormCanvas;
+    public GameObject mainUiCanvas;
 
+    
+    public delegate void HouseTutoDelegate();
+    public HouseTutoDelegate OnHouseTuto;
     [Header("UI Buttons")]
     public GameObject dreamPanel;
     public GameObject dayNightPanel;
@@ -70,10 +77,10 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
     private void Start()
     {
-        if (!isPlayerCreated)
-        {
-            playerFormCanvas.SetActive(true);
-        }
+        // if (!isPlayerCreated)
+        // {
+        //     playerFormCanvas.SetActive(true);
+        // }
     }
 
     // Load all resources for shop from the Resources folder
@@ -333,6 +340,14 @@ public static class GM
     public static VillageManager VM => GameManager.instance.villageManager;
     public static DayNight DN => GameManager.instance.dayNight;
     public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
+    
+    public static DialoguesManager Dm => GameManager.instance.dialoguesManager;
+    
+    public static TutorialsManager Tm => GameManager.instance.tutorialsManager;
+    
+    
+    public static AccessibilityOptions Ao => GameManager.instance.accessibilityOptions;
+  
     public static DreamMachineManager DMM => GameManager.instance.dreamMachineManager;
 
     public static GameObject DreamPanel => Instance.dreamPanel;
