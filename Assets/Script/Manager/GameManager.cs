@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
     public static GameManager instance { get; private set; } //Singleton 
 
+    public Transform playerIslandObject;
+
     [Header("Managers")]
     public VillageManager villageManager;
     public IsoManager isoManager;
@@ -310,7 +312,18 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     {
         lastTimeSaved = data.lastTimeConnected;
 
-        dayNight.isDay = data.isDay;
+        //dayNight.isDay = data.isDay;
+
+
+        if (dayNight.TimeRemaining > 0f)
+        {
+            dayNight.isDay = false;
+        }
+        else
+        {
+            dayNight.isDay = true;
+        }
+
         dayNight.TimeRemaining = data.timeRemainingNight;
 
         selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();

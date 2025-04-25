@@ -48,12 +48,16 @@ public class DayNight : MonoBehaviour
         sun.color = isDay ? dayColor : nightColor;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
-        if (TimeRemaining != 0f)
+        if (TimeRemaining > 0f)
         {
             TimeSpan elapsedTime = System.DateTime.Now - GameManager.instance.GetLastTimeSaved();
             TimeRemaining -= (float)elapsedTime.TotalSeconds;
 
             nightDreamTimeCoroutine = StartCoroutine(StartWaitingTime());
+        }
+        else
+        {
+            timeContainer.SetActive(false);
         }
         dayNightButton.sprite = isDay ? nightSprite : daySprite;
     }
