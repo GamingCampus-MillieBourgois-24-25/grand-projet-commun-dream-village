@@ -10,32 +10,44 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Stats_en
+  m_Name: Activities_en
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: en
-  m_SharedData: {fileID: 11400000, guid: 237bcc55320b2ff4a872398eb2b6a9bc, type: 2}
+  m_SharedData: {fileID: 11400000, guid: 7adf37f9dcac6834195d42044c6bafe5, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 6801813504
-    m_Localized: Serenity
+  - m_Id: 5599567872
+    m_Localized: Bench
     m_Metadata:
       m_Items: []
-  - m_Id: 4587220992
-    m_Localized: Mood
+  - m_Id: 40953356288
+    m_Localized: Cinema
     m_Metadata:
       m_Items: []
-  - m_Id: 9721049088
-    m_Localized: Energy
+  - m_Id: 57990619136
+    m_Localized: Coffe Shop
     m_Metadata:
       m_Items: []
-  - m_Id: 759150019780608
-    m_Localized: He/Him
+  - m_Id: 94384594944
+    m_Localized: Fountain
     m_Metadata:
       m_Items: []
-  - m_Id: 759292756140032
-    m_Localized: She/Her
+  - m_Id: 115393863680
+    m_Localized: Gym
+    m_Metadata:
+      m_Items: []
+  - m_Id: 134171762688
+    m_Localized: Librairy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 160059006976
+    m_Localized: Pool
+    m_Metadata:
+      m_Items: []
+  - m_Id: 182808911872
+    m_Localized: Well
     m_Metadata:
       m_Items: []
   references:
