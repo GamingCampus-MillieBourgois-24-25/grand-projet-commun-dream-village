@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static Building;
 
 [CreateAssetMenu(fileName = "Decoration", menuName = "ScriptableObjects/Decoration")]
 public class Decoration : IScriptableElement
