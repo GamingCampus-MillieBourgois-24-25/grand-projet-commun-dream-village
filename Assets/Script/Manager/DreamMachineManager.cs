@@ -357,6 +357,8 @@ public class DreamMachineManager : MonoBehaviour
 
     public void BS_ValidateSelectedDream()
     {
+        GM.SM.PlaySFX(applyDreamsSFX);
+
         GM.DreamPanel.SetActive(false);
 
         GM.DN.TimeRemaining = totalDreamMinute * 60; //minutes to seconds
