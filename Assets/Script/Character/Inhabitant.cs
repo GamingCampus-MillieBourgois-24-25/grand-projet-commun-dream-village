@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewInhabitant", menuName = "ScriptableObjects/Character")]
@@ -47,8 +48,8 @@ public class Inhabitant : IScriptableElement
     [field: Header("Visuals")]
     public override Sprite Icon => base.Icon;
     [field: SerializeField] public GameObject InhabitantPrefab { get; private set; }
-    [field: SerializeField] public Building InhabitantHouse { get; private set; }
-    public override GameObject InstantiatePrefab => InhabitantHouse.InstantiatePrefab;
+    [field: SerializeField] public HouseObject InhabitantHouse { get; private set; }
+    public override GameObject InstantiatePrefab => InhabitantHouse.gameObject;
     #endregion
     #endregion
 
@@ -74,5 +75,22 @@ public class Inhabitant : IScriptableElement
         }
 
         return 0;
+    }
+
+    public List<string> GetPronouns()
+    {
+        List<string> pronouns = new();
+
+        string[] tempPronouns = Pronouns.ToString().Split('_');
+        foreach (string pronoun in tempPronouns)
+        {
+            pronouns.Add(pronoun);
+        }
+        return pronouns;
+    }
+
+    public bool isPlural()
+    {
+        return Pronouns == Pronouns.They_Them;
     }
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartData>
 {
+    [SerializeField]
+    private Vector3 willithDefaultHousePosition = Vector3.zero;
     public List<InhabitantInstance> inhabitants { get; private set; } = new List<InhabitantInstance>();
     public List<BuildingObject> buildings { get; private set; } = new List<BuildingObject>();
 
@@ -12,12 +14,6 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     {
         public List<BuildingObject.SavePartData> buildings = new List<BuildingObject.SavePartData>();
         public List<InhabitantInstance.SavePartData> inhabitants = new List<InhabitantInstance.SavePartData>();
-    }
-
-    public void Awake()
-    {
-        CreateInstanceofScriptable(GM.Instance.inhabitants[2], GameObject.Find("House1"));
-        CreateInstanceofScriptable(GM.Instance.inhabitants[0], GameObject.Find("House2"));
     }
 
 
@@ -89,22 +85,36 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
 
     public void Deserialize(SavePartData data)
     {
+        foreach (var inhabitantData in data.inhabitants)
+        {
+            GameObject house = GM.Instance.GetInhabitantByName(inhabitantData.baseInhabitantName).InstantiatePrefab;
+            GameObject houseInstanciate = Instantiate(house, Vector3.zero, house.transform.rotation);
+
+            InhabitantInstance loadedInhabitant = new InhabitantInstance();
+            loadedInhabitant.houseObject = houseInstanciate.GetComponent<HouseObject>();
+            loadedInhabitant.Deserialize(inhabitantData);
+
+            inhabitants.Add(loadedInhabitant);
+        }
+
+        if(inhabitants.Count == 0)
+        {
+            GameObject house = GM.Instance.GetInhabitantByName("Willith Warm").InstantiatePrefab;
+            GameObject houseInstanciate = Instantiate(house, willithDefaultHousePosition, house.transform.rotation);
+
+            CreateInstanceofScriptable(GM.Instance.GetInhabitantByName("Willith Warm"), houseInstanciate);
+        }
+
+
 
         foreach (var buildingData in data.buildings)
         {
-            Building building = GM.Instance.GetBuildingByName(buildingData.baseBuildingName);
-            GameObject buildingInstanciate = Instantiate(building.InstantiatePrefab, Vector3.zero, building.InstantiatePrefab.transform.rotation);
+            GameObject building = GM.Instance.GetBuildingByName(buildingData.baseBuildingName).InstantiatePrefab;
+            GameObject buildingInstanciate = Instantiate(building, Vector3.zero, building.transform.rotation);
 
             BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
             loadedBuilding.Deserialize(buildingData);
             buildings.Add(loadedBuilding);
-        }
-        foreach (var inhabitantData in data.inhabitants)
-        {
-            //InhabitantInstance loadedInhabitant = new InhabitantInstance();
-            //loadedInhabitant.Deserialize(inhabitantData);
-            //inhabitants.Add(loadedInhabitant);
-            //baseInhabitants.Add(loadedInhabitant.baseData);
         }
     }
 }

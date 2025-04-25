@@ -17,7 +17,23 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 3b9e9f7a0fd4df244b25a54e664bfc70, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 12334100480
+    m_Localized: Bonjour... Je m'appelle Fiesta Hest.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14783574016
+    m_Localized: "Ce village semble plut\xF4t petit. Mais j'aime bien."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17287573504
+    m_Localized: Merci de m'avoir ici.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19896430592
+    m_Localized: Bonjour...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

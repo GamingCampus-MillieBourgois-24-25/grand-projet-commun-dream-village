@@ -2,28 +2,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class DreamMachineManager : MonoBehaviour
 {
+    [Header("Canvas")]
+    [SerializeField] public GameObject dreamMachineCanvas;
+    
     [Header("UI Elements")]
     public Image characterImage;
     public TextMeshProUGUI characterNameText;
     public Slider moodSlider;
     public Slider serenitySlider;
     public Slider energySlider;
-    public TextMeshProUGUI index;
+    public TextMeshProUGUI indexUI;
     public GameObject dreamButtonPrefab;
     public Transform dreamsContainer;
     public Button validateButton;
 
-    [SerializeField] private RectTransform nameBackgroundRectTransform;
-
+    [Header("Selection")] 
+    [SerializeField] public Canvas selectInhabitant;
+    [SerializeField] public GameObject inhabitantsContainer;
+    [SerializeField] public GameObject selectInhabitantPrefab;
+    [SerializeField] private TextMeshProUGUI selectionCountText;
+    [SerializeField] private TextMeshProUGUI goldPreviewText;
+    [SerializeField] private TextMeshProUGUI expPreviewText;
+    [SerializeField] private TextMeshProUGUI timePreviewText;
+    private List<InhabitantInstance> selectedInhabitants = new();
+    private GameObject selectedButton;
+    
     public InterestDatabase interestDatabase;
 
     private int currentIndex = 0;
+    private int numberDreamSelected = 0;
 
     private Dictionary<InhabitantInstance, List<DisplayableDream>> dreamsByInhabitant = new();
-    private Dictionary<InhabitantInstance, DisplayableDream> selectedDreamByInhabitant = new();
+    public Dictionary<InhabitantInstance, DisplayableDream> selectedDreamByInhabitant = new();
 
     private Vector2 startTouchPosition;
     private float swipeThreshold = 50f;
@@ -33,11 +47,15 @@ public class DreamMachineManager : MonoBehaviour
     [SerializeField]
     private int baseEXPPerDream = 150;
 
+    private float totalDreamMinute;
+
     private void Start()
     {
-        if (GM.VM.inhabitants.Count > 0)
+        UpdateSelectionCanvas();
+        
+        if (selectedInhabitants.Count > 0)
         {
-            var current = GM.VM.inhabitants[currentIndex];
+            var current = selectedInhabitants[currentIndex];
 
             if (!dreamsByInhabitant.ContainsKey(current))
             {
@@ -91,7 +109,7 @@ public class DreamMachineManager : MonoBehaviour
 
     private void DisplayCurrentInhabitant()
     {
-        InhabitantInstance currentInhabitant = GM.VM.inhabitants[currentIndex];
+        InhabitantInstance currentInhabitant = selectedInhabitants[currentIndex];
 
         characterImage.sprite = currentInhabitant.Icon;
         characterNameText.text = $"{currentInhabitant.Name}";
@@ -100,7 +118,7 @@ public class DreamMachineManager : MonoBehaviour
         serenitySlider.value = currentInhabitant.Serenity;
         energySlider.value = currentInhabitant.Energy;
 
-        index.text = $"{currentIndex + 1}/{GM.VM.inhabitants.Count}";
+        indexUI.text = $"{numberDreamSelected}/{selectedInhabitants.Count}";
 
         // Reset slider colors to default (white)
         ResetSliderColors();
@@ -130,7 +148,7 @@ public class DreamMachineManager : MonoBehaviour
             Destroy(child.gameObject);
 
         List<Button> buttons = new();
-        InhabitantInstance currentInhabitant = GM.VM.inhabitants[currentIndex];
+        InhabitantInstance currentInhabitant = selectedInhabitants[currentIndex];
 
         for (int i = 0; i < dreams.Count; i++)
         {
@@ -168,6 +186,10 @@ public class DreamMachineManager : MonoBehaviour
 
                 // Select clicked one
                 displayable.isSelected = true;
+                if (!selectedDreamByInhabitant.ContainsKey(currentInhabitant))
+                {
+                    numberDreamSelected++;
+                }
                 UpdateDreamButtonVisual(button, true);
 
                 // Save the selection
@@ -176,6 +198,7 @@ public class DreamMachineManager : MonoBehaviour
                 PreviewStats(displayable);
                 
                 CheckIfAllDreamsSelected();
+                indexUI.text = $"{numberDreamSelected}/{selectedInhabitants.Count}";
             });
 
             Debug.Log($"Dream Order: {ordered[0].interestName}, {ordered[1].interestName}, {ordered[2].interestName}");
@@ -190,10 +213,10 @@ public class DreamMachineManager : MonoBehaviour
     
     public void NextInhabitant()
     {
-        currentIndex = (currentIndex + 1) % GM.VM.inhabitants.Count;
+        currentIndex = (currentIndex + 1) % selectedInhabitants.Count;
         DisplayCurrentInhabitant();
 
-        var current = GM.VM.inhabitants[currentIndex];
+        var current = selectedInhabitants[currentIndex];
 
         if (!dreamsByInhabitant.ContainsKey(current))
         {
@@ -201,20 +224,14 @@ public class DreamMachineManager : MonoBehaviour
         }
 
         DisplayDreams(dreamsByInhabitant[current]);
-
-        /* Si un rêve est sélectionné, applique la prévisualisation
-        if (selectedDream != null)
-        {
-            PreviewStats(selectedDream);
-        }*/
     }
 
     public void PreviousInhabitant()
     {
-        currentIndex = (currentIndex - 1 + GM.VM.inhabitants.Count) % GM.VM.inhabitants.Count;
+        currentIndex = (currentIndex - 1 + selectedInhabitants.Count) % selectedInhabitants.Count;
         DisplayCurrentInhabitant();
 
-        var current = GM.VM.inhabitants[currentIndex];
+        var current = selectedInhabitants[currentIndex];
 
         if (!dreamsByInhabitant.ContainsKey(current))
         {
@@ -222,12 +239,6 @@ public class DreamMachineManager : MonoBehaviour
         }
 
         DisplayDreams(dreamsByInhabitant[current]);
-
-        /* Si un rêve est sélectionné, applique la prévisualisation
-        if (selectedDream != null)
-        {
-            PreviewStats(selectedDream);
-        }*/
     }
 
 
@@ -301,7 +312,7 @@ public class DreamMachineManager : MonoBehaviour
     
     private void PreviewStats(DisplayableDream displayable)
     {
-        var currentInhabitant = GM.VM.inhabitants[currentIndex];
+        var currentInhabitant = selectedInhabitants[currentIndex];
 
         // Calculer les changements
         int moodChange = GetStatChange(displayable.orderedElements[0], currentInhabitant);
@@ -312,27 +323,6 @@ public class DreamMachineManager : MonoBehaviour
         moodSlider.value = currentInhabitant.Mood + moodChange;
         serenitySlider.value = currentInhabitant.Serenity + serenityChange;
         energySlider.value = currentInhabitant.Energy + energyChange;
-
-        // Appliquer la couleur selon les changements
-        //UpdateSliderColor(moodSlider, moodChange);
-        //UpdateSliderColor(serenitySlider, serenityChange);
-        //UpdateSliderColor(energySlider, energyChange);
-    }
-
-    private void UpdateSliderColor(Slider slider, int change)
-    {
-        if (change > 0)
-        {
-            slider.fillRect.GetComponent<Image>().color = Color.green;  // Couleur verte pour positif
-        }
-        else if (change < 0)
-        {
-            slider.fillRect.GetComponent<Image>().color = Color.red;  // Couleur rouge pour négatif
-        }
-        else
-        {
-            slider.fillRect.GetComponent<Image>().color = Color.white;  // Couleur neutre pour aucun changement
-        }
     }
     
     private void ResetSliderColors()
@@ -346,7 +336,7 @@ public class DreamMachineManager : MonoBehaviour
     {
         bool allSelected = true;
 
-        foreach (var inhabitant in GM.VM.inhabitants)
+        foreach (var inhabitant in selectedInhabitants)
         {
             if (!selectedDreamByInhabitant.ContainsKey(inhabitant))
             {
@@ -358,9 +348,17 @@ public class DreamMachineManager : MonoBehaviour
         validateButton.interactable = allSelected;
     }
 
+    public void BS_ValidateSelectedDream()
+    {
+        GM.DreamPanel.SetActive(false);
+
+        GM.DN.TimeRemaining = totalDreamMinute * 60; //minutes to seconds
+        GM.DN.nightDreamTimeCoroutine = GM.DN.StartCoroutine(GM.DN.StartWaitingTime());
+    }
 
     public void ApplySelectedDreams()
     {
+        Debug.Log("Apply Selected Dreams! " + selectedDreamByInhabitant.First());
         foreach (var pair in selectedDreamByInhabitant)
         {
             var inhabitant = pair.Key;
@@ -385,8 +383,9 @@ public class DreamMachineManager : MonoBehaviour
                     inhabitant.DiscoveredDislikes.Add(element);
             }
 
-            // 📊 Stats après
-            Debug.Log($"[After] {inhabitant.Name}| Mood: {inhabitant.Mood}, Serenity: {inhabitant.Serenity}, Energy: {inhabitant.Energy}");
+            inhabitant.Mood = Mathf.FloorToInt(inhabitant.Mood / 2f);
+            inhabitant.Serenity = Mathf.FloorToInt(inhabitant.Serenity / 2f);
+            inhabitant.Energy = Mathf.FloorToInt(inhabitant.Energy / 2f);
 
             // 🔄 Désélection
             dream.isSelected = false;
@@ -401,12 +400,144 @@ public class DreamMachineManager : MonoBehaviour
         // ♻️ Reset
         selectedDreamByInhabitant.Clear();
         validateButton.interactable = false;
+        
+        dreamsByInhabitant.Clear();
+        foreach (var inhabitant in selectedInhabitants)
+        {
+            dreamsByInhabitant[inhabitant] = GenerateDreamOptions(inhabitant);
+        }
 
         // 🔁 Rafraîchissement UI
         DisplayCurrentInhabitant();
-        DisplayDreams(dreamsByInhabitant[GM.VM.inhabitants[currentIndex]]);
-
+        DisplayDreams(dreamsByInhabitant[selectedInhabitants[currentIndex]]);
+        
         GM.Cjm.DisplayInhabitant();
+
+        selectedInhabitants.Clear();
+    }
+    
+    public void UpdateSelectionCanvas()
+    {
+        foreach (Transform child in inhabitantsContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var inhabitant in GM.VM.inhabitants)
+        {
+            GameObject go = Instantiate(selectInhabitantPrefab, inhabitantsContainer.transform);
+
+            Image image = go.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+            image.sprite = inhabitant.Icon;
+
+            GameObject statsContainer = go.transform.GetChild(1).gameObject;
+
+            Slider mood = statsContainer.transform.GetChild(0).GetComponent<Slider>();
+            Slider serenity = statsContainer.transform.GetChild(1).GetComponent<Slider>();
+            Slider energy = statsContainer.transform.GetChild(2).GetComponent<Slider>();
+
+            mood.value = inhabitant.Mood;
+            serenity.value = inhabitant.Serenity;
+            energy.value = inhabitant.Energy;
+
+            Button btn = go.GetComponent<Button>();
+            if (btn != null)
+            {
+                InhabitantInstance capturedInhabitant = inhabitant;
+                btn.onClick.AddListener(() => BS_SelectInhabitant(btn, capturedInhabitant));
+            }
+        }
+        
+        UpdateInformationsSelectionCanvas();
+    }
+
+    public void UpdateInformationsSelectionCanvas()
+    {
+        int selectedCount = selectedInhabitants.Count;
+        int totalCount = GM.VM.inhabitants.Count;
+
+        selectionCountText.text = $"{selectedCount} / {totalCount}";
+
+        int totalGold = 0;
+        int totalXP = 0;
+        totalDreamMinute = 0f;
+
+        foreach (var inhabitant in selectedInhabitants)
+        {
+            float multiplier = inhabitant.GoldMultiplier;
+            int mood = inhabitant.Mood;
+            int serenity = inhabitant.Serenity;
+            int energy = inhabitant.Energy;
+
+            int gold = Mathf.Max(0, Mathf.FloorToInt((baseGoldPerDream) * multiplier));
+            int xp = Mathf.Max(0, Mathf.FloorToInt((baseEXPPerDream) * multiplier));
+
+            totalGold += gold;
+            totalXP += xp;
+            totalDreamMinute += 0.1f; // TODO : A changer 30 min
+        }
+
+        goldPreviewText.text = $"{totalGold} gold";
+        expPreviewText.text = $"{totalXP} XP";
+        timePreviewText.text = $"{(int)(totalDreamMinute / 60)}h {((int)totalDreamMinute % 60)}min";
+    }
+
+    
+    public void BS_OpenSelectionCanvas()
+    {
+        UpdateSelectionCanvas();
+        DisableButton(selectedButton, true);
+        selectInhabitant.gameObject.SetActive(true);
+    }
+    
+    public void BS_SelectInhabitant(Button button, InhabitantInstance inhabitant)
+    {
+        if (selectedInhabitants.Contains(inhabitant))
+        {
+            selectedInhabitants.Remove(inhabitant);
+            DisableButton(button.gameObject, true);
+        }
+        else
+        {
+            selectedInhabitants.Add(inhabitant);
+            DisableButton(button.gameObject, false);
+        }
+        
+        UpdateInformationsSelectionCanvas();
+    }
+
+    public void BS_CloseSelectionCanvas()
+    {
+        selectedInhabitants.Clear();
+        selectInhabitant.gameObject.SetActive(false);
+    }
+    
+    public void BS_SendSelectedInhabitant()
+    {
+        if (selectedInhabitants.Count > 0)
+        {
+            currentIndex = 0;
+            var current = selectedInhabitants[currentIndex];
+            
+            selectInhabitant.gameObject.SetActive(false);
+            
+            if (!dreamsByInhabitant.ContainsKey(current))
+            {
+                dreamsByInhabitant[current] = GenerateDreamOptions(current);
+            }
+            
+            DisplayCurrentInhabitant();
+            DisplayDreams(dreamsByInhabitant[current]);
+            CheckIfAllDreamsSelected();
+            
+            dreamMachineCanvas.SetActive(true);
+            UpdateSelectionCanvas();
+        }
+    }
+    
+    private void DisableButton(GameObject button, bool disable)
+    {
+        if (button != null) button.transform.GetChild(3).gameObject.SetActive(disable);
     }
 }
 

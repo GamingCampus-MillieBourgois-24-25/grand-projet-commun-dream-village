@@ -16,8 +16,27 @@ MonoBehaviour:
     m_Code: fr
   m_SharedData: {fileID: 11400000, guid: f7b6952ea84e7334282b9a1336f30eac, type: 2}
   m_Metadata:
-    m_Items: []
-  m_TableData: []
+    m_Items:
+    - rid: 6238822977345945604
+  m_TableData:
+  - m_Id: 21137944576
+    m_Localized: "Oh, salut mon gars ! Alors vous \xEAtes le nouveau maire ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23780356096
+    m_Localized: "Je suis ravi de vous rencontrer. Je m'appelle Willith Warm. J'esp\xE8re
+      que {0} deviendra le plus beau village du monde\_!"
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945604
+  - m_Id: 27089661952
+    m_Localized: ' Salut mon gars !'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6238822977345945604
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00706b8905000000

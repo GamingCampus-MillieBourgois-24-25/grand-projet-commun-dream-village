@@ -183,7 +183,7 @@ public class CameraDeplacement : MonoBehaviour
 
     void CameraMovementEdit()
     {
-        Debug.Log("CameraMovementEdit : " + isoManager.HasSelectedObject());
+        //Debug.Log("CameraMovementEdit : " + isoManager.HasSelectedObject());
         if (cameraMovementCoroutine != null)
         {
             StopCoroutine(cameraMovementCoroutine);
@@ -200,10 +200,10 @@ public class CameraDeplacement : MonoBehaviour
         yield return null;
         if (isoManager.HasSelectedObject())
         {
-            Debug.Log("HasItem");
+            //Debug.Log("HasItem");
             while (touch1Action.action.IsPressed())
             {
-                Debug.Log("while");
+                //Debug.Log("while");
                 Vector2 movement = Vector2.zero;
                 Vector2 posTouch = zoom1Action.action.ReadValue<Vector2>();
 
@@ -252,7 +252,7 @@ public class CameraDeplacement : MonoBehaviour
         }
         else
         {
-            Debug.Log("HasNotItem");
+            //Debug.Log("HasNotItem");
             cameraMovementCoroutine = null;
             yield break;
         }
