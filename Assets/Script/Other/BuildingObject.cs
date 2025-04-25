@@ -31,7 +31,8 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
         int lastWholeMinutes = Mathf.CeilToInt(timeRemaining / 60f);
         UpdateSkipText(lastWholeMinutes);
-        AddBSSkipFunction();
+        AddBSSkipFunctions();
+
 
         if (notificationID == -1 && inhabitantUsing != null && inhabitantUsing.baseData.Name != null)
         {
@@ -142,6 +143,21 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         if (starText == null) return;
 
         starText.text = remainingMinutes.ToString();
+
+        UpdateStarBTNInteractable(remainingMinutes);
+    }
+
+    private void UpdateStarBTNInteractable(int stars)
+    {
+        Button starButton = GM.Instance.skipWithStarButton;
+        if (GM.Instance.player.CanSpendStar(stars))
+        {
+            starButton.interactable = true;
+        }
+        else
+        {
+            starButton.interactable = false;
+        }
     }
 
     //private void UpdateSkipText(int remainingMinutes)
@@ -159,16 +175,27 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
     //    starText.text = remainingMinutes.ToString();
     //}
-    private void AddBSSkipFunction()
+    private void AddBSSkipFunctions()
     {
         Button starButton = GM.Instance.skipWithStarButton;
 
-        if (starText != null)
+        if (starButton != null && starText != null)
         {
             starButton.onClick.RemoveAllListeners();
             starButton.onClick.AddListener(() =>
             {
-                GM.Instance.TrySkipActivityWithStars(starText, this);
+                GM.Instance.TrySkipActivityWithStars(starText, this, true);
+            });
+        }
+
+        Button adButton = GM.Instance.skipWithAdButton;
+
+        if (adButton != null)
+        {
+            adButton.onClick.RemoveAllListeners();
+            adButton.onClick.AddListener(() =>
+            {
+                GM.Instance.SkipActivityWithADS(this, true);
             });
         }
     }

@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public GameObject inventoryPanel;
     public GameObject shopPanel;
     public Button skipWithStarButton;
+    public Button skipWithAdButton;
 
     [Header("UI Canvas")]
     public Canvas chooseSkipCanvas;
@@ -232,19 +233,24 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         }
     }
 
-    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject)
+    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject, bool isActivity)
     {
         int timeStars = int.Parse(starText.text);
         if (player.CanSpendStar(timeStars)) {
             player.SpendStar(timeStars);
             chooseSkipCanvas.gameObject.SetActive(false);
-            buildingObject.FinishActivity();
+            if (isActivity) {
+                buildingObject.FinishActivity();
+            }
         }
     }
 
-    public void SkipActivityWithADS(BuildingObject buildingObject)
+    public void SkipActivityWithADS(BuildingObject buildingObject, bool isActivity)
     {
-        buildingObject.FinishActivity();
+        if (isActivity)
+        {
+            buildingObject.FinishActivity();
+        }
     }
 
     public bool IsPointerOverUIElement(Vector2 screenPosition)
