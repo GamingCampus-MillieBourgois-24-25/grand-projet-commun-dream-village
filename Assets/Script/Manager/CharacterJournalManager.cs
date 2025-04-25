@@ -1,11 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
-using Unity.VisualScripting;
-using UnityEngine.InputSystem;
 
 public class CharacterJournalManager : MonoBehaviour
 {
@@ -48,8 +44,6 @@ public class CharacterJournalManager : MonoBehaviour
     [SerializeField] private AudioClip switchPageSFX;
     [SerializeField] private AudioClip noneButtonSFX;
 
-    [SerializeField] private InputActionReference swipeAction;
-
     private List<InhabitantInstance> inhabitants;
     private int currentIndex = 0;
     
@@ -62,47 +56,6 @@ public class CharacterJournalManager : MonoBehaviour
         inhabitants = GM.VM.inhabitants;
 
         DisplayInhabitant();
-
-        swipeAction.action.Enable();
-        swipeAction.action.started += OnSwipeStarted;
-        swipeAction.action.canceled += OnSwipeEnded;
-    }
-
-    private void OnEnable()
-    {
-        swipeAction.action.Enable();
-    }
-
-    private void OnDisable()
-    {
-        swipeAction.action.Disable();
-    }
-
-    private void OnSwipeStarted(InputAction.CallbackContext context)
-    {
-        startTouchPosition = context.ReadValue<Vector2>();
-    }
-
-    private void OnSwipeEnded(InputAction.CallbackContext context)
-    {
-        if (journalCanvas.activeSelf)
-        {
-            Vector2 endTouchPosition = context.ReadValue<Vector2>();
-
-            Vector2 swipeDelta = endTouchPosition - startTouchPosition;
-
-            if (Mathf.Abs(swipeDelta.x) > swipeThreshold)
-            {
-                if (swipeDelta.x > 0)
-                {
-                    BS_ShowPrevious();
-                }
-                else
-                {
-                    BS_ShowNext();
-                }
-            }
-        }
     }
 
     /*private void Update()

@@ -30,6 +30,14 @@ MonoBehaviour:
     m_Localized: Energy
     m_Metadata:
       m_Items: []
+  - m_Id: 759150019780608
+    m_Localized: He/Him
+    m_Metadata:
+      m_Items: []
+  - m_Id: 759292756140032
+    m_Localized: She/Her
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
