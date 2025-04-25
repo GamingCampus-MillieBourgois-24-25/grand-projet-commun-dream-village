@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: defbef0920b2a4c4897c9b87d136ac7f,
         type: 3}
       propertyPath: m_Name
-      value: BarriereEntiere02
+      value: OLDFence1A
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -95,6 +95,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3728798892524856564}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: defbef0920b2a4c4897c9b87d136ac7f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -146837449469273972}
   m_SourcePrefab: {fileID: 100100000, guid: defbef0920b2a4c4897c9b87d136ac7f, type: 3}
 --- !u!1 &6998228220738688303 stripped
 GameObject:
@@ -135,5 +139,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fcb961e62672942939249e73bd7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeInTiles: {x: 0, y: 0}
+  canBeStocked: 1
   cachedRenderer: {fileID: 0}
+--- !u!114 &-146837449469273972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998228220738688303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feccf5141630d4843a5b85ec813fd8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseData: {fileID: 11400000, guid: 6aa674556aaf83e429fad2ac16052379, type: 2}
