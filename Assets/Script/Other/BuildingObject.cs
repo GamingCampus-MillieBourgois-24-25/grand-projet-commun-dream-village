@@ -110,7 +110,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
     private void CheckAndInstanciateRemainingTime()
     {
-        // S'assurer que l'UI est prï¿½sente
+        // S'assurer que l'UI est présente
         Transform existing = transform.Find("remainingTime");
         if (existing != null)
         {
@@ -231,13 +231,9 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             image.sprite = attributeEffect.attribute.icon;
         }
 
-        Button button = canvasBuilding.transform.GetChild(4).GetComponent<Button>();
-        button.onClick.AddListener(() => {                 
-            if (GM.Tm.inActivityTutorial)
-            {
-                GM.Tm.UnHold(26);
-            }
-        });
+        //Button button = canvasBuilding.transform.GetChild(3).GetComponent<Button>();
+        //button.onClick.RemoveAllListeners();
+        //button.onClick.AddListener(() => { DebugSetFirstInhabitant(); });
 
         canvasBuilding.transform.SetParent(transform, true);
         canvasBuilding.transform.position = this.transform.position + new Vector3(0, canvasBuilding.transform.position.y, 0);
