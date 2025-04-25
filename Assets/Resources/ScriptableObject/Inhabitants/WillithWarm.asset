@@ -17,7 +17,7 @@ MonoBehaviour:
     type: 3}
   <InitialPrice>k__BackingField: 0
   <InstantiatePrefab>k__BackingField: {fileID: 0}
-  <MaxOwned>k__BackingField: 0
+  <MaxOwned>k__BackingField: 1
   <UnlockedAtLvl>k__BackingField: 1
   FirstName: Willith
   LastName: Warm
@@ -42,7 +42,7 @@ MonoBehaviour:
   <GoldMultiplier>k__BackingField: 1
   <CanLeave>k__BackingField: 0
   <HeartsBeforeLeaving>k__BackingField: 0
-  <InhabitantPrefab>k__BackingField: {fileID: 919132149155446097, guid: 472562410776d3f4e810da89bfd9e3f3,
+  <InhabitantPrefab>k__BackingField: {fileID: 3831955123217533689, guid: 2b61195a433a62b419f0a33a5cd9c74c,
     type: 3}
   <InhabitantHouse>k__BackingField: {fileID: -2287234931181842320, guid: bd6da1a2db11c26458fee734c88d6840,
     type: 3}

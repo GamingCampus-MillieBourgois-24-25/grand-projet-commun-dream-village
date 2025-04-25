@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: Well
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Well
+  <Icon>k__BackingField: {fileID: 21300000, guid: 37396956628b61c4f8190af07830937b,
+    type: 3}
+  <InitialPrice>k__BackingField: 500
+  <InstantiatePrefab>k__BackingField: {fileID: 6045927367610473379, guid: 347949cc3269f6547a4740123c16bc69,
+    type: 3}
+  <MaxOwned>k__BackingField: 3
+  <UnlockedAtLvl>k__BackingField: 2
   <Description>k__BackingField: 
   <EffectDuration>k__BackingField: 300
   <AttributeEffects>k__BackingField:
-  - attribute: {fileID: 11400000, guid: a15712b2b029c254cb82c3bbe0b7b6c8, type: 2}
-    bonus: 2
-    bonusType: 0
-  <Mood>k__BackingField: 5
+  - <attribute>k__BackingField: {fileID: 11400000, guid: a15712b2b029c254cb82c3bbe0b7b6c8,
+      type: 2}
+    <bonus>k__BackingField: 2
+    <bonusType>k__BackingField: 0
+  <Experience>k__BackingField: 50
+  <Mood>k__BackingField: 0
   <Serenity>k__BackingField: 10
   <Energy>k__BackingField: 0
-  <InitialPrice>k__BackingField: 1000
-  <MaximumInInv>k__BackingField: 2
-  <Icon>k__BackingField: {fileID: 0}
-  <BuildingPrefab>k__BackingField: {fileID: 0}

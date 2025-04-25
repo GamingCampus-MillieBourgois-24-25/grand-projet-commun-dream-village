@@ -436,10 +436,10 @@ MonoBehaviour:
     type: 3}
   buildingBonusPrefab: {fileID: 2087731661816660375, guid: e597fc4ce2da5ee40af5478cfb06e19f,
     type: 3}
-  moodEffectSprite: {fileID: 21300000, guid: 8950d1199b43daa49ac6db16c95333d9, type: 3}
-  serenityEffectSprite: {fileID: 21300000, guid: da546a8371ab23d47a7d3754d7dbae9c,
+  moodEffectSprite: {fileID: 21300000, guid: f2275dc149ecc7f4b915dcba02331ff7, type: 3}
+  serenityEffectSprite: {fileID: 21300000, guid: f72679bee7c6658448ed597b29422267,
     type: 3}
-  energyEffectSprite: {fileID: 21300000, guid: cbb90c3794ee7c24cad7b4138e62fe0b, type: 3}
+  energyEffectSprite: {fileID: 21300000, guid: c5dc4afff9342cc4bb1187491a987dec, type: 3}
 --- !u!222 &1687137399677988928
 CanvasRenderer:
   m_ObjectHideFlags: 0
