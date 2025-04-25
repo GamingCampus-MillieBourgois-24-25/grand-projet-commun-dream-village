@@ -317,6 +317,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         //dayNight.isDay = data.isDay;
 
 
+        dayNight.TimeRemaining = data.timeRemainingNight;
         if (dayNight.TimeRemaining > 0f)
         {
             dayNight.isDay = false;
@@ -326,7 +327,6 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
             dayNight.isDay = true;
         }
 
-        dayNight.TimeRemaining = data.timeRemainingNight;
 
         selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
         foreach (var kvp in data.selectedDreamByInhabitant)
