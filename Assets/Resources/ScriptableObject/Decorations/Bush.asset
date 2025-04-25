@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bush
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Bush
-  <Icon>k__BackingField: {fileID: 21300000, guid: 37396956628b61c4f8190af07830937b,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 5c0d0ff9fc1e5834c8a95469956f7f3d,
     type: 3}
   <InitialPrice>k__BackingField: 100
   <InstantiatePrefab>k__BackingField: {fileID: 7837784147414195496, guid: b6f8e5cc1abfd7b41b821388d3437424,

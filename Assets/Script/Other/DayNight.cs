@@ -33,6 +33,8 @@ public class DayNight : MonoBehaviour
     [Header("Curtain Parameters")]
     [SerializeField] private RawImage curtain;
     [SerializeField] private float animationDuration;
+    [SerializeField] private Color dayCurtainColor = new Color(0.5f, 0.7f, 1f, 1f); // Bleu clair
+    [SerializeField] private Color nightCurtainColor = new Color(0.1f, 0.1f, 0.3f, 1f); // Bleu foncé/violet
 
     [Header("Music Settings")]
     [SerializeField] private AudioClip dayMusic;
@@ -134,6 +136,10 @@ public class DayNight : MonoBehaviour
         TimeRemaining = 0f;
         RectTransform transform = curtain.GetComponent<RectTransform>();
         Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
+        LMotion.Create(curtain.color, isDay ? dayCurtainColor : nightCurtainColor, animationDuration)
+            .WithEase(Ease.OutCubic)
+            .Bind(color => curtain.color = color);
+
         LMotion.Create(0, target.x, animationDuration)
             .WithEase(Ease.OutCubic).WithOnComplete(SwitchTime)
             .Bind(x =>

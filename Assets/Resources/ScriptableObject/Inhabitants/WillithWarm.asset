@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WillithWarm
   m_EditorClassIdentifier: 
   <Name>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: 8794667d732546e4881dde9c7401eae6,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 48ef7018e77bbc948a8011f4009ebab0,
     type: 3}
   <InitialPrice>k__BackingField: 0
   <InstantiatePrefab>k__BackingField: {fileID: 0}
