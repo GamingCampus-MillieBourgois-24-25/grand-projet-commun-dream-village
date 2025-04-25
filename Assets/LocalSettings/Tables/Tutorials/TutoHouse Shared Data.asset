@@ -23,20 +23,12 @@ MonoBehaviour:
     m_Key: Tuto_House_002
     m_Metadata:
       m_Items: []
-  - m_Id: 25567129600
-    m_Key: Tuto_House_003
-    m_Metadata:
-      m_Items: []
   - m_Id: 28062740480
     m_Key: Tuto_House_004
     m_Metadata:
       m_Items: []
   - m_Id: 30369607680
     m_Key: Tuto_House_005
-    m_Metadata:
-      m_Items: []
-  - m_Id: 46970662912
-    m_Key: Tuto_House_006
     m_Metadata:
       m_Items: []
   - m_Id: 50372243456
@@ -53,6 +45,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 58815377408
     m_Key: Tuto_House_010
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3213609877073920
+    m_Key: Tuto_House_006
     m_Metadata:
       m_Items: []
   m_Metadata:

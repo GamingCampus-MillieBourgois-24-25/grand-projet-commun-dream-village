@@ -38,19 +38,33 @@ public class Dialogues : ScriptableObject
         Shop,
     }
     
+    [Header("General")]
     [SerializeField] private string ID;
     [SerializeField] private int tutorialID;
+    [SerializeField] private bool shouldBePlayed = true;
     [SerializeField] private LocalizedString dialogueText;
     [SerializeField] private string[] requiredArguments;
     
+    [Header("Dialogue Types")]
     [SerializeField] private DialogueType dialogueType;
     [SerializeField] private DialogueCondition dialogueCondition;
     [SerializeField] private TutorialType tutorialType;
     
+    [Header("Dialogue Options")]
     [SerializeField] private bool shouldHoldDialogues = false;
     [SerializeField] private bool shouldGiveRareMoney = false;
     [SerializeField] private bool isDialogueBoxTop = false;
     [SerializeField] private NosphyPosition nosphyPosition;
+    
+    [Header("UI Highlight")]
+    public bool highlightJournalRightPage = false;
+    public bool highlightQuitJournalButton = false;
+    public bool highlightNightButton = false;
+    public bool highlightDreamButton = false;
+    public bool highlightShopButton = false;
+    public bool highlightQuitShopButton = false;
+    public bool highlightEditButton = false;
+    public bool highlightQuitEditButton = false;
     
     public string GetID()
     {
@@ -60,6 +74,11 @@ public class Dialogues : ScriptableObject
     public int GetTutorialID()
     {
         return tutorialID;
+    }
+    
+    public bool ShouldBePlayed()
+    {
+        return shouldBePlayed;
     }
     
     public DialogueType GetDialogueType()
@@ -111,4 +130,5 @@ public class Dialogues : ScriptableObject
     {
         return nosphyPosition;
     }
+    
 }
