@@ -7,6 +7,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     private Vector3 willithDefaultHousePosition = Vector3.zero;
     public List<InhabitantInstance> inhabitants { get; private set; } = new List<InhabitantInstance>();
     public List<BuildingObject> buildings { get; private set; } = new List<BuildingObject>();
+    public List<PlaceableObject> decorations { get; private set; } = new List<PlaceableObject>();
 
 
     [System.Serializable]
@@ -14,6 +15,9 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     {
         public List<BuildingObject.SavePartData> buildings = new List<BuildingObject.SavePartData>();
         public List<InhabitantInstance.SavePartData> inhabitants = new List<InhabitantInstance.SavePartData>();
+
+        public List<string> decorations = new List<string>();
+        public List<Vector3Int> decorationPositions = new List<Vector3Int>();
     }
 
 
@@ -41,6 +45,10 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
                 BuildingObject loadedBuilding = _obj.GetComponent<BuildingObject>();
                 buildings.Add(loadedBuilding);
                 Debug.Log($"New building added: {building.Name}");
+                break;
+            case Decoration decoration:
+                decorations.Add(_obj.GetComponent<PlaceableObject>());
+                Debug.Log($"New decoration added: {decoration.Name}");
                 break;
             default:
                 Debug.LogError("Unknown type");
@@ -91,6 +99,11 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         {
             data.inhabitants.Add(inhabitant.Serialize());
         }
+        foreach (var deco in decorations)
+        {
+            data.decorations.Add(deco.GetComponent<Decoration>().Name);
+            data.decorationPositions.Add(deco.OriginalPosition);
+        }
 
         return data;
     }
@@ -121,5 +134,19 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             loadedBuilding.Deserialize(buildingData);
             buildings.Add(loadedBuilding);
         }
+
+        for (int i = 0; i < data.decorations.Count; i++)
+        {
+            GameObject decoration = GM.Instance.GetDecorationByName(data.decorations[i]).InstantiatePrefab;
+            GameObject decorationInstanciate = Instantiate(decoration, Vector3.zero, decoration.transform.rotation, playerIslandObject);
+            PlaceableObject loadedDecoration = decorationInstanciate.GetComponent<PlaceableObject>();
+
+            loadedDecoration.OriginalPosition = data.decorationPositions[i];
+            loadedDecoration.ResetPosition();
+
+            decorations.Add(loadedDecoration);
+        }
+
+
     }
 }
