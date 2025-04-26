@@ -9489,6 +9489,12 @@ PrefabInstance:
       propertyPath: defaultClickSound
       value: 
       objectReference: {fileID: 8300000, guid: c3a257339e6426c48935a5e992dd9bc6, type: 3}
+    - target: {fileID: 5157323527859054462, guid: ee04742cccb83584fa1f5daf09aacc0a,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7707838910240529441, guid: 25ee6e66aedfed8469c9d70a36ea9227,
+        type: 2}
     - target: {fileID: 7029000785420447571, guid: ee04742cccb83584fa1f5daf09aacc0a,
         type: 3}
       propertyPath: m_Name
@@ -15854,7 +15860,8 @@ AudioSource:
   m_GameObject: {fileID: 1705861468}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1276109234119380079, guid: 25ee6e66aedfed8469c9d70a36ea9227,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.5
