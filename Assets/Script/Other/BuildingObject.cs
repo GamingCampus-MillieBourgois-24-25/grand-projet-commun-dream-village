@@ -37,7 +37,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
         if (notificationID == -1 && inhabitantUsing != null && inhabitantUsing.baseData.Name != null)
         {
-            string title = inhabitantUsing.baseData.Name + "has finished " + inhabitantUsing.baseData.GetPronouns()[1] + "activity!";
+            string title = inhabitantUsing.baseData.Name + " has finished " + inhabitantUsing.baseData.GetPronouns()[1] + " activity!";
             string text = "Come back to see what " + inhabitantUsing.baseData.GetPronouns()[0] + (inhabitantUsing.baseData.isPlural() ? " are" : " is") + " doing!";
             notificationID = NotificationManager.CreateNotification(title, text, timeRemaining);
         }
