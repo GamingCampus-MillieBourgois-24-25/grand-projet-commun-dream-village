@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 using System;
+using System.Drawing;
+using Color = UnityEngine.Color;
 
 public class DayNight : MonoBehaviour
 {
@@ -35,6 +37,8 @@ public class DayNight : MonoBehaviour
     [SerializeField] private float animationDuration;
     [SerializeField] private Color dayCurtainColor = new Color(0.5f, 0.7f, 1f, 1f); // Bleu clair
     [SerializeField] private Color nightCurtainColor = new Color(0.1f, 0.1f, 0.3f, 1f); // Bleu foncé/violet
+    [SerializeField] private Texture2D dayCurtainTexture;    // ⬅️ Texture pour le jour
+    [SerializeField] private Texture2D nightCurtainTexture;
 
     [Header("Music Settings")]
     [SerializeField] private AudioClip dayMusic;
@@ -105,6 +109,9 @@ public class DayNight : MonoBehaviour
 
     public void ChangeTime()
     {
+        // TEST TEXTURE
+        //curtain.texture = isDay ?  nightCurtainTexture : dayCurtainTexture;
+        
         // Pour passer à la nuit
         if (isDay)
         {
@@ -142,6 +149,8 @@ public class DayNight : MonoBehaviour
         LMotion.Create(curtain.color, isDay ? dayCurtainColor : nightCurtainColor, animationDuration)
             .WithEase(Ease.OutCubic)
             .Bind(color => curtain.color = color);
+        
+        Debug.Log(target.x);
 
         LMotion.Create(0, target.x, animationDuration)
             .WithEase(Ease.OutCubic).WithOnComplete(SwitchTime)
@@ -193,7 +202,6 @@ public class DayNight : MonoBehaviour
                     GM.JournalPanel.SetActive(false);
                     GM.ShopPanel.SetActive(false);
                     GM.InventoryPanel.SetActive(false);
-                    GM.DayNightPanel.SetActive(false);
                 })
                 .Bind(x =>
                 {

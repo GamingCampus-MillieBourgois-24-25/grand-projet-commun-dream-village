@@ -142,8 +142,8 @@ public class DreamMachineManager : MonoBehaviour
         ColorBlock colors = button.colors;
         if (isActive)
         {
-            colors.normalColor = Color.green; // sélectionné
-            colors.selectedColor = Color.green;
+            colors.normalColor = new Color(0.70f, 0.70f, 0.70f); // sélectionné
+            colors.selectedColor = new Color(0.70f, 0.70f, 0.70f);
         }
         else
         {
@@ -382,7 +382,6 @@ public class DreamMachineManager : MonoBehaviour
     {
         GM.SM.PlaySFX(applyDreamsSFX);
 
-        GM.DayNightPanel.SetActive(true);
         GM.DreamPanel.SetActive(false);
 
         GM.DN.TimeRemaining = totalDreamMinute * 60; //minutes to seconds
@@ -503,8 +502,8 @@ public class DreamMachineManager : MonoBehaviour
             int serenity = inhabitant.Serenity;
             int energy = inhabitant.Energy;
 
-            int gold = Mathf.Max(0, Mathf.FloorToInt((baseGoldPerDream) * multiplier));
-            int xp = Mathf.Max(0, Mathf.FloorToInt((baseEXPPerDream) * multiplier));
+            int gold = Mathf.Max(0, Mathf.FloorToInt((baseGoldPerDream + mood + serenity + energy) * multiplier));
+            int xp = Mathf.Max(0, Mathf.FloorToInt((baseEXPPerDream + mood + serenity + energy) * multiplier));
 
             totalGold += gold;
             totalXP += xp;
