@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public HouseTutoDelegate OnHouseTuto;
     [Header("UI Buttons")]
     public GameObject dreamPanel;
+    public GameObject skipDreamPanel;
     public GameObject dayNightPanel;
     public GameObject journalPanel;
     public GameObject inventoryPanel;
@@ -268,12 +269,28 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         }
     }
 
+    public void TrySkipNightWithStars(TextMeshProUGUI starText)
+    {
+        int timeStars = int.Parse(starText.text);
+        if (player.CanSpendStar(timeStars))
+        {
+            player.SpendStar(timeStars);
+            chooseSkipCanvas.gameObject.SetActive(false);
+            dayNight.TimeRemaining = 0;
+        }
+    }
+
     public void SkipActivityWithADS(BuildingObject buildingObject, bool isActivity)
     {
         if (isActivity)
         {
             buildingObject.FinishActivity();
         }
+    }
+
+    public void SkipNightWithADS()
+    {
+        dayNight.TimeRemaining = 0;
     }
 
     public bool IsPointerOverUIElement(Vector2 screenPosition)
@@ -435,6 +452,7 @@ public static class GM
     public static SoundManager SM => GameManager.instance.soundManager;
 
     public static GameObject DreamPanel => Instance.dreamPanel;
+    public static GameObject SkipDreamPanel => Instance.skipDreamPanel;
     public static GameObject DayNightPanel => Instance.dayNightPanel;
     public static GameObject JournalPanel => Instance.journalPanel;
     public static GameObject InventoryPanel => Instance.inventoryPanel;

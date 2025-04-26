@@ -413,12 +413,13 @@ public class DreamMachineManager : MonoBehaviour
         GM.SM.PlaySFX(applyDreamsSFX);
 
         GM.DreamPanel.SetActive(false);
+        GM.SkipDreamPanel.SetActive(true);
 
         GM.DN.TimeRemaining = totalDreamMinute * 60; //minutes to seconds
         GM.DN.nightDreamTimeCoroutine = GM.DN.StartCoroutine(GM.DN.StartWaitingTime());
     }
 
-    public void ApplySelectedDreams()
+    public void ApplySelectedDreams(int notificationID)
     {
         Debug.Log("Apply Selected Dreams! " + selectedDreamByInhabitant.First());
         foreach (var pair in selectedDreamByInhabitant)
@@ -477,6 +478,14 @@ public class DreamMachineManager : MonoBehaviour
         GM.Cjm.DisplayInhabitant();
 
         selectedInhabitants.Clear();
+
+        if (notificationID != -1)
+        {
+            NotificationManager.CancelNotification(notificationID);
+            notificationID = -1;
+        }
+
+        GM.SkipDreamPanel.SetActive(false);
     }
     
     public void UpdateSelectionCanvas()
