@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class DreamMachineManager : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class DreamMachineManager : MonoBehaviour
     [SerializeField] private AudioClip applyDreamsSFX;
     [SerializeField] private AudioClip clickSFX;
     [SerializeField] private AudioClip noneButtonSFX;
+
+    [Header("Visuals")]
+    [SerializeField] private Color likeColor;
+    [SerializeField] private Color dislikeColor;
+
 
     private List<InhabitantInstance> selectedInhabitants = new();
     private GameObject selectedButton;
@@ -169,12 +175,36 @@ public class DreamMachineManager : MonoBehaviour
             GameObject dreamButton = Instantiate(dreamButtonPrefab, dreamsContainer);
 
             // R�cup�rer les images dans le bouton
-            Image[] images = dreamButton.GetComponentsInChildren<Image>();
+            List<Image> images = new();
+            foreach (Transform child in dreamButton.transform)
+            {
+                images.Add(child.GetComponent<Image>());
+            }
 
             var ordered = displayable.orderedElements;
-            images[1].sprite = ordered[0].icon;
-            images[2].sprite = ordered[1].icon;
-            images[3].sprite = ordered[2].icon;
+
+            for (int j = 0; j < ordered.Count; j++)
+            {
+                images[j].sprite = ordered[j].icon;
+
+                switch (currentInhabitant.IsInterestLiked(ordered[j]))
+                {
+                    case 1:
+                        images[j].transform.GetChild(0).GetComponent<Image>().color = likeColor;
+                        break;
+                    case -1:
+                        images[j].transform.GetChild(0).GetComponent<Image>().color = dislikeColor;
+                        images[j].transform.GetChild(0).GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
+                        images[j].transform.GetChild(0).GetComponent<RectTransform>().pivot = new Vector2(0.8f, 0.2f);
+                        break;
+                    default:
+                        images[j].transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, 0);
+                        break;
+                }
+            }
+
+
+
 
             Button button = dreamButton.GetComponent<Button>();
             buttons.Add(button);
