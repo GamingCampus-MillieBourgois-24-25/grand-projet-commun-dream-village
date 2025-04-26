@@ -238,23 +238,90 @@ public class DayNight : MonoBehaviour
         if (nightDreamTimeCoroutine == null)
         {
             timeContainer.SetActive(true);
-            while (TimeRemaining > 1f)
+            while (TimeRemaining > 0f)
             {
                 TimeRemaining -= Time.deltaTime;
                 timeText.text = GM.Instance.DisplayFormattedTime(TimeRemaining);
                 yield return null;
             }
 
+            yield return null;
             nightDreamTimeCoroutine = null;
             timeText.text = GM.Instance.DisplayFormattedTime(0f); // Assure l'affichage à 00:00
+
             ChangeTime(); // Day automatique
+
 
             yield return new WaitForSeconds(1f);
             GM.DMM.ApplySelectedDreams();
             timeContainer.SetActive(false);
+
         }
     }
     
     public bool IsDay => isDay;
+
+
+
+
+
+
+
+    IEnumerator RestartCoroutine()
+    {
+        yield return null;
+
+        if (!isDay && nightDreamTimeCoroutine == null)
+        {
+            TimeSpan elapsedTime = System.DateTime.Now - GM.Instance.GetLastTimeSaved();
+            TimeRemaining -= (float)elapsedTime.TotalSeconds;
+
+            nightDreamTimeCoroutine = StartCoroutine(StartWaitingTime());
+        }
+    }
+
+
+    #region Check Game closed
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            if(nightDreamTimeCoroutine != null)
+            {
+                StopCoroutine(nightDreamTimeCoroutine);
+                nightDreamTimeCoroutine = null;
+            }
+        }
+        else
+        {
+            StartCoroutine(RestartCoroutine());
+        }
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            if (nightDreamTimeCoroutine != null)
+            {
+                StopCoroutine(nightDreamTimeCoroutine);
+                nightDreamTimeCoroutine = null;
+            }
+        }
+        else
+        {
+            StartCoroutine(RestartCoroutine());
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (nightDreamTimeCoroutine != null)
+        {
+            StopCoroutine(nightDreamTimeCoroutine);
+            nightDreamTimeCoroutine = null;
+        }
+    }
+    #endregion
 
 }
