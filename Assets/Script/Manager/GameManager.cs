@@ -1,10 +1,13 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
@@ -95,9 +98,10 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     // Load all resources for shop from the Resources folder
     private void LoadAllResources()
     {
-        this.Load("GameManager");
+        List<bool> filesLoaded = new List<bool>();
+        filesLoaded.Add(this.Load("GameManager"));
 
-
+        #region Load All Inhabitants, Buildings and Decorations
         // Load all inhabitants
         Inhabitant[] allInhabitants = Resources.LoadAll<Inhabitant>("ScriptableObject/Inhabitants");
         foreach (Inhabitant inhabitant in allInhabitants)
@@ -119,11 +123,13 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
             decorations.Add(decoration);
         }
         decorations.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort decorations by name
+        #endregion
 
+        bool hasWillith;
+        filesLoaded.Add(hasWillith = villageManager.Load("VillageManager"));
+        filesLoaded.Add(player.Load("PlayerData"));
 
-        bool hasWillith = villageManager.Load("VillageManager");
-        player.Load("PlayerData");
-
+        #region Load All dreams
         // Load all dream
         dreamMachineManager.selectedDreamByInhabitant = new Dictionary<InhabitantInstance, DisplayableDream>();
         if(selectedDreamByInhabitantTemp == null)
@@ -137,10 +143,21 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
                 dreamMachineManager.selectedDreamByInhabitant.Add(inhabitant, displayableDream);
             }
         }
+        #endregion
 
-        if(!hasWillith)
+        if (filesLoaded.Any(x => x != filesLoaded[0]))
+        {
+            Debug.LogError("GameManager, VillageManager ou PlayerData n'ont pas été chargés correctement");
+            StartCoroutine(DeleteSaveCoroutine());
+            return;
+        }
+
+
+
+        if (!hasWillith)
         {
             villageManager.SpawnWillith();
+            villageManager.SpawnBench();
         }
 
         NotificationManager.SetupNotifications();
@@ -371,6 +388,19 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         this.Save("GameManager");
         villageManager.Save("VillageManager");
         player.Save("PlayerData");
+    }
+
+    public IEnumerator DeleteSaveCoroutine()
+    {
+        LoadingClouds.cloudOuting = false;
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        SaveScript.DeleteSave();
     }
     #endregion
 }
