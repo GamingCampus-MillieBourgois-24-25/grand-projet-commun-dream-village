@@ -1,5 +1,6 @@
 using Unity.Services.LevelPlay;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Example for IronSource Unity.
 public class AdsManager : MonoBehaviour
@@ -11,7 +12,7 @@ public class AdsManager : MonoBehaviour
     string appKey = "unexpected_platform";
 #endif
 
-    private bool isRewardedReady = false;
+    [SerializeField] private Button skipActivityAdsButton;
 
 
     private void Awake()
@@ -73,7 +74,7 @@ public class AdsManager : MonoBehaviour
         Debug.Log("unity-script: I got SdkInitializationFailedEvent with error: " + error);
     }
 
-    public void AdButton()
+    public void WatchRewardedAds()
     {
         if (IronSource.Agent.isRewardedVideoAvailable())
         {
@@ -96,12 +97,13 @@ public class AdsManager : MonoBehaviour
 
     void RewardedVideoOnAdAvailable(IronSourceAdInfo adInfo)
     {
-        isRewardedReady = true;
+        skipActivityAdsButton.interactable = true;
         Debug.Log("IronSource reward available");
     }
 
     void RewardedVideoOnAdUnavailable()
     {
+        skipActivityAdsButton.interactable = false;
         Debug.Log("IronSource reward unavailable");
     }
 
