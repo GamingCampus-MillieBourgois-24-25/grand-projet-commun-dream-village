@@ -379,6 +379,7 @@ public class DreamMachineManager : MonoBehaviour
     {
         GM.SM.PlaySFX(applyDreamsSFX);
 
+        GM.DayNightPanel.SetActive(true);
         GM.DreamPanel.SetActive(false);
 
         GM.DN.TimeRemaining = totalDreamMinute * 60; //minutes to seconds

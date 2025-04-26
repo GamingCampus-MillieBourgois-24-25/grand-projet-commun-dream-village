@@ -193,6 +193,7 @@ public class DayNight : MonoBehaviour
                     GM.JournalPanel.SetActive(false);
                     GM.ShopPanel.SetActive(false);
                     GM.InventoryPanel.SetActive(false);
+                    GM.DayNightPanel.SetActive(false);
                 })
                 .Bind(x =>
                 {
