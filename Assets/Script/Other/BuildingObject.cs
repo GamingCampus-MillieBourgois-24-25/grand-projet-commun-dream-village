@@ -110,12 +110,17 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
                 SetupCanvas();
                 canvasBuilding.SetActive(true);
             }
+
+            if (GM.Tm.inActivityTutorial)
+            {
+                GM.Tm.UnHold(26);
+            }
         }
     }
 
     private void CheckAndInstanciateRemainingTime()
     {
-        // S'assurer que l'UI est présente
+        // S'assurer que l'UI est prï¿½sente
         Transform existing = transform.Find("remainingTime");
         if (existing != null)
         {
