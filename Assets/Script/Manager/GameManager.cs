@@ -394,11 +394,19 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     {
         LoadingClouds.cloudOuting = false;
 
-        AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync("LoadingScreen");
-        while (!asyncLoad.isDone)
+        AsyncOperation asyncLoad;
+
+
+        Scene loadingScreenScene = SceneManager.GetSceneByName("LoadingScreen");
+        if (loadingScreenScene.IsValid() && loadingScreenScene.isLoaded)
         {
-            yield return null;
+            asyncLoad = SceneManager.UnloadSceneAsync(loadingScreenScene);
+            while (!asyncLoad.isDone)
+            {
+                yield return null;
+            }
         }
+        
 
         asyncLoad = SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
 

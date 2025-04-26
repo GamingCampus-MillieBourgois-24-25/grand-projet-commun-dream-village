@@ -54,6 +54,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
 
             CreateInstanceofScriptable(GM.Instance.GetBuildingByName("Bench"), benchInstanciate);
             benchInstanciate.GetComponent<PlaceableObject>().OriginalPosition = new(-2, -5);
+            benchInstanciate.GetComponent<PlaceableObject>().ResetPosition();
 
 
             GM.Instance.SaveGame();
