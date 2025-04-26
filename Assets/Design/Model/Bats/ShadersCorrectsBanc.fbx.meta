@@ -3,7 +3,17 @@ guid: 27e9f996b1b0538458a73f4b2b2f1ab0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_bench_metal
+    second: {fileID: 2100000, guid: 6f54ebe551506594781b7817e05342c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_bench_wood
+    second: {fileID: 2100000, guid: f7e401c2a0398724483b7379381533b2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
