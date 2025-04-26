@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: Librairy
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Librairy
+  <Icon>k__BackingField: {fileID: 21300000, guid: 64126b780648a2d428130053f58ba474,
+    type: 3}
+  <InitialPrice>k__BackingField: 3500
+  <InstantiatePrefab>k__BackingField: {fileID: 5826083253263354730, guid: b0e7282824d985a439b416bdbfa1ff98,
+    type: 3}
+  <MaxOwned>k__BackingField: 1
+  <UnlockedAtLvl>k__BackingField: 15
   <Description>k__BackingField: 
   <EffectDuration>k__BackingField: 5400
   <AttributeEffects>k__BackingField:
-  - attribute: {fileID: 11400000, guid: 2b574a8cd29d59942bb785cfb05c2317, type: 2}
-    bonus: 25
-    bonusType: 1
+  - <attribute>k__BackingField: {fileID: 11400000, guid: 2b574a8cd29d59942bb785cfb05c2317,
+      type: 2}
+    <bonus>k__BackingField: 25
+    <bonusType>k__BackingField: 1
+  <Experience>k__BackingField: 5000
   <Mood>k__BackingField: -5
   <Serenity>k__BackingField: 20
   <Energy>k__BackingField: 0
-  <InitialPrice>k__BackingField: 3500
-  <MaximumInInv>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
-  <BuildingPrefab>k__BackingField: {fileID: 0}

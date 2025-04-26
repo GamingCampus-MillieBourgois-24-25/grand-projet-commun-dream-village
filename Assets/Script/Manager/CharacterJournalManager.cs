@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
-using Unity.VisualScripting;
 
 public class CharacterJournalManager : MonoBehaviour
 {
@@ -43,25 +40,27 @@ public class CharacterJournalManager : MonoBehaviour
     [SerializeField] private GameObject heartPrefab;
     [SerializeField] private GameObject preferencePrefab;
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip switchPageSFX;
+    [SerializeField] private AudioClip noneButtonSFX;
+
     private List<InhabitantInstance> inhabitants;
     private int currentIndex = 0;
     
     private Vector2 startTouchPosition;
     private float swipeThreshold = 50f;
 
+
     private void Start()
     {
         inhabitants = GM.VM.inhabitants;
 
-        //nextButton.onClick.AddListener(ShowNext);
-        //previousButton.onClick.AddListener(ShowPrevious);
-
         DisplayInhabitant();
     }
-    
-    private void Update()
+
+    /*private void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0) 
         {
             Touch touch = Input.GetTouch(0);
 
@@ -90,7 +89,7 @@ public class CharacterJournalManager : MonoBehaviour
                     break;
             }
         }
-    }
+    }*/
 
     public void DisplayInhabitant()
     {
@@ -100,7 +99,7 @@ public class CharacterJournalManager : MonoBehaviour
 
         iconImage.sprite = currentInhabitant.Icon;
         nameText.text = currentInhabitant.Name;
-        pronounsText.text = currentInhabitant.baseData.Pronouns.ToString();
+        pronounsText.text = currentInhabitant.baseData.GetPronouns()[0] + "/" + currentInhabitant.baseData.GetPronouns()[1] ;
         mbtiText.text = currentInhabitant.baseData.MBTI.ToString();
         personalitiesText.text = string.Join(" / ", currentInhabitant.baseData.Personnality);
         GoldMultiplierText.text = $"x{currentInhabitant.baseData.GoldMultiplier:F2}";
@@ -180,7 +179,7 @@ public class CharacterJournalManager : MonoBehaviour
                 
                 Image img = heartGO.GetComponent<Image>();
                 img.sprite = i < currentHearts ? heartFullSprite : heartEmptySprite;
-             }
+            }
         }
     }
 
@@ -262,12 +261,30 @@ public class CharacterJournalManager : MonoBehaviour
 
     public void BS_ShowNext()
     {
+        if (inhabitants.Count > 1)
+        {
+            GM.SM.PlaySFX(switchPageSFX);
+        } 
+        else
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+        }
+
         currentIndex = (currentIndex + 1) % inhabitants.Count;
         DisplayInhabitant();
     }
 
     public void BS_ShowPrevious()
     {
+        if (inhabitants.Count > 1)
+        {
+            GM.SM.PlaySFX(switchPageSFX);
+        }
+        else
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+        }
+
         currentIndex = (currentIndex - 1 + inhabitants.Count) % inhabitants.Count;
         DisplayInhabitant();
     }

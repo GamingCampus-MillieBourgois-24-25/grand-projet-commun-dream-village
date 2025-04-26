@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9364533248
-    m_Localized: Alright, you can confirm the changes.
+    m_Localized: Alright. You can exit the edit mode.
     m_Metadata:
       m_Items: []
   references:

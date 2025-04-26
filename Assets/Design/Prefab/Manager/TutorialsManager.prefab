@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6094672421958732644}
   - component: {fileID: 3450776198738013160}
+  - component: {fileID: 2122872550221718214}
   m_Layer: 0
   m_Name: TutorialsManager
   m_TagString: Untagged
@@ -44,8 +45,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0d307d2ab50f843a09036c752741fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFormCanvas: {fileID: 0}
+  skipDialogue: 0
   dialoguesTargetDisplayTime: 5
   dialoguesDisplayTime: 2
   isPlayerCreated: 0
   holdDialogues: 0
+  isHouseTutorialAlreadyPlayed: 0
+  inIntroductionTutorial: 0
+  inActivityTutorial: 0
+  inDreamTutorial: 0
+  inShopTutorial: 0
+  inEditTutorial: 0
+  inHeartTutorial: 0
+  inHouseTutorial: 0
+--- !u!114 &2122872550221718214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6833543448044597072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34421e6017a1af44e971dd45e828f0f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerFormCanvas: {fileID: 0}
+  mainUi: {fileID: 0}
+  journalRightPage: {fileID: 0}
+  quitJournalButton: {fileID: 0}

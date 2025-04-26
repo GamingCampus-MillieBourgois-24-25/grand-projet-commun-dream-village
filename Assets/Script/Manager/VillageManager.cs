@@ -8,13 +8,60 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     public List<InhabitantInstance> inhabitants { get; private set; } = new List<InhabitantInstance>();
     public List<BuildingObject> buildings { get; private set; } = new List<BuildingObject>();
 
+    List<DecorationObject> decorations = new List<DecorationObject>();
+
 
     [System.Serializable]
     public class SavePartData : ISaveData
     {
         public List<BuildingObject.SavePartData> buildings = new List<BuildingObject.SavePartData>();
         public List<InhabitantInstance.SavePartData> inhabitants = new List<InhabitantInstance.SavePartData>();
+        public List<DecorationObject.SavePartData> decorations = new List<DecorationObject.SavePartData>();
     }
+
+
+    private void Start()
+    {
+        if(inhabitants.Count == 0)
+        {
+            Debug.Log("Corrupted village");
+            StartCoroutine(GM.Instance.DeleteSaveCoroutine());
+        }
+    }
+
+
+    public void SpawnWillith()
+    {
+        if (inhabitants.Count == 0)
+        {
+            Transform playerIslandObject = GM.Instance.playerIslandObject;
+            GameObject house = GM.Instance.GetInhabitantByName("Willith Warm").InstantiatePrefab;
+            GameObject houseInstanciate = Instantiate(house, willithDefaultHousePosition, house.transform.rotation, playerIslandObject);
+
+            CreateInstanceofScriptable(GM.Instance.GetInhabitantByName("Willith Warm"), houseInstanciate);
+
+            GM.Instance.SaveGame();
+        }
+    }
+
+    public void SpawnBench()
+    {
+        if(buildings.Count == 0)
+        {
+            Transform playerIslandObject = GM.Instance.playerIslandObject;
+            GameObject bench = GM.Instance.GetBuildingByName("Bench").InstantiatePrefab;
+            GameObject benchInstanciate = Instantiate(bench, willithDefaultHousePosition, bench.transform.rotation, playerIslandObject);
+
+            CreateInstanceofScriptable(GM.Instance.GetBuildingByName("Bench"), benchInstanciate);
+            benchInstanciate.GetComponent<PlaceableObject>().OriginalPosition = new(-2, -5);
+            benchInstanciate.GetComponent<PlaceableObject>().ResetPosition();
+
+
+            GM.Instance.SaveGame();
+        }
+    }
+
+
 
 
     public void CreateInstanceofScriptable<T>(T _item, GameObject _obj) where T : IScriptableElement
@@ -29,6 +76,11 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
                 BuildingObject loadedBuilding = _obj.GetComponent<BuildingObject>();
                 buildings.Add(loadedBuilding);
                 Debug.Log($"New building added: {building.Name}");
+                break;
+            case Decoration decoration:
+                DecorationObject loadedDecoration = _obj.GetComponent<DecorationObject>();
+                decorations.Add(loadedDecoration);
+                Debug.Log($"New decoration added: {decoration.Name}");
                 break;
             default:
                 Debug.LogError("Unknown type");
@@ -52,6 +104,8 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         {
             Debug.LogError("Unknown object type");
         }
+
+        GM.Instance.SaveGame();
     }
 
     public InhabitantInstance GetInhabitant(Inhabitant inhabitant)
@@ -79,6 +133,10 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         {
             data.inhabitants.Add(inhabitant.Serialize());
         }
+        foreach (var decoration in decorations)
+        {
+            data.decorations.Add(decoration.Serialize());
+        }
 
         return data;
     }
@@ -99,24 +157,27 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             inhabitants.Add(loadedInhabitant);
         }
 
-        if(inhabitants.Count == 0)
-        {
-            GameObject house = GM.Instance.GetInhabitantByName("Willith Warm").InstantiatePrefab;
-            GameObject houseInstanciate = Instantiate(house, willithDefaultHousePosition, house.transform.rotation, playerIslandObject);
-
-            CreateInstanceofScriptable(GM.Instance.GetInhabitantByName("Willith Warm"), houseInstanciate);
-        }
-
-
 
         foreach (var buildingData in data.buildings)
         {
             GameObject building = GM.Instance.GetBuildingByName(buildingData.baseBuildingName).InstantiatePrefab;
-            GameObject buildingInstanciate = Instantiate(building, Vector3.zero, building.transform.rotation,playerIslandObject);
+            GameObject buildingInstanciate = Instantiate(building, Vector3.zero, building.transform.rotation, playerIslandObject);
 
             BuildingObject loadedBuilding = buildingInstanciate.GetComponent<BuildingObject>();
             loadedBuilding.Deserialize(buildingData);
             buildings.Add(loadedBuilding);
         }
+
+        foreach (var decorationData in data.decorations)
+        {
+            GameObject decoration = GM.Instance.GetDecorationByName(decorationData.baseDecorationName).InstantiatePrefab;
+            GameObject decorationInstanciate = Instantiate(decoration, Vector3.zero, decoration.transform.rotation, playerIslandObject);
+
+            DecorationObject loadedDecoration = decorationInstanciate.GetComponent<DecorationObject>();
+            loadedDecoration.Deserialize(decorationData);
+            decorations.Add(loadedDecoration);
+        }
+
+
     }
 }

@@ -13,19 +13,25 @@ MonoBehaviour:
   m_Name: Gym
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Gym
+  <Icon>k__BackingField: {fileID: 21300000, guid: 71914d7afc2740640bb058b615df3360,
+    type: 3}
+  <InitialPrice>k__BackingField: 2500
+  <InstantiatePrefab>k__BackingField: {fileID: 6045927367610473379, guid: 347949cc3269f6547a4740123c16bc69,
+    type: 3}
+  <MaxOwned>k__BackingField: 1
+  <UnlockedAtLvl>k__BackingField: 10
   <Description>k__BackingField: 
   <EffectDuration>k__BackingField: 2700
   <AttributeEffects>k__BackingField:
-  - attribute: {fileID: 11400000, guid: a9097d07afa0b0346ba116afeded535c, type: 2}
-    bonus: 2.5
-    bonusType: 0
-  - attribute: {fileID: 11400000, guid: 7557c9e9f1dc06c498ae86fc236b1391, type: 2}
-    bonus: 10
-    bonusType: 1
+  - <attribute>k__BackingField: {fileID: 11400000, guid: a9097d07afa0b0346ba116afeded535c,
+      type: 2}
+    <bonus>k__BackingField: 2.5
+    <bonusType>k__BackingField: 0
+  - <attribute>k__BackingField: {fileID: 11400000, guid: 7557c9e9f1dc06c498ae86fc236b1391,
+      type: 2}
+    <bonus>k__BackingField: 10
+    <bonusType>k__BackingField: 1
+  <Experience>k__BackingField: 1500
   <Mood>k__BackingField: 20
   <Serenity>k__BackingField: 10
   <Energy>k__BackingField: -10
-  <InitialPrice>k__BackingField: 2500
-  <MaximumInInv>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
-  <BuildingPrefab>k__BackingField: {fileID: 0}

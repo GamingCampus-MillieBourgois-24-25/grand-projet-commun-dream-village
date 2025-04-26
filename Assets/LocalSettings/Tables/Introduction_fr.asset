@@ -20,27 +20,26 @@ MonoBehaviour:
     - rid: 6238822977345945605
   m_TableData:
   - m_Id: 2689851944960
-    m_Localized: "Oh... {0}... \xE7a te va bien, je suppose."
+    m_Localized: "Oh... {0}... \xE7a te va bien, je crois."
     m_Metadata:
       m_Items:
       - rid: 6238822977345945605
   - m_Id: 1881123024896
-    m_Localized: "Oh l\xE0 l\xE0 ! Le nouveau porteur de r\xEAves est enfin arriv\xE9
-      !"
+    m_Localized: "Oh incroyable ! Le nouveau porte-r\xEAve est enfin arriv\xE9 !"
     m_Metadata:
       m_Items: []
   - m_Id: 2101403676672
-    m_Localized: "Enchant\xE9 de vous rencontrer, porteur de r\xEAves. Je suis Nosphy."
+    m_Localized: "Ravi\u2022e de te rencontrer porte-r\xEAve. Je suis Nosphy."
     m_Metadata:
       m_Items: []
   - m_Id: 2124610760704
-    m_Localized: "J'\xE9tais le porteur de r\xEAve de cette humble petite \xEEle...
-      Jusqu'\xE0 ce que vous apparaissiez."
+    m_Localized: "J'\xE9tais le porte-r\xEAve de cette petite \xEEle\u2026 avant
+      que tu n'arrives."
     m_Metadata:
       m_Items: []
   - m_Id: 2165018685440
-    m_Localized: "Cela fait si longtemps que je n\u2019ai pas eu de temps pour moi,
-      et gr\xE2ce \xE0 vous, je peux enfin prendre ma retraite !"
+    m_Localized: "\xC7a faisait longtemps que je n'avais pas eu de temps pour moi,
+      et, gr\xE2ce \xE0 toi, je peux enfin quitter ce travail !\r"
     m_Metadata:
       m_Items: []
   - m_Id: 2205321752576
@@ -51,37 +50,32 @@ MonoBehaviour:
     m_Localized: ...
     m_Metadata:
       m_Items: []
-  - m_Id: 2400906342400
-    m_Localized: ...
-    m_Metadata:
-      m_Items: []
   - m_Id: 2491968876544
-    m_Localized: "Oh, je suis d\xE9sol\xE9 ! C'est vrai que tu es nouveau ! Je dois
-      t'apprendre quelques trucs avant de partir."
+    m_Localized: "Oh pardon ! C'est vrai. Tu es nouveau\u2022elle ! Je dois t'apprendre
+      quelques petites choses avant de partir."
     m_Metadata:
       m_Items: []
   - m_Id: 2530514530304
-    m_Localized: "Mais avant tout, comment t'appelles tu, porteur de r\xEAves ?"
+    m_Localized: "Mais avant \xE7a - quel est ton nom, porte-r\xEAve ?"
     m_Metadata:
       m_Items: []
   - m_Id: 2845431263232
-    m_Localized: "Vous devez savoir qu\u2019en tant que porteurs de r\xEAves, nous
-      ne pouvons pas r\xE9v\xE9ler nos pouvoirs aux mortels."
+    m_Localized: "Tu devrais savoir qu'en tant que porte-r\xEAve, on ne peut pas
+      r\xE9v\xE9ler nos pouvoirs aux mortels."
     m_Metadata:
       m_Items: []
   - m_Id: 2903954386944
-    m_Localized: "C'est pourquoi vous, {0}, \xEAtes \xE9galement promu maire de ce
-      village ! Cela vous aidera \xE0 dissimuler votre identit\xE9."
+    m_Localized: "C'est pourquoi toi, {0}, est aussi promu maire de ce village !
+      \xC7a va aider \xE0 cacher ton identit\xE9."
     m_Metadata:
       m_Items:
       - rid: 6238822977345945605
   - m_Id: 2947906498560
-    m_Localized: "Maire le jour, porteur de r\xEAves la nuit."
+    m_Localized: "Maire le jour, porte-r\xEAve la nuit."
     m_Metadata:
       m_Items: []
   - m_Id: 2989052620800
-    m_Localized: "Alors\u2026 *maire* {0}... comment devriez-vous nommer votre village
-      ?"
+    m_Localized: Dans ce cas {0}... comment devrait-on appeler ton village ?
     m_Metadata:
       m_Items:
       - rid: 6238822977345945605

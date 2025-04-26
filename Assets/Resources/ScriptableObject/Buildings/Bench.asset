@@ -13,19 +13,21 @@ MonoBehaviour:
   m_Name: Bench
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Bench
-  <Icon>k__BackingField: {fileID: 0}
-  <InitialPrice>k__BackingField: 500
-  <InstantiatePrefab>k__BackingField: {fileID: 0}
-  <MaxOwned>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: 82d8e0643c743444995de694ad46a036,
+    type: 3}
+  <InitialPrice>k__BackingField: 100
+  <InstantiatePrefab>k__BackingField: {fileID: 5847354224935044461, guid: 114dd39cae0bd4847bc35999700252fa,
+    type: 3}
+  <MaxOwned>k__BackingField: 10
   <UnlockedAtLvl>k__BackingField: 1
   <Description>k__BackingField: 
   <EffectDuration>k__BackingField: 60
   <AttributeEffects>k__BackingField:
   - <attribute>k__BackingField: {fileID: 11400000, guid: df15dce0f8fb50544b99b12e25ae75de,
       type: 2}
-    <bonus>k__BackingField: 0
-    <bonusType>k__BackingField: 0
+    <bonus>k__BackingField: 3
+    <bonusType>k__BackingField: 1
+  <Experience>k__BackingField: 25
   <Mood>k__BackingField: 0
-  <Serenity>k__BackingField: -10
+  <Serenity>k__BackingField: 0
   <Energy>k__BackingField: 2
-  <MaximumInInv>k__BackingField: 0

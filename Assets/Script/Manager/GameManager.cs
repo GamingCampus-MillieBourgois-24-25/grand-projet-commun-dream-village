@@ -1,9 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 {
@@ -23,6 +28,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public BuildingManager buildingManager;
     public DayNight dayNight;
     public DreamMachineManager dreamMachineManager;
+    public SoundManager soundManager;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -43,7 +49,11 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public GameObject journalPanel;
     public GameObject inventoryPanel;
     public GameObject shopPanel;
+    public Button skipWithStarButton;
+    public Button skipWithAdButton;
 
+    [Header("UI Canvas")]
+    public Canvas chooseSkipCanvas;
 
     DateTime lastTimeSaved;
     Dictionary<string, DisplayableDream> selectedDreamByInhabitantTemp;
@@ -88,9 +98,10 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     // Load all resources for shop from the Resources folder
     private void LoadAllResources()
     {
-        this.Load("GameManager");
+        List<bool> filesLoaded = new List<bool>();
+        filesLoaded.Add(this.Load("GameManager"));
 
-
+        #region Load All Inhabitants, Buildings and Decorations
         // Load all inhabitants
         Inhabitant[] allInhabitants = Resources.LoadAll<Inhabitant>("ScriptableObject/Inhabitants");
         foreach (Inhabitant inhabitant in allInhabitants)
@@ -112,13 +123,17 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
             decorations.Add(decoration);
         }
         decorations.Sort((x, y) => x.UnlockedAtLvl.CompareTo(y.UnlockedAtLvl)); // Sort decorations by name
+        #endregion
 
+        bool hasWillith;
+        filesLoaded.Add(hasWillith = villageManager.Load("VillageManager"));
+        filesLoaded.Add(player.Load("PlayerData"));
 
-        villageManager.Load("VillageManager");
-        player.Load("PlayerData");
-
+        #region Load All dreams
         // Load all dream
         dreamMachineManager.selectedDreamByInhabitant = new Dictionary<InhabitantInstance, DisplayableDream>();
+        if(selectedDreamByInhabitantTemp == null)
+            selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
         foreach (var kvp in selectedDreamByInhabitantTemp)
         {
             InhabitantInstance inhabitant = villageManager.GetInhabitant(GetInhabitantByName(kvp.Key));
@@ -127,6 +142,22 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
                 DisplayableDream displayableDream = kvp.Value;
                 dreamMachineManager.selectedDreamByInhabitant.Add(inhabitant, displayableDream);
             }
+        }
+        #endregion
+
+        if (filesLoaded.Any(x => x != filesLoaded[0]))
+        {
+            Debug.LogError("GameManager, VillageManager ou PlayerData n'ont pas été chargés correctement");
+            StartCoroutine(DeleteSaveCoroutine());
+            return;
+        }
+
+
+
+        if (!hasWillith)
+        {
+            villageManager.SpawnWillith();
+            villageManager.SpawnBench();
         }
 
         NotificationManager.SetupNotifications();
@@ -225,11 +256,22 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         }
     }
 
-    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject)
+    public void TrySkipActivityWithStars(TextMeshProUGUI starText, BuildingObject buildingObject, bool isActivity)
     {
         int timeStars = int.Parse(starText.text);
         if (player.CanSpendStar(timeStars)) {
             player.SpendStar(timeStars);
+            chooseSkipCanvas.gameObject.SetActive(false);
+            if (isActivity) {
+                buildingObject.FinishActivity();
+            }
+        }
+    }
+
+    public void SkipActivityWithADS(BuildingObject buildingObject, bool isActivity)
+    {
+        if (isActivity)
+        {
             buildingObject.FinishActivity();
         }
     }
@@ -243,7 +285,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerEventData, results);
-        Debug.Log("results count ui: " + results.Count);
+        //Debug.Log("results count ui: " + results.Count);
 
         return results.Count > 0; // If there's any UI element under the pointer, return true
     }
@@ -315,24 +357,28 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         //dayNight.isDay = data.isDay;
 
 
-        if (dayNight.TimeRemaining > 0f)
+        dayNight.TimeRemaining = data.timeRemainingNight;
+        selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
+
+
+        if (!data.isDay && dayNight.TimeRemaining > 0 && data.selectedDreamByInhabitant.Count > 0)
         {
             dayNight.isDay = false;
+
+            foreach (var kvp in data.selectedDreamByInhabitant)
+            {
+                DisplayableDream displayableDream = new DisplayableDream();
+                displayableDream.Deserialize(kvp.Value);
+                selectedDreamByInhabitantTemp.Add(kvp.Key, displayableDream);
+            }
         }
         else
         {
             dayNight.isDay = true;
         }
 
-        dayNight.TimeRemaining = data.timeRemainingNight;
 
-        selectedDreamByInhabitantTemp = new Dictionary<string, DisplayableDream>();
-        foreach (var kvp in data.selectedDreamByInhabitant)
-        {
-            DisplayableDream displayableDream = new DisplayableDream();
-            displayableDream.Deserialize(kvp.Value);
-            selectedDreamByInhabitantTemp.Add(kvp.Key, displayableDream);
-        }
+
     }
 
 
@@ -342,6 +388,34 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
         this.Save("GameManager");
         villageManager.Save("VillageManager");
         player.Save("PlayerData");
+    }
+
+    public IEnumerator DeleteSaveCoroutine()
+    {
+        LoadingClouds.cloudOuting = false;
+
+        AsyncOperation asyncLoad;
+
+
+        Scene loadingScreenScene = SceneManager.GetSceneByName("LoadingScreen");
+        if (loadingScreenScene.IsValid() && loadingScreenScene.isLoaded)
+        {
+            asyncLoad = SceneManager.UnloadSceneAsync(loadingScreenScene);
+            while (!asyncLoad.isDone)
+            {
+                yield return null;
+            }
+        }
+        
+
+        asyncLoad = SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        SaveScript.DeleteSave();
     }
     #endregion
 }
@@ -353,15 +427,12 @@ public static class GM
     public static VillageManager VM => GameManager.instance.villageManager;
     public static DayNight DN => GameManager.instance.dayNight;
     public static CharacterJournalManager Cjm => GameManager.instance.characterJournalManager;
-    
     public static DialoguesManager Dm => GameManager.instance.dialoguesManager;
-    
     public static TutorialsManager Tm => GameManager.instance.tutorialsManager;
-    
-    
     public static AccessibilityOptions Ao => GameManager.instance.accessibilityOptions;
-  
     public static DreamMachineManager DMM => GameManager.instance.dreamMachineManager;
+    public static BuildingManager BM => GameManager.instance.buildingManager;
+    public static SoundManager SM => GameManager.instance.soundManager;
 
     public static GameObject DreamPanel => Instance.dreamPanel;
     public static GameObject DayNightPanel => Instance.dayNightPanel;
@@ -369,5 +440,4 @@ public static class GM
     public static GameObject InventoryPanel => Instance.inventoryPanel;
     public static GameObject ShopPanel => Instance.shopPanel;
 
-    public static BuildingManager BM => GameManager.instance.buildingManager;
 }

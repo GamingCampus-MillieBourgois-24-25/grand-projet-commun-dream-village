@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 using System;
+using System.Drawing;
+using Color = UnityEngine.Color;
 
 public class DayNight : MonoBehaviour
 {
@@ -33,11 +35,17 @@ public class DayNight : MonoBehaviour
     [Header("Curtain Parameters")]
     [SerializeField] private RawImage curtain;
     [SerializeField] private float animationDuration;
+    [SerializeField] private Color dayCurtainColor = new Color(0.5f, 0.7f, 1f, 1f); // Bleu clair
+    [SerializeField] private Color nightCurtainColor = new Color(0.1f, 0.1f, 0.3f, 1f); // Bleu foncé/violet
+    [SerializeField] private Texture2D dayCurtainTexture;    // ⬅️ Texture pour le jour
+    [SerializeField] private Texture2D nightCurtainTexture;
 
     [Header("Music Settings")]
-    [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip dayMusic;
     [SerializeField] private AudioClip nightMusic;
+    [SerializeField] private AudioClip dayTransitionMusic;
+    [SerializeField] private AudioClip nightTransitionMusic;
+    [SerializeField] private AudioClip noneButtonSFX;
     
     private Coroutine activityErrorCoroutine;
     public Coroutine nightDreamTimeCoroutine;
@@ -60,6 +68,14 @@ public class DayNight : MonoBehaviour
             timeContainer.SetActive(false);
         }
         dayNightButton.sprite = isDay ? nightSprite : daySprite;
+        if (isDay)
+        {
+            GM.SM.PlayMusic(dayMusic, true);
+        }
+        else
+        {
+            GM.SM.PlayMusic(nightMusic, true);
+        }
     }
 
     private IEnumerator ShowActivityErrorText()
@@ -93,6 +109,9 @@ public class DayNight : MonoBehaviour
 
     public void ChangeTime()
     {
+        // TEST TEXTURE
+        //curtain.texture = isDay ?  nightCurtainTexture : dayCurtainTexture;
+        
         // Pour passer à la nuit
         if (isDay)
         {
@@ -100,6 +119,7 @@ public class DayNight : MonoBehaviour
             {
                 if (inhabitant.isInActivity) // Pas passer en mode nuit si un habitant est en activité
                 {
+                    GM.SM.PlaySFX(noneButtonSFX);
                     if (activityErrorCoroutine != null)
                     {
                         StopCoroutine(activityErrorCoroutine);
@@ -121,8 +141,17 @@ public class DayNight : MonoBehaviour
         
         isDay = !isDay;
         TimeRemaining = 0f;
+
+        GM.Instance.SaveGame();
+
         RectTransform transform = curtain.GetComponent<RectTransform>();
         Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
+        LMotion.Create(curtain.color, isDay ? dayCurtainColor : nightCurtainColor, animationDuration)
+            .WithEase(Ease.OutCubic)
+            .Bind(color => curtain.color = color);
+        
+        Debug.Log(target.x);
+
         LMotion.Create(0, target.x, animationDuration)
             .WithEase(Ease.OutCubic).WithOnComplete(SwitchTime)
             .Bind(x =>
@@ -136,6 +165,10 @@ public class DayNight : MonoBehaviour
         }
         if (isDay)
         {
+            GM.SM.PlayMusic(dayTransitionMusic, false, () =>
+            {
+                GM.SM.PlayMusic(dayMusic, true);
+            });
             GM.Cjm.CheckStatsAndHandleDeparture();
             GM.Cjm.CheckForHeartBonus();
             Debug.Log("Daytime: Checking stats and handling departure.");
@@ -157,6 +190,10 @@ public class DayNight : MonoBehaviour
         }
         else
         {
+            GM.SM.PlayMusic(nightTransitionMusic, false, () =>
+            {
+                GM.SM.PlayMusic(nightMusic, true);
+            });
             LMotion.Create(0, target.x, animationDuration)
                 .WithEase(Ease.OutCubic)
                 .WithOnComplete(() =>
@@ -179,6 +216,7 @@ public class DayNight : MonoBehaviour
         sun.color = isDay ? dayColor : nightColor;
         RenderSettings.skybox = isDay ? daySkybox : nightSkybox;
         sun.transform.rotation = Quaternion.Euler(isDay ? dayRotation : nightRotation);
+        
         RectTransform transform = curtain.GetComponent<RectTransform>();
         Vector2 target = curtain.GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
         LMotion.Create(target.x, 0, animationDuration)
@@ -192,31 +230,106 @@ public class DayNight : MonoBehaviour
         dayNightButton.sprite = isDay ? nightSprite : daySprite;
         //timeText.text = isDay ? "Night" : "Day";
 
-        musicSource.clip = isDay ? dayMusic : nightMusic;
-        musicSource.Play();
-
+        /*if (isDay)
+        {
+            GM.SM.PlayMusic(dayMusic, true);
+        }
+        else
+        {
+            GM.SM.PlayMusic(nightMusic, true);
+        }*/
     }
-
 
     public IEnumerator StartWaitingTime()
     {
+        GM.Instance.SaveGame();
         if (nightDreamTimeCoroutine == null)
         {
             timeContainer.SetActive(true);
-            while (TimeRemaining > 1f)
+            while (TimeRemaining > 0f)
             {
                 TimeRemaining -= Time.deltaTime;
                 timeText.text = GM.Instance.DisplayFormattedTime(TimeRemaining);
                 yield return null;
             }
 
+            yield return null;
             nightDreamTimeCoroutine = null;
             timeText.text = GM.Instance.DisplayFormattedTime(0f); // Assure l'affichage à 00:00
+
             ChangeTime(); // Day automatique
+
 
             yield return new WaitForSeconds(1f);
             GM.DMM.ApplySelectedDreams();
             timeContainer.SetActive(false);
+
         }
     }
+    
+    public bool IsDay => isDay;
+
+
+
+
+
+
+
+    IEnumerator RestartCoroutine()
+    {
+        yield return null;
+
+        if (!isDay && nightDreamTimeCoroutine == null)
+        {
+            TimeSpan elapsedTime = System.DateTime.Now - GM.Instance.GetLastTimeSaved();
+            TimeRemaining -= (float)elapsedTime.TotalSeconds;
+
+            nightDreamTimeCoroutine = StartCoroutine(StartWaitingTime());
+        }
+    }
+
+
+    #region Check Game closed
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            if(nightDreamTimeCoroutine != null)
+            {
+                StopCoroutine(nightDreamTimeCoroutine);
+                nightDreamTimeCoroutine = null;
+            }
+        }
+        else
+        {
+            StartCoroutine(RestartCoroutine());
+        }
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            if (nightDreamTimeCoroutine != null)
+            {
+                StopCoroutine(nightDreamTimeCoroutine);
+                nightDreamTimeCoroutine = null;
+            }
+        }
+        else
+        {
+            StartCoroutine(RestartCoroutine());
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (nightDreamTimeCoroutine != null)
+        {
+            StopCoroutine(nightDreamTimeCoroutine);
+            nightDreamTimeCoroutine = null;
+        }
+    }
+    #endregion
+
 }

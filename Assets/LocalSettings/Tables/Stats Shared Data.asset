@@ -27,6 +27,14 @@ MonoBehaviour:
     m_Key: Energy
     m_Metadata:
       m_Items: []
+  - m_Id: 759150019780608
+    m_Key: Pronouns_Male
+    m_Metadata:
+      m_Items: []
+  - m_Id: 759292756140032
+    m_Key: Pronouns_Female
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

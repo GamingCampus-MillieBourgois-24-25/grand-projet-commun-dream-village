@@ -40,6 +40,11 @@ public class BuildingManager : MonoBehaviour
     {
         UpdateSelectionCanvas();
     }
+
+    private void Update()
+    {
+        CupTurnCoffee.RotateCup();
+    }
     #endregion
 
     public void StartActivity(InhabitantInstance _inhabitant)
@@ -174,18 +179,31 @@ public class BuildingManager : MonoBehaviour
                 BuildingObject obj = hit.collider.GetComponent<BuildingObject>();
                 if (obj != null)
                 {
-                    obj.ClickOnBuiding();
+                    if (FindObjectOfType<DayNight>().IsDay)
+                    {
+                        obj.ClickOnBuiding();
+                    }
+                    else
+                    {
+                        Debug.Log("Impossible d’ouvrir le journal la nuit !");
+                    }
                 }
                 else if (canvasBuilding.gameObject.activeSelf)
                 {
                     canvasBuilding.gameObject.SetActive(false);
                 }
 
-                // ATTENTION OPEN JOURNAL VIA HOUSE
                 HouseObject house = hit.collider.GetComponent<HouseObject>();
                 if (house != null)
                 {
-                    house.OpenInhabitantJournal();
+                    if (FindObjectOfType<DayNight>().IsDay)
+                    {
+                        house.OpenInhabitantJournal();
+                    }
+                    else
+                    {
+                        Debug.Log("Impossible d’ouvrir le journal la nuit !");
+                    }
                 }
             }
         }

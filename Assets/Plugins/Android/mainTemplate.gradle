@@ -20,6 +20,7 @@
     }
 }
 // Android Resolver Repos End
+
 apply plugin: 'com.android.library'
 **APPLY_PLUGINS**
 

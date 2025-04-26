@@ -29,6 +29,10 @@ MonoBehaviour:
   tutorialType: 5
   shouldHoldDialogues: 1
   shouldGiveRareMoney: 0
+  isDialogueBoxTop: 1
+  nosphyPosition: 0
+  highlightJournalRightPage: 0
+  highlightQuitJournalButton: 1
   references:
     version: 2
     RefIds: []

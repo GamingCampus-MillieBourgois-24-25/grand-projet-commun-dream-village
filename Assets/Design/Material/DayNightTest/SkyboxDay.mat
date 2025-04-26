@@ -45,7 +45,7 @@ Material:
     - _NaDirBlend: 0.01
     - _ZenithBlend: 0.01
     m_Colors:
-    - _GroundColor: {r: 0.47138664, g: 0.81911796, b: 0.9339623, a: 1}
-    - _HorizonColor: {r: 0.79619277, g: 0.8018868, b: 0.6468049, a: 1}
-    - _SkyColor: {r: 0.5801887, g: 0.8370143, b: 1, a: 1}
+    - _GroundColor: {r: 0.8746885, g: 0.95694035, b: 0.9811321, a: 1}
+    - _HorizonColor: {r: 0.9013884, g: 0.9056604, b: 0.9051167, a: 1}
+    - _SkyColor: {r: 0.5518868, g: 0.82410514, b: 1, a: 1}
   m_BuildTextureStacks: []

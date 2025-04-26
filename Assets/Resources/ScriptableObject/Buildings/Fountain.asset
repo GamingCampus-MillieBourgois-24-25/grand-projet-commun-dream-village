@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: Fountain
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Fountain
+  <Icon>k__BackingField: {fileID: 21300000, guid: cff57004edd15224a9a7e505dc880e4c,
+    type: 3}
+  <InitialPrice>k__BackingField: 1000
+  <InstantiatePrefab>k__BackingField: {fileID: 2989772271846371469, guid: 79a8dcaebfb485849ac04c084c7d8e36,
+    type: 3}
+  <MaxOwned>k__BackingField: 2
+  <UnlockedAtLvl>k__BackingField: 3
   <Description>k__BackingField: 
-  <EffectDuration>k__BackingField: 600
+  <EffectDuration>k__BackingField: 6000
   <AttributeEffects>k__BackingField:
-  - attribute: {fileID: 11400000, guid: a15712b2b029c254cb82c3bbe0b7b6c8, type: 2}
-    bonus: 2
-    bonusType: 0
+  - <attribute>k__BackingField: {fileID: 11400000, guid: a15712b2b029c254cb82c3bbe0b7b6c8,
+      type: 2}
+    <bonus>k__BackingField: 10
+    <bonusType>k__BackingField: 1
+  <Experience>k__BackingField: 75
   <Mood>k__BackingField: 5
   <Serenity>k__BackingField: 10
   <Energy>k__BackingField: 0
-  <InitialPrice>k__BackingField: 1000
-  <MaximumInInv>k__BackingField: 2
-  <Icon>k__BackingField: {fileID: 0}
-  <BuildingPrefab>k__BackingField: {fileID: 0}

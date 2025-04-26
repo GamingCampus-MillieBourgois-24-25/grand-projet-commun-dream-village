@@ -54,11 +54,21 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
     
     public void DiscoverInterest(InterestCategory category)
     {
-        if (baseData.Likes.Contains(category))
+        if (baseData.Likes.Contains(category) && !DiscoveredLikes.Contains(category))
             DiscoveredLikes.Add(category);
 
-        if (baseData.Dislikes.Contains(category))
+        if (baseData.Dislikes.Contains(category) && !DiscoveredDislikes.Contains(category))
             DiscoveredDislikes.Add(category);
+    }
+
+    public int IsInterestLiked(InterestCategory category)
+    {
+        if (DiscoveredLikes.Contains(category))
+            return 1;
+        else if (DiscoveredDislikes.Contains(category))
+            return -1;
+        else
+            return 0;
     }
 
 
@@ -123,8 +133,8 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
         public int serenity;
         public int energy;
         public int hearts;
-        public HashSet<InterestCategory> discoveredLikes = new();
-        public HashSet<InterestCategory> discoveredDislikes = new();
+        public List<string> discoveredLikes = new();
+        public List<string> discoveredDislikes = new();
 
         public Vector3Int housePos;
     }
@@ -140,10 +150,17 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
         data.energy = energy;
         data.hearts = Hearts;
 
-        data.discoveredLikes = DiscoveredLikes;
-        data.discoveredDislikes = DiscoveredDislikes;
 
-        data.housePos = houseObject.GetComponent<PlaceableObject>().OriginalPosition;
+        foreach (var like in DiscoveredLikes)
+        {
+            data.discoveredLikes.Add(like.interestName);
+        }
+        foreach (var dislike in DiscoveredDislikes)
+        {
+            data.discoveredDislikes.Add(dislike.interestName);
+        }
+
+        data.housePos = houseObject.gameObject.GetComponent<PlaceableObject>().OriginalPosition;
 
         return data;
     }
@@ -155,8 +172,25 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
         Serenity = data.serenity;
         Energy = data.energy;
         Hearts = data.hearts;
-        DiscoveredLikes = data.discoveredLikes;
-        DiscoveredDislikes = data.discoveredDislikes;
+
+        foreach (var like in data.discoveredLikes)
+        {
+            InterestCategory element = GM.DMM.interestDatabase.GetInterestByName(like);
+            if (element != null)
+            {
+                DiscoveredLikes.Add(element);
+            }
+            else Debug.LogError("Interest not found: " + like);
+        }
+        foreach (var dislike in data.discoveredDislikes)
+        {
+            InterestCategory element = GM.DMM.interestDatabase.GetInterestByName(dislike);
+            if (element != null)
+            {
+                DiscoveredDislikes.Add(element);
+            }
+            else Debug.LogError("Interest not found: " + dislike);
+        }
 
         houseObject.inhabitantInstance = this;
 

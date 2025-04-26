@@ -24,12 +24,12 @@ public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
         inventoryItem = _item;
         icon.sprite = inventoryItem.Icon;
         itemName.text = inventoryItem.Name;
-        quantityText.text = _quantity.ToString();
+        quantityText.text = "x" + _quantity.ToString();
     }
 
     public void UpdateItemContent(int _quantity)
     {
-        quantityText.text = _quantity.ToString();
+        quantityText.text = "x" + _quantity.ToString();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

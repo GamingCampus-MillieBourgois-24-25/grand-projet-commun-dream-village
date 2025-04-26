@@ -2,27 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor;
+using LitMotion;
 using UnityEngine;
 
 public class TutorialsManager : MonoBehaviour
 {
     private Player player;
     private DialoguesManager dialoguesManager;
+    private TutorialsUI tutorialsUI;
     
-    [Header("Tutorials UI")]
-    [SerializeField] private GameObject playerFormCanvas;
-    [SerializeField] private GameObject mainUi;
 
     [Header("Tutorials variables")] 
-    
     public bool skipDialogue = false;
     public float dialoguesTargetDisplayTime;
     public float dialoguesDisplayTime;
     public bool isPlayerCreated = false;
     public bool holdDialogues = false;
     public bool isHouseTutorialAlreadyPlayed = false;
+    
+    private MotionHandle highlightAnimationHandle;
     
     [Header("Tutorials State")]
     public bool inIntroductionTutorial = false;
@@ -32,10 +30,11 @@ public class TutorialsManager : MonoBehaviour
     public bool inEditTutorial = false;
     public bool inHeartTutorial = false;
     public bool inHouseTutorial = false;
-    private int currentTutorialID = 0;
+    public int currentTutorialID = 0;
 
     private void Start()
     {
+        tutorialsUI = GetComponent<TutorialsUI>();
         player = GM.Instance.player;
         dialoguesManager = GM.Dm;
         player.OnPlayerInfoAssigned += PlayerFormCompleted;
@@ -48,14 +47,14 @@ public class TutorialsManager : MonoBehaviour
         if (GM.Instance.isPlayerCreated) return;
         
         GM.Instance.mainUiCanvas.SetActive(false);
-        playerFormCanvas.SetActive(false);
+        tutorialsUI.playerFormCanvas.SetActive(false);
 
         List<Dialogues> introDialogues = dialoguesManager.GetDialogues()
             .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Introduction)
             .ToList();
         
         List<Dialogues> tutoDialogues = dialoguesManager.GetDialogues()
-            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Tutorial)
+            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Tutorial && dialogue.ShouldBePlayed())
             .ToList();
 
         List<Dialogues> dialogues = introDialogues.ToList();
@@ -73,11 +72,20 @@ public class TutorialsManager : MonoBehaviour
         {
             SetCurrentTutorial(dialogue.GetTutorialType());
             
+            if (highlightAnimationHandle.IsPlaying())
+            {
+                highlightAnimationHandle.TryComplete();
+                highlightAnimationHandle.Cancel();
+            }
+            
+            
             skipDialogue = false;
             
             dialoguesManager.DisplayDialogue(dialogue);
             float dif = dialoguesTargetDisplayTime - dialoguesDisplayTime - GM.Ao.CurrentTextSpeedStruct.TextSpeed;
             float textSpeed = dialoguesDisplayTime + GM.Ao.CurrentTextSpeedStruct.TextSpeed + dif;
+
+            TutorialsButtonFeedback(dialogue);
             
             currentTutorialID = dialogue.GetTutorialID();
 
@@ -87,10 +95,10 @@ public class TutorialsManager : MonoBehaviour
 
                 if (dialogue.GetTutorialType() == Dialogues.TutorialType.None)
                 {
-                    playerFormCanvas.SetActive(true);
+                    tutorialsUI.playerFormCanvas.SetActive(true);
                 }
                 
-                if (dialogue.GetTutorialType() != Dialogues.TutorialType.None) mainUi.SetActive(true);
+                if (dialogue.GetTutorialType() != Dialogues.TutorialType.None) tutorialsUI.mainUi.SetActive(true);
 
                 yield return new WaitUntil(() => !holdDialogues);
             }
@@ -146,6 +154,29 @@ public class TutorialsManager : MonoBehaviour
         }
     }
 
+    private void TutorialsButtonFeedback(Dialogues dialogue)
+    {
+        void HighlightButton(GameObject button, bool shouldHighlight)
+        {
+            if (shouldHighlight)
+            {
+                highlightAnimationHandle = LMotion.Create(1, 1.1f, 0.5f)
+                    .WithLoops(-1, LoopType.Yoyo)
+                    .WithOnCancel(() => button.transform.localScale = Vector3.one)
+                    .Bind(x => button.transform.localScale = new Vector3(x, x, 1));
+            }
+        }
+
+        HighlightButton(tutorialsUI.journalRightPage, dialogue.highlightJournalRightPage);
+        HighlightButton(tutorialsUI.quitJournalButton, dialogue.highlightQuitJournalButton);
+        HighlightButton(tutorialsUI.nightButton, dialogue.highlightNightButton);
+        HighlightButton(tutorialsUI.dreamButton, dialogue.highlightDreamButton);
+        HighlightButton(tutorialsUI.shopButton, dialogue.highlightShopButton);
+        HighlightButton(tutorialsUI.quitShopButton, dialogue.highlightQuitShopButton);
+        HighlightButton(tutorialsUI.editButton, dialogue.highlightEditButton);
+        HighlightButton(tutorialsUI.quitEditButton, dialogue.highlightQuitEditButton);
+    }
+
     public void UnHold(int value)
     {
         if (value != currentTutorialID) return;
@@ -161,7 +192,7 @@ public class TutorialsManager : MonoBehaviour
     public void PlayerFormCompleted()
     {
         isPlayerCreated = true;
-        playerFormCanvas.SetActive(false);
+        tutorialsUI.playerFormCanvas.SetActive(false);
     }
 
     public void SkipDialogue()
@@ -179,7 +210,7 @@ public class TutorialsManager : MonoBehaviour
         if (inIntroductionTutorial) return;
         
         dialoguesManager.HideDialogue();
-        StopCoroutine(DisplayTutorialDialogues(null));
+        StopAllCoroutines();
         
         inActivityTutorial = false;
         inDreamTutorial = false;
@@ -188,17 +219,15 @@ public class TutorialsManager : MonoBehaviour
         inHeartTutorial = false;
         inHouseTutorial = false;
     }
-    
-    // ------------------------------------------ DEBUG ------------------------------------------
-    
+
     public void GetTutoDialogues(Dialogues.TutorialType type)
     {
         List<Dialogues> introDialogues = dialoguesManager.GetDialogues()
             .Where(dialogue => dialogue.GetTutorialType() == type)
             .ToList();
-        
+
         introDialogues.Sort((x, y) => string.Compare(x.GetID(), y.GetID(), StringComparison.Ordinal));
-        
+
         StartCoroutine(DisplayTutorialDialogues(introDialogues));
     }
 }

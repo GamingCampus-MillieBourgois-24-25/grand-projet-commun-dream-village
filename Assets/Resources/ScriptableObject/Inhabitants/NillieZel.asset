@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: NillieZel
   m_EditorClassIdentifier: 
   <Name>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: f21854d785acb4545826bc3099b7065a,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 83e6656e552465c469ea6b9fdbaab6b2,
     type: 3}
   <InitialPrice>k__BackingField: 5000
   <InstantiatePrefab>k__BackingField: {fileID: 0}
   <MaxOwned>k__BackingField: 0
-  <UnlockedAtLvl>k__BackingField: 4
+  <UnlockedAtLvl>k__BackingField: 6
   FirstName: Nillie
   LastName: Zel
   <Pronouns>k__BackingField: 1
@@ -42,5 +42,7 @@ MonoBehaviour:
   <GoldMultiplier>k__BackingField: 1.15
   <CanLeave>k__BackingField: 1
   <HeartsBeforeLeaving>k__BackingField: 3
-  <InhabitantPrefab>k__BackingField: {fileID: 0}
-  <InhabitantHouse>k__BackingField: {fileID: 0}
+  <InhabitantPrefab>k__BackingField: {fileID: 8694470420618613287, guid: 6e83c7365accd534bab7b0c35434c364,
+    type: 3}
+  <InhabitantHouse>k__BackingField: {fileID: -230439962419092311, guid: ddf65e7d3c192ef4f877ba109d07195b,
+    type: 3}

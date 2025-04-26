@@ -108,6 +108,30 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3bf63636b8b91ab48be9d003eecd7b37
+    m_Address: UserInterface_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90288e66cf18cb645aa9b7b42939aa00
+    m_Address: Activities_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ae5d6ad3121c2b4ea0b09aab288f38c
+    m_Address: Decorations_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce44293bb5549264c831550f6db58715
+    m_Address: Interests_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e0d329acf3f3a7e48a292f2c5ffaa1ef
     m_Address: Stats_en
     m_ReadOnly: 1

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -34,11 +35,14 @@ public class DevTest
     }
 
     [MenuItem("Tools/DevTest/AddStars")]
-    public static void AddSimflouz()
+    public static void AddStars()
     {
         GM.Instance.player.AddStar(2000);
     }
 
+    // ------------------------------------------ DEBUG ------------------------------------------
+
+  
     [MenuItem("Tools/Tutorials/PlayAllTuto")]
     public static void PlayAllTuto()
     {
@@ -56,7 +60,7 @@ public class DevTest
     [MenuItem("Tools/Tutorials/PlayHouseTuto")]
     public static void PlayHouseTuto()
     {
-        TutorialsManager tutorialsManager = GM.Tm;
+        TutorialsManager tutorialsManager = GM.Tm; ;
         if (tutorialsManager != null)
         {
             tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.House);
@@ -70,7 +74,7 @@ public class DevTest
     [MenuItem("Tools/Tutorials/PlayActivityTuto")]
     public static void PlayActivityTuto()
     {
-        TutorialsManager tutorialsManager = GM.Tm;
+        TutorialsManager tutorialsManager = GM.Tm;;
         if (tutorialsManager != null)
         {
             tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.Activity);
@@ -84,7 +88,7 @@ public class DevTest
     [MenuItem("Tools/Tutorials/PlayDreamTuto")]
     public static void PlayDreamTuto()
     {
-        TutorialsManager tutorialsManager = GM.Tm;
+        TutorialsManager tutorialsManager = GM.Tm; ;
         if (tutorialsManager != null)
         {
             tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.Dream);
@@ -98,7 +102,7 @@ public class DevTest
     [MenuItem("Tools/Tutorials/PlayShopTuto")]
     public static void PlayShopTuto()
     {
-        TutorialsManager tutorialsManager = GM.Tm;
+        TutorialsManager tutorialsManager = GM.Tm;;
         if (tutorialsManager != null)
         {
             tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.Shop);
@@ -112,7 +116,7 @@ public class DevTest
     [MenuItem("Tools/Tutorials/PlayEditTuto")]
     public static void PlayEditTuto()
     {
-        TutorialsManager tutorialsManager = GM.Tm;
+        TutorialsManager tutorialsManager = GM.Tm;;
         if (tutorialsManager != null)
         {
             tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.Edit);
@@ -126,7 +130,7 @@ public class DevTest
     [MenuItem("Tools/Tutorials/PlayHeartTuto")]
     public static void PlayHeartTuto()
     {
-        TutorialsManager tutorialsManager = GM.Tm;
+        TutorialsManager tutorialsManager = GM.Tm;;
         if (tutorialsManager != null)
         {
             tutorialsManager.GetTutoDialogues(Dialogues.TutorialType.Heart);
