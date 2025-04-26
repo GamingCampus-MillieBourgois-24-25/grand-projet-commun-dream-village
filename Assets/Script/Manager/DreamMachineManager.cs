@@ -118,6 +118,9 @@ public class DreamMachineManager : MonoBehaviour
 
     private void DisplayCurrentInhabitant()
     {
+        if (selectedInhabitants.Count == 0)
+            return;
+
         InhabitantInstance currentInhabitant = selectedInhabitants[currentIndex];
 
         characterImage.sprite = currentInhabitant.Icon;
@@ -439,7 +442,8 @@ public class DreamMachineManager : MonoBehaviour
 
         // 🔁 Rafraîchissement UI
         DisplayCurrentInhabitant();
-        DisplayDreams(dreamsByInhabitant[selectedInhabitants[currentIndex]]);
+        if(selectedInhabitants.Count > 0)
+            DisplayDreams(dreamsByInhabitant[selectedInhabitants[currentIndex]]);
         
         GM.Cjm.DisplayInhabitant();
 

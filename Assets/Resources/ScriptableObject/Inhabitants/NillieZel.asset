@@ -42,7 +42,7 @@ MonoBehaviour:
   <GoldMultiplier>k__BackingField: 1.15
   <CanLeave>k__BackingField: 1
   <HeartsBeforeLeaving>k__BackingField: 3
-  <InhabitantPrefab>k__BackingField: {fileID: 6045927367610473379, guid: 347949cc3269f6547a4740123c16bc69,
+  <InhabitantPrefab>k__BackingField: {fileID: 8694470420618613287, guid: 6e83c7365accd534bab7b0c35434c364,
     type: 3}
-  <InhabitantHouse>k__BackingField: {fileID: 4472625512882639753, guid: c2742e185167e8f4794157e86fb087f2,
+  <InhabitantHouse>k__BackingField: {fileID: -230439962419092311, guid: ddf65e7d3c192ef4f877ba109d07195b,
     type: 3}
