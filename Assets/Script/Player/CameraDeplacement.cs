@@ -48,47 +48,65 @@ public class CameraDeplacement : MonoBehaviour
         scrollAction.Enable();
         scrollAction.performed += ctx => CameraZoom(ctx.ReadValue<Vector2>().y * zoomSpeed);
 
-        // Zoom
-        touch1Action.action.Enable();
-        touch2Action.action.Enable();
-        touch1Action.action.performed += ctx => touchCount++;
-        touch2Action.action.performed += ctx => touchCount++;
-        touch1Action.action.canceled += ctx => RemoveTouch();
-        touch2Action.action.canceled += ctx => RemoveTouch();
-
-        zoom1Action.action.Enable();
-        zoom2Action.action.Enable();
-        zoom2Action.action.performed += ctx => OnPinch();
-
-        // Deplacement
-        MoveAction.action.Enable();
-        touch1Action.action.performed += ctx => MoveAction.action.performed += ctx => CameraMovement(ctx.ReadValue<Vector2>() * moveSpeed);
-        touch1Action.action.canceled += ctx => MoveAction.action.performed -= ctx => CameraMovement(ctx.ReadValue<Vector2>() * moveSpeed);
-
-        // Deplacement in edit 
-        touch1Action.action.performed +=  ctx => CameraMovementEdit();
-        touch1Action.action.canceled += ctx => CameraMovementEdit();
-
         actualZoom = Camera.main.orthographicSize;
     }
 
     public void OnEnable()
     {
+        // Activation des actions
         touch1Action.action.Enable();
         touch2Action.action.Enable();
         zoom1Action.action.Enable();
         zoom2Action.action.Enable();
         MoveAction.action.Enable();
+
+        // Abonnement aux événements
+        touch1Action.action.performed += ctx => touchCount++;
+        touch2Action.action.performed += ctx => touchCount++;
+        touch1Action.action.canceled += ctx => RemoveTouch();
+        touch2Action.action.canceled += ctx => RemoveTouch();
+
+        zoom2Action.action.performed += ctx => OnPinch();
+
+        touch1Action.action.performed += ctx => MoveAction.action.performed += ctx => CameraMovement(ctx.ReadValue<Vector2>() * moveSpeed);
+        touch1Action.action.canceled += ctx => MoveAction.action.performed -= ctx => CameraMovement(ctx.ReadValue<Vector2>() * moveSpeed);
+
+        touch1Action.action.performed += ctx => CameraMovementEdit();
+        touch1Action.action.canceled += ctx => CameraMovementEdit();
     }
 
     public void OnDisable()
     {
+        // Désactivation des actions
         touch1Action.action.Disable();
         touch2Action.action.Disable();
         zoom1Action.action.Disable();
         zoom2Action.action.Disable();
         MoveAction.action.Disable();
+
+        // Désabonnement des événements
+        touch1Action.action.performed -= ctx => touchCount++;
+        touch2Action.action.performed -= ctx => touchCount++;
+        touch1Action.action.canceled -= ctx => RemoveTouch();
+        touch2Action.action.canceled -= ctx => RemoveTouch();
+
+        zoom2Action.action.performed -= ctx => OnPinch();
+
+        touch1Action.action.performed -= ctx => MoveAction.action.performed += ctx => CameraMovement(ctx.ReadValue<Vector2>() * moveSpeed);
+        touch1Action.action.canceled -= ctx => MoveAction.action.performed -= ctx => CameraMovement(ctx.ReadValue<Vector2>() * moveSpeed);
+
+        touch1Action.action.performed -= ctx => CameraMovementEdit();
+        touch1Action.action.canceled -= ctx => CameraMovementEdit();
+
+        // Arrêt des coroutines
+        if (cameraMovementCoroutine != null)
+        {
+            StopCoroutine(cameraMovementCoroutine);
+            cameraMovementCoroutine = null;
+        }
     }
+
+
 
     private void OnPinch()
     {
