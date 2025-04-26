@@ -3,5 +3,6 @@
   <projectSetting name="com.google.external-dependency-managerAnalyticsCookie" value="d03ce94a73124ff592f7739325ac1d11" />
   <projectSetting name="com.google.external-dependency-managerAnalyticsEnabled" value="True" />
   <projectSetting name="Google.VersionHandler.VerboseLoggingEnabled" value="False" />
+  <projectSetting name="GooglePlayServices.PromptBeforeAutoResolution" value="False" />
   <projectSetting name="GooglePlayServices.UseJetifier" value="True" />
 </projectSettings>
