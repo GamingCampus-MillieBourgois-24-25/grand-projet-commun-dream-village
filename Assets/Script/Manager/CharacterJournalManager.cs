@@ -179,7 +179,7 @@ public class CharacterJournalManager : MonoBehaviour
                 
                 Image img = heartGO.GetComponent<Image>();
                 img.sprite = i < currentHearts ? heartFullSprite : heartEmptySprite;
-             }
+            }
         }
     }
 
