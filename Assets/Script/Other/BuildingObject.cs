@@ -17,7 +17,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     private bool isUsed = false;
     public bool IsUsed => isUsed;
 
-    float timeRemaining = 0f;
+    public float timeRemaining = 0.0f;
     int notificationID = -1;
 
     private GameObject remainingTimeUI;

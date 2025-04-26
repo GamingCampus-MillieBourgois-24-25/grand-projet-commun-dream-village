@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public DayNight dayNight;
     public DreamMachineManager dreamMachineManager;
     public SoundManager soundManager;
+    public AdsManager adsManager;
 
     public List<Inhabitant> inhabitants = new List<Inhabitant>();
     public List<Building> buildings = new List<Building>();
@@ -55,6 +56,9 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
     [Header("UI Canvas")]
     public Canvas chooseSkipCanvas;
+
+    [Header("Shop")]
+    public Shop shop;
 
     DateTime lastTimeSaved;
     Dictionary<string, DisplayableDream> selectedDreamByInhabitantTemp;
@@ -90,10 +94,8 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
     private void Start()
     {
-        // if (!isPlayerCreated)
-        // {
-        //     playerFormCanvas.SetActive(true);
-        // }
+        Debug.Log("GameManager Start");
+        shop.InitShop();
     }
 
     // Load all resources for shop from the Resources folder
@@ -282,10 +284,18 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
 
     public void SkipActivityWithADS(BuildingObject buildingObject, bool isActivity)
     {
-        if (isActivity)
+        GM.AM.WatchRewardedAds(() =>
         {
-            buildingObject.FinishActivity();
-        }
+            chooseSkipCanvas.gameObject.SetActive(false);
+            if (isActivity && buildingObject.timeRemaining - 3600 < 0)
+            {
+                buildingObject.FinishActivity();
+            }
+            else
+            {
+                buildingObject.timeRemaining -= 3600;
+            }
+        });
     }
 
     public void SkipNightWithADS()
@@ -450,6 +460,7 @@ public static class GM
     public static DreamMachineManager DMM => GameManager.instance.dreamMachineManager;
     public static BuildingManager BM => GameManager.instance.buildingManager;
     public static SoundManager SM => GameManager.instance.soundManager;
+    public static AdsManager AM => GameManager.instance.adsManager;
 
     public static GameObject DreamPanel => Instance.dreamPanel;
     public static GameObject SkipDreamPanel => Instance.skipDreamPanel;

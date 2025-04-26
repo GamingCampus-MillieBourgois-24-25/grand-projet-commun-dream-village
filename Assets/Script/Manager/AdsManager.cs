@@ -13,7 +13,7 @@ public class AdsManager : MonoBehaviour
 #endif
 
     [SerializeField] private Button skipActivityAdsButton;
-
+    private System.Action onRewardedVideoAdWatched;
 
     private void Awake()
     {
@@ -74,10 +74,11 @@ public class AdsManager : MonoBehaviour
         Debug.Log("unity-script: I got SdkInitializationFailedEvent with error: " + error);
     }
 
-    public void WatchRewardedAds()
+    public void WatchRewardedAds(System.Action callback)
     {
         if (IronSource.Agent.isRewardedVideoAvailable())
         {
+            onRewardedVideoAdWatched = callback;
             IronSource.Agent.showRewardedVideo();
             LoadReward();
         }
@@ -117,7 +118,7 @@ public class AdsManager : MonoBehaviour
 
     void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
     {
-        //HERE YOU PUT YOUR REWARD FOR THE PLAYER
+        onRewardedVideoAdWatched?.Invoke();
         Debug.Log("Rewarded video worked");
     }
 
