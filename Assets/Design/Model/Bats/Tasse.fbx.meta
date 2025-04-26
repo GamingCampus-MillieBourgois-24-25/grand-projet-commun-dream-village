@@ -3,7 +3,17 @@ guid: 2a3a604e89624664b9b00ac76035d4fb
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_tasse_cafe
+    second: {fileID: 2100000, guid: d06b0f42fbb8d69408f7be1995f67203, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_tasse_ceramic
+    second: {fileID: 2100000, guid: c72862e5471c19742be273fc6516b8f3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

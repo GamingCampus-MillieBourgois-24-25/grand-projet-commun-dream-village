@@ -3,7 +3,42 @@ guid: 7c1b2d68a206482449a50c675c308058
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_bouches_MarronFonce1
+    second: {fileID: 2100000, guid: afa6955c6d3309d438048b4e943549f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_corps_shoes1
+    second: {fileID: 2100000, guid: 3acfb484af381564f96f54e2b1ff0348, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_corps_tete_skin1
+    second: {fileID: 2100000, guid: 6c65450595fcaef4fb7d927a7ebecd53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_eye_EyeColor1
+    second: {fileID: 2100000, guid: d0440a819e28ffa49a6e0993cd22ba43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_nez_rose1
+    second: {fileID: 2100000, guid: 2b4b16201f9dece40b6e92f9f995f885, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_head_cheveux
+    second: {fileID: 2100000, guid: d5eb73da1ad828142ab9b6dbdae22551, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_pyjama
+    second: {fileID: 2100000, guid: 36d07da380b0c8a40bd18ab312f999ef, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -3,7 +3,32 @@ guid: 30d370f861fa2b94a89014ec11ebc759
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_coffee_boisures
+    second: {fileID: 2100000, guid: 119d8f1a036f2974588a902807d9200f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_coffee_lettre
+    second: {fileID: 2100000, guid: 839a16abdf0aa8242af87a6ff9ebe05d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_coffee_walls
+    second: {fileID: 2100000, guid: aa8c31a986315814b83fbe47e5ad62f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_coffee_storebanne
+    second: {fileID: 2100000, guid: 3f8e6006163c3ed47ba6a18ad4038fdd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_coffee_vitres
+    second: {fileID: 2100000, guid: 03ae78ad228a0824baeefdf00f94bbde, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
