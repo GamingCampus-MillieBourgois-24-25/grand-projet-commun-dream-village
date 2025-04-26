@@ -393,7 +393,14 @@ public class GameManager : MonoBehaviour, ISaveable<GameManager.SavePartData>
     public IEnumerator DeleteSaveCoroutine()
     {
         LoadingClouds.cloudOuting = false;
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+
+        AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync("LoadingScreen");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        asyncLoad = SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
         {
