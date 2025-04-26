@@ -17,14 +17,20 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 82a4d078315c54845bbe7a1210217a0e
   m_SerializeEntries:
+  - m_GUID: 2f274fa5b9c5dbe4e8e63fa6c57bd7e3
+    m_Address: Gender Sample_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7251ed5f5d80f4e468a3e2f14589dffa
     m_Address: Stats_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2f274fa5b9c5dbe4e8e63fa6c57bd7e3
-    m_Address: Gender Sample_es
+  - m_GUID: 41eb4e84ce293d740a968a16de28c0c8
+    m_Address: UserInterface_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es
