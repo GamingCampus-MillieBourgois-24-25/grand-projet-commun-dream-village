@@ -3,7 +3,32 @@ guid: abd103ff083b2114e8f5318780c8675b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house03_concrete
+    second: {fileID: 2100000, guid: 58d4fcc2d4c32dc4ca16cdd21cedf28b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house03_glass
+    second: {fileID: 2100000, guid: 3e0a8d48ab862b041828e37252851c93, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house03_metal
+    second: {fileID: 2100000, guid: 6301ab4cd38c2af4384b53dd3f22001e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house03_tiles
+    second: {fileID: 2100000, guid: 71150912561a181498a0511fcc6fd517, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface2
+    second: {fileID: 2100000, guid: 4575a583bb5314240b4e72a56c0407e3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
