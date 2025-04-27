@@ -33,6 +33,8 @@ public class HouseObject : MonoBehaviour
             if (timer >= wanderTimer)
             {
                 Vector3 newPos = RandomNavSphere(inhabitantInstance.inhabitantObject.transform.position, wanderRadius, -1);
+                Debug.Log(inhabitantInstance.inhabitantObject);
+                Debug.Log(inhabitantInstance.Name);
                 inhabitantInstance.agent.SetDestination(newPos);
                 timer = 0;
             }

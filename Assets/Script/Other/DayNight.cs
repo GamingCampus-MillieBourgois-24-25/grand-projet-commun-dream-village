@@ -134,6 +134,10 @@ public class DayNight : MonoBehaviour
                     activityErrorCoroutine = StartCoroutine(ShowActivityErrorText());
                     return;
                 }
+               if(inhabitant.inhabitantObject != null)
+               {
+                   Destroy(inhabitant.inhabitantObject);
+               }
             }
         }
         //Pour passer au jour
