@@ -75,6 +75,7 @@ public class Inhabitant : IScriptableElement
         return 0;
     }
 
+    // Returns the pronouns as a list of strings [He, Him, His, he, him, his]
     public List<string> GetPronouns()
     {
         List<string> pronouns = new();
@@ -89,6 +90,6 @@ public class Inhabitant : IScriptableElement
 
     public bool isPlural()
     {
-        return Pronouns == Pronouns.They_Them;
+        return Pronouns == Pronouns.They_Them_Their_they_them_their;
     }
 }
