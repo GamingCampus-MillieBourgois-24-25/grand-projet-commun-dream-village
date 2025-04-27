@@ -78,6 +78,7 @@ public class TutorialsManager : MonoBehaviour
                 highlightAnimationHandle.Cancel();
             }
             
+            tutorialsUI.blockPanel.SetActive(true);
             
             skipDialogue = false;
             
@@ -91,6 +92,7 @@ public class TutorialsManager : MonoBehaviour
 
             if (dialogue.ShouldHoldDialogues())
             {
+                tutorialsUI.blockPanel.SetActive(false);
                 holdDialogues = true;
 
                 if (dialogue.GetTutorialType() == Dialogues.TutorialType.None)
