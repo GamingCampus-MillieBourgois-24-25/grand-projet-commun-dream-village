@@ -9,6 +9,8 @@ public class TutorialsUI : MonoBehaviour
     public GameObject skipButton;
     public GameObject hideButton;
     public GameObject playerFormCanvas;
+    public GameObject playerNameInput;
+    public GameObject cityNameInput;
     public GameObject mainUi;
     public GameObject journalRightPage;
     public GameObject journalStats;
