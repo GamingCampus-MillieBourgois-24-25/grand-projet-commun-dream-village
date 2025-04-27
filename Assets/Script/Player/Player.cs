@@ -83,6 +83,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         public Dictionary<string, int> inhabitantsInventory = new();
         public Dictionary<string, int> buildingsInventory = new();
         public Dictionary<string, int> decorationsInventory = new();
+
+        public Dialogues.TutorialType tutorialState;
     }
 
     public SavePartData Serialize()
@@ -105,6 +107,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 
         foreach (var item in decorationsInventory)
             data.decorationsInventory[item.Key.Name] = item.Value.quantity;
+
+        data.tutorialState = GM.Tm.currentTutorialType;
 
         return data;
     }
@@ -149,10 +153,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
             }
         }
 
-        if (PlayerName != null)
-        {
-            GM.Instance.isPlayerCreated = true;
-        }
+        GM.Tm.currentTutorialType = data.tutorialState;
     }
     #endregion
 
@@ -212,8 +213,6 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         GM.Tm.UnHold(14);
         
         OnPlayerInfoAssigned?.Invoke();
-        
-        this.Save("PlayerData");
     }
 
     public void SetPlayerInfo()

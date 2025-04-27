@@ -29,7 +29,7 @@ public class HouseObject : MonoBehaviour
                 GM.Instance.tutorialsManager.skipDialogue = true;
             }
 
-            if (GM.Tm.inHeartTutorial)
+            if (/*GM.Tm.inHeartTutorial*/ GM.Tm.currentTutorialType == Dialogues.TutorialType.Heart)
             {
                 GM.Tm.UnHold(55);
             }

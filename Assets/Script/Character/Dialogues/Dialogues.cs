@@ -36,6 +36,7 @@ public class Dialogues : ScriptableObject
         Heart,
         House,
         Shop,
+        Finished
     }
     
     [Header("General")]

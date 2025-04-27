@@ -111,7 +111,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
                 canvasBuilding.SetActive(true);
             }
             
-            if (GM.Tm.inActivityTutorial)
+            if (/*GM.Tm.inActivityTutorial*/ GM.Tm.currentTutorialType == Dialogues.TutorialType.Activity)
             {
                 GM.Tm.UnHold(31);
             }
@@ -284,7 +284,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         Button button = canvasBuilding.transform.GetChild(4).GetComponent<Button>();
         button.onClick.AddListener(() =>
         {
-            if (GM.Tm.inActivityTutorial)
+            if (/*GM.Tm.inActivityTutorial*/ GM.Tm.currentTutorialType == Dialogues.TutorialType.Activity)
             {
                 GM.Tm.UnHold(26);
             }
