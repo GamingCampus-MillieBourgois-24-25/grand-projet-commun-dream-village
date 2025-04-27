@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class DreamMachineManager : MonoBehaviour
 {
@@ -31,6 +32,13 @@ public class DreamMachineManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip applyDreamsSFX;
+    [SerializeField] private AudioClip clickSFX;
+    [SerializeField] private AudioClip noneButtonSFX;
+
+    [Header("Visuals")]
+    [SerializeField] private Color likeColor;
+    [SerializeField] private Color dislikeColor;
+
 
     private List<InhabitantInstance> selectedInhabitants = new();
     private GameObject selectedButton;
@@ -77,7 +85,7 @@ public class DreamMachineManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (dreamMachineCanvas.activeSelf)
         {
@@ -112,10 +120,13 @@ public class DreamMachineManager : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     private void DisplayCurrentInhabitant()
     {
+        if (selectedInhabitants.Count == 0)
+            return;
+
         InhabitantInstance currentInhabitant = selectedInhabitants[currentIndex];
 
         characterImage.sprite = currentInhabitant.Icon;
@@ -137,8 +148,8 @@ public class DreamMachineManager : MonoBehaviour
         ColorBlock colors = button.colors;
         if (isActive)
         {
-            colors.normalColor = Color.green; // sélectionné
-            colors.selectedColor = Color.green;
+            colors.normalColor = new Color(0.70f, 0.70f, 0.70f); // sélectionné
+            colors.selectedColor = new Color(0.70f, 0.70f, 0.70f);
         }
         else
         {
@@ -164,12 +175,36 @@ public class DreamMachineManager : MonoBehaviour
             GameObject dreamButton = Instantiate(dreamButtonPrefab, dreamsContainer);
 
             // R�cup�rer les images dans le bouton
-            Image[] images = dreamButton.GetComponentsInChildren<Image>();
+            List<Image> images = new();
+            foreach (Transform child in dreamButton.transform)
+            {
+                images.Add(child.GetComponent<Image>());
+            }
 
             var ordered = displayable.orderedElements;
-            images[1].sprite = ordered[0].icon;
-            images[2].sprite = ordered[1].icon;
-            images[3].sprite = ordered[2].icon;
+
+            for (int j = 0; j < ordered.Count; j++)
+            {
+                images[j].sprite = ordered[j].icon;
+
+                switch (currentInhabitant.IsInterestLiked(ordered[j]))
+                {
+                    case 1:
+                        images[j].transform.GetChild(0).GetComponent<Image>().color = likeColor;
+                        break;
+                    case -1:
+                        images[j].transform.GetChild(0).GetComponent<Image>().color = dislikeColor;
+                        images[j].transform.GetChild(0).GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
+                        images[j].transform.GetChild(0).GetComponent<RectTransform>().pivot = new Vector2(0.8f, 0.2f);
+                        break;
+                    default:
+                        images[j].transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, 0);
+                        break;
+                }
+            }
+
+
+
 
             Button button = dreamButton.GetComponent<Button>();
             buttons.Add(button);
@@ -220,6 +255,15 @@ public class DreamMachineManager : MonoBehaviour
     
     public void NextInhabitant()
     {
+        if (selectedInhabitants.Count > 1)
+        {
+            GM.SM.PlaySFX(clickSFX);
+        } 
+        else
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+        }
+        
         currentIndex = (currentIndex + 1) % selectedInhabitants.Count;
         DisplayCurrentInhabitant();
 
@@ -235,6 +279,15 @@ public class DreamMachineManager : MonoBehaviour
 
     public void PreviousInhabitant()
     {
+        if (selectedInhabitants.Count > 1)
+        {
+            GM.SM.PlaySFX(clickSFX);
+        } 
+        else
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+        }
+        
         currentIndex = (currentIndex - 1 + selectedInhabitants.Count) % selectedInhabitants.Count;
         DisplayCurrentInhabitant();
 
@@ -360,13 +413,16 @@ public class DreamMachineManager : MonoBehaviour
         GM.SM.PlaySFX(applyDreamsSFX);
 
         GM.DreamPanel.SetActive(false);
+        GM.SkipDreamPanel.SetActive(true);
 
         GM.DN.TimeRemaining = totalDreamMinute * 60; //minutes to seconds
         GM.DN.nightDreamTimeCoroutine = GM.DN.StartCoroutine(GM.DN.StartWaitingTime());
     }
 
-    public void ApplySelectedDreams()
+    public void ApplySelectedDreams(int notificationID)
     {
+        List<InhabitantInstance> allInhabitants = new List<InhabitantInstance>(GM.VM.inhabitants);
+        
         Debug.Log("Apply Selected Dreams! " + selectedDreamByInhabitant.First());
         foreach (var pair in selectedDreamByInhabitant)
         {
@@ -403,6 +459,31 @@ public class DreamMachineManager : MonoBehaviour
             GM.Instance.player.AddXP(Mathf.Max(0,Mathf.FloorToInt((baseEXPPerDream + inhabitant.Mood + inhabitant.Serenity + inhabitant.Energy)*inhabitant.GoldMultiplier)));
 
         }
+        
+        foreach (var inhabitant in allInhabitants)
+        {
+            if (!selectedInhabitants.Contains(inhabitant))
+            {
+                int randomStat = UnityEngine.Random.Range(0, 3);
+
+                switch (randomStat)
+                {
+                    case 0:
+                        inhabitant.Mood -= 15;
+                        Debug.Log($"[Penalty] {inhabitant.Name} loses 20 Mood.");
+                        break;
+                    case 1:
+                        inhabitant.Serenity -= 15;
+                        Debug.Log($"[Penalty] {inhabitant.Name} loses 20 Serenity.");
+                        break;
+                    case 2:
+                        inhabitant.Energy -= 15;
+                        Debug.Log($"[Penalty] {inhabitant.Name} loses 20 Energy.");
+                        break;
+                }
+            }
+        }
+        
         Debug.Log("Player just gained " + GM.Instance.player.GetGold() + " gold and " + GM.Instance.player.CurrentXP+ " exp");
 
 
@@ -418,11 +499,20 @@ public class DreamMachineManager : MonoBehaviour
 
         // 🔁 Rafraîchissement UI
         DisplayCurrentInhabitant();
-        DisplayDreams(dreamsByInhabitant[selectedInhabitants[currentIndex]]);
+        if(selectedInhabitants.Count > 0)
+            DisplayDreams(dreamsByInhabitant[selectedInhabitants[currentIndex]]);
         
         GM.Cjm.DisplayInhabitant();
 
         selectedInhabitants.Clear();
+
+        if (notificationID != -1)
+        {
+            NotificationManager.CancelNotification(notificationID);
+            notificationID = -1;
+        }
+
+        GM.SkipDreamPanel.SetActive(false);
     }
     
     public void UpdateSelectionCanvas()
@@ -478,8 +568,8 @@ public class DreamMachineManager : MonoBehaviour
             int serenity = inhabitant.Serenity;
             int energy = inhabitant.Energy;
 
-            int gold = Mathf.Max(0, Mathf.FloorToInt((baseGoldPerDream) * multiplier));
-            int xp = Mathf.Max(0, Mathf.FloorToInt((baseEXPPerDream) * multiplier));
+            int gold = Mathf.Max(0, Mathf.FloorToInt((baseGoldPerDream + mood + serenity + energy) * multiplier));
+            int xp = Mathf.Max(0, Mathf.FloorToInt((baseEXPPerDream + mood + serenity + energy) * multiplier));
 
             totalGold += gold;
             totalXP += xp;

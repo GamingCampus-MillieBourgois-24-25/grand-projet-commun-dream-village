@@ -13,10 +13,12 @@ public class LoadingClouds : MonoBehaviour
     [SerializeField] List<ColorClouds> colors;
 
 
-    public bool cloudOuting = true;
     [SerializeField] float minTimeWait = 0.5f;
 
     int cloudsNotFinished = 0;
+
+    public static bool cloudOuting = true;
+    public static LoadingClouds Instance = null;
 
 
 
@@ -60,6 +62,16 @@ public class LoadingClouds : MonoBehaviour
         }
 
         cloudsNotFinished = cloudsBack.Count + cloudsFront.Count;
+
+        // Vérifier si une instance de LoadingClouds existe déjà
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Détruire le nouvel objet si une instance existe déjà
+        }
     }
 
 
@@ -88,6 +100,48 @@ public class LoadingClouds : MonoBehaviour
         }
 
 
+
+        if(!cloudOuting)
+        {
+            foreach (CloudsPos cloud in cloudsBack)
+            {
+                CloudMovement(cloud);
+            }
+            foreach (CloudsPos cloud in cloudsFront)
+            {
+                CloudMovement(cloud);
+            }
+
+            while (cloudsNotFinished > 0)
+            {
+                yield return null;
+            }
+
+            // Charger la scène "MainScene" de manière asynchrone
+            AsyncOperation asyncUnLoad = SceneManager.UnloadSceneAsync("MainScene");
+
+            // Délai minimum d'une seconde
+            yield return new WaitForSeconds(minTimeWait);
+
+            while (!asyncUnLoad.isDone)
+            {
+                yield return null;
+            }
+
+
+            // Reset les values
+            cloudsNotFinished = cloudsBack.Count + cloudsFront.Count;
+            cloudOuting = true;
+
+            foreach (CloudsPos cloud in cloudsBack)
+            {
+                cloud.cloud.transform.localPosition = cloud.startPos;
+            }
+            foreach (CloudsPos cloud in cloudsFront)
+            {
+                cloud.cloud.transform.localPosition = cloud.startPos;
+            }
+        }
 
 
         // Charger la scène "MainScene" de manière asynchrone

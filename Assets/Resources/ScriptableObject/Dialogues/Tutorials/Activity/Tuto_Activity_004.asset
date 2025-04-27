@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Tuto_Activity_004
   tutorialID: 29
-  shouldBePlayed: 0
+  shouldBePlayed: 1
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:87a78c4e8df18794faeedb1045c7c26b
@@ -31,9 +31,15 @@ MonoBehaviour:
   shouldHoldDialogues: 0
   shouldGiveRareMoney: 1
   isDialogueBoxTop: 0
-  nosphyPosition: 0
+  nosphyPosition: 2
   highlightJournalRightPage: 0
   highlightQuitJournalButton: 0
+  highlightNightButton: 0
+  highlightDreamButton: 0
+  highlightShopButton: 0
+  highlightQuitShopButton: 0
+  highlightEditButton: 0
+  highlightQuitEditButton: 0
   references:
     version: 2
     RefIds: []

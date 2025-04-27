@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2989052620800
-    m_Localized: Dans ce cas* {0}... comment devrait-on appeler ton village ?
+    m_Localized: Dans ce cas {0}... comment devrait-on appeler ton village ?
     m_Metadata:
       m_Items:
       - rid: 6238822977345945605

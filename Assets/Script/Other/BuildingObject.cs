@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
     private bool isUsed = false;
     public bool IsUsed => isUsed;
 
-    float timeRemaining = 0f;
+    public float timeRemaining = 0.0f;
     int notificationID = -1;
 
     private GameObject remainingTimeUI;
@@ -36,7 +37,7 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
         if (notificationID == -1 && inhabitantUsing != null && inhabitantUsing.baseData.Name != null)
         {
-            string title = inhabitantUsing.baseData.Name + "has finished " + inhabitantUsing.baseData.GetPronouns()[1] + "activity!";
+            string title = inhabitantUsing.baseData.Name + " has finished " + inhabitantUsing.baseData.GetPronouns()[1] + " activity!";
             string text = "Come back to see what " + inhabitantUsing.baseData.GetPronouns()[0] + (inhabitantUsing.baseData.isPlural() ? " are" : " is") + " doing!";
             notificationID = NotificationManager.CreateNotification(title, text, timeRemaining);
         }
@@ -109,12 +110,17 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
                 SetupCanvas();
                 canvasBuilding.SetActive(true);
             }
+
+            if (GM.Tm.inActivityTutorial)
+            {
+                GM.Tm.UnHold(26);
+            }
         }
     }
 
     private void CheckAndInstanciateRemainingTime()
     {
-        // S'assurer que l'UI est présente
+        // S'assurer que l'UI est prï¿½sente
         Transform existing = transform.Find("remainingTime");
         if (existing != null)
         {

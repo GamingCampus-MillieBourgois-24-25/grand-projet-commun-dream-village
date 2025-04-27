@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Librairy
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Librairy
-  <Icon>k__BackingField: {fileID: 21300000, guid: 37396956628b61c4f8190af07830937b,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 64126b780648a2d428130053f58ba474,
     type: 3}
   <InitialPrice>k__BackingField: 3500
-  <InstantiatePrefab>k__BackingField: {fileID: 6045927367610473379, guid: 347949cc3269f6547a4740123c16bc69,
+  <InstantiatePrefab>k__BackingField: {fileID: 5826083253263354730, guid: b0e7282824d985a439b416bdbfa1ff98,
     type: 3}
   <MaxOwned>k__BackingField: 1
   <UnlockedAtLvl>k__BackingField: 15

@@ -3,7 +3,12 @@ guid: 6a71354196ab8fd4884690666313649d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_barrier_wood
+    second: {fileID: 2100000, guid: af6ed18bffb65a347ae96341ecfaaf00, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

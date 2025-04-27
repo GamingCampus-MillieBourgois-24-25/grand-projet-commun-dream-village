@@ -30,7 +30,7 @@ public class TutorialsManager : MonoBehaviour
     public bool inEditTutorial = false;
     public bool inHeartTutorial = false;
     public bool inHouseTutorial = false;
-    private int currentTutorialID = 0;
+    public int currentTutorialID = 0;
 
     private void Start()
     {

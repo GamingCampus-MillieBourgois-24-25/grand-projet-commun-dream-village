@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Well
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Well
-  <Icon>k__BackingField: {fileID: 21300000, guid: 37396956628b61c4f8190af07830937b,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 8997f1bf74dd5ae46ba24e3383a8e4fb,
     type: 3}
   <InitialPrice>k__BackingField: 500
-  <InstantiatePrefab>k__BackingField: {fileID: 6045927367610473379, guid: 347949cc3269f6547a4740123c16bc69,
+  <InstantiatePrefab>k__BackingField: {fileID: 9215897852482887236, guid: 45be2b8e1aba8e04a93dcf6508b8747e,
     type: 3}
   <MaxOwned>k__BackingField: 3
   <UnlockedAtLvl>k__BackingField: 2

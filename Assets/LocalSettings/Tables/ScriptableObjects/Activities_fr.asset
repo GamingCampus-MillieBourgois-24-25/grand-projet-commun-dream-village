@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Activities_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 7adf37f9dcac6834195d42044c6bafe5, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 5599567872
+    m_Localized: Banc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40953356288
+    m_Localized: "Cin\xE9ma"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 57990619136
+    m_Localized: "Caf\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 94384594944
+    m_Localized: Fontaine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115393863680
+    m_Localized: Salle de sport
+    m_Metadata:
+      m_Items: []
+  - m_Id: 134171762688
+    m_Localized: Librairie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 160059006976
+    m_Localized: Piscine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 182808911872
+    m_Localized: Puit
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

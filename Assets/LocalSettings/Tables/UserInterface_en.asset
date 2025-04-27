@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UserInterface_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: da0791bd6fbfd2242a4f6082afb5afc1, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 188051791872
+    m_Localized: Inhabitants
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1271583121408
+    m_Localized: Buildings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1407520514048
+    m_Localized: Decorations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24781386850304
+    m_Localized: Enter your name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24819009757184
+    m_Localized: Enter your city name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25410800885760
+    m_Localized: Validate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25666343051264
+    m_Localized: Level up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25846584877056
+    m_Localized: Click anywhere to close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26251561705472
+    m_Localized: Dream Resources
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26431270854656
+    m_Localized: Likes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26463915122688
+    m_Localized: Dislikes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26839036895232
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27340713402368
+    m_Localized: Selection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27455654109184
+    m_Localized: Selected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27824719306752
+    m_Localized: Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27987202449408
+    m_Localized: Gold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28431450546176
+    m_Localized: Skip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28592285327360
+    m_Localized: Skip with
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28779418394624
+    m_Localized: Or
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29201159856128
+    m_Localized: Ads
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30988260515840
+    m_Localized: New
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31977369673728
+    m_Localized: Owned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32269003825152
+    m_Localized: Someone is still doing an activity!
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

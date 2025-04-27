@@ -1,6 +1,7 @@
 using LitMotion;
 using LitMotion.Extensions;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -202,10 +203,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     } 
 
     public void AddGold(int amount) {
-        gold += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
-        UpdateGoldText();
-
-        this.Save("PlayerData");
+        SetGold(gold + amount);
     } 
     public bool CanSpendGold(int amount)
     {
@@ -219,10 +217,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     {
         if (CanSpendGold(amount))
         {
-            gold -= amount;
-            UpdateGoldText();
-
-            this.Save("PlayerData");
+            SetGold(gold - amount);
         }
     }
     private void UpdateGoldText()
@@ -241,10 +236,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 
     public void AddStar(int amount)
     {
-        star += Mathf.Max(0, amount); //Ajoute des nombres positifs seulement
-        UpdateStarText();
-
-        this.Save("PlayerData");
+        SetStar(star + amount);
     }
     public bool CanSpendStar(int amount)
     {
@@ -258,10 +250,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     {
         if (CanSpendStar(amount))
         {
-            star -= amount;
-            UpdateStarText();
-
-            this.Save("PlayerData");
+            SetStar(star - amount);
         }
     }
 
@@ -319,7 +308,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         {
             levelUpItemContainer.gameObject.SetActive(false);
         }
-            levelUpCanvas.SetActive(true);
+        levelUpCanvas.SetActive(true);
         RectTransform target = levelUpCanvas.transform.GetChild(0).GetComponent<RectTransform>();
         target.localScale = Vector3.zero;
 
@@ -411,6 +400,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
             }
             Debug.Log($"Added {amount} of {item} to inventory.");
             this.Save("PlayerData");
+            
         }
     }
 
@@ -431,6 +421,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
             if (existing.quantity >= amount)
             {
                 existing.quantity -= amount;
+                existing.inventorySlotItem.UpdateItemContent(existing.quantity);
                 if (existing.quantity == 0)
                 {
                     switch (item)
@@ -448,8 +439,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
                     Destroy(existing.inventorySlotItem.gameObject);
                 }
                 Debug.Log($"Removed {amount} of {item.name} from inventory.");
-                return true;
                 this.Save("PlayerData");
+                return true;
             }
         }
         return false;

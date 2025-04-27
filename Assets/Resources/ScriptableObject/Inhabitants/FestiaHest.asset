@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FestiaHest
   m_EditorClassIdentifier: 
   <Name>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: c44da6d62915e0c41858f295a360b362,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 2a64f14a4645cf748ab1a182a9a2dbe4,
     type: 3}
   <InitialPrice>k__BackingField: 250
   <InstantiatePrefab>k__BackingField: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   <GoldMultiplier>k__BackingField: 1.1
   <CanLeave>k__BackingField: 1
   <HeartsBeforeLeaving>k__BackingField: 3
-  <InhabitantPrefab>k__BackingField: {fileID: 6045927367610473379, guid: 347949cc3269f6547a4740123c16bc69,
+  <InhabitantPrefab>k__BackingField: {fileID: 1309492460398015393, guid: 5b05824995d22f945925184d37df6818,
     type: 3}
-  <InhabitantHouse>k__BackingField: {fileID: -2287234931181842320, guid: bd6da1a2db11c26458fee734c88d6840,
+  <InhabitantHouse>k__BackingField: {fileID: 8012466042955324804, guid: d791d89f73649754994cb2aa5ee746be,
     type: 3}
