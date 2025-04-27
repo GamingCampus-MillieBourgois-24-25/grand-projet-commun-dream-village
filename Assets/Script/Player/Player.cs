@@ -347,6 +347,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
             GM.SM.PlaySFX(levelUpSFX);
             CurrentXP -= expLevel;
             Level++;
+            AddStar(5);
             expLevel = Mathf.RoundToInt(expLevel * multExp);
             CheckUnlockedItem();
             levelText.text = Level.ToString();
