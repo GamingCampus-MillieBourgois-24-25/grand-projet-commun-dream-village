@@ -73,7 +73,11 @@ public class TutorialsManager : MonoBehaviour
     {
         foreach (Dialogues dialogue in dialogues)
         {
-            if (currentTutorialType > dialogue.GetTutorialType()) continue;
+            Dialogues.TutorialType nextType = dialogue.GetTutorialType();
+            if (currentTutorialType > nextType) continue;
+
+            if(nextType > currentTutorialType)
+                GM.Instance.player.Save("PlayerData");
 
             //SetCurrentTutorial(dialogue.GetTutorialType());
             currentTutorialType = dialogue.GetTutorialType();
@@ -123,6 +127,8 @@ public class TutorialsManager : MonoBehaviour
         //tutorialFinished = true;
         dialoguesManager.HideDialogue();
         GM.Instance.mainUiCanvas.SetActive(true);
+
+        GM.Instance.player.Save("PlayerData");
     }
 
 /*    private void SetCurrentTutorial(Dialogues.TutorialType type)

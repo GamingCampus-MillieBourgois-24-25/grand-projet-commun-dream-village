@@ -213,8 +213,6 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         GM.Tm.UnHold(14);
         
         OnPlayerInfoAssigned?.Invoke();
-        
-        this.Save("PlayerData");
     }
 
     public void SetPlayerInfo()
