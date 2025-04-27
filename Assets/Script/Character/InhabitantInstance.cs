@@ -111,6 +111,11 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
                         Energy += Mathf.RoundToInt(_energy * (bonus * isAffected));
                         break;
                 }
+
+                if(isAffected == 1 && !DiscoveredLikes.Contains(category))
+                    DiscoveredLikes.Add(category);
+                else if (isAffected == -1 && !DiscoveredDislikes.Contains(category))
+                    DiscoveredDislikes.Add(category);
             }
             else
             {

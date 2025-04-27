@@ -29,7 +29,7 @@ static public class SaveScript
 
     static private void SaveFile(string dataJson, string fileName)
     {
-        //byte[] data = Encrypt(dataJson);
+        byte[] data = Encrypt(dataJson);
 
         string path = savePath + '/' + fileName + extension;
 
@@ -46,15 +46,15 @@ static public class SaveScript
         }
 
         // Écrire dans le fichier s'il existe
-        /*using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite))
+        using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite))
         {
             fs.Write(data, 0, data.Length);
-        }*/
+        }
 
-        using (StreamWriter writer = new StreamWriter(path, false, Encoding.UTF8)) // false pour écraser le contenu existant
+  /*      using (StreamWriter writer = new StreamWriter(path, false, Encoding.UTF8)) // false pour écraser le contenu existant
         {
             writer.Write(dataJson);
-        }
+        }*/
 
     }
 
@@ -76,10 +76,10 @@ static public class SaveScript
             File.Create(path).Close();
             return "";
         }
-        //byte[] data = File.ReadAllBytes(path);
-        //string dataStringLoad = Decrypt(data, key);
+        byte[] data = File.ReadAllBytes(path);
+        string dataStringLoad = Decrypt(data, key);
 
-        string dataStringLoad = File.ReadAllText(path); // enlever le decrypt pour tester
+        //string dataStringLoad = File.ReadAllText(path); // enlever le decrypt pour tester
         if (string.IsNullOrEmpty(dataStringLoad))
         {
             Debug.LogError("Erreur lors du chargement des données. Le fichier peut être corrompu. (vide ou null)");
