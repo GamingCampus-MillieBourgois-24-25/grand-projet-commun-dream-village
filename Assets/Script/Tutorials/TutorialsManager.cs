@@ -23,13 +23,15 @@ public class TutorialsManager : MonoBehaviour
     private MotionHandle highlightAnimationHandle;
     
     [Header("Tutorials State")]
-    public bool inIntroductionTutorial = false;
+    public Dialogues.TutorialType currentTutorialType;
+/*    public bool inIntroductionTutorial = false;
     public bool inActivityTutorial = false;
     public bool inDreamTutorial = false;
     public bool inShopTutorial = false;
     public bool inEditTutorial = false;
     public bool inHeartTutorial = false;
     public bool inHouseTutorial = false;
+    public bool tutorialFinished = false;*/
     public int currentTutorialID = 0;
 
     private void Start()
@@ -44,7 +46,8 @@ public class TutorialsManager : MonoBehaviour
 
     public void PlayAllTutorials()
     {
-        if (GM.Instance.isPlayerCreated) return;
+        //if (tutorialFinished) return;
+        if(currentTutorialType == Dialogues.TutorialType.Finished) return;
         
         GM.Instance.mainUiCanvas.SetActive(false);
         tutorialsUI.playerFormCanvas.SetActive(false);
@@ -70,7 +73,14 @@ public class TutorialsManager : MonoBehaviour
     {
         foreach (Dialogues dialogue in dialogues)
         {
-            SetCurrentTutorial(dialogue.GetTutorialType());
+            Dialogues.TutorialType nextType = dialogue.GetTutorialType();
+            if (currentTutorialType > nextType) continue;
+
+            if(nextType > currentTutorialType)
+                GM.Instance.player.Save("PlayerData");
+
+            //SetCurrentTutorial(dialogue.GetTutorialType());
+            currentTutorialType = dialogue.GetTutorialType();
             
             if (highlightAnimationHandle.IsPlaying())
             {
@@ -113,11 +123,15 @@ public class TutorialsManager : MonoBehaviour
             yield return new WaitUntil(() => skipDialogue);
         }
 
+        currentTutorialType = Dialogues.TutorialType.Finished;
+        //tutorialFinished = true;
         dialoguesManager.HideDialogue();
         GM.Instance.mainUiCanvas.SetActive(true);
+
+        GM.Instance.player.Save("PlayerData");
     }
 
-    private void SetCurrentTutorial(Dialogues.TutorialType type)
+/*    private void SetCurrentTutorial(Dialogues.TutorialType type)
     {
         inIntroductionTutorial = false;
         inHouseTutorial = false;
@@ -154,7 +168,7 @@ public class TutorialsManager : MonoBehaviour
                 break;
         }
     }
-
+*/
     private void TutorialsButtonFeedback(Dialogues dialogue)
     {
         void HighlightButton(GameObject button, bool shouldHighlight)
@@ -209,17 +223,21 @@ public class TutorialsManager : MonoBehaviour
     
     public void SkipTutorial()
     {
-        if (inIntroductionTutorial) return;
+        //if (inIntroductionTutorial) return;
+        if(currentTutorialType == Dialogues.TutorialType.None) return;
         
         dialoguesManager.HideDialogue();
         StopAllCoroutines();
-        
-        inActivityTutorial = false;
+
+        /*inActivityTutorial = false;
         inDreamTutorial = false;
         inShopTutorial = false;
         inEditTutorial = false;
         inHeartTutorial = false;
         inHouseTutorial = false;
+
+        tutorialFinished = true;*/
+        currentTutorialType = Dialogues.TutorialType.Finished;
     }
 
     public void GetTutoDialogues(Dialogues.TutorialType type)
