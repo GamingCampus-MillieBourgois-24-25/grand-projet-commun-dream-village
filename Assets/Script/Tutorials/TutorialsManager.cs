@@ -85,8 +85,6 @@ public class TutorialsManager : MonoBehaviour
             skipDialogue = false;
             
             dialoguesManager.DisplayDialogue(dialogue);
-            float dif = dialoguesTargetDisplayTime - dialoguesDisplayTime - GM.Ao.CurrentTextSpeedStruct.TextSpeed;
-            float textSpeed = dialoguesDisplayTime + GM.Ao.CurrentTextSpeedStruct.TextSpeed + dif;
 
             TutorialsButtonFeedback(dialogue);
             
@@ -99,20 +97,20 @@ public class TutorialsManager : MonoBehaviour
                 if (dialogue.GetTutorialType() == Dialogues.TutorialType.None)
                 {
                     tutorialsUI.playerFormCanvas.SetActive(true);
+
+                    if (GM.Instance.player.nameAlreadySet)
+                    {
+                        tutorialsUI.playerNameInput.SetActive(false);
+                        tutorialsUI.cityNameInput.SetActive(true);
+                    }
                 }
                 
                 if (dialogue.GetTutorialType() != Dialogues.TutorialType.None) tutorialsUI.mainUi.SetActive(true);
 
                 yield return new WaitUntil(() => !holdDialogues);
             }
-
-            float elapsedTime = 0f;
-            while (elapsedTime < textSpeed && (!skipDialogue && !dialogue.ShouldHoldDialogues()))
-            {
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
             
+            yield return new WaitUntil(() => skipDialogue);
         }
 
         dialoguesManager.HideDialogue();
