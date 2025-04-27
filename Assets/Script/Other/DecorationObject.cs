@@ -11,7 +11,7 @@ public class DecorationObject : MonoBehaviour, ISaveable<DecorationObject.SavePa
     public SavePartData Serialize()
     {
         SavePartData data = new SavePartData();
-        data.baseDecorationName = baseData.name;
+        data.baseDecorationName = baseData.Name;
         data.position = GetComponent<PlaceableObject>().OriginalPosition;
         return data;
     }
