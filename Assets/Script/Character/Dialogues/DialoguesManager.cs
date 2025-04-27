@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.Localization;
 using LitMotion.Extensions;
 using Unity.Collections;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public enum NosphyPosition
@@ -54,6 +55,8 @@ public class DialoguesManager : MonoBehaviour
     public bool isTop = false;
     [SerializeField] private Sprite nosphySprite1;
     [SerializeField] private Sprite nosphySprite2;
+    [SerializeField] private LocalizedString showString;
+    [SerializeField] private LocalizedString hideString;
 
     private void Awake()
     {
@@ -140,8 +143,18 @@ public class DialoguesManager : MonoBehaviour
         dialogueCanvas.SetActive(true);
         dialogueBox.SetActive(true);
         dialogueBox.transform.localPosition = isTop ? topDialogueBoxPosition.transform.localPosition : bottomDialogueBoxPosition.transform.localPosition;
-        //dialogueSkip.transform.localPosition = isTop ? new Vector3(525, -200, 0) : new Vector3(525, 200, 0);
-        //dialogueHide.transform.localPosition = isTop ? new Vector3(250, -200, 0) : new Vector3(250, 200, 0);
+
+        if (isTop)
+        {
+            dialogueSkip.transform.localPosition = new Vector3(dialogueSkip.transform.localPosition.x, -75, 0);
+            dialogueHide.transform.localPosition = new Vector3(dialogueHide.transform.localPosition.x, -75, 0);
+        }
+        else
+        {
+            dialogueSkip.transform.localPosition = new Vector3(dialogueSkip.transform.localPosition.x, 250, 0);
+            dialogueHide.transform.localPosition = new Vector3(dialogueHide.transform.localPosition.x, 250, 0);
+        }
+        
         
         float textSpeed = GM.Ao.CurrentTextSpeedStruct.TextSpeed;
         
@@ -215,6 +228,10 @@ public class DialoguesManager : MonoBehaviour
             dialogueBox.transform.localPosition = isDialogueBoxHidden
                 ? hiddenBottomDialogueBoxPosition.transform.localPosition
                 : bottomDialogueBoxPosition.transform.localPosition;
+
+            // dialogueHide.GetComponent<RectTransform>().localPosition = new Vector3(dialogueHide.transform.localPosition.x, isDialogueBoxHidden ? 450 : 200, 0);
         }
+        
+        dialogueHide.GetComponentInChildren<LocalizeStringEvent>().StringReference = isDialogueBoxHidden ? showString : hideString;
     }
 }

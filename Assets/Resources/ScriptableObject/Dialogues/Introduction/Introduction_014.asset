@@ -30,8 +30,8 @@ MonoBehaviour:
   dialogueCondition: 0
   tutorialType: 0
   shouldShowSkipButton: 0
-  shouldBlockInteractions: 1
-  shouldHoldDialogues: 0
+  shouldBlockInteractions: 0
+  shouldHoldDialogues: 1
   shouldGiveRareMoney: 0
   isDialogueBoxTop: 0
   nosphyPosition: 1
