@@ -66,6 +66,10 @@ MonoBehaviour:
     m_Localized: Vitesse de texte
     m_Metadata:
       m_Items: []
+  - m_Id: 8526167753793536
+    m_Localized: Supprimer Sauvegarde
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
