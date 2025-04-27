@@ -54,11 +54,21 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
     
     public void DiscoverInterest(InterestCategory category)
     {
-        if (baseData.Likes.Contains(category))
+        if (baseData.Likes.Contains(category) && !DiscoveredLikes.Contains(category))
             DiscoveredLikes.Add(category);
 
-        if (baseData.Dislikes.Contains(category))
+        if (baseData.Dislikes.Contains(category) && !DiscoveredDislikes.Contains(category))
             DiscoveredDislikes.Add(category);
+    }
+
+    public int IsInterestLiked(InterestCategory category)
+    {
+        if (DiscoveredLikes.Contains(category))
+            return 1;
+        else if (DiscoveredDislikes.Contains(category))
+            return -1;
+        else
+            return 0;
     }
 
 
@@ -106,6 +116,11 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
                 Serenity += _serenity;
                 Energy += _energy;
             }
+        }
+
+        if (GM.Tm.inActivityTutorial)
+        {
+            GM.Tm.UnHold(30);
         }
     }
 

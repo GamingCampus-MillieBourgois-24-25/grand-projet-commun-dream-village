@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseData: {fileID: 11400000, guid: ed5e21c38189e6142ad0e90c76fa1bb4, type: 2}
+  timeRemaining: 0
 --- !u!114 &8434074079870125734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +171,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.008, y: 0.012, z: 0.008}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.012, z: 0}
   m_TimeToStationary: 0.5

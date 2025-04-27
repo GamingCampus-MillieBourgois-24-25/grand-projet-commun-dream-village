@@ -1,9 +1,49 @@
 fileFormatVersion: 2
-guid: 945304105e1d4cc4b81962e67e31ab4c
+guid: cc093cf69489b05419c69156ba1fbb41
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house02_glass
+    second: {fileID: 2100000, guid: 75c8671dca9061b498ff7c617d1ad710, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house02_glass1
+    second: {fileID: 2100000, guid: 75c8671dca9061b498ff7c617d1ad710, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house02_metal
+    second: {fileID: 2100000, guid: 895dd1dccb9cc7d4fa29031494c9eb04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house02_metal1
+    second: {fileID: 2100000, guid: 895dd1dccb9cc7d4fa29031494c9eb04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house02_rocks
+    second: {fileID: 2100000, guid: 856a04a4bcd0a0d48ae934360030f4fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house02_rocks1
+    second: {fileID: 2100000, guid: 856a04a4bcd0a0d48ae934360030f4fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house02_wood
+    second: {fileID: 2100000, guid: d550a22ccb1f36642b72f3121f69413c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_house02_wood1
+    second: {fileID: 2100000, guid: d550a22ccb1f36642b72f3121f69413c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

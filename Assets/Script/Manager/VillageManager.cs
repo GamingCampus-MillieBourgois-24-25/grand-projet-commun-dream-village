@@ -20,6 +20,16 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     }
 
 
+    private void Start()
+    {
+        if(inhabitants.Count == 0)
+        {
+            Debug.Log("Corrupted village");
+            StartCoroutine(GM.Instance.DeleteSaveCoroutine());
+        }
+    }
+
+
     public void SpawnWillith()
     {
         if (inhabitants.Count == 0)
@@ -29,6 +39,23 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
             GameObject houseInstanciate = Instantiate(house, willithDefaultHousePosition, house.transform.rotation, playerIslandObject);
 
             CreateInstanceofScriptable(GM.Instance.GetInhabitantByName("Willith Warm"), houseInstanciate);
+
+            GM.Instance.SaveGame();
+        }
+    }
+
+    public void SpawnBench()
+    {
+        if(buildings.Count == 0)
+        {
+            Transform playerIslandObject = GM.Instance.playerIslandObject;
+            GameObject bench = GM.Instance.GetBuildingByName("Bench").InstantiatePrefab;
+            GameObject benchInstanciate = Instantiate(bench, willithDefaultHousePosition, bench.transform.rotation, playerIslandObject);
+
+            CreateInstanceofScriptable(GM.Instance.GetBuildingByName("Bench"), benchInstanciate);
+            benchInstanciate.GetComponent<PlaceableObject>().OriginalPosition = new(-2, -5);
+            benchInstanciate.GetComponent<PlaceableObject>().ResetPosition();
+
 
             GM.Instance.SaveGame();
         }

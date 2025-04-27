@@ -70,7 +70,7 @@ public class LoadingClouds : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject); // Détruire l'objet si une instance existe déjà
+            Destroy(gameObject); // Détruire le nouvel objet si une instance existe déjà
         }
     }
 

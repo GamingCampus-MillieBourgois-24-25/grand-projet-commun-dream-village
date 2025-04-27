@@ -44,14 +44,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198235de1fa2caa4489b8173bf2198c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dreamMachineCanvas: {fileID: 0}
   characterImage: {fileID: 0}
   characterNameText: {fileID: 0}
   moodSlider: {fileID: 0}
   serenitySlider: {fileID: 0}
   energySlider: {fileID: 0}
-  index: {fileID: 0}
+  indexUI: {fileID: 0}
   dreamButtonPrefab: {fileID: 891341645705998573, guid: 0adf66426ab9bdc44ade2f4ebe6359cb,
     type: 3}
   dreamsContainer: {fileID: 0}
   validateButton: {fileID: 0}
+  selectInhabitant: {fileID: 0}
+  inhabitantsContainer: {fileID: 0}
+  selectInhabitantPrefab: {fileID: 0}
+  selectionCountText: {fileID: 0}
+  goldPreviewText: {fileID: 0}
+  expPreviewText: {fileID: 0}
+  timePreviewText: {fileID: 0}
+  applyDreamsSFX: {fileID: 0}
+  clickSFX: {fileID: 0}
+  noneButtonSFX: {fileID: 0}
+  likeColor: {r: 0.44820344, g: 0.78113204, b: 0.37582764, a: 1}
+  dislikeColor: {r: 0.82641506, g: 0.36019218, b: 0.36019218, a: 1}
   interestDatabase: {fileID: 11400000, guid: 0e7f13a00ccf98d43b6b0c66692649de, type: 2}
+  baseGoldPerDream: 200
+  baseEXPPerDream: 150
