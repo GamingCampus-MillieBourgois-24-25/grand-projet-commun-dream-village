@@ -16,7 +16,7 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: 21300000, guid: 3e889e138e6151449a4a3fa867026585,
     type: 3}
   <InitialPrice>k__BackingField: 50
-  <InstantiatePrefab>k__BackingField: {fileID: 919132149155446097, guid: eb70bfbab0dda0d4091cc7b8df5fea38,
+  <InstantiatePrefab>k__BackingField: {fileID: 8613177576381787529, guid: 0d4109e667ed75a4b8569374dd23028d,
     type: 3}
   <MaxOwned>k__BackingField: 15
   <UnlockedAtLvl>k__BackingField: 1
