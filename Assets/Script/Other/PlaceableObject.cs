@@ -30,6 +30,8 @@ public class PlaceableObject : MonoBehaviour
     [HideInInspector]
     public Renderer cachedRenderer;
 
+    public bool isFromInventory = false;
+
     private void Awake()
     {
         cachedRenderer = GetComponent<Renderer>();

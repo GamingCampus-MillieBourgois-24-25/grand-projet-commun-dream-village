@@ -130,7 +130,7 @@ public class IsoManager : MonoBehaviour
             } 
             else
             {
-                if (validWhiteTilePositions.Contains(selectedObject.OriginalPosition))
+                if (!selectedObject.isFromInventory)
                 {
                     selectedObject.ResetPosition();
                 }
@@ -322,7 +322,7 @@ public class IsoManager : MonoBehaviour
             }
             else
             {
-                if (selectedObject.OriginalPosition != null)
+                if (!selectedObject.isFromInventory)
                 {
                     selectedObject.ResetPosition();
                 }
@@ -341,7 +341,7 @@ public class IsoManager : MonoBehaviour
 
         selectedObject = obj;
 
-        if (stockCanvas != null && selectedObject.CanBeStocked == true)
+        if (stockCanvas != null && selectedObject.CanBeStocked == true && selectedObject.isFromInventory)
         {
             stockCanvas.transform.position = new Vector3(obj.transform.position.x, (obj.cachedRenderer.bounds.size.y ) + yStockCanvas, obj.transform.position.z);
             //Debug.Log(obj.cachedRenderer.bounds.size.y + " " + obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y + " " + ((obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y) + yStockCanvas));
@@ -429,6 +429,8 @@ public class IsoManager : MonoBehaviour
 
         // SET NEW POSITION
         obj.OriginalPosition = tilemapObjects.WorldToCell(obj.transform.position);
+
+        if (obj.isFromInventory) obj.isFromInventory = false;
 
         if (/*GM.Tm.inEditTutorial*/ GM.Tm.currentTutorialType == Dialogues.TutorialType.Edit)
         {
@@ -611,6 +613,7 @@ public class IsoManager : MonoBehaviour
 
         GameObject newObj = Instantiate(item.InstantiatePrefab, centerPos, item.InstantiatePrefab.transform.rotation, GM.Instance.playerIslandObject);
         PlaceableObject placeable = newObj.GetComponent<PlaceableObject>();
+        placeable.isFromInventory = true;
 
         if (placeable != null)
         {
