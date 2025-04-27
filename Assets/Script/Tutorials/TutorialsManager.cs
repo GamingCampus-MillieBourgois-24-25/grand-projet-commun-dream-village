@@ -73,7 +73,7 @@ public class TutorialsManager : MonoBehaviour
     {
         foreach (Dialogues dialogue in dialogues)
         {
-            
+            if (dialogue.GetTutorialType() != Dialogues.TutorialType.None) tutorialsUI.mainUi.SetActive(true);
             Dialogues.TutorialType nextType = dialogue.GetTutorialType();
             Debug.Log(nextType);
             if (currentTutorialType > nextType) 
@@ -117,8 +117,6 @@ public class TutorialsManager : MonoBehaviour
                         tutorialsUI.cityNameInput.SetActive(true);
                     }
                 }
-                
-                if (dialogue.GetTutorialType() != Dialogues.TutorialType.None) tutorialsUI.mainUi.SetActive(true);
 
                 yield return new WaitUntil(() => !holdDialogues);
             }
