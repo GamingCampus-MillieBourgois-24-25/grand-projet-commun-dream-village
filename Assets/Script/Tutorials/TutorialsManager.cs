@@ -73,6 +73,8 @@ public class TutorialsManager : MonoBehaviour
     {
         foreach (Dialogues dialogue in dialogues)
         {
+            currentTutorialType = dialogue.GetTutorialType();
+            
             Dialogues.TutorialType nextType = dialogue.GetTutorialType();
             if (currentTutorialType > nextType) continue;
 
@@ -80,7 +82,6 @@ public class TutorialsManager : MonoBehaviour
                 GM.Instance.player.Save("PlayerData");
 
             //SetCurrentTutorial(dialogue.GetTutorialType());
-            currentTutorialType = dialogue.GetTutorialType();
             
             if (highlightAnimationHandle.IsPlaying())
             {
