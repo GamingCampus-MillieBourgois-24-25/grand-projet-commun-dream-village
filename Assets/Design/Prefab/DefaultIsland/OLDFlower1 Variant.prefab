@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 6045927367610473379, guid: 347949cc3269f6547a4740123c16bc69,
         type: 3}
       propertyPath: m_Name
-      value: Flower1 Variant
+      value: OLDFlower1 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6389660388141318425, guid: 347949cc3269f6547a4740123c16bc69,
         type: 3}
@@ -65,6 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4824782909405420651, guid: 347949cc3269f6547a4740123c16bc69, type: 3}
+    - {fileID: 3056939518277961513, guid: 347949cc3269f6547a4740123c16bc69, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

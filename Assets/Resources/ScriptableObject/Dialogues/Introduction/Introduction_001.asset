@@ -33,7 +33,7 @@ MonoBehaviour:
   shouldHoldDialogues: 0
   shouldGiveRareMoney: 0
   isDialogueBoxTop: 0
-  nosphyPosition: 0
+  nosphyPosition: 1
   highlightJournalRightPage: 0
   highlightJournalStats: 0
   highlightQuitJournalButton: 0
