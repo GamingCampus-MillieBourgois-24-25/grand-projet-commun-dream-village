@@ -20,7 +20,7 @@ MonoBehaviour:
     - rid: 6238822977345945607
   m_TableData:
   - m_Id: 22442373120
-    m_Localized: Regarde ici ! Un banc ! Clique dessus !
+    m_Localized: Regarde ici ! Un banc ! Clique dessus et appuie sur GO !
     m_Metadata:
       m_Items: []
   - m_Id: 25126727680

@@ -125,10 +125,10 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
                 SetupCanvas();
                 canvasBuilding.SetActive(true);
             }
-
-            if (GM.Tm.inActivityTutorial)
+            
+            if (/*GM.Tm.inActivityTutorial*/ GM.Tm.currentTutorialType == Dialogues.TutorialType.Activity)
             {
-                GM.Tm.UnHold(26);
+                GM.Tm.UnHold(31);
             }
         }
     }
@@ -310,9 +310,14 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             image.sprite = attributeEffect.attribute.icon;
         }
 
-        //Button button = canvasBuilding.transform.GetChild(3).GetComponent<Button>();
-        //button.onClick.RemoveAllListeners();
-        //button.onClick.AddListener(() => { DebugSetFirstInhabitant(); });
+        Button button = canvasBuilding.transform.GetChild(4).GetComponent<Button>();
+        button.onClick.AddListener(() =>
+        {
+            if (/*GM.Tm.inActivityTutorial*/ GM.Tm.currentTutorialType == Dialogues.TutorialType.Activity)
+            {
+                GM.Tm.UnHold(26);
+            }
+        });
 
         canvasBuilding.transform.SetParent(transform, true);
         canvasBuilding.transform.position = this.transform.position + new Vector3(0, canvasBuilding.transform.position.y, 0);

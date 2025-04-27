@@ -31,8 +31,9 @@ MonoBehaviour:
       m_Items:
       - rid: 6238822977345945608
   - m_Id: 348230742016
-    m_Localized: "Tout d'abord, clique sur le bouton nuit. Mais attention ! Tu ne
-      peux pas cliquer dessus si un de tes villageois est au milieu d'une activit\xE9."
+    m_Localized: "Tout d'abord, quitte le journal puis clique sur le bouton nuit.
+      Mais attention ! Tu ne peux pas cliquer dessus si un de tes villageois est
+      au milieu d'une activit\xE9."
     m_Metadata:
       m_Items: []
   - m_Id: 351351304192
@@ -49,7 +50,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 360339697664
     m_Localized: "Plus de villageois r\xEAvent, plus tu gagnes de l'argent, mais
-      c'est aussi plus long."
+      c'est aussi plus long. Choisis Willith et appuie sur GO."
     m_Metadata:
       m_Items: []
   - m_Id: 361094672384

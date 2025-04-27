@@ -119,6 +119,11 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
                 Energy += _energy;
             }
         }
+
+        if (/*GM.Tm.inActivityTutorial*/ GM.Tm.currentTutorialType == Dialogues.TutorialType.Activity)
+        {
+            GM.Tm.UnHold(30);
+        }
     }
 
 

@@ -107,6 +107,14 @@ MonoBehaviour:
     m_Key: Activity_Error
     m_Metadata:
       m_Items: []
+  - m_Id: 756911255494656
+    m_Key: Hide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756940942778368
+    m_Key: Show
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -83,7 +83,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 28431450546176
-    m_Localized: Skip
+    m_Localized: Skip Tutos
     m_Metadata:
       m_Items: []
   - m_Id: 28592285327360
@@ -108,6 +108,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 32269003825152
     m_Localized: Someone is still doing an activity!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756911255494656
+    m_Localized: Hide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756940942778368
+    m_Localized: Show
     m_Metadata:
       m_Items: []
   references:

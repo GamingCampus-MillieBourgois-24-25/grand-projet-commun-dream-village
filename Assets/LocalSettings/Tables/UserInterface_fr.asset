@@ -83,7 +83,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 28431450546176
-    m_Localized: Passer
+    m_Localized: Passer Tutos
     m_Metadata:
       m_Items: []
   - m_Id: 28592285327360
@@ -108,6 +108,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 32269003825152
     m_Localized: "Quelqu'un fait encore une activit\xE9 !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756911255494656
+    m_Localized: Cacher
+    m_Metadata:
+      m_Items: []
+  - m_Id: 756940942778368
+    m_Localized: Montrer
     m_Metadata:
       m_Items: []
   references:
