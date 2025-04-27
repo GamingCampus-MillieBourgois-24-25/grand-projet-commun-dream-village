@@ -136,7 +136,6 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
 
 
 
-
     public class SavePartData : ISaveData
     {
         public string baseInhabitantName;
