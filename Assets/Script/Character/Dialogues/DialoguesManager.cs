@@ -141,7 +141,7 @@ public class DialoguesManager : MonoBehaviour
         dialogueBox.SetActive(true);
         dialogueBox.transform.localPosition = isTop ? topDialogueBoxPosition.transform.localPosition : bottomDialogueBoxPosition.transform.localPosition;
         //dialogueSkip.transform.localPosition = isTop ? new Vector3(525, -200, 0) : new Vector3(525, 200, 0);
-        dialogueHide.transform.localPosition = isTop ? new Vector3(250, -200, 0) : new Vector3(250, 200, 0);
+        //dialogueHide.transform.localPosition = isTop ? new Vector3(250, -200, 0) : new Vector3(250, 200, 0);
         
         float textSpeed = GM.Ao.CurrentTextSpeedStruct.TextSpeed;
         

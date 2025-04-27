@@ -2171,6 +2171,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7082973441369892932, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7222120952190544338, guid: 86c2440593a799147abfe91ada691d3e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2740,6 +2745,12 @@ Tilemap:
 --- !u!224 &532908311 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4312049121486626459, guid: e8db015efc51ef842965717a72dd6060,
+    type: 3}
+  m_PrefabInstance: {fileID: 85192248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &544713930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5102632666092862592, guid: e8db015efc51ef842965717a72dd6060,
     type: 3}
   m_PrefabInstance: {fileID: 85192248}
   m_PrefabAsset: {fileID: 0}
@@ -5579,6 +5590,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4093860918375044367}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &880785389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7082973441369892932, guid: 86c2440593a799147abfe91ada691d3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 330962573}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &894292795 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8084304098128245805, guid: 721dba7f516ffdd41af74044c52f92de,
@@ -7480,14 +7497,29 @@ PrefabInstance:
       objectReference: {fileID: 2103227506}
     - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
         type: 3}
+      propertyPath: blockPanel
+      value: 
+      objectReference: {fileID: 880785389}
+    - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
+        type: 3}
       propertyPath: editButton
       value: 
       objectReference: {fileID: 967803091}
     - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
         type: 3}
+      propertyPath: hideButton
+      value: 
+      objectReference: {fileID: 1645408571}
+    - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
+        type: 3}
       propertyPath: shopButton
       value: 
       objectReference: {fileID: 1576997161}
+    - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
+        type: 3}
+      propertyPath: skipButton
+      value: 
+      objectReference: {fileID: 330962577}
     - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
         type: 3}
       propertyPath: dreamButton
@@ -7498,6 +7530,11 @@ PrefabInstance:
       propertyPath: nightButton
       value: 
       objectReference: {fileID: 272313839}
+    - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
+        type: 3}
+      propertyPath: journalStats
+      value: 
+      objectReference: {fileID: 544713930}
     - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
         type: 3}
       propertyPath: quitEditButton
@@ -11029,6 +11066,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b05172f7ca4acb4c984cb5840ec0675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1645408571 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4146284483276294223, guid: 86c2440593a799147abfe91ada691d3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 330962573}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1646999215 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1549818955976496455, guid: e8db015efc51ef842965717a72dd6060,
@@ -12691,6 +12734,7 @@ MonoBehaviour:
   goldText: {fileID: 203764383}
   starText: {fileID: 760504121}
   levelProgression: {fileID: 1705861470}
+  playerUIPrefab: {fileID: 0}
   playerNameInputField: {fileID: 686716018}
   cityNameInputField: {fileID: 0}
   playerNameText: {fileID: 1401959906}
@@ -12712,6 +12756,8 @@ MonoBehaviour:
   - {fileID: 338905615}
   - {fileID: 1716495034}
   levelUpSFX: {fileID: 8300000, guid: f8fee1562481ed848a134055a1cfd2e9, type: 3}
+  clickSFX: {fileID: 0}
+  noneButtonSFX: {fileID: 0}
 --- !u!114 &1705861470 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 691484844297795610, guid: dfda028edd13ca148beb3305925a2081,
