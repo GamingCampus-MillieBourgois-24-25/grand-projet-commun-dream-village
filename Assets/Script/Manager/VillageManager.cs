@@ -8,7 +8,7 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
     public List<InhabitantInstance> inhabitants { get; private set; } = new List<InhabitantInstance>();
     public List<BuildingObject> buildings { get; private set; } = new List<BuildingObject>();
 
-    List<DecorationObject> decorations = new List<DecorationObject>();
+    public List<DecorationObject> decorations { get; private set; } = new List<DecorationObject>();
 
 
     [System.Serializable]
@@ -99,6 +99,11 @@ public class VillageManager : MonoBehaviour, ISaveable<VillageManager.SavePartDa
         {
             inhabitants.Remove(houseObj.inhabitantInstance);
             Debug.Log($"Inhabitant removed: {houseObj.inhabitantInstance.baseData.Name}");
+        }
+        else if (_obj.TryGetComponent<DecorationObject>(out DecorationObject decorationObj) && decorations.Count >= 1)
+        {
+            decorations.Remove(decorationObj);
+            Debug.Log($"Decoration removed: {decorationObj.baseData.Name}");
         }
         else
         {
