@@ -34,8 +34,12 @@ public class IsoManager : MonoBehaviour
     [SerializeField] private float yMovingObject;
 
     private HashSet<Vector3Int> validWhiteTilePositions;
+    public HashSet<Vector3Int> ValidWhiteTilePositions
+    {
+        get => validWhiteTilePositions;
+    }
     private HashSet<Vector3Int> occupiedTilePositions;
-    private PlaceableObject selectedObject;
+    public PlaceableObject selectedObject;
     public bool isEditMode = false;
 
     private bool isClicking = false;
@@ -126,7 +130,14 @@ public class IsoManager : MonoBehaviour
             } 
             else
             {
-                selectedObject.ResetPosition();
+                if (validWhiteTilePositions.Contains(selectedObject.OriginalPosition))
+                {
+                    selectedObject.ResetPosition();
+                }
+                else
+                {
+                    BS_StockSelectedObject();
+                }
                 ToggleInventorySmooth(true);
             }
             UnSelectObject();
@@ -311,7 +322,14 @@ public class IsoManager : MonoBehaviour
             }
             else
             {
-                selectedObject.ResetPosition();
+                if (selectedObject.OriginalPosition != null)
+                {
+                    selectedObject.ResetPosition();
+                }
+                else
+                {
+                    BS_StockSelectedObject();
+                }
             }
         }
         else
@@ -323,7 +341,7 @@ public class IsoManager : MonoBehaviour
 
         selectedObject = obj;
 
-        if (stockCanvas != null)
+        if (stockCanvas != null && selectedObject.CanBeStocked == true)
         {
             stockCanvas.transform.position = new Vector3(obj.transform.position.x, (obj.cachedRenderer.bounds.size.y ) + yStockCanvas, obj.transform.position.z);
             //Debug.Log(obj.cachedRenderer.bounds.size.y + " " + obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y + " " + ((obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y) + yStockCanvas));
