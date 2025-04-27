@@ -341,7 +341,7 @@ public class IsoManager : MonoBehaviour
 
         selectedObject = obj;
 
-        if (stockCanvas != null && selectedObject.CanBeStocked == true && selectedObject.isFromInventory)
+        if (stockCanvas != null && selectedObject.CanBeStocked == true && !selectedObject.isFromInventory)
         {
             stockCanvas.transform.position = new Vector3(obj.transform.position.x, (obj.cachedRenderer.bounds.size.y ) + yStockCanvas, obj.transform.position.z);
             //Debug.Log(obj.cachedRenderer.bounds.size.y + " " + obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y + " " + ((obj.cachedRenderer.bounds.size.y / obj.transform.localScale.y) + yStockCanvas));

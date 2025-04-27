@@ -34,11 +34,11 @@ public class PlaceableObject : MonoBehaviour
 
     private void Awake()
     {
-        cachedRenderer = GetComponent<Renderer>();
     }
 
     public void Start()
     {
+        cachedRenderer = GetComponent<Renderer>();
         sizeInTiles = GetCellSizeWithBounds();
         CenterObject(GM.IM.tilemapObjects);
         if (this.gameObject != GM.IM.selectedObject.gameObject) OriginalPosition = GM.IM.tilemapObjects.WorldToCell(transform.position);
@@ -49,7 +49,8 @@ public class PlaceableObject : MonoBehaviour
         Vector3 centerWorld = GM.IM.tilemapObjects.CellToWorld(OriginalPosition);
 
         transform.position = GetCenterObject(GM.IM.tilemapObjects, centerWorld);
-        GM.IM.ValidWhiteTilePositions.UnionWith(GetOccupiedTiles());
+        //GM.IM.ValidWhiteTilePositions.UnionWith(GetOccupiedTiles());
+        //GetOccupiedTiles();
         Debug.Log("Reset Position: original "+ OriginalPosition +" centerWorld: "+ centerWorld+ " getCenterObject: " + GetCenterObject(GM.IM.tilemapObjects, centerWorld));
     }
 
