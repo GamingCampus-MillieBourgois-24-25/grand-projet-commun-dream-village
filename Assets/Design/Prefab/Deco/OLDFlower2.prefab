@@ -26,17 +26,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 59a583d19d6bf4b4f9830e6775386631,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.47
+      value: -5.838349
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59a583d19d6bf4b4f9830e6775386631,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.0018984079
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59a583d19d6bf4b4f9830e6775386631,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.56
+      value: -2.469008
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59a583d19d6bf4b4f9830e6775386631,
         type: 3}
@@ -90,7 +90,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59a583d19d6bf4b4f9830e6775386631,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8689483947152260761}
+      addedObject: {fileID: 1837409122589299595}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59a583d19d6bf4b4f9830e6775386631,
         type: 3}
       insertIndex: -1
@@ -110,8 +110,8 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6918671378224947321}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &8689483947152260761
-BoxCollider:
+--- !u!136 &1837409122589299595
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128,8 +128,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.05846853, y: 0.02955778, z: 0.059413638}
+  serializedVersion: 2
+  m_Radius: 0.029706819
+  m_Height: 0.02955778
+  m_Direction: 1
   m_Center: {x: 0, y: 0.01477889, z: 0}
 --- !u!114 &609298619238168312
 MonoBehaviour:
@@ -167,8 +169,8 @@ NavMeshObstacle:
   m_GameObject: {fileID: 7837784147414195496}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.029000001, y: 0.015000001, z: 0.030000001}
+  m_Shape: 0
+  m_Extents: {x: 0.030000001, y: 0.015000001, z: 0.030000001}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
