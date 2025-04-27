@@ -30,12 +30,12 @@ public class Dialogues : ScriptableObject
     public enum TutorialType
     {
         None,
+        House,
         Activity,
         Dream,
+        Shop,
         Edit,
         Heart,
-        House,
-        Shop,
         Finished
     }
     

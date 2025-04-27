@@ -27,7 +27,7 @@ MonoBehaviour:
   requiredArguments: []
   dialogueType: 5
   dialogueCondition: 7
-  tutorialType: 4
+  tutorialType: 6
   shouldShowSkipButton: 1
   shouldBlockInteractions: 0
   shouldHoldDialogues: 0

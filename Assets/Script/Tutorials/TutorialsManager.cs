@@ -73,14 +73,17 @@ public class TutorialsManager : MonoBehaviour
     {
         foreach (Dialogues dialogue in dialogues)
         {
+            
             Dialogues.TutorialType nextType = dialogue.GetTutorialType();
-            if (currentTutorialType > nextType) continue;
+            Debug.Log(nextType);
+            if (currentTutorialType > nextType) 
+                continue;
 
             if(nextType > currentTutorialType)
                 GM.Instance.player.Save("PlayerData");
 
+            currentTutorialType = nextType;
             //SetCurrentTutorial(dialogue.GetTutorialType());
-            currentTutorialType = dialogue.GetTutorialType();
             
             if (highlightAnimationHandle.IsPlaying())
             {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartData>
@@ -81,6 +82,20 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
 
             waitingCoroutine = StartCoroutine(WaitingCoroutine());
         }
+    }
+
+    private IEnumerator WaitingForInhabitantInDestination()
+    {
+        while (inhabitantUsing.agent.pathPending)
+        {
+            yield return null;
+        }
+
+        while (inhabitantUsing.agent.remainingDistance > 0.1 || inhabitantUsing.agent.velocity.sqrMagnitude > 0f)
+        {
+            yield return null;
+        }
+        Destroy(inhabitantUsing.inhabitantObject);
     }
 
     #endregion
@@ -215,6 +230,15 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             inhabitantUsing = _inhabitant;
             waitingCoroutine = StartCoroutine(WaitingCoroutine());
 
+            if (inhabitantUsing.inhabitantObject == null)
+            {
+                Transform spawnPoint = inhabitantUsing.houseObject.spawnPoint;
+                inhabitantUsing.inhabitantObject = Instantiate(inhabitantUsing.baseData.InhabitantPrefab, spawnPoint.transform.position, spawnPoint.rotation, GM.Instance.playerIslandObject);
+                inhabitantUsing.agent = inhabitantUsing.inhabitantObject.GetComponent<NavMeshAgent>();
+            }
+            inhabitantUsing.agent.SetDestination(gameObject.transform.Find("ArrivalPoint").position);
+            StartCoroutine(WaitingForInhabitantInDestination());
+
             _inhabitant.isInActivity = true;
 
             gameManager.SaveGame();
@@ -241,11 +265,16 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
         {
             Debug.Log("inhabitant just finished an activity! "+ inhabitantUsing.baseData.Name);
             inhabitantUsing.FinishActivity(baseData.AttributeEffects, baseData.Energy, baseData.Mood, baseData.Serenity);
+
+            Transform spawnPoint = gameObject.transform.Find("ArrivalPoint");
+            inhabitantUsing.inhabitantObject = Instantiate(inhabitantUsing.baseData.InhabitantPrefab, spawnPoint.position, spawnPoint.rotation, GM.Instance.playerIslandObject);
+            inhabitantUsing.agent = inhabitantUsing.inhabitantObject.GetComponent<NavMeshAgent>();
+
             inhabitantUsing = null;
         }
 
         // TODO : changer l'exp en fonction du building
-        GM.Instance.player.AddXP(100);
+        GM.Instance.player.AddXP(baseData.Experience);
         Destroy(remainingTimeUI);
 
         GM.VM.Save("VillageManager");

@@ -569,7 +569,7 @@ public class IsoManager : MonoBehaviour
     }
     public void BS_StockSelectedObject()
     {
-        if(selectedObject.TryGetComponent<BuildingObject>(out BuildingObject buildingObj))
+        if (selectedObject.TryGetComponent<BuildingObject>(out BuildingObject buildingObj))
         {
             GM.VM.RemoveInstance(buildingObj.gameObject);
             GM.Instance.player.AddToInventory(buildingObj.baseData, 1);
@@ -578,6 +578,11 @@ public class IsoManager : MonoBehaviour
         {
             GM.VM.RemoveInstance(houseObj.gameObject);
             GM.Instance.player.AddToInventory(houseObj.inhabitantInstance.baseData, 1);
+        }
+        else if (selectedObject.TryGetComponent<DecorationObject>(out DecorationObject decorationObj))
+        {
+            GM.VM.RemoveInstance(decorationObj.gameObject);
+            GM.Instance.player.AddToInventory(decorationObj.baseData, 1);
         }
         else
         {
