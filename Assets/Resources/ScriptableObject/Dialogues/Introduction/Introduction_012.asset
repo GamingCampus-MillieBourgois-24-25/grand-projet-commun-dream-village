@@ -29,6 +29,7 @@ MonoBehaviour:
   dialogueType: 3
   dialogueCondition: 0
   tutorialType: 0
+  shouldShowSkipButton: 0
   shouldBlockInteractions: 1
   shouldHoldDialogues: 0
   shouldGiveRareMoney: 0

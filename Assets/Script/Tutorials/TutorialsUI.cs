@@ -6,6 +6,8 @@ public class TutorialsUI : MonoBehaviour
 {
     [Header("Tutorials UI")]
     public GameObject blockPanel;
+    public GameObject skipButton;
+    public GameObject hideButton;
     public GameObject playerFormCanvas;
     public GameObject mainUi;
     public GameObject journalRightPage;

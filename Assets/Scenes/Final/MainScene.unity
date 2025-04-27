@@ -2136,6 +2136,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1104283565792221118, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104283565792221118, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104283565792221118, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104283565792221118, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104283565792221118, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104283565792221118, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 375
+      objectReference: {fileID: 0}
     - target: {fileID: 1335793684580859540, guid: 86c2440593a799147abfe91ada691d3e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2165,6 +2195,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: DialoguesManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5012642024186556791, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533340510532924145, guid: 86c2440593a799147abfe91ada691d3e,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 5533340510532924145, guid: 86c2440593a799147abfe91ada691d3e,
         type: 3}
@@ -10810,9 +10850,19 @@ PrefabInstance:
       objectReference: {fileID: 967803091}
     - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
         type: 3}
+      propertyPath: hideButton
+      value: 
+      objectReference: {fileID: 1030638228}
+    - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
+        type: 3}
       propertyPath: shopButton
       value: 
       objectReference: {fileID: 1576997161}
+    - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
+        type: 3}
+      propertyPath: skipButton
+      value: 
+      objectReference: {fileID: 330962577}
     - target: {fileID: 2122872550221718214, guid: e1d9ec6fdad3e3641bf507867c6f8678,
         type: 3}
       propertyPath: dreamButton

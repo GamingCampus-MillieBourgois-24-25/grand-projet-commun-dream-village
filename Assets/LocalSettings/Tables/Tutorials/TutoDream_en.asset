@@ -25,8 +25,9 @@ MonoBehaviour:
       m_Items:
       - rid: 4777453162711744537
   - m_Id: 348230742016
-    m_Localized: First click on the night button. Careful! You cannot click on the
-      night button if one of your villagers is in the middle of an activity.
+    m_Localized: First, leave the journal and click on the night button. Careful!
+      You cannot click on the night button if one of your villagers is in the middle
+      of an activity.
     m_Metadata:
       m_Items: []
   - m_Id: 351351304192

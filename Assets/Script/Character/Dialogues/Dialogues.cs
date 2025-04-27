@@ -51,6 +51,7 @@ public class Dialogues : ScriptableObject
     [SerializeField] private TutorialType tutorialType;
     
     [Header("Dialogue Options")]
+    [SerializeField] private bool shouldShowSkipButton = true;
     [SerializeField] private bool shouldBlockInteractions = false;
     [SerializeField] private bool shouldHoldDialogues = false;
     [SerializeField] private bool shouldGiveRareMoney = false;
@@ -136,6 +137,11 @@ public class Dialogues : ScriptableObject
     public bool ShouldBlockInteractions()
     {
         return shouldBlockInteractions;
+    }
+    
+    public bool ShouldShowSkipButton()
+    {
+        return shouldShowSkipButton;
     }
     
 }

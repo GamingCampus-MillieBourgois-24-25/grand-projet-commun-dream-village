@@ -193,6 +193,8 @@ public class DialoguesManager : MonoBehaviour
     public void HideDialogueBox()
     {
         isDialogueBoxHidden = !isDialogueBoxHidden;
+        
+        nosphy.SetActive(!isDialogueBoxHidden);
 
         if (isTop)
         {

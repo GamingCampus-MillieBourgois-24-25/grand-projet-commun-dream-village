@@ -28,11 +28,12 @@ MonoBehaviour:
   dialogueType: 5
   dialogueCondition: 7
   tutorialType: 1
+  shouldShowSkipButton: 1
   shouldBlockInteractions: 1
   shouldHoldDialogues: 0
   shouldGiveRareMoney: 1
   isDialogueBoxTop: 0
-  nosphyPosition: 2
+  nosphyPosition: 1
   highlightJournalRightPage: 0
   highlightJournalStats: 0
   highlightQuitJournalButton: 0

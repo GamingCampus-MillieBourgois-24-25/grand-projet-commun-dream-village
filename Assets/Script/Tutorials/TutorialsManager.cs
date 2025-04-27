@@ -50,7 +50,7 @@ public class TutorialsManager : MonoBehaviour
         tutorialsUI.playerFormCanvas.SetActive(false);
 
         List<Dialogues> introDialogues = dialoguesManager.GetDialogues()
-            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Introduction)
+            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Introduction && dialogue.ShouldBePlayed())
             .ToList();
         
         List<Dialogues> tutoDialogues = dialoguesManager.GetDialogues()
@@ -77,15 +77,10 @@ public class TutorialsManager : MonoBehaviour
                 highlightAnimationHandle.TryComplete();
                 highlightAnimationHandle.Cancel();
             }
-
-            if (dialogue.ShouldBlockInteractions())
-            {
-                tutorialsUI.blockPanel.SetActive(true);
-            }
-            else
-            {
-                tutorialsUI.blockPanel.SetActive(false);
-            }
+            
+            tutorialsUI.blockPanel.SetActive(dialogue.ShouldBlockInteractions());
+            tutorialsUI.skipButton.SetActive(dialogue.ShouldShowSkipButton());
+            tutorialsUI.hideButton.SetActive(dialogue.ShouldShowSkipButton());
             
             skipDialogue = false;
             
