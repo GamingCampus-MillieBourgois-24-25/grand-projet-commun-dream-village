@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b87d20c4875e2488498605b6d4fbae, type: 3}
   m_Name: Lamp
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Fence2
-  <Icon>k__BackingField: {fileID: 21300000, guid: 37396956628b61c4f8190af07830937b,
+  <Name>k__BackingField: Lamp
+  <Icon>k__BackingField: {fileID: 21300000, guid: 3773b8252efdbc248935653f9f62c40b,
     type: 3}
   <InitialPrice>k__BackingField: 1000
   <InstantiatePrefab>k__BackingField: {fileID: 2225280581633549717, guid: 851df48ed7d8735418bfc29c3bea5589,
     type: 3}
-  <MaxOwned>k__BackingField: 5
-  <UnlockedAtLvl>k__BackingField: 10
+  <MaxOwned>k__BackingField: 7
+  <UnlockedAtLvl>k__BackingField: 8
