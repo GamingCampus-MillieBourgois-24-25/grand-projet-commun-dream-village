@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     public bool nameAlreadySet = false;
 
     // Currency
-    private int gold = 100000;
+    private int gold = 100;
     private int star = 100;
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private TextMeshProUGUI starText;
