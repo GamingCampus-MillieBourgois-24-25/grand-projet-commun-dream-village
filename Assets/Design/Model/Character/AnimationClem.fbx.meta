@@ -1,64 +1,9 @@
 fileFormatVersion: 2
-guid: e7380224a84ecac448097f1ccd407933
+guid: 3d704c9836eb6464684501e1ac685230
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sh_bouches_MarronFonce
-    second: {fileID: 2100000, guid: 744f78990c4c58c4393880f43ea63a84, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sh_corps_shoes
-    second: {fileID: 2100000, guid: da7b995cd7443224c8d0c9d65ec384ee, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sh_corps_tete_skin
-    second: {fileID: 2100000, guid: 7a29d36570276a24fb6acd8b0c365f6b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sh_eye_EyeColor
-    second: {fileID: 2100000, guid: 894efe0be52bff745adf8f1d490fb00a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sh_nez_rose
-    second: {fileID: 2100000, guid: 107b2dd7c6590794ab1f2b40878502bd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sh_sourcils_cils_CouleurCheveux
-    second: {fileID: 2100000, guid: cf1efbd3806a50f43b5b724d756ed7ce, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sha_FestiaHest_kigurumiblack
-    second: {fileID: 2100000, guid: 84821f623117b964a867d4434b90c320, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sha_FestiaHest_kigurumiwhite
-    second: {fileID: 2100000, guid: 65f3d5e4a27391f4fa3dbb76234c6d96, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sha_FestiaHest_kigurumiyellow
-    second: {fileID: 2100000, guid: 2a9502f4e412eaf4f9832caa3797f170, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sha_FestiaHest_metal
-    second: {fileID: 2100000, guid: 6860f1a646e29454aae87a3a61330a03, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sha_festiahest_hair
-    second: {fileID: 2100000, guid: 6b890133bf4313e41bd8bbc5b3fcf1f5, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

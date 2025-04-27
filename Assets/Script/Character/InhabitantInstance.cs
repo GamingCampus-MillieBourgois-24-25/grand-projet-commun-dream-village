@@ -1,11 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
 {
     public Inhabitant baseData;
     public HouseObject houseObject;
     public bool isInActivity = false;
+    public GameObject inhabitantObject;
+    public NavMeshAgent agent;
 
     private int mood;
     private int serenity;
@@ -79,8 +83,6 @@ public class InhabitantInstance : ISaveable<InhabitantInstance.SavePartData>
     public List<InterestCategory> Dislikes => baseData.Dislikes;
 
     public float GoldMultiplier => baseData.GoldMultiplier;
-
-
 
     public void FinishActivity(List<Building.AttributeEffect> _attributes, int _energy, int _mood, int _serenity)
     {

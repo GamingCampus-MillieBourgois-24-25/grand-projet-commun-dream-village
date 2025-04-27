@@ -1,15 +1,42 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HouseObject : MonoBehaviour
 {
-    public InhabitantInstance inhabitantInstance;
-    private Transform spawnPoint;
-
     private GameObject instantiatedPrefab;
+
+    public InhabitantInstance inhabitantInstance;
+    public Transform spawnPoint;
+
+    public float wanderRadius = 2f;
+    public float wanderTimer = 5f;
+
+    private float timer;
 
     private void Start()
     {
         spawnPoint = transform.Find("SpawnPoint");
+        if (!inhabitantInstance.isInActivity)
+        {
+            inhabitantInstance.inhabitantObject = Instantiate(inhabitantInstance.baseData.InhabitantPrefab, spawnPoint.position, spawnPoint.rotation, GM.Instance.playerIslandObject);
+            inhabitantInstance.agent = inhabitantInstance.inhabitantObject.GetComponent<NavMeshAgent>();
+            timer = wanderTimer;
+        }
+    }
+
+    void Update()
+    {
+        if (inhabitantInstance.inhabitantObject != null && !inhabitantInstance.isInActivity)
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= wanderTimer)
+            {
+                Vector3 newPos = RandomNavSphere(inhabitantInstance.inhabitantObject.transform.position, wanderRadius, -1);
+                inhabitantInstance.agent.SetDestination(newPos);
+                timer = 0;
+            }
+        }
     }
 
     //private void OnMouseDown()
@@ -71,5 +98,29 @@ public class HouseObject : MonoBehaviour
             }
         }
     }
+
+    #region InhabitantFreeMovement
+
+    public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 finalPosition = origin;
+        for (int i = 0; i < 30; i++) // On essaie plusieurs fois
+        {
+            Vector3 randomDirection = Random.insideUnitSphere * dist;
+            randomDirection += origin;
+
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomDirection, out hit, dist, layermask))
+            {
+                finalPosition = hit.position;
+                break; 
+            }
+        }
+        return finalPosition;
+    }
+
+
+
+    #endregion
 
 }

@@ -29,7 +29,6 @@ public class Shop : MonoBehaviour
 
     public void InitShop()
     {
-        Debug.LogError("Shop Awake");
         levelProgression = GM.Instance.gameObject.GetComponent<LevelProgression>();
 
         InitCategory(categoryContainers[0], GameManager.instance.inhabitants.OrderBy(x => x.InitialPrice).ToList());

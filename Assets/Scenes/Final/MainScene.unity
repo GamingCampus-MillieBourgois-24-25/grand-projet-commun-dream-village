@@ -9204,7 +9204,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.033333335
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 245dcb4ad6e9d834083e4ec940e324f7, type: 2}
   m_BuildHeightMesh: 0
@@ -10291,6 +10291,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1232733589}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1232733591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7756728528171746734, guid: a89d6f1e7cf14b3408653d59c06bc9b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1232733589}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2cfc8cf2d262044bae3851e364a16db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1234798671 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5348776667767761538, guid: 90bf729e147f987429720465a9360317,
@@ -16145,6 +16157,11 @@ PrefabInstance:
       objectReference: {fileID: 1576997161}
     - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}
+      propertyPath: adsManager
+      value: 
+      objectReference: {fileID: 1232733591}
+    - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
+        type: 3}
       propertyPath: dreamPanel
       value: 
       objectReference: {fileID: 1535578536}
@@ -16191,7 +16208,7 @@ PrefabInstance:
     - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}
       propertyPath: isPlayerCreated
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2984640881235056443, guid: dfda028edd13ca148beb3305925a2081,
         type: 3}
