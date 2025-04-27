@@ -99,7 +99,7 @@ public class NotificationManager
 
         string title = "Where are you?";
         string text = "Your residents miss you! Come back to make them dream!";
-        float days = 15;
+        int days = 3;
         inactivityNotificationID = CreateNotification(title, text, days);
     }
     public static void LaunchNotifications()
