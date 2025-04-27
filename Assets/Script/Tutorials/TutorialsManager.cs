@@ -50,7 +50,7 @@ public class TutorialsManager : MonoBehaviour
         tutorialsUI.playerFormCanvas.SetActive(false);
 
         List<Dialogues> introDialogues = dialoguesManager.GetDialogues()
-            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Introduction)
+            .Where(dialogue => dialogue.GetDialogueType() == Dialogues.DialogueType.Introduction && dialogue.ShouldBePlayed())
             .ToList();
         
         List<Dialogues> tutoDialogues = dialoguesManager.GetDialogues()
@@ -78,6 +78,9 @@ public class TutorialsManager : MonoBehaviour
                 highlightAnimationHandle.Cancel();
             }
             
+            tutorialsUI.blockPanel.SetActive(dialogue.ShouldBlockInteractions());
+            tutorialsUI.skipButton.SetActive(dialogue.ShouldShowSkipButton());
+            tutorialsUI.hideButton.SetActive(dialogue.ShouldShowSkipButton());
             
             skipDialogue = false;
             
@@ -168,6 +171,7 @@ public class TutorialsManager : MonoBehaviour
         }
 
         HighlightButton(tutorialsUI.journalRightPage, dialogue.highlightJournalRightPage);
+        HighlightButton(tutorialsUI.journalStats, dialogue.highlightJournalStats);
         HighlightButton(tutorialsUI.quitJournalButton, dialogue.highlightQuitJournalButton);
         HighlightButton(tutorialsUI.nightButton, dialogue.highlightNightButton);
         HighlightButton(tutorialsUI.dreamButton, dialogue.highlightDreamButton);

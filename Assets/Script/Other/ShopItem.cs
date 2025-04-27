@@ -180,7 +180,10 @@ public class ShopItem : MonoBehaviour
         
         BuyItem<IScriptableElement>();
 
-        GM.Tm.UnHold(49);
+        if (GM.Tm.inShopTutorial)
+        {
+            GM.Tm.UnHold(49);
+        }
     }
 
     public void BS_Info()

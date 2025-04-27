@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Tuto_House_004
   tutorialID: 19
+  shouldBePlayed: 1
   dialogueText:
     m_TableReference:
       m_TableCollectionName: GUID:72d91b9481dd09147846ac20901bda6a
@@ -27,8 +28,21 @@ MonoBehaviour:
   dialogueType: 5
   dialogueCondition: 7
   tutorialType: 5
+  shouldShowSkipButton: 1
+  shouldBlockInteractions: 1
   shouldHoldDialogues: 0
   shouldGiveRareMoney: 0
+  isDialogueBoxTop: 0
+  nosphyPosition: 2
+  highlightJournalRightPage: 0
+  highlightJournalStats: 0
+  highlightQuitJournalButton: 0
+  highlightNightButton: 0
+  highlightDreamButton: 0
+  highlightShopButton: 0
+  highlightQuitShopButton: 0
+  highlightEditButton: 0
+  highlightQuitEditButton: 0
   references:
     version: 2
     RefIds: []

@@ -412,6 +412,11 @@ public class IsoManager : MonoBehaviour
         // SET NEW POSITION
         obj.OriginalPosition = tilemapObjects.WorldToCell(obj.transform.position);
 
+        if (GM.Tm.inEditTutorial)
+        {
+            GM.Tm.UnHold(53);
+        }
+
         // Réinitialiser
         ChangeTileUnderObject(selectedObject, null);
         UnSelectObject();
