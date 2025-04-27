@@ -5,9 +5,13 @@ using UnityEngine;
 public class TutorialsUI : MonoBehaviour
 {
     [Header("Tutorials UI")]
+    public GameObject blockPanel;
+    public GameObject skipButton;
+    public GameObject hideButton;
     public GameObject playerFormCanvas;
     public GameObject mainUi;
     public GameObject journalRightPage;
+    public GameObject journalStats;
     public GameObject quitJournalButton;
     public GameObject nightButton;
     public GameObject dreamButton;

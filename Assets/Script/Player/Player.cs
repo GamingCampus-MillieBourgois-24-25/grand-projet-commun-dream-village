@@ -44,6 +44,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     public LevelProgression levelProgression;
 
     [Header("Player UI")]
+    [SerializeField] private GameObject playerUIPrefab;
     [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private TMP_InputField cityNameInputField;
     [SerializeField] private TextMeshProUGUI playerNameText;
@@ -62,6 +63,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 
     [Header("Inventory Menu UI")]
     [SerializeField] private AudioClip levelUpSFX;
+    [SerializeField] private AudioClip clickSFX;
+    [SerializeField] private AudioClip noneButtonSFX;
 
     #endregion
 
@@ -143,6 +146,11 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
                 AddToInventory(decoration, decorationDic.Value);
             }
         }
+
+        if (PlayerName != null)
+        {
+            GM.Instance.isPlayerCreated = true;
+        }
     }
     #endregion
 
@@ -162,15 +170,18 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 
     public void SetPlayerInfo()
     {
+        GM.SM.PlaySFX(clickSFX);
         PlayerName = playerNameInputField.text;
         CityName = cityNameInputField.text;
         if (string.IsNullOrEmpty(PlayerName))
         {
+            GM.SM.PlaySFX(noneButtonSFX);
             Debug.LogError("Player name cannot be empty.");
             return;
         }
         if (string.IsNullOrEmpty(CityName))
         {
+            GM.SM.PlaySFX(noneButtonSFX);
             Debug.LogError("City name cannot be empty.");
             return;
         }
@@ -181,14 +192,17 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         GM.Dm.UpdateLocalizedArguments("PLAYER_NAME", PlayerName);
         GM.Dm.UpdateLocalizedArguments("VILLAGE_NAME", CityName);
         
+        playerUIPrefab.SetActive(false);
+        
         GM.Tm.holdDialogues = false;
-        GM.Tm.skipDialogue = true;
+        GM.Tm.skipDialogue = true; 
         
         GM.Instance.isPlayerCreated = true;
         
         OnPlayerInfoAssigned?.Invoke();
 
         this.Save("PlayerData");
+        
     }
 
     #region Currency

@@ -51,6 +51,8 @@ public class Dialogues : ScriptableObject
     [SerializeField] private TutorialType tutorialType;
     
     [Header("Dialogue Options")]
+    [SerializeField] private bool shouldShowSkipButton = true;
+    [SerializeField] private bool shouldBlockInteractions = false;
     [SerializeField] private bool shouldHoldDialogues = false;
     [SerializeField] private bool shouldGiveRareMoney = false;
     [SerializeField] private bool isDialogueBoxTop = false;
@@ -58,6 +60,7 @@ public class Dialogues : ScriptableObject
     
     [Header("UI Highlight")]
     public bool highlightJournalRightPage = false;
+    public bool highlightJournalStats = false;
     public bool highlightQuitJournalButton = false;
     public bool highlightNightButton = false;
     public bool highlightDreamButton = false;
@@ -129,6 +132,16 @@ public class Dialogues : ScriptableObject
     public NosphyPosition GetNosphyPosition()
     {
         return nosphyPosition;
+    }
+    
+    public bool ShouldBlockInteractions()
+    {
+        return shouldBlockInteractions;
+    }
+    
+    public bool ShouldShowSkipButton()
+    {
+        return shouldShowSkipButton;
     }
     
 }

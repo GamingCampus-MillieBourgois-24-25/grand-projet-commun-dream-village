@@ -38,11 +38,16 @@ public class DialoguesManager : MonoBehaviour
     public bool isTextAnimationActive;
     [SerializeField] private SerializableMotionSettings<FixedString512Bytes, StringOptions> textAnimationSettings;
 
-    [Header("UI Elements")] public GameObject dialogueCanvas;
+    [Header("UI Elements")] 
+    public GameObject dialogueCanvas;
     public GameObject dialogueBox;
     public GameObject dialogueSkip;
+    public GameObject dialogueHide;
     public GameObject topDialogueBoxPosition;
     public GameObject bottomDialogueBoxPosition;
+    public GameObject hiddenTopDialogueBoxPosition;
+    public GameObject hiddenBottomDialogueBoxPosition;
+    public bool isDialogueBoxHidden = false;
     public TMP_Text dialogueText;
     public NosphyPosition nosphyPosition;
     [SerializeField] private GameObject nosphy;
@@ -136,6 +141,7 @@ public class DialoguesManager : MonoBehaviour
         dialogueBox.SetActive(true);
         dialogueBox.transform.localPosition = isTop ? topDialogueBoxPosition.transform.localPosition : bottomDialogueBoxPosition.transform.localPosition;
         //dialogueSkip.transform.localPosition = isTop ? new Vector3(525, -200, 0) : new Vector3(525, 200, 0);
+        dialogueHide.transform.localPosition = isTop ? new Vector3(250, -200, 0) : new Vector3(250, 200, 0);
         
         float textSpeed = GM.Ao.CurrentTextSpeedStruct.TextSpeed;
         
@@ -182,5 +188,33 @@ public class DialoguesManager : MonoBehaviour
     {
         textAnimationHandle.TryComplete();
         isTextAnimationActive = false;
+    }
+    
+    public void HideDialogueBox()
+    {
+        isDialogueBoxHidden = !isDialogueBoxHidden;
+        
+        nosphy.SetActive(!isDialogueBoxHidden);
+
+        if (isTop)
+        {
+            dialogueBox.GetComponent<RectTransform>().anchoredPosition = isDialogueBoxHidden
+                ? hiddenTopDialogueBoxPosition.GetComponent<RectTransform>().anchoredPosition
+                : topDialogueBoxPosition.GetComponent<RectTransform>().anchoredPosition;
+            
+            dialogueBox.transform.localPosition = isDialogueBoxHidden
+                ? hiddenTopDialogueBoxPosition.transform.localPosition
+                : topDialogueBoxPosition.transform.localPosition;
+        }
+        else
+        {
+            dialogueBox.GetComponent<RectTransform>().anchoredPosition = isDialogueBoxHidden
+                ? hiddenBottomDialogueBoxPosition.GetComponent<RectTransform>().anchoredPosition
+                : bottomDialogueBoxPosition.GetComponent<RectTransform>().anchoredPosition;
+            
+            dialogueBox.transform.localPosition = isDialogueBoxHidden
+                ? hiddenBottomDialogueBoxPosition.transform.localPosition
+                : bottomDialogueBoxPosition.transform.localPosition;
+        }
     }
 }

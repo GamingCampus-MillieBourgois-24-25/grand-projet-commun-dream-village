@@ -631,6 +631,11 @@ public class DreamMachineManager : MonoBehaviour
             
             dreamMachineCanvas.SetActive(true);
             UpdateSelectionCanvas();
+
+            if (GM.Tm.inDreamTutorial)
+            {
+                GM.Tm.UnHold(38);
+            }
         }
     }
     
