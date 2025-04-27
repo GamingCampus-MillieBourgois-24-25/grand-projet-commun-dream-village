@@ -176,6 +176,7 @@ public class DayNight : MonoBehaviour
             {
                 GM.SM.PlayMusic(dayMusic, true);
             });
+            
             GM.Cjm.CheckStatsAndHandleDeparture();
             GM.Cjm.CheckForHeartBonus();
             Debug.Log("Daytime: Checking stats and handling departure.");

@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.Localization;
 using LitMotion.Extensions;
 using Unity.Collections;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public enum NosphyPosition
@@ -41,19 +42,28 @@ public class DialoguesManager : MonoBehaviour
     [Header("UI Elements")] 
     public GameObject dialogueCanvas;
     public GameObject dialogueBox;
+    public GameObject buttonContainer;
     public GameObject dialogueSkip;
     public GameObject dialogueHide;
     public GameObject topDialogueBoxPosition;
     public GameObject bottomDialogueBoxPosition;
     public GameObject hiddenTopDialogueBoxPosition;
     public GameObject hiddenBottomDialogueBoxPosition;
+    public GameObject topButtonPosition;
+    public GameObject bottomButtonPosition;
+    public GameObject hiddenTopButtonPosition;
+    public GameObject hiddenBottomButtonPosition;
+    
     public bool isDialogueBoxHidden = false;
     public TMP_Text dialogueText;
     public NosphyPosition nosphyPosition;
     [SerializeField] private GameObject nosphy;
+    public bool showNosphy = false;
     public bool isTop = false;
     [SerializeField] private Sprite nosphySprite1;
     [SerializeField] private Sprite nosphySprite2;
+    [SerializeField] private LocalizedString showString;
+    [SerializeField] private LocalizedString hideString;
 
     private void Awake()
     {
@@ -106,20 +116,22 @@ public class DialoguesManager : MonoBehaviour
         switch (dialogue.GetNosphyPosition())
         {
             case NosphyPosition.Position1:
-                nosphy.gameObject.SetActive(true);
+                showNosphy = true;
                 nosphy.GetComponent<Image>().sprite = nosphySprite1;
                 break;
             case NosphyPosition.Position2:
-                nosphy.gameObject.SetActive(true);
+                showNosphy = true;
                 nosphy.GetComponent<Image>().sprite = nosphySprite2;
                 break;
             case NosphyPosition.Position3:
-                nosphy.gameObject.SetActive(false);
+                showNosphy = false;
                 break;
             default:
-                nosphy.gameObject.SetActive(true);
+                showNosphy = true;
                 break;
         }
+        
+        nosphy.SetActive(showNosphy);
         
         LocalizedString localized = dialogue.GetLocalizedString();
         localized.Arguments = null;
@@ -140,11 +152,11 @@ public class DialoguesManager : MonoBehaviour
         dialogueCanvas.SetActive(true);
         dialogueBox.SetActive(true);
         dialogueBox.transform.localPosition = isTop ? topDialogueBoxPosition.transform.localPosition : bottomDialogueBoxPosition.transform.localPosition;
-        //dialogueSkip.transform.localPosition = isTop ? new Vector3(525, -200, 0) : new Vector3(525, 200, 0);
-        //dialogueHide.transform.localPosition = isTop ? new Vector3(250, -200, 0) : new Vector3(250, 200, 0);
+        buttonContainer.transform.localPosition = isTop ? topButtonPosition.transform.localPosition : bottomButtonPosition.transform.localPosition;
         
-        float textSpeed = GM.Ao.CurrentTextSpeedStruct.TextSpeed;
-        
+        float charactersPerSecond = 10f;
+        float textSpeed = text.Length / GM.Ao.CurrentTextSpeedStruct.TextSpeed;
+
         textAnimationSettings = textAnimationSettings with
         {
             StartValue = "",
@@ -194,7 +206,7 @@ public class DialoguesManager : MonoBehaviour
     {
         isDialogueBoxHidden = !isDialogueBoxHidden;
         
-        nosphy.SetActive(!isDialogueBoxHidden);
+        nosphy.SetActive(showNosphy);
 
         if (isTop)
         {
@@ -205,6 +217,8 @@ public class DialoguesManager : MonoBehaviour
             dialogueBox.transform.localPosition = isDialogueBoxHidden
                 ? hiddenTopDialogueBoxPosition.transform.localPosition
                 : topDialogueBoxPosition.transform.localPosition;
+            
+            buttonContainer.transform.localPosition = isDialogueBoxHidden ? hiddenTopButtonPosition.transform.localPosition : topButtonPosition.transform.localPosition;
         }
         else
         {
@@ -215,6 +229,8 @@ public class DialoguesManager : MonoBehaviour
             dialogueBox.transform.localPosition = isDialogueBoxHidden
                 ? hiddenBottomDialogueBoxPosition.transform.localPosition
                 : bottomDialogueBoxPosition.transform.localPosition;
+            
+            buttonContainer.transform.localPosition = isDialogueBoxHidden ? hiddenBottomButtonPosition.transform.localPosition : bottomButtonPosition.transform.localPosition;
         }
     }
 }

@@ -632,7 +632,7 @@ public class DreamMachineManager : MonoBehaviour
             dreamMachineCanvas.SetActive(true);
             UpdateSelectionCanvas();
 
-            if (GM.Tm.inDreamTutorial)
+            if (/*GM.Tm.inDreamTutorial*/GM.Tm.currentTutorialType == Dialogues.TutorialType.Dream)
             {
                 GM.Tm.UnHold(38);
             }

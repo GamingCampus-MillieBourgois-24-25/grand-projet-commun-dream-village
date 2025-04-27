@@ -40,11 +40,12 @@ public class AccessibilityOptions : MonoBehaviour
         public float TextSpeed;
     }
 
+    [SerializeField]
     private TextSpeedStruct[] _textSpeedParameters = new TextSpeedStruct[3]
     {
-        new TextSpeedStruct {TextSpeedParameter = TextSpeedParameter.Slow, TextSpeed = 3f},
-        new TextSpeedStruct {TextSpeedParameter = TextSpeedParameter.Normal, TextSpeed = 2f},
-        new TextSpeedStruct {TextSpeedParameter = TextSpeedParameter.Fast, TextSpeed = 1f}
+        new TextSpeedStruct {TextSpeedParameter = TextSpeedParameter.Slow, TextSpeed = 10f},
+        new TextSpeedStruct {TextSpeedParameter = TextSpeedParameter.Normal, TextSpeed = 25f},
+        new TextSpeedStruct {TextSpeedParameter = TextSpeedParameter.Fast, TextSpeed = 50f}
     };
     
     public TextSpeedStruct CurrentTextSpeedStruct;

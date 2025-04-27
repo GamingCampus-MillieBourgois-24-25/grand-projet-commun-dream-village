@@ -412,7 +412,7 @@ public class IsoManager : MonoBehaviour
         // SET NEW POSITION
         obj.OriginalPosition = tilemapObjects.WorldToCell(obj.transform.position);
 
-        if (GM.Tm.inEditTutorial)
+        if (/*GM.Tm.inEditTutorial*/ GM.Tm.currentTutorialType == Dialogues.TutorialType.Edit)
         {
             GM.Tm.UnHold(53);
         }

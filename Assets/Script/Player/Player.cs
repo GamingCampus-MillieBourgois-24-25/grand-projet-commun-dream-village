@@ -33,6 +33,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     private int baseExpPerLevel = 100;
     private float multExp = 1.9f;
     private int expLevel;
+    
+    public bool nameAlreadySet = false;
 
     // Currency
     private int gold = 100000;
@@ -81,6 +83,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         public Dictionary<string, int> inhabitantsInventory = new();
         public Dictionary<string, int> buildingsInventory = new();
         public Dictionary<string, int> decorationsInventory = new();
+
+        public Dialogues.TutorialType tutorialState;
     }
 
     public SavePartData Serialize()
@@ -103,6 +107,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
 
         foreach (var item in decorationsInventory)
             data.decorationsInventory[item.Key.Name] = item.Value.quantity;
+
+        data.tutorialState = GM.Tm.currentTutorialType;
 
         return data;
     }
@@ -147,10 +153,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
             }
         }
 
-        if (PlayerName != null)
-        {
-            GM.Instance.isPlayerCreated = true;
-        }
+        GM.Tm.currentTutorialType = data.tutorialState;
     }
     #endregion
 
@@ -166,6 +169,50 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         UpdateGoldText();
         UpdateStarText();
         UpdateLevelText();
+    }
+
+    public void SetPlayerNameInfo()
+    {
+        PlayerName = playerNameInputField.text;
+        if (string.IsNullOrEmpty(PlayerName))
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+            Debug.LogError("Player name cannot be empty.");
+            return;
+        }
+        
+        playerNameText.text = PlayerName;
+        
+        UpdateLevelText();
+        
+        GM.Dm.UpdateLocalizedArguments("PLAYER_NAME", PlayerName);
+        
+        playerUIPrefab.SetActive(false);
+        
+        GM.Tm.UnHold(9);
+        
+        nameAlreadySet = true;
+    }
+    
+    public void SetCityNameInfo()
+    {
+        if (!nameAlreadySet) return;
+        
+        CityName = cityNameInputField.text;
+        if (string.IsNullOrEmpty(CityName))
+        {
+            GM.SM.PlaySFX(noneButtonSFX);
+            Debug.LogError("City name cannot be empty.");
+            return;
+        }
+        
+        GM.Dm.UpdateLocalizedArguments("VILLAGE_NAME", CityName);
+        
+        playerUIPrefab.SetActive(false);
+        
+        GM.Tm.UnHold(14);
+        
+        OnPlayerInfoAssigned?.Invoke();
     }
 
     public void SetPlayerInfo()
