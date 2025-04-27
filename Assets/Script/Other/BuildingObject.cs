@@ -149,7 +149,8 @@ public class BuildingObject : MonoBehaviour, ISaveable<BuildingObject.SavePartDa
             remainingTimeUI.SetActive(true);
         }
 
-        timeText = remainingTimeUI.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+        remainingTimeUI.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = inhabitantUsing.baseData.Icon;
+        timeText = remainingTimeUI.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
         Debug.Log(timeText);
         canvasBuilding.SetActive(false);
     }

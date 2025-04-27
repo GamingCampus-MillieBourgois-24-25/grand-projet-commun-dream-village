@@ -3,7 +3,17 @@ guid: 3e8fcd4af6a1dc14fbce66c6bc508aae
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_ile_herbe
+    second: {fileID: 2100000, guid: 1b0900606de25d44994ceb5c44848c6e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_Iland_rocks
+    second: {fileID: 2100000, guid: 3dcee9811d2fcc84d860aeb96e5daabb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

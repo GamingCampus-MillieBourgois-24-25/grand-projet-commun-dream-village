@@ -30,31 +30,27 @@ public class PlaceableObject : MonoBehaviour
     [HideInInspector]
     public Renderer cachedRenderer;
 
+    public bool isFromInventory = false;
+
     private void Awake()
     {
-        cachedRenderer = GetComponent<Renderer>();
     }
 
     public void Start()
     {
+        cachedRenderer = GetComponent<Renderer>();
         sizeInTiles = GetCellSizeWithBounds();
         CenterObject(GM.IM.tilemapObjects);
-        OriginalPosition = GM.IM.tilemapObjects.WorldToCell(transform.position);
+        if (this.gameObject != GM.IM.selectedObject.gameObject) OriginalPosition = GM.IM.tilemapObjects.WorldToCell(transform.position);
     }
 
     public void ResetPosition()
     {
-        Vector3 centerWorld;
-        if (sizeInTiles.x % 2 == 0)
-        {
-            centerWorld = GM.IM.tilemapObjects.CellToWorld(OriginalPosition);
-        }
-        else
-        {
-            centerWorld = GM.IM.tilemapObjects.GetCellCenterWorld(OriginalPosition);
-        }
+        Vector3 centerWorld = GM.IM.tilemapObjects.CellToWorld(OriginalPosition);
 
         transform.position = GetCenterObject(GM.IM.tilemapObjects, centerWorld);
+        //GM.IM.ValidWhiteTilePositions.UnionWith(GetOccupiedTiles());
+        //GetOccupiedTiles();
         Debug.Log("Reset Position: original "+ OriginalPosition +" centerWorld: "+ centerWorld+ " getCenterObject: " + GetCenterObject(GM.IM.tilemapObjects, centerWorld));
     }
 

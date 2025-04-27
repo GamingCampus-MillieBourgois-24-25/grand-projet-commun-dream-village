@@ -27,12 +27,15 @@ MonoBehaviour:
   requiredArguments: []
   dialogueType: 5
   dialogueCondition: 7
-  tutorialType: 1
+  tutorialType: 2
+  shouldShowSkipButton: 1
+  shouldBlockInteractions: 0
   shouldHoldDialogues: 0
   shouldGiveRareMoney: 0
   isDialogueBoxTop: 0
   nosphyPosition: 2
   highlightJournalRightPage: 0
+  highlightJournalStats: 0
   highlightQuitJournalButton: 0
   highlightNightButton: 0
   highlightDreamButton: 0

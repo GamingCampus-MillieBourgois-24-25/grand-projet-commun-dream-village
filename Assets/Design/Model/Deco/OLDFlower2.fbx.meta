@@ -3,7 +3,22 @@ guid: 59a583d19d6bf4b4f9830e6775386631
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_Flower2_center2
+    second: {fileID: 2100000, guid: 86ea4be4e3c39494aa2cc15ec8144f1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_Flower2_petal
+    second: {fileID: 2100000, guid: 83d551c47ef2b9a41b167a6803abb33a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sh_bush1
+    second: {fileID: 2100000, guid: 9c360408579607a44ba1471da69b0fd9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

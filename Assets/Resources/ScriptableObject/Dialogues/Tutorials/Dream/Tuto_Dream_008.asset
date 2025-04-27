@@ -30,7 +30,7 @@ MonoBehaviour:
   - THIRD_STAT
   dialogueType: 5
   dialogueCondition: 7
-  tutorialType: 2
+  tutorialType: 3
   shouldShowSkipButton: 1
   shouldBlockInteractions: 1
   shouldHoldDialogues: 0

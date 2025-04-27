@@ -51,6 +51,7 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
     [SerializeField] private TMP_InputField cityNameInputField;
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private Button validateButton;
 
     [SerializeField] private GameObject levelUpCanvas;
     [SerializeField] private RectTransform levelUpItemContainer;
@@ -169,6 +170,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         UpdateGoldText();
         UpdateStarText();
         UpdateLevelText();
+        
+        validateButton.onClick.AddListener(SetPlayerNameInfo);
     }
 
     public void SetPlayerNameInfo()
@@ -181,6 +184,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
             return;
         }
         
+        GM.SM.PlaySFX(clickSFX);
+        
         playerNameText.text = PlayerName;
         
         UpdateLevelText();
@@ -192,6 +197,9 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
         GM.Tm.UnHold(9);
         
         nameAlreadySet = true;
+        
+        validateButton.onClick.RemoveAllListeners();
+        validateButton.onClick.AddListener(SetCityNameInfo);
     }
     
     public void SetCityNameInfo()
@@ -205,6 +213,8 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
             Debug.LogError("City name cannot be empty.");
             return;
         }
+        
+        GM.SM.PlaySFX(clickSFX);
         
         GM.Dm.UpdateLocalizedArguments("VILLAGE_NAME", CityName);
         
