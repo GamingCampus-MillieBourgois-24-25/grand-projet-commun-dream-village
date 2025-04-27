@@ -105,7 +105,15 @@ public class ShopItem : MonoBehaviour
                 }
                 break;
             case Player.ItemCategory.DecorationCategory:
-                Debug.LogWarning("Not Implemented");
+                Decoration decorationItem = GetItem<Decoration>();
+                ownedQuantity = GM.Instance.player.GetItemQuantity(decorationItem);
+                foreach (var decoration in GM.VM.decorations)
+                {
+                    if (decoration.baseData == decorationItem)
+                    {
+                        ownedQuantity++;
+                    }
+                }
                 break;
             default:
                 Debug.LogError("Invalid category");
