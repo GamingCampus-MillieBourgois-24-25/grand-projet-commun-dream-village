@@ -135,10 +135,6 @@ public class DayNight : MonoBehaviour
                     activityErrorCoroutine = StartCoroutine(ShowActivityErrorText());
                     return;
                 }
-               if(inhabitant.inhabitantObject != null)
-               {
-                   Destroy(inhabitant.inhabitantObject);
-               }
             }
         }
         //Pour passer au jour
@@ -148,13 +144,8 @@ public class DayNight : MonoBehaviour
             {
                 return;
             }
-
-            foreach (InhabitantInstance inhabitant in GM.VM.inhabitants)
-            {
-
-                inhabitant.inhabitantObject = Instantiate(inhabitant.baseData.InhabitantPrefab, inhabitant.houseObject.spawnPoint.position, inhabitant.houseObject.spawnPoint.rotation, GM.Instance.playerIslandObject);
-                inhabitant.agent = inhabitant.inhabitantObject.GetComponent<NavMeshAgent>();
-            }
+            
+        }
         
         isDay = !isDay;
         TimeRemaining = 0f;
@@ -180,52 +171,64 @@ public class DayNight : MonoBehaviour
         {
             timeContainer.SetActive(false);
         }
-            if (isDay)
+        if (isDay)
+        {
+            GM.SM.PlayMusic(dayTransitionMusic, false, () =>
             {
-                GM.SM.PlayMusic(dayTransitionMusic, false, () =>
+                GM.SM.PlayMusic(dayMusic, true);
+            });
+            
+            GM.Cjm.CheckStatsAndHandleDeparture();
+            GM.Cjm.CheckForHeartBonus();
+            Debug.Log("Daytime: Checking stats and handling departure.");
+
+            LMotion.Create(0, target.x, animationDuration)
+                .WithEase(Ease.OutCubic)
+                .WithOnComplete(() =>
                 {
-                    GM.SM.PlayMusic(dayMusic, true);
+                    GM.DreamPanel.SetActive(false);
+                    GM.JournalPanel.SetActive(true);
+                    GM.ShopPanel.SetActive(true);
+                    GM.InventoryPanel.SetActive(true);
+                })
+                .Bind(x =>
+                {
+                    var rect = transform.rect;
+                    transform.sizeDelta = new Vector2(x, rect.height);
                 });
 
-                GM.Cjm.CheckStatsAndHandleDeparture();
-                GM.Cjm.CheckForHeartBonus();
-                Debug.Log("Daytime: Checking stats and handling departure.");
+            foreach (InhabitantInstance inhabitant in GM.VM.inhabitants)
+            {
 
-                LMotion.Create(0, target.x, animationDuration)
-                    .WithEase(Ease.OutCubic)
-                    .WithOnComplete(() =>
-                    {
-                        GM.DreamPanel.SetActive(false);
-                        GM.JournalPanel.SetActive(true);
-                        GM.ShopPanel.SetActive(true);
-                        GM.InventoryPanel.SetActive(true);
-                    })
-                    .Bind(x =>
-                    {
-                        var rect = transform.rect;
-                        transform.sizeDelta = new Vector2(x, rect.height);
-                    });
+                inhabitant.inhabitantObject = Instantiate(inhabitant.baseData.InhabitantPrefab, inhabitant.houseObject.spawnPoint.position, inhabitant.houseObject.spawnPoint.rotation, GM.Instance.playerIslandObject);
+                inhabitant.agent = inhabitant.inhabitantObject.GetComponent<NavMeshAgent>();
             }
-            else
+        }
+        else
+        {
+            GM.SM.PlayMusic(nightTransitionMusic, false, () =>
             {
-                GM.SM.PlayMusic(nightTransitionMusic, false, () =>
+                GM.SM.PlayMusic(nightMusic, true);
+            });
+            LMotion.Create(0, target.x, animationDuration)
+                .WithEase(Ease.OutCubic)
+                .WithOnComplete(() =>
                 {
-                    GM.SM.PlayMusic(nightMusic, true);
+                    GM.DreamPanel.SetActive(true);
+                    GM.JournalPanel.SetActive(false);
+                    GM.ShopPanel.SetActive(false);
+                    GM.InventoryPanel.SetActive(false);
+                })
+                .Bind(x =>
+                {
+                    var rect = transform.rect;
+                    transform.sizeDelta = new Vector2(x, rect.height);
                 });
-                LMotion.Create(0, target.x, animationDuration)
-                    .WithEase(Ease.OutCubic)
-                    .WithOnComplete(() =>
-                    {
-                        GM.DreamPanel.SetActive(true);
-                        GM.JournalPanel.SetActive(false);
-                        GM.ShopPanel.SetActive(false);
-                        GM.InventoryPanel.SetActive(false);
-                    })
-                    .Bind(x =>
-                    {
-                        var rect = transform.rect;
-                        transform.sizeDelta = new Vector2(x, rect.height);
-                    });
+
+            foreach (InhabitantInstance inhabitant in GM.VM.inhabitants)
+            {
+
+                Destroy(inhabitant.inhabitantObject);
             }
         }
     }
