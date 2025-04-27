@@ -63,6 +63,10 @@ MonoBehaviour:
     m_Key: Text Speed Setting
     m_Metadata:
       m_Items: []
+  - m_Id: 8526167753793536
+    m_Key: Delete Save
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
