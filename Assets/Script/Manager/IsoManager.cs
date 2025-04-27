@@ -397,7 +397,7 @@ public class IsoManager : MonoBehaviour
     {
         if (obj == null || !CanPlaceObjectOnTilemap(obj)) return; // Sécurité
 
-        //GM.SM.PlaySFX(placeBuildingSFX);
+        GM.SM.PlaySFX(placeBuildingSFX);
 
         float objectHeight = obj.GetComponent<Renderer>().bounds.size.y;
         // TODO: à changer plus tard si toutes les origines des batiments sont en bas !
