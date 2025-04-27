@@ -154,8 +154,9 @@ public class DialoguesManager : MonoBehaviour
         dialogueBox.transform.localPosition = isTop ? topDialogueBoxPosition.transform.localPosition : bottomDialogueBoxPosition.transform.localPosition;
         buttonContainer.transform.localPosition = isTop ? topButtonPosition.transform.localPosition : bottomButtonPosition.transform.localPosition;
         
-        float textSpeed = GM.Ao.CurrentTextSpeedStruct.TextSpeed;
-        
+        float charactersPerSecond = 10f;
+        float textSpeed = text.Length / GM.Ao.CurrentTextSpeedStruct.TextSpeed;
+
         textAnimationSettings = textAnimationSettings with
         {
             StartValue = "",
