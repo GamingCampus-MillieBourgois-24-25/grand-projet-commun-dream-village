@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13e6beaa89ee5d418d873cd6e279228, type: 3}
+  m_Name: Tuto_Edit_003
+  m_EditorClassIdentifier: 
+  ID: Tuto_Edit_003
+  tutorialID: 54
+  shouldBePlayed: 1
+  dialogueText:
+    m_TableReference:
+      m_TableCollectionName: GUID:8b60c89231d77df46975de3eff2d3416
+    m_TableEntryReference:
+      m_KeyId: 9364533248
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  requiredArguments: []
+  dialogueType: 5
+  dialogueCondition: 7
+  tutorialType: 5
+  shouldShowSkipButton: 1
+  shouldBlockInteractions: 0
+  shouldHoldDialogues: 1
+  shouldGiveRareMoney: 0
+  isDialogueBoxTop: 0
+  nosphyPosition: 2
+  highlightJournalRightPage: 0
+  highlightJournalStats: 0
+  highlightQuitJournalButton: 0
+  highlightNightButton: 0
+  highlightDreamButton: 0
+  highlightShopButton: 0
+  highlightQuitShopButton: 0
+  highlightEditButton: 0
+  highlightQuitEditButton: 1
+  references:
+    version: 2
+    RefIds: []

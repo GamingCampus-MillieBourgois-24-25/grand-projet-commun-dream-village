@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DialoguesWillithWarm_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: f7b6952ea84e7334282b9a1336f30eac, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 6238822977345945604
+  m_TableData:
+  - m_Id: 21137944576
+    m_Localized: "Oh, salut mon gars ! Alors vous \xEAtes le nouveau maire ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23780356096
+    m_Localized: "Je suis ravi de vous rencontrer. Je m'appelle Willith Warm. J'esp\xE8re
+      que {0} deviendra le plus beau village du monde\_!"
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945604
+  - m_Id: 27089661952
+    m_Localized: ' Salut mon gars !'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6238822977345945604
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00706b8905000000

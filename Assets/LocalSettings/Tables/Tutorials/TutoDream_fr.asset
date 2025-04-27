@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TutoDream_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 85753728e70574449a9548b06cefa37a, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 6238822977345945608
+  m_TableData:
+  - m_Id: 345529610240
+    m_Localized: "Maintenant que {0} se sent mieux, faisons-le r\xEAver !"
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945608
+  - m_Id: 361795121152
+    m_Localized: "La premi\xE8re option affecte l'{0}, la deuxi\xE8me affecte la
+      {1} et la troisi\xE8me affecte l'{2}."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945608
+  - m_Id: 348230742016
+    m_Localized: "Tout d'abord, quitte le journal puis clique sur le bouton nuit.
+      Mais attention ! Tu ne peux pas cliquer dessus si un de tes villageois est
+      au milieu d'une activit\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 351351304192
+    m_Localized: "Maintenant qu'il fait nuit, tu peux faire ton travail de porte-r\xEAve."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 354111156224
+    m_Localized: "Clique sur le bouton r\xEAve."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357995081728
+    m_Localized: "Ici tu peux choisir qui peut r\xEAver ce soir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 360339697664
+    m_Localized: "Plus de villageois r\xEAvent, plus tu gagnes de l'argent, mais
+      c'est aussi plus long. Choisis Willith et appuie sur GO."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361094672384
+    m_Localized: "Pour chaque habitant, il y aura trois options al\xE9atoires qui
+      vont influencer chacune de leurs statistiques une derni\xE8re fois."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362424266752
+    m_Localized: "Et, pour chaque option il y aura toujours au minimum un int\xE9r\xEAt
+      et une haine, mais dans un ordre diff\xE9rent."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363011469312
+    m_Localized: Choisis-en une !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363615449088
+    m_Localized: "Super. Mais comme tu peux le voir, cr\xE9er des r\xEAves prend
+      du temps. Donc, encore une derni\xE8re fois, je te couvre les frais."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364387201024
+    m_Localized: "La nuit est termin\xE9e ! Tu as re\xE7u des sous et de l'exp. Bravo
+      !"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6238822977345945608
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00702b73500000000070ab3c54000000

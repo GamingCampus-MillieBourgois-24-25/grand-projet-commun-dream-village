@@ -1,0 +1,120 @@
+version: 2.1
+
+executors:
+  unity-executor:
+    docker:
+      - image: unityci/editor:ubuntu-2022.3.32f1-android-3
+    resource_class: large
+
+jobs:
+  build:
+    executor: unity-executor
+    steps:
+      - checkout
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+          image: unityci/editor:ubuntu-2022.3.32f1-android-3 
+          registry: "docker.io"
+          force_pull: false
+
+      - restore_cache:
+          keys:
+            - unity-cache-{{ checksum "Packages/manifest.json" }}
+            - unity-cache-v1
+
+      # Build Projet
+      - run:
+          name: Build project
+          command: |
+            # Activer la licence Unity
+            unity-editor \
+              -batchmode \
+              -nographics \
+              -silent-crashes \
+              -logFile /dev/stdout \
+              -username "$UNITY_USERNAME" \
+              -password "$UNITY_PASSWORD" \
+              -serial "$UNITY_SERIAL" \
+              -projectPath $(pwd) \
+              -buildTarget Android \
+              -quit
+            
+            # Lancer la build
+            unity-editor \
+              -batchmode \
+              -nographics \
+              -silent-crashes \
+              -logFile /dev/stdout \
+              -projectPath $(pwd) \
+              -buildTarget Android \
+              -executeMethod BuildScript.BuildAndroid \
+              -quit
+
+      # Save cache for Unity dependencies
+      - save_cache:
+          paths:
+            - /root/.cache/unity3d
+            - /root/.local/share/unity3d
+            - /project/Library
+          key: unity-cache-{{ checksum "Packages/manifest.json" }}
+
+      # Archive Build
+      - run:
+          name: Archive Build
+          command: |
+            mkdir -p /tmp/build
+            cp builds/Android.apk /tmp/build/
+
+      - store_artifacts:
+          path: /tmp/build
+          destination: Build
+
+      # Upload to Github Realease
+      - run:
+          name: Upload APK to GitHub Release
+          command: |
+            echo "$GITHUB_TOKEN_CUSTOM" | gh auth login --with-token
+            gh release upload latest builds/Android.apk \
+              --repo GamingCampus-MillieBourgois-24-25/grand-projet-commun-dream-village \
+              --clobber
+
+      # Envoyer le lien sur Discord
+      - run:
+          name: Envoyer le lien sur Discord
+          command: |
+            DISCORD_WEBHOOK_URL="${DISCORD_WEBHOOK_URL}"
+
+            MESSAGE_CONTENT="🚀 **Nouvelle build disponible !**\n🎮 Téléchargez la dernière version de l'APK ici :\n🔗 [📥 Télécharger](https://www.dropbox.com/home/Applications/DreamVillage-Build/Build)"
+
+            curl -s -X POST "$DISCORD_WEBHOOK_URL" \
+              -H "Content-Type: application/json" \
+              -d "{\"content\": \"$MESSAGE_CONTENT\"}"
+
+      # Supprimer les anciens messages Discord
+      - run:
+          name: Supprimer les anciens messages du webhook
+          command: |
+            DISCORD_WEBHOOK_URL="${DISCORD_WEBHOOK_URL}"
+      
+            RESPONSE=$(curl -s "$DISCORD_WEBHOOK_URL/messages?limit=10")
+            echo "Réponse de l'API Discord : $RESPONSE"  # Ajout du débogage
+      
+            MESSAGE_ID=$(echo "$RESPONSE" | grep -o '"id":"\([^"]*\)"' | head -n 1 | sed 's/"id":"\([^"]*\)"/\1/')
+      
+            if [[ -z "$MESSAGE_ID" ]]; then
+              echo "❌ Aucun message trouvé ou réponse invalide"
+              exit 0
+            fi
+      
+            curl -X DELETE "$DISCORD_WEBHOOK_URL/messages/$MESSAGE_ID"
+            sleep 1
+
+workflows:
+  version: 2
+  build-workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: develop

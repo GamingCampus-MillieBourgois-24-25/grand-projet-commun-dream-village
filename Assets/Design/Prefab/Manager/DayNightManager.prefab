@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5715480060953124152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9198178991101596642}
+  - component: {fileID: 3832973176699877064}
+  m_Layer: 0
+  m_Name: DayNightManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9198178991101596642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715480060953124152}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3832973176699877064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715480060953124152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d455f43bb26007a438f09ae66310a512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDay: 1
+  dayNightButton: {fileID: 0}
+  activityErrorText: {fileID: 0}
+  daySprite: {fileID: 21300000, guid: b1f10de84129000498cbc84f28c750ca, type: 3}
+  nightSprite: {fileID: 21300000, guid: 83b5e6a5187d42646bee41aca0b6995e, type: 3}
+  sun: {fileID: 0}
+  dayColor: {r: 1, g: 1, b: 1, a: 1}
+  nightColor: {r: 0.36494306, g: 0.49271694, b: 0.5566038, a: 1}
+  dayRotation: {x: 35, y: -150, z: 0}
+  nightRotation: {x: 35, y: 150, z: 0}
+  daySkybox: {fileID: 2100000, guid: c704597794bef1746a6578702192b0d5, type: 2}
+  nightSkybox: {fileID: 2100000, guid: 8fc0b8d755b9d3f4b8557ae2f83ce2ec, type: 2}
+  curtain: {fileID: 0}
+  animationDuration: 1
+  musicSource: {fileID: 0}
+  dayMusic: {fileID: 0}
+  nightMusic: {fileID: 0}

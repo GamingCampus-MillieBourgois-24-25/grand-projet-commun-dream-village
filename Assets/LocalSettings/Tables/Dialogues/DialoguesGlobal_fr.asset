@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DialoguesGlobal_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 31227703947268344b145d584fb78ab6, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 6238822977345945602
+  m_TableData:
+  - m_Id: 31799865344
+    m_Localized: Salut.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34589077504
+    m_Localized: Bonjour {0}.
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945602
+  - m_Id: 37562839040
+    m_Localized: Bonjour monsieur/madame le maire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40616292352
+    m_Localized: "Je ne me sens pas tr\xE8s bien..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43430670336
+    m_Localized: "\xC7a va \xEAtre une super journ\xE9e !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47830495232
+    m_Localized: "J'ai r\xEAv\xE9 de {0} la nuit derni\xE8re. C'\xE9tait comme un
+      cauchemar."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945602
+  - m_Id: 50858782720
+    m_Localized: "J'ai r\xEAv\xE9 de {0} la nuit derni\xE8re. J'ai beaucoup aim\xE9
+      !"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6238822977345945602
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070ab0d080000000070eb220b000000

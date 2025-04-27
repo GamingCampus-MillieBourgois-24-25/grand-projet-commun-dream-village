@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TutoActivity_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 87a78c4e8df18794faeedb1045c7c26b, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 6238822977345945607
+  m_TableData:
+  - m_Id: 22442373120
+    m_Localized: Regarde ici ! Un banc ! Clique dessus et appuie sur GO !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25126727680
+    m_Localized: "Comme tu peux le voir, le banc va redonner \xE0 ton habitant de
+      l\u2019\xE9nergie. Avec un bonus s'il aime \xEAtre seul !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27844636672
+    m_Localized: "Demande \xE0 {0} de l'utiliser."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945607
+  - m_Id: 30709346304
+    m_Localized: "Les activit\xE9s prennent du temps. Mais ne t'inqui\xE8te pas,
+      je vais te donner assez pour cette fois.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33095905280
+    m_Localized: "Voil\xE0, tu peux passer l'attente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37286014976
+    m_Localized: "Super ! {0} \xE0 l'air de se sentir mieux maintenant. Visitons
+      le \xE0 nouveau.\r"
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945607
+  - m_Id: 41736171520
+    m_Localized: "Bon, il n'a pas l'air d'aimer ou de d\xE9tester \xEAtre seul, ou
+      alors \xE7a se serait \xE9crit ici."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945607
+  references:
+    version: 2
+    RefIds:
+    - rid: 6238822977345945607
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070ab7b0600000000706bae080000000070abb709000000

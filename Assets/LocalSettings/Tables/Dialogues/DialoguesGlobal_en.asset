@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DialoguesGlobal_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 31227703947268344b145d584fb78ab6, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4777453186010316803
+  m_TableData:
+  - m_Id: 31799865344
+    m_Localized: Hi.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34589077504
+    m_Localized: Hello {0}.
+    m_Metadata:
+      m_Items:
+      - rid: 4777453186010316803
+  - m_Id: 37562839040
+    m_Localized: Good morning mayor.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40616292352
+    m_Localized: I don't feel so good...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43430670336
+    m_Localized: This is gonna be a great day!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47830495232
+    m_Localized: I dreamt of {0} last night. It almost felt like a nightmare...
+    m_Metadata:
+      m_Items:
+      - rid: 4777453186010316803
+  - m_Id: 50858782720
+    m_Localized: I dreamt of {0} last night. I really liked it!
+    m_Metadata:
+      m_Items:
+      - rid: 4777453186010316803
+  references:
+    version: 2
+    RefIds:
+    - rid: 4777453186010316803
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070ab0d080000000070eb220b00000000706bd70b000000

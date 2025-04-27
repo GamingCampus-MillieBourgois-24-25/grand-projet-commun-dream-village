@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: TutoDream Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: TutoDream
+  m_TableCollectionNameGuidString: 85753728e70574449a9548b06cefa37a
+  m_Entries:
+  - m_Id: 345529610240
+    m_Key: Tuto_Dream_001
+    m_Metadata:
+      m_Items: []
+  - m_Id: 348230742016
+    m_Key: Tuto_Dream_002
+    m_Metadata:
+      m_Items: []
+  - m_Id: 351351304192
+    m_Key: Tuto_Dream_003
+    m_Metadata:
+      m_Items: []
+  - m_Id: 354111156224
+    m_Key: Tuto_Dream_004
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357995081728
+    m_Key: Tuto_Dream_005
+    m_Metadata:
+      m_Items: []
+  - m_Id: 360339697664
+    m_Key: Tuto_Dream_006
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361094672384
+    m_Key: Tuto_Dream_007
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361795121152
+    m_Key: Tuto_Dream_008
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362424266752
+    m_Key: Tuto_Dream_009
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363011469312
+    m_Key: Tuto_Dream_010
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363615449088
+    m_Key: Tuto_Dream_011
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364387201024
+    m_Key: Tuto_Dream_012
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4777453162711744536
+  references:
+    version: 2
+    RefIds:
+    - rid: 4777453162711744536
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1744814578764

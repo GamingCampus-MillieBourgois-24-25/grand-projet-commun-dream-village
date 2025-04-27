@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Introduction Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Introduction
+  m_TableCollectionNameGuidString: 3575041cfccaf4e4884f5987c04b8901
+  m_Entries:
+  - m_Id: 1881123024896
+    m_Key: Intro_001
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2101403676672
+    m_Key: Intro_002
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2124610760704
+    m_Key: Intro_003
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2165018685440
+    m_Key: Intro_004
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2205321752576
+    m_Key: Intro_005
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2396745592832
+    m_Key: Intro_006
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2491968876544
+    m_Key: Intro_008
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530514530304
+    m_Key: Intro_009
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2689851944960
+    m_Key: Intro_010
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2845431263232
+    m_Key: Intro_011
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903954386944
+    m_Key: Intro_012
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2947906498560
+    m_Key: Intro_013
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2989052620800
+    m_Key: Intro_014
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3147442122752
+    m_Key: Intro_015
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4777453113262735362
+  references:
+    version: 2
+    RefIds:
+    - rid: 4777453113262735362
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1744615234416

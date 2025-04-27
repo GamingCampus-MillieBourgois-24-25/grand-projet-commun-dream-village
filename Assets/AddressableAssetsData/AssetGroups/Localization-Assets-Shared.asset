@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Shared
+  m_Data:
+    m_SerializedData: []
+  m_GUID: fdf481f980b6e4947b4ecdf8efa78c72
+  m_SerializeEntries:
+  - m_GUID: 34954f719440f7b479a35b9ef1e127c4
+    m_Address: Assets/LocalSettings/Tables/OptionsTable Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3575041cfccaf4e4884f5987c04b8901
+    m_Address: Assets/LocalSettings/Tables/Introduction Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1317265bd367bf24c8c9252ba14c8797
+    m_Address: Assets/Samples/Localization/1.4.5/Smart Strings - Persistent Variables/String
+      Table/Gender Sample Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27153e20147c06c4c8d1304d28104a87
+    m_Address: Assets/Samples/Localization/1.4.5/Smart Strings - Persistent Variables/String
+      Table/Global Variables Sample Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a4358b2d52704d4faffc78d6ca427c9
+    m_Address: Assets/LocalSettings/Tables/Introduction Ending Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72d91b9481dd09147846ac20901bda6a
+    m_Address: Assets/LocalSettings/Tables/TutoHouse Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87a78c4e8df18794faeedb1045c7c26b
+    m_Address: Assets/LocalSettings/Tables/TutoActivity Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85753728e70574449a9548b06cefa37a
+    m_Address: Assets/LocalSettings/Tables/TutoDream Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f38f8bf1e031cb148a0bfd0ba4690bfb
+    m_Address: Assets/LocalSettings/Tables/Tutorials/TutoShop Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b60c89231d77df46975de3eff2d3416
+    m_Address: Assets/LocalSettings/Tables/Tutorials/TutoEdit Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 812b64478f6af3c46a979775b764189c
+    m_Address: Assets/LocalSettings/Tables/Tutorials/TutoHeart Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31227703947268344b145d584fb78ab6
+    m_Address: Assets/LocalSettings/Tables/Dialogues/DialoguesGlobal Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7b6952ea84e7334282b9a1336f30eac
+    m_Address: Assets/LocalSettings/Tables/Dialogues/CharacterSpecific/DialoguesWillithWarm
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b9e9f7a0fd4df244b25a54e664bfc70
+    m_Address: Assets/LocalSettings/Tables/Dialogues/CharacterSpecific/DialoguesFestiaHest
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ddbcaa726fc0d349aac34691376c3bf
+    m_Address: Assets/LocalSettings/Tables/Dialogues/CharacterSpecific/DialoguesNillieZel
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 237bcc55320b2ff4a872398eb2b6a9bc
+    m_Address: Assets/LocalSettings/Tables/Stats Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da0791bd6fbfd2242a4f6082afb5afc1
+    m_Address: Assets/LocalSettings/Tables/UserInterface Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7adf37f9dcac6834195d42044c6bafe5
+    m_Address: Assets/LocalSettings/Tables/ScriptableObjects/Activities Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85ab25c21abf4e84189cac0113679919
+    m_Address: Assets/LocalSettings/Tables/ScriptableObjects/Decorations Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f48478efc80c5047b91d5b74f4300f1
+    m_Address: Assets/LocalSettings/Tables/ScriptableObjects/Interests Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: b2886dc44f367cc4784b3a637a476509, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: fcb9ac39f3262c04a8667ed38d388449, type: 2}
+    - {fileID: 11400000, guid: 07ec887a58c65104db2c967ae1237f1a, type: 2}

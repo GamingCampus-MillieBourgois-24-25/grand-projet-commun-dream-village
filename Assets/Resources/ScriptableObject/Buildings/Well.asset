@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
+  m_Name: Well
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Well
+  <Icon>k__BackingField: {fileID: 21300000, guid: 8997f1bf74dd5ae46ba24e3383a8e4fb,
+    type: 3}
+  <InitialPrice>k__BackingField: 500
+  <InstantiatePrefab>k__BackingField: {fileID: 9215897852482887236, guid: 45be2b8e1aba8e04a93dcf6508b8747e,
+    type: 3}
+  <MaxOwned>k__BackingField: 3
+  <UnlockedAtLvl>k__BackingField: 2
+  <Description>k__BackingField: 
+  <EffectDuration>k__BackingField: 300
+  <AttributeEffects>k__BackingField:
+  - <attribute>k__BackingField: {fileID: 11400000, guid: a15712b2b029c254cb82c3bbe0b7b6c8,
+      type: 2}
+    <bonus>k__BackingField: 2
+    <bonusType>k__BackingField: 0
+  <Experience>k__BackingField: 50
+  <Mood>k__BackingField: 0
+  <Serenity>k__BackingField: 10
+  <Energy>k__BackingField: 0

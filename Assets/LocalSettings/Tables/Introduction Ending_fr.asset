@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Introduction Ending_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 8a4358b2d52704d4faffc78d6ca427c9, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 6238822977345945606
+  m_TableData:
+  - m_Id: 5941981184
+    m_Localized: Je pense que tu sais tout maintenant.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9813323776
+    m_Localized: Si jamais tu oublies quelque chose, juste ouvre le menu des OPTIONS.
+      Tu y trouveras le bouton pour rejouer le TUTORIEL.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17547620352
+    m_Localized: "Au revoir, {0}. Soit le meilleur maire - et le meilleur porte-r\xEAve
+      - que {1} ait jamais vu."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945606
+  references:
+    version: 2
+    RefIds:
+    - rid: 6238822977345945606
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070eb1504000000

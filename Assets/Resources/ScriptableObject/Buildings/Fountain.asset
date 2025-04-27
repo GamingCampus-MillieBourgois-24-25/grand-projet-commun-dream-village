@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e63b62e461d444b9bdfdddc85eaf72, type: 3}
+  m_Name: Fountain
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Fountain
+  <Icon>k__BackingField: {fileID: 21300000, guid: cff57004edd15224a9a7e505dc880e4c,
+    type: 3}
+  <InitialPrice>k__BackingField: 1000
+  <InstantiatePrefab>k__BackingField: {fileID: 2989772271846371469, guid: 79a8dcaebfb485849ac04c084c7d8e36,
+    type: 3}
+  <MaxOwned>k__BackingField: 2
+  <UnlockedAtLvl>k__BackingField: 3
+  <Description>k__BackingField: 
+  <EffectDuration>k__BackingField: 6000
+  <AttributeEffects>k__BackingField:
+  - <attribute>k__BackingField: {fileID: 11400000, guid: a15712b2b029c254cb82c3bbe0b7b6c8,
+      type: 2}
+    <bonus>k__BackingField: 10
+    <bonusType>k__BackingField: 1
+  <Experience>k__BackingField: 75
+  <Mood>k__BackingField: 5
+  <Serenity>k__BackingField: 10
+  <Energy>k__BackingField: 0

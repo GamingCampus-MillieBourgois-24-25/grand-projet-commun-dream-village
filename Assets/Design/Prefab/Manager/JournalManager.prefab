@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2494397505269990607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3406362604582300333}
+  - component: {fileID: 8293250436908638852}
+  m_Layer: 0
+  m_Name: JournalManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3406362604582300333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2494397505269990607}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8293250436908638852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2494397505269990607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c75f7c47dee8cf488fa452defe49d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconImage: {fileID: 0}
+  nameText: {fileID: 0}
+  pronounsText: {fileID: 0}
+  mbtiText: {fileID: 0}
+  personalitiesText: {fileID: 0}
+  likesContainer: {fileID: 0}
+  dislikesContainer: {fileID: 0}
+  GoldMultiplierText: {fileID: 0}
+  moodSlider: {fileID: 0}
+  serenitySlider: {fileID: 0}
+  energySlider: {fileID: 0}
+  heartsContainer: {fileID: 0}
+  indexText: {fileID: 0}
+  nextButton: {fileID: 0}
+  previousButton: {fileID: 0}
+  heartFullSprite: {fileID: 21300000, guid: 4dbd818a7fa38ed45aa450cbcc878f6c, type: 3}
+  heartEmptySprite: {fileID: 21300000, guid: 74c73f7a6f38bd240ae2a270209ee176, type: 3}
+  unknownIcon: {fileID: 21300000, guid: 5d68098dcafd4fe438dc177a3ed3422d, type: 3}
+  heartPrefab: {fileID: 0}
+  preferencePrefab: {fileID: 0}

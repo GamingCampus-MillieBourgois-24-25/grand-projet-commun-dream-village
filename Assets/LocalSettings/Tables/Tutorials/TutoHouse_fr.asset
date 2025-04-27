@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TutoHouse_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 72d91b9481dd09147846ac20901bda6a, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 6238822977345945610
+  m_TableData:
+  - m_Id: 20999532544
+    m_Localized: 'Voici le premier habitant de ton village : {0}.'
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945610
+  - m_Id: 23239290880
+    m_Localized: "Cliquez sur sa maison pour le voir de pr\xE8s !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28062740480
+    m_Localized: Ceci est ton journal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30369607680
+    m_Localized: "Il est d\xE9j\xE0 ouvert sur la page de {0}, et tu peux y trouver
+      ses informations."
+    m_Metadata:
+      m_Items:
+      - rid: 6238822977345945610
+  - m_Id: 50372243456
+    m_Localized: "Par d\xE9faut, ses pr\xE9f\xE9rences sont cach\xE9es. Chaque habitant
+      a les siennes. C'est \xE0 toi de les d\xE9couvrir !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53174038528
+    m_Localized: "Comment ? Elles vont se d\xE9bloqu\xE9es automatiquement dans ton
+      journal quand tu les fais r\xEAver ou fais faire des activit\xE9s dans le village."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56558841856
+    m_Localized: Voici ses statistiques du moment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58815377408
+    m_Localized: "Allons les am\xE9liorer maintenant !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3213609877073920
+    m_Localized: "Sur la page de droite, tu peux y trouver ses pr\xE9f\xE9rences."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6238822977345945610
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0070abe30400000000702b1207000000

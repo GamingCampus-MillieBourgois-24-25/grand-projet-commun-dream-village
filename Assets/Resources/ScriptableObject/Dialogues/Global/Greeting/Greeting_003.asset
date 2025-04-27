@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13e6beaa89ee5d418d873cd6e279228, type: 3}
+  m_Name: Greeting_003
+  m_EditorClassIdentifier: 
+  ID: Greeting_003
+  dialogueText:
+    m_TableReference:
+      m_TableCollectionName: GUID:31227703947268344b145d584fb78ab6
+    m_TableEntryReference:
+      m_KeyId: 37562839040
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  requiredArguments: []
+  dialogueType: 0
+  dialogueCondition: 2
+  tutorialType: 0
+  references:
+    version: 2
+    RefIds: []
