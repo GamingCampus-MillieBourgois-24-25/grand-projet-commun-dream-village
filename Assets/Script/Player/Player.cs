@@ -146,6 +146,11 @@ public class Player : MonoBehaviour, ISaveable<Player.SavePartData>
                 AddToInventory(decoration, decorationDic.Value);
             }
         }
+
+        if (PlayerName != null)
+        {
+            GM.Instance.isPlayerCreated = true;
+        }
     }
     #endregion
 
