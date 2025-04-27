@@ -146,7 +146,7 @@ public class BuildingManager : MonoBehaviour
             StartActivity(selectedInhabitant);
             selectONEInhabitant.gameObject.SetActive(false);
             UpdateSelectionCanvas();
-            if (GM.Tm.inActivityTutorial)
+            if (/*GM.Tm.inActivityTutorial*/ GM.Tm.currentTutorialType == Dialogues.TutorialType.Activity)
             {
                 GM.Tm.UnHold(28);
             }

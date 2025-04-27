@@ -180,7 +180,7 @@ public class ShopItem : MonoBehaviour
         
         BuyItem<IScriptableElement>();
 
-        if (GM.Tm.inShopTutorial)
+        if (/*GM.Tm.inShopTutorial*/ GM.Tm.currentTutorialType == Dialogues.TutorialType.Shop)
         {
             GM.Tm.UnHold(49);
         }
