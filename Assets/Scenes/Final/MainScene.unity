@@ -3501,22 +3501,22 @@ PrefabInstance:
     - target: {fileID: 286296304336733971, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 286296304336733971, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 769588479}
+      objectReference: {fileID: 1705861469}
     - target: {fileID: 286296304336733971, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: DisableLvlUpCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 286296304336733971, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Player, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 286296304336733971, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
@@ -3726,12 +3726,12 @@ PrefabInstance:
     - target: {fileID: 5582096750843034061, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5582096750843034061, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 391.38
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6761765311741921803, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
@@ -3746,57 +3746,57 @@ PrefabInstance:
     - target: {fileID: 7806409739752126700, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7806409739752126700, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7806409739752126700, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7806409739752126700, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 250
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7806409739752126700, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -83.19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9172915322031969079, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9172915322031969079, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9172915322031969079, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9172915322031969079, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 86.38
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9172915322031969079, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9172915322031969079, guid: c91c5215893444a4abef2c41869d05b6,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -43.19
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
