@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -32,6 +33,7 @@ public class AccessibilityOptions : MonoBehaviour
         Fast
     }
     
+    [Serializable]
     public struct TextSpeedStruct
     {
         public TextSpeedParameter TextSpeedParameter;

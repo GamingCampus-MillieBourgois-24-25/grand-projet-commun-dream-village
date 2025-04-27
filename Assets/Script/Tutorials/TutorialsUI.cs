@@ -9,6 +9,7 @@ public class TutorialsUI : MonoBehaviour
     public GameObject playerFormCanvas;
     public GameObject mainUi;
     public GameObject journalRightPage;
+    public GameObject journalStats;
     public GameObject quitJournalButton;
     public GameObject nightButton;
     public GameObject dreamButton;

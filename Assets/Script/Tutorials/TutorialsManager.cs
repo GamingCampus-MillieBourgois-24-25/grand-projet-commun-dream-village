@@ -77,8 +77,15 @@ public class TutorialsManager : MonoBehaviour
                 highlightAnimationHandle.TryComplete();
                 highlightAnimationHandle.Cancel();
             }
-            
-            tutorialsUI.blockPanel.SetActive(true);
+
+            if (dialogue.ShouldBlockInteractions())
+            {
+                tutorialsUI.blockPanel.SetActive(true);
+            }
+            else
+            {
+                tutorialsUI.blockPanel.SetActive(false);
+            }
             
             skipDialogue = false;
             
@@ -92,7 +99,6 @@ public class TutorialsManager : MonoBehaviour
 
             if (dialogue.ShouldHoldDialogues())
             {
-                tutorialsUI.blockPanel.SetActive(false);
                 holdDialogues = true;
 
                 if (dialogue.GetTutorialType() == Dialogues.TutorialType.None)
@@ -170,6 +176,7 @@ public class TutorialsManager : MonoBehaviour
         }
 
         HighlightButton(tutorialsUI.journalRightPage, dialogue.highlightJournalRightPage);
+        HighlightButton(tutorialsUI.journalStats, dialogue.highlightJournalStats);
         HighlightButton(tutorialsUI.quitJournalButton, dialogue.highlightQuitJournalButton);
         HighlightButton(tutorialsUI.nightButton, dialogue.highlightNightButton);
         HighlightButton(tutorialsUI.dreamButton, dialogue.highlightDreamButton);
