@@ -28,7 +28,7 @@ MonoBehaviour:
   - FIRST_VILLAGER_NAME
   dialogueType: 5
   dialogueCondition: 7
-  tutorialType: 1
+  tutorialType: 2
   shouldShowSkipButton: 1
   shouldBlockInteractions: 0
   shouldHoldDialogues: 1
