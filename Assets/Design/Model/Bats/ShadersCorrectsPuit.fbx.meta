@@ -3,7 +3,32 @@ guid: 5bf03eac78b867e44b12adcc51b77580
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_well_metal
+    second: {fileID: 2100000, guid: 4be225e03ef54224e8a37b72596515a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_well_stone
+    second: {fileID: 2100000, guid: ed0b764a41f82d94a91e15276a746e1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_well_woodplanche
+    second: {fileID: 2100000, guid: d76c17278af8b03419c4e80cd2ba81a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_well_woodpoteau
+    second: {fileID: 2100000, guid: e27d0cd60f259424381596f048a4a974, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sha_well_woodsaut
+    second: {fileID: 2100000, guid: 2746cb2a1f7f3b14eb447fd89fde73bf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

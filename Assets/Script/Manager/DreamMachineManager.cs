@@ -413,13 +413,16 @@ public class DreamMachineManager : MonoBehaviour
         GM.SM.PlaySFX(applyDreamsSFX);
 
         GM.DreamPanel.SetActive(false);
+        GM.SkipDreamPanel.SetActive(true);
 
         GM.DN.TimeRemaining = totalDreamMinute * 60; //minutes to seconds
         GM.DN.nightDreamTimeCoroutine = GM.DN.StartCoroutine(GM.DN.StartWaitingTime());
     }
 
-    public void ApplySelectedDreams()
+    public void ApplySelectedDreams(int notificationID)
     {
+        List<InhabitantInstance> allInhabitants = new List<InhabitantInstance>(GM.VM.inhabitants);
+        
         Debug.Log("Apply Selected Dreams! " + selectedDreamByInhabitant.First());
         foreach (var pair in selectedDreamByInhabitant)
         {
@@ -456,6 +459,31 @@ public class DreamMachineManager : MonoBehaviour
             GM.Instance.player.AddXP(Mathf.Max(0,Mathf.FloorToInt((baseEXPPerDream + inhabitant.Mood + inhabitant.Serenity + inhabitant.Energy)*inhabitant.GoldMultiplier)));
 
         }
+        
+        foreach (var inhabitant in allInhabitants)
+        {
+            if (!selectedInhabitants.Contains(inhabitant))
+            {
+                int randomStat = UnityEngine.Random.Range(0, 3);
+
+                switch (randomStat)
+                {
+                    case 0:
+                        inhabitant.Mood -= 15;
+                        Debug.Log($"[Penalty] {inhabitant.Name} loses 20 Mood.");
+                        break;
+                    case 1:
+                        inhabitant.Serenity -= 15;
+                        Debug.Log($"[Penalty] {inhabitant.Name} loses 20 Serenity.");
+                        break;
+                    case 2:
+                        inhabitant.Energy -= 15;
+                        Debug.Log($"[Penalty] {inhabitant.Name} loses 20 Energy.");
+                        break;
+                }
+            }
+        }
+        
         Debug.Log("Player just gained " + GM.Instance.player.GetGold() + " gold and " + GM.Instance.player.CurrentXP+ " exp");
 
 
@@ -477,6 +505,14 @@ public class DreamMachineManager : MonoBehaviour
         GM.Cjm.DisplayInhabitant();
 
         selectedInhabitants.Clear();
+
+        if (notificationID != -1)
+        {
+            NotificationManager.CancelNotification(notificationID);
+            notificationID = -1;
+        }
+
+        GM.SkipDreamPanel.SetActive(false);
     }
     
     public void UpdateSelectionCanvas()

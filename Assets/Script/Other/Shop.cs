@@ -27,9 +27,9 @@ public class Shop : MonoBehaviour
 
     #endregion
 
-    // Start is called before the first frame update
-    void Start()
+    public void InitShop()
     {
+        Debug.LogError("Shop Awake");
         levelProgression = GM.Instance.gameObject.GetComponent<LevelProgression>();
 
         InitCategory(categoryContainers[0], GameManager.instance.inhabitants.OrderBy(x => x.InitialPrice).ToList());

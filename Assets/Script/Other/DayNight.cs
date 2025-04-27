@@ -50,6 +50,13 @@ public class DayNight : MonoBehaviour
     private Coroutine activityErrorCoroutine;
     public Coroutine nightDreamTimeCoroutine;
 
+    int notificationID = -1;
+
+
+    private TextMeshProUGUI starText;
+
+
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -243,13 +250,38 @@ public class DayNight : MonoBehaviour
     public IEnumerator StartWaitingTime()
     {
         GM.Instance.SaveGame();
+
+
         if (nightDreamTimeCoroutine == null)
         {
+            int lastWholeMinutes = Mathf.CeilToInt(TimeRemaining / 60f);
+            UpdateSkipText(lastWholeMinutes);
+            AddBSSkipFunctions();
+
+            if (notificationID == -1)
+            {
+                string title = "The dawn is near!";
+                string text = "Let’s start a new day together!";
+                notificationID = NotificationManager.CreateNotification(title, text, TimeRemaining);
+            }
+
+
             timeContainer.SetActive(true);
             while (TimeRemaining > 0f)
             {
                 TimeRemaining -= Time.deltaTime;
                 timeText.text = GM.Instance.DisplayFormattedTime(TimeRemaining);
+
+                int currentWholeMinutes = Mathf.CeilToInt(TimeRemaining / 60f);
+                if (GM.Instance.skipWithStarButton.gameObject.activeSelf)
+                {
+                    if (currentWholeMinutes != lastWholeMinutes)
+                    {
+                        lastWholeMinutes = currentWholeMinutes;
+                        UpdateSkipText(currentWholeMinutes);
+                    }
+                }
+
                 yield return null;
             }
 
@@ -261,7 +293,7 @@ public class DayNight : MonoBehaviour
 
 
             yield return new WaitForSeconds(1f);
-            GM.DMM.ApplySelectedDreams();
+            GM.DMM.ApplySelectedDreams(notificationID);
             timeContainer.SetActive(false);
 
         }
@@ -270,8 +302,57 @@ public class DayNight : MonoBehaviour
     public bool IsDay => isDay;
 
 
+    private void AddBSSkipFunctions()
+    {
+        Button starButton = GM.Instance.skipWithStarButton;
 
+        if (starButton != null && starText != null)
+        {
+            starButton.onClick.RemoveAllListeners();
+            starButton.onClick.AddListener(() =>
+            {
+                GM.Instance.TrySkipNightWithStars(starText);
+            });
+        }
 
+        Button adButton = GM.Instance.skipWithAdButton;
+
+        if (adButton != null)
+        {
+            adButton.onClick.RemoveAllListeners();
+            adButton.onClick.AddListener(() =>
+            {
+                GM.Instance.SkipNightWithADS();
+            });
+        }
+    }
+
+    private void UpdateSkipText(int remainingMinutes)
+    {
+        if (starText == null)
+        {
+            starText = GM.Instance.skipWithStarButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+
+        }
+        if (starText == null) return;
+
+        starText.text = remainingMinutes.ToString();
+
+        UpdateStarBTNInteractable(remainingMinutes);
+    }
+
+    private void UpdateStarBTNInteractable(int stars)
+    {
+        Button starButton = GM.Instance.skipWithStarButton;
+        if (GM.Instance.player.CanSpendStar(stars))
+        {
+            starButton.interactable = true;
+        }
+        else
+        {
+            starButton.interactable = false;
+        }
+    }
 
 
 

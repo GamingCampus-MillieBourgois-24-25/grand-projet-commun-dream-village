@@ -1,3 +1,4 @@
+using Mono.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using static LevelProgression;
@@ -7,11 +8,13 @@ public class LevelDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        GUI.enabled = false;
         SerializedProperty parentArray = property.serializedObject.FindProperty("levels");
         int index = GetIndex(property, parentArray);
 
         label.text = $"Level {index + 1}";
         EditorGUI.PropertyField(position, property, label, true);
+        GUI.enabled = true;
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

@@ -32,6 +32,9 @@ public class ShopItem : MonoBehaviour
     [SerializeField] private Sprite moodEffectSprite;
     [SerializeField] private Sprite serenityEffectSprite;
     [SerializeField] private Sprite energyEffectSprite;
+    
+    [Header("Sounds")]
+    [SerializeField] private AudioClip buySound;
 
     public void SetItemContent(Player.ItemCategory _category, Sprite _icon, string _name, int _price)
     {
@@ -173,6 +176,8 @@ public class ShopItem : MonoBehaviour
 
     public void BS_Buy()
     {
+        GM.SM.PlaySFX(buySound);
+        
         BuyItem<IScriptableElement>();
 
         if (GM.Tm.inShopTutorial)
