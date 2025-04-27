@@ -6,6 +6,7 @@ using System.Collections;
 using System;
 using System.Drawing;
 using Color = UnityEngine.Color;
+using UnityEngine.AI;
 
 public class DayNight : MonoBehaviour
 {
@@ -147,8 +148,13 @@ public class DayNight : MonoBehaviour
             {
                 return;
             }
-            
-        }
+
+            foreach (InhabitantInstance inhabitant in GM.VM.inhabitants)
+            {
+
+                inhabitant.inhabitantObject = Instantiate(inhabitant.baseData.InhabitantPrefab, inhabitant.houseObject.spawnPoint.position, inhabitant.houseObject.spawnPoint.rotation, GM.Instance.playerIslandObject);
+                inhabitant.agent = inhabitant.inhabitantObject.GetComponent<NavMeshAgent>();
+            }
         
         isDay = !isDay;
         TimeRemaining = 0f;
