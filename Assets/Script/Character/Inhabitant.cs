@@ -89,6 +89,6 @@ public class Inhabitant : IScriptableElement
 
     public bool isPlural()
     {
-        return Pronouns == Pronouns.They_Them;
+        return Pronouns == Pronouns.They_Them_Their_they_them_their;
     }
 }
