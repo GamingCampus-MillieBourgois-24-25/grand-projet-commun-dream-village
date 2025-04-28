@@ -20,9 +20,9 @@ public enum InhabitantEnums
 
 public enum Pronouns
 {
-    He_Him,
-    She_Her,
-    They_Them
+    He_Him_His_he_him_his,
+    She_Her_Her_she_her_her,
+    They_Them_Their_they_them_their,
 }
 
 public enum Personalities
